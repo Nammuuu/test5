@@ -1,0 +1,102 @@
+
+
+
+/* Container for the entire page */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  /* Form styling */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Labels and inputs */
+  .container label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  /* Input fields */
+  .container input[type="text"],
+  .container input[type="email"],
+  .container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.2s ease;
+  }
+  
+  .container input[type="text"]:focus,
+  .container input[type="email"]:focus,
+  .container textarea:focus {
+    border-color: #0070f3;
+    outline: none;
+  }
+  
+  .container  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  /* Email List Styling */
+  .container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .container ul li {
+    padding: 8px;
+    margin: 5px 0;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+    color: #333;
+    font-size: 0.95rem;
+  }
+  
+  /* Buttons */
+  .container button {
+    padding: 12px;
+    background-color: #0070f3;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .container button:hover {
+    background-color: #005bb5;
+  }
+  
+  /* For mobile responsiveness */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+  
+    .container  button {
+      width: 100%;
+    }
+  }
+  

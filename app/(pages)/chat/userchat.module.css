@@ -1,0 +1,244 @@
+/* Chat Button */
+.chatButton {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  border: none;
+  display: flex;
+  z-index: 33;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Increased box-shadow for modern look */
+}
+
+.chatIcon {
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+/* Chat Container */
+.chatContainer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 70%;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced box-shadow */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  z-index: 1000;
+}
+
+/* Chat Header */
+.chatHeader {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 5px;
+  background-color: #101123;
+  color: white;
+  border-radius: 10px 10px 0 0;
+  /* font-size: 1.2rem; */
+  text-transform: capitalize; /* Auto capitalize text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.title {
+  font-size: 1.2rem;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* Chat Window */
+.chatWindow {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+/* User Message - Left Aligned */
+.userMessage {
+  /* background-color: #000abd;  */
+  /* color: white; */
+  /* padding: 10px 15px; */
+  /* border-radius: 20px 20px 20px 0; */
+  margin: 10px 0;
+  display: flex;
+  text-align: left;
+  align-items: flex-end;
+  align-self: flex-start;
+  max-width: 55%;
+  justify-content: flex-end;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  float: right;
+  /* flex-direction: column; */
+  width: 100%;
+}
+
+.msgbutton {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  /* background: red; */
+  padding: 10px 15px;
+  border-radius: 20px 20px 20px 0;
+  /* margin: 10px 0; */
+  background-color: #000abd;
+  /* color: white; */
+  /* padding: 10px 15px; */
+  border-radius: 20px 20px 20px 0;
+  display: flex;
+  text-align: left;
+  align-items: flex-end;
+  border-radius: 20px 20px 20px 0;
+  box-shadow: 0 4px 8px rgb(32 0 218 / 20%);
+color: #fff;
+
+}
+
+.msgbutton p{
+  display: flex;
+  text-align: left;
+  text-transform: capitalize;
+  }
+
+
+
+/* Admin Message - Right Aligned */
+.adminMessage {
+  /* background-color: white;  */
+  color: black;
+  padding: 10px 15px;
+  border-radius: 20px 20px 0 20px;
+  /* margin: 10px 0; */
+  text-align: right;
+  align-self: flex-end;
+  /* max-width: 70%; */
+   max-width: 55%;
+    float: left;
+   
+    width: 100%;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  */
+}
+
+
+.adminMessage .msgbutton{
+  color: #000;
+  background-color: white;
+}
+
+
+/* Input Container */
+.inputContainer {
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.inputField {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light box-shadow for input */
+}
+
+.sendButton {
+  background-color: transparent; /* Transparent background */
+  color: black;
+  border: none;
+  padding: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+}
+
+/* Icon inside the send button */
+.sendButton svg {
+  font-size: 1.5rem;
+  opacity: 0.7;
+}
+
+/* Media Queries */
+
+/* For tablets and larger devices */
+@media (max-width: 768px) {
+  .chatContainer {
+    width: 90%;
+    height: 70%;
+    bottom: 20px;
+    right: 5%;
+  }
+
+  .chatButton {
+    width: 50px;
+    height: 50px;
+  }
+
+  .chatIcon {
+    font-size: 1.25rem;
+  }
+
+  .inputField {
+    font-size: 0.9rem;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+
+  .userMessage,
+  .adminMessage {
+    max-width: 100%;
+  }
+
+  .chatContainer {
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+    border-radius: 0;
+    top: 10%;
+    left: 10%
+  }
+
+  .chatButton {
+    width: 45px;
+    height: 45px;
+  }
+
+  .chatIcon {
+    font-size: 1rem;
+  }
+
+  .inputField {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  .sendButton {
+    padding: 8px;
+  }
+}

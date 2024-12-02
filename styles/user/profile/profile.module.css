@@ -1,0 +1,363 @@
+/* General container and layout settings */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  /* padding: 20px; */
+  background-color: #f8f9fa;
+  margin-bottom: 100px;
+  margin-top: 80px;
+  width: 100%;
+ 
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  text-align: start;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.currentTime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+.currentTime svg {
+  margin-right: 5px;
+  color: #007bff;
+}
+
+/* Top Navigation Bar */
+.topNav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ff6347; /* Light brand color */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navButton:hover {
+  background-color: #e0533b; /* Darker shade for hover */
+}
+
+.navButton.active {
+  background-color: #e0533b; /* Darker shade for active */
+  font-weight: bold;
+}
+
+.navButton svg {
+  font-size: 1.2rem;
+}
+
+/* Profile, Address, Notification, and Billing Section Styling */
+.sectionContent {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.sectionContent h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Profile Section */
+.profileSection img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.profileSection p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.profileSection strong {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Button Container */
+.ButtonContainer {
+  display: flex;
+  justify-content: space-between; /* Align buttons side by side */
+  margin-top: 20px;
+  gap: 20px;
+}
+
+/* Delete Account Button */
+.deleteButton {
+  background-color: transparent;
+  color: #ff6347;
+  padding: 10px 20px;
+  border: 2px solid #dc354557;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #ff6347;
+}
+
+.deleteButton:hover {
+  color: #fff;
+  background-color: #c82333;
+}
+
+.deleteButton svg {
+  font-size: 1.2rem;
+}
+
+/* Update Profile Button */
+.updateButton {
+  display: inline-block;
+  border: 2px solid #ff6347;
+  color: #ff6347;
+  
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 0.7em 1.5em -0.5em #ff6347;
+  transition: background-color 0.3s ease;
+}
+
+.updateButton:hover {
+  background-color: #ff6347;
+  color: #fff;
+
+}
+
+.updateButton:focus,
+.updateButton:active {
+  box-shadow: 0 0.7em 1.5em -0.5em #ff6347;
+  background-color: #f33f20;
+  text-decoration: none;
+  color: white;
+}
+
+
+/* addrss  */
+
+.addressSection {
+  padding: 20px; /* Add padding around the section */
+  background-color: #f9f9f9; /* Light background for the section */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.title {
+  font-size: 24px; /* Larger font for the title */
+  margin-bottom: 15px; /* Space below the title */
+  color: #333; /* Darker text color */
+}
+
+.addressInfo {
+  font-size: 16px; /* Standard font size for address info */
+  margin-bottom: 20px; /* Space below the address info */
+  color: #555; /* Slightly lighter text color */
+}
+
+.addressCard {
+  padding: 15px; /* Padding inside each address card */
+  border: 1px solid #ddd; /* Light border around the address card */
+  border-radius: 8px; /* Rounded corners for each card */
+  background-color: #fff; /* White background for clarity */
+  margin-bottom: 10px; /* Space between cards */
+  transition: background-color 0.3s ease;
+}
+
+.addressCard:hover {
+  transform: scale(1.1);
+  background-color: #fff; 
+  transition: background-color 0.3s ease;
+}
+
+
+
+.noAddresses {
+  font-style: italic; /* Italicize the message for no addresses */
+  color: #888; /* Gray color for no addresses message */
+}
+
+
+.editLink {
+  display: flex; /* Use flex to align icon and text */
+  align-items: center; /* Center icon vertically */
+  text-decoration: none; /* Remove underline from link */
+  color: #5ea5f7e7; /* Link color */
+  font-weight: bold; /* Make the link bold */
+}
+
+.editLink:hover {
+  color: #0070f3; 
+}
+.editIcon {
+  margin-right: 5px; /* Space between icon and text */
+  font-size: 18px; /* Icon size */
+}
+
+
+.addressheader {
+  display: flex; /* Use flexbox for horizontal alignment */
+  align-items: center; /* Center items vertically */
+  margin-bottom: 15px; /* Space below the header */
+  display: flex;
+    justify-content: space-between;
+}
+
+.indexaddress {
+  display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .topNav {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .navButton {
+      width: 100%;
+      justify-content: center;
+  }
+
+  .sectionContent {
+      padding: 15px;
+  }
+
+  .header h1 {
+      font-size: 1.5rem;
+  }
+
+  .currentTime {
+      flex-direction: column;
+      gap: 5px;
+  }
+
+  .deleteButton,
+  .updateButton {
+      text-align: center;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+  }
+
+  .ButtonContainer {
+      flex-direction: column; /* Stack buttons on mobile */
+  }
+}
+
+.profileSectioncontainer {
+  display: flex;
+    justify-content: space-around;
+}
+
+@media (max-width: 480px) {
+  .profileSectioncontainer {
+    /* flex-direction: column;  */
+    flex-flow: column-reverse;
+  }
+  .header h1 {
+      font-size: 1.2rem;
+  }
+
+  .navButton {
+      font-size: 0.9rem;
+  }
+
+  .sectionContent h1 {
+      font-size: 1.5rem;
+  }
+  .container {
+    padding: 0;
+  }
+
+  .addressSection {
+    padding: 0;
+  }
+
+}
+
+
+
+
+/* .svg  */
+
+
+.header {
+  text-align: center;
+}
+
+.header .username  {
+  color: #555;
+}
+
+.header .usermonicon svg{
+  font-size: 1.5rem;
+  color: #e0533b;
+  padding: 0 5px;
+}
+
+
+.header .usermonicondatatime {
+  font-size: 1.5rem;
+  color: #555;
+  padding: 0 5px;
+}
+
+.header .usermonicondatatime svg{
+  font-size: 1.5rem;
+  color: #6ebbfae0;
+  padding: 0 5px;
+}

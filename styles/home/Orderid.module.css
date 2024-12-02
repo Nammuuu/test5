@@ -1,0 +1,308 @@
+
+/* General Page Styles */
+.pageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-top: 70px;
+}
+
+
+.displayflexx {
+  gap: 10px;
+    align-items: center;
+    text-align: center;
+}
+/* Modal-like Box */
+.modalBox {
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 30px;
+  
+  width: 100%;
+  margin: auto;
+}
+
+/* Modal Header */
+.modalHeader {
+  text-align: center;
+  margin-bottom: 20px;
+  display: block !important;
+}
+
+.confirmIcon {
+  color: rgb(242, 62, 20);
+  font-size: 30px;
+}
+
+.pageWrapper h1 {
+  font-size: 28px;
+  margin: 15px 0;
+}
+
+.pageWrapper p {
+  font-size: 16px;
+  color: #555;
+}
+
+/* Action Section */
+.actionSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.actionSectionx {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+  gap: 20px;
+}
+
+.trackOrderButton {
+  background-color: rgb(242, 62, 20);
+  color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  padding: 20px 30px;
+}
+
+.trackOrderButtonto {
+  background-color: rgb(208 202 239 / 50%);
+  color: #111;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  padding: 20px 30px;
+}
+
+.trackOrderButtonto:hover {
+  background-color: rgb(208, 202, 239);
+  color: #333;
+}
+
+.trackOrderButton:hover {
+  background-color: rgba(242, 61, 20, 0.807);
+  color: #fff;
+}
+
+
+
+
+
+/* Grid Layout for Summary */
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Order Items Section */
+.orderItemsSection, .orderDetailsSection, .shippingAddressSectionx, .modalHeader {
+  /* background-color: #fafafa; */
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+
+.shippingAddressSection {
+  background-color: #ffffff; /* White background for clarity */
+ 
+  display: grid; /* Use grid display */
+  grid-template-columns: 1fr 2fr; /* Two columns: labels are narrower, values are wider */
+  gap: 10px; /* Space between grid items */
+  max-width: 100%; /* Ensures the section can expand to full width */
+}
+
+
+
+
+
+
+
+/* end   */
+
+.orderItemsSection h2, .orderDetailsSection h2, .shippingAddressSection h2 {
+  font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+}
+
+.orderItemsList {
+  list-style: none;
+  padding: 0;
+}
+
+.orderItem {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1rem;
+}
+
+.orderItem img {
+  max-width: 80px;
+  margin-right: 1rem;
+  border-radius: 8px;
+}
+
+.noImage {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.productDetails p {
+  margin: 0.2rem 0;
+  color: #555;
+}
+
+.sizecolor p {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Order Details Section */
+.orderDetailsSection p, .shippingAddressSection p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0.5rem 0;
+}
+
+.orderDetailsSection strong, .shippingAddressSection strong {
+  color: #333;
+}
+
+.paymentMethod {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.paymentMethod svg {
+  margin-right: 0.5rem;
+  color: rgb(242, 62, 20);
+}
+
+/* Shipping Address Section */
+.shippingAddressSection p {
+  display: flex;
+  gap: 10px;
+  
+}
+
+.shippingAddressSection strong {
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+  .pageWrapper {
+    padding: 1px;
+  }
+  .gridContainer {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 0;
+  }
+
+  .modalBox {
+    padding: 1.5rem 0;
+  }
+
+  .modalHeader h1 {
+    font-size: 1.8rem;
+  }
+
+  .modalHeader p {
+    font-size: 1rem;
+  }
+
+  .shippingAddressSection {
+    display: block !important;;
+  }
+
+  .orderItem {
+    display: flex !important;; 
+  }
+  
+  .orderItem img {
+    max-width: 200px;
+    margin-right: 1rem;
+    border-radius: 8px;
+  }
+
+
+  
+  .actionSectionx {
+    flex-direction: column;
+    margin: 50px 0;
+    width: 100%;
+  }
+
+.actionSectionx a {
+  width: 80%;
+}
+.modalHeader {
+  text-align: start;
+  margin: 20px 0;
+}
+
+}
+
+@media (max-width: 308px) {
+.shippingAddressSection p{
+  flex-direction: column;
+}
+
+.displayflexx {
+  justify-content: center;
+}
+
+}
+
+
+
+/* size color  */
+.sizecolor {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #333;
+}
+
+.sizecolor p {
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.sizecolor p:hover {
+  color: #000;
+}
+
+.sizecolor p:first-of-type::after {
+  content: '|'; /* Adds a pipe separator between size and color */
+  margin-left: 5px;
+}

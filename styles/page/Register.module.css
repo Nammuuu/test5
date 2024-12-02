@@ -1,0 +1,100 @@
+
+
+
+
+
+/* Register.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.container2 {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.containerimg {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.containerimg span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f26a20;
+}
+
+.containerimg p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.input {
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input:disabled {
+  background-color: #f0f0f0;
+}
+
+.button {
+  background-color: #f26a20;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.button:hover {
+  background-color: #e35b1c;
+}
+
+.button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.container h1 {
+  color: #333;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.container h1 a {
+  color: #f26a20;
+  text-decoration: none;
+}
+
+.container h1 a:hover {
+  text-decoration: underline;
+}

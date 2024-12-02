@@ -1,0 +1,217 @@
+
+
+
+
+
+/* Container for the entire page */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 80px auto;
+    
+    background-color: #f7f8fa;
+  }
+
+  .buttoncontainer {
+    display: flex;
+    gap: 20px;
+  }
+  
+  /* Header section */
+  .ShippingInformation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .ShippingInformationh1 {
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+  
+  .arrowButton {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .arrowButton:hover {
+    color: #0056b3;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .button:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+  }
+  
+  /* Form layout */
+  .settingsForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .settingsForm label {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .settingsForm input,
+  .settingsForm select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: border 0.3s;
+  }
+  
+  .settingsForm input:hover,
+  .settingsForm select:hover {
+    border: 1px solid #007bff;
+  }
+  
+  .colorPicker {
+    padding: 0;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  .previewImage {
+    max-width: 120px;
+    max-height: 120px;
+    margin: 10px 0;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Modal for updating settings */
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  /* Close Button for Modal */
+  .closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  .closeButton:hover {
+    color: #0056b3;
+  }
+  
+  /* Preview Box */
+  .previewBox {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #f0f4f8;
+    border: 1px solid #e0e6ed;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cardPreview {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cardPreview p {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .previewLogo {
+    width: 80px;
+    height: 80px;
+    margin-top: 10px;
+    border-radius: 50%;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    .ShippingInformation {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .arrowButton {
+      margin-bottom: 15px;
+    }
+  
+    .settingsForm {
+      gap: 15px;
+    }
+  
+    .modal {
+      max-width: 90%;
+    }
+  
+    .previewBox {
+      margin-top: 20px;
+    }
+  }
+  

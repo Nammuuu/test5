@@ -1,0 +1,75 @@
+/* Button to trigger the popup */
+.openButton {
+  /* background-color: #f26a20;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px; */
+  
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}
+
+
+
+.openButton svg {
+  color: #666;
+}
+
+/* Popup overlay */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 110vw;
+  height: 110vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup content box */
+.popupContent {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Close button inside popup */
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  color: #f26a20;
+}
+
+@media (max-width: 700px) {
+}
+
+@media (max-width: 550px) {
+  .popup {
+    width: auto;
+    height: 90vh;
+  }
+  .popupContent {
+   
+    width: 70%; 
+  }
+}

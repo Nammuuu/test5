@@ -1,0 +1,157 @@
+
+
+
+
+
+
+
+
+
+
+
+
+  // const handleOrderSubmit = async () => {
+  //   if (
+  //     Object.values(shippingAddress).some((value) => !value) ||
+  //     !paymentMethod ||
+  //     !user ||
+  //     !user._id
+  //   ) {
+  //     alert('Please fill in all fields and ensure you are logged in.');
+  //     return;
+  //   }
+  
+  //   const discount = couponDiscount || (globalCoupon ? globalCoupon.discount : 0);
+  //   const discountedTotal = totalAmount - (totalAmount * discount) / 100;
+  
+  //   const orderData = {
+  //     user: user._id,
+  //     orderItems: cartItems.map((item) => ({
+  //       product: item._id,
+  //       quantity: item.quantity,
+  //       image: item.image,
+  //       name: item.name,
+  //       size: item.selectedSize,
+  //       color: item.selectedColor,
+  //     })),
+  //     shippingAddress,
+  //     paymentMethod,
+  //     totalPrice: discountedTotal,
+  //     coupon: {
+  //       code: couponCode,
+  //       discount: couponDiscount,
+  //     },
+  //   };
+  
+  //   try {
+  //     let paymentSuccess = false;
+  
+  //     if (paymentMethod === 'RazorPay') {
+  //       const response = await fetch('/api/payment/razorpay', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify({
+  //           amount: discountedTotal,
+  //           currency: 'INR',
+  //           receipt: `order_rcptid_${Math.floor(Math.random() * 10000)}`,
+  //         }),
+  //       });
+  
+  //       const { id: order_id } = await response.json();
+  
+  //       const options = {
+  //         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+  //         amount: discountedTotal * 100,
+  //         currency: 'INR',
+  //         name: 'Your Company',
+  //         description: 'Test Transaction',
+  //         order_id,
+  //         handler: async (response) => {
+  //           try {
+  //             const verifyResponse = await fetch('/api/payment/razorpay/verify', {
+  //               method: 'POST',
+  //               headers: {
+  //                 'Content-Type': 'application/json',
+  //               },
+  //               body: JSON.stringify({
+  //                 razorpay_order_id: response.razorpay_order_id,
+  //                 razorpay_payment_id: response.razorpay_payment_id,
+  //                 razorpay_signature: response.razorpay_signature,
+  //               }),
+  //             });
+  
+  //             if (verifyResponse.ok) {
+  //               paymentSuccess = true;
+  
+  //               // **Place the Order Now**
+  //               const orderResponse = await fetch('/api/user/product/order', {
+  //                 method: 'POST',
+  //                 headers: {
+  //                   'Content-Type': 'application/json',
+  //                   Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //                 },
+  //                 body: JSON.stringify(orderData),
+  //               });
+  
+  //               if (orderResponse.ok) {
+  //                 const data = await orderResponse.json();
+  //                 showToast('Order placed successfully!', 'success');
+  //                 router.push(`/orderconfirm/${data.orderId}`);
+  //               } else {
+  //                 const errorData = await orderResponse.json();
+  //                 alert(`Order placement failed: ${errorData.message}`);
+  //               }
+  //             } else {
+  //               alert('Payment verification failed.');
+  //             }
+  //           } catch (error) {
+  //             console.error('Error verifying payment:', error);
+  //             alert('An error occurred while verifying the payment.');
+  //           }
+  //         },
+  //         prefill: {
+  //           name: user.name,
+  //           email: user.email,
+  //           contact: shippingAddress.phoneNo,
+  //         },
+  //         theme: {
+  //           color: '#3399cc',
+  //         },
+  //       };
+  
+  //       const paymentObject = new window.Razorpay(options);
+  //       paymentObject.open();
+  //     } else {
+  //       // Handle other payment methods (e.g., Stripe, PayPal, Cash on Delivery)
+  //       paymentSuccess = true;
+  //       // You can add similar logic here as done for Razorpay
+  //     }
+  
+  //     // Place the order immediately for non-Razorpay methods
+  //     if (paymentSuccess && paymentMethod !== 'RazorPay') {
+  //       const response = await fetch('/api/user/product/order', {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //         },
+  //         body: JSON.stringify(orderData),
+  //       });
+  
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         showToast('Order placed successfully!', 'success');
+  //         router.push(`/orderconfirm/${data.orderId}`);
+  //       } else {
+  //         const errorData = await response.json();
+  //         alert(`Order placement failed: ${errorData.message}`);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error placing order:', error);
+  //     alert('An error occurred while placing the order.');
+  //   }
+  // };
+  

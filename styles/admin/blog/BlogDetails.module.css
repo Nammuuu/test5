@@ -1,0 +1,105 @@
+
+
+
+
+
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 80px auto;
+
+}
+
+.container h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.container h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.container p {
+  margin: 10px 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.container div {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Responsive Images */
+.container img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+/* Link Styling */
+.container a {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #f26a20;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.container a:hover {
+  background-color:  #f26920e6;
+}
+
+
+
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .container h2 {
+    font-size: 22px;
+  }
+
+  .container h3 {
+    font-size: 18px;
+  }
+
+  .container p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .container h2 {
+    font-size: 20px;
+  }
+
+  .container h3 {
+    font-size: 16px;
+  }
+
+  .container p {
+    font-size: 14px;
+  }
+
+  .container a {
+    padding: 8px 12px;
+  }
+}

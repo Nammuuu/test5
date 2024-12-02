@@ -1,0 +1,165 @@
+
+   .cartPage {
+    padding: 20px;
+    /* max-width: 1200px; */
+    margin-top: 60px;
+    background-color: #f4f4f4; /* Light background for the entire page */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    /* margin: auto 0; */
+}
+
+.cartPage h1 {
+    font-size: 2.5rem; /* Larger title font */
+    margin-bottom: 20px;
+    color: #333; /* Darker text color */
+    text-align: center; /* Center align title */
+}
+
+.cartItems {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    background-color: #ffffff; /* White background for each item */
+    transition: box-shadow 0.3s ease; /* Smooth shadow transition */
+}
+
+.cartItem:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow on hover */
+}
+
+
+.itemImage {
+    flex-shrink: 0; 
+    width: 200px;
+    height: auto;
+}
+
+.itemImage img{
+  width: 100%;
+  height: 100%;
+}
+
+.itemDetails {
+    /* flex: 1; */
+    padding: 0 15px; /* Spacing around item details */
+}
+
+.itemDetails h2 {
+    font-size: 1.8rem; /* Slightly larger font for item titles */
+    margin-bottom: 5px;
+    color: #ff6347; /* Brand color for titles */
+}
+
+.itemDetails p {
+    margin: 5px 0;
+    color: #666; /* Gray color for description text */
+}
+
+.quantityControlcontainer
+{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.quantityControl {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between buttons and quantity */
+}
+
+.quantityControl button {
+    background-color: #ff6347; /* Brand color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.quantityControl button:hover {
+    background-color: #e55b39; /* Darker shade on hover */
+}
+
+.removeButton {
+    background-color: #ff4d4d; /* Red background for remove button */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.removeButton:hover {
+    background-color: #e60000; /* Darker red on hover */
+}
+
+.totalAmount {
+    margin-top: 20px;
+    text-align: center; /* Center align total amount */
+}
+
+.totalAmount h2 {
+    font-size: 1.8rem; /* Larger font for total amount */
+    color: #333; /* Darker text color */
+}
+
+.checkoutButton {
+  margin: 60px 0;
+    padding: 15px;
+    background-color: #28a745; /* Green background for checkout button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    width: 100%; /* Full width */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.checkoutButton:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .cartPage {
+        padding: 15px;
+    }
+
+    .cartPage h1 {
+        font-size: 2rem; /* Adjust font size on smaller screens */
+    }
+
+    .cartItem {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: flex-start; /* Align items to start */
+    }
+
+    .itemDetails {
+        padding: 10px 0; /* Add padding for mobile */
+    }
+
+    .quantityControl {
+        margin-top: 10px; /* Space above quantity controls */
+    }
+
+    .checkoutButton {
+        font-size: 1rem; /* Adjust button font size */
+    }
+}

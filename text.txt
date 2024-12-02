@@ -1,0 +1,440 @@
+ Your Project
+ nextjseco
+ eco
+ eco
+
+
+
+ username 
+ eco
+ passowrd is 
+ eco
+
+ mongodb+srv://eco:eco@cluster0.kgkyu.mongodb.net/
+
+ 
+
+Here's a list of e-commerce functionalities:
+
+User Registration & Login --done 
+Product Search by Name, Description, Tags, and Category --done 
+
+Add Products to Cart --done  
+Remove Products from Cart --done  
+Update Cart Quantity --done  
+Checkout Process --done 
+Order History --done 
+Wishlist Functionality  --done 
+Search Suggestions --done
+Product Reviews and Ratings  --- done 
+
+Product Recommendations   --done  -- Reviews only frontend ok 
+
+User Profile Management  ---done --   Reviews
+
+Admin Product Management (Add, Edit, Delete, update)  ---done 
+
+Product Reviews and Ratings delete  --- fix it 
+
+admin User Profile Management  
+
+
+---contineu 
+---admin dasbort --desing and more funsaanaliys  
+ .
+
+
+  ---review 
+Filter Products by Price Range  --done  -- Reviews
+Sort Products by Latest or Price  --done  -- Reviews
+
+
+Product Categorization --done 
+Discount Codes and Promotions 
+Shipping Calculation 
+Email Notifications (Order Confirmation, Shipping Updates)
+
+
+
+Social Media Sharing 
+Product Zoom and Image Gallery
+
+Secure User Authentication
+SEO Optimization
+Analytics Dashboard for Admin
+Live Chat Support
+GDPR Compliance
+Abandoned Cart Recovery
+Sales Reports and Analytics
+User Account Deletion Option 
+
+
+Inventory Management
+Payment Integration
+Responsive Design
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+User Features
+User Registration & Login --done
+
+     User Profile & Dashboard  --- done
+            User Information (Name, Email, Contact Details)
+            Profile Picture
+            Order History
+            Pending Orders
+            Order Tracking Status
+            Wishlist
+            Saved Addresses (Shipping & Billing)
+            Discount Coupons & Vouchers
+            Product Reviews & Ratings Given
+            Returns & Refund Requests
+            Support Tickets & Queries
+            Abandoned Carts
+            Newsletter Subscription Settings
+            Logout Option
+
+
+add product discount price and  Discount Coupons & Vouchers ok --done 
+Product Search & Advanced Filters ---done
+Product Categories & Subcategories --done 
+Product Listings with Detailed Descriptions --done
+Product Variants (Color, Size, etc.) --done
+User Reviews & Ratings --done
+Wishlist for Future Purchases --done
+Add to Cart --done
+View Product Details --done
+Address Management for Shipping & Billing --done
+Product Recommendations --done 
+Product Features --done
+Product Categories & Tags --done
+Product Variants (Color, Size, etc.) --done
+Order Tracking  --done  
+Order History --done
+Invoice Generation --done
+User Reviews Moderation --done
+Product Creation & Management --done 
+Product Preview --done
+Product Performance Analytics --done
+Product Inventory Tracking & Management  --done 
+Product Stock Alerts (Out of Stock, Low Stock) --done
+
+
+Admin Features
+Admin Dashboard with Key Metrics -done
+User Management (Roles & Permissions) --done 
+Order Management (View, Edit, Cancel Orders) --done
+Inventory Management (Stock Level Monitoring) --done 
+Product Management (Create, Edit, Delete Products) --done 
+Category & Tag Management --done 
+Customer Support Tools (Ticketing System, Chatbots) --done 
+Product Review Moderation --done
+Access Control for Admin Roles (user, and admin only (--letter Manager, Editor, etc.)) --done
+CMS for Blogs & Announcements  --admin done --user done  all done 
+Email Marketing Integration (Newsletters, Campaigns) --done just update html content to msg ok 
+Social Media Integration (Share)  --done
+Live Chat & Customer Support -- done chat delete option 
+Promotions & Sale Management (Flash Sales, Black Friday) -- home page banners  --done
+
+Discount Management (Coupons)  ---done 
+
+Admin funsaanaliys
+
+
+Payment Management (Refunds, Payment Gateway Integration) 
+Multiple Payment Methods (cod razorPay, stripe, PayPal, )  ---done
+
+ 
+Shipping Management (Regions, Rates, Carriers)
+order pdf download admin  --working 
+SEO Optimization (Meta Tags,  Descriptions, Keywords) --done  
+
+Product Images, Videos & Zoom Feature
+Password Recovery & Reset --start last
+user and admin friendly ui and responsive laylout 
+
+
+optional 
+Google Analytics Integration  ---cancel
+1. Report Generation (Sales, Product Performance, Traffic) 
+Performance Optimization Tools (Cache, CDN Integration) --no need 
+Email & SMS Notifications (Order Confirmation) no needed this time ok  add on admin Confirmation or not channal email ok 
+
+stripe publishble key  = pk_test_51MQtCySGvG5AH790lIVQN4qXBY9FDK95XCQisCzvCKfNjnRjWRWEUYhzwkCCAvhUV8biqIuzD1Jq9fXLuoCg2l1s00v1ib9pYa
+
+stripe secret key  = sk_test_51MQtCySGvG5AH790ADlqfhHCkuV2sOIuhE2UpIfIQIC2D9GFjNlpoKEqMzNKkZ5mQabzbswfx52ADNXTuRhrmcjB00LFlkJHMF
+
+RAZORPAY_KEY_ID = "rzp_test_095q3jI8BxZ154"
+RAZORPAY_KEY_SECRET = "eP9efhb5W3wXW8dj9wXn0RHD"
+
+
+user and admin friendly ui and responsive laylout 
+
+ 
+start  widht 0 
+
+01. user profile id --done  
+02. user profile page --done 
+04. product details --done 
+05. live chat  --done
+06. add to cart --done
+07. order --done
+
+09. searchbar --done
+
+11. login and Registration pages --done
+13. order details --done
+14. order Confirmation --done 
+15. cart and wishlist sidebar --done
+17. loading page --done 
+18. blog and blog details --done
+03. wishlist page --done
+20. all product page  --done
+21. all category page --done
+01. loading  design --done
+
+10. product page --done
+
+19. admin Dashboard --start
+01.  admin product creating --done
+02. admin product update --done
+03. admin order page --done
+04. admin order details page --done  --add pdf design ok 
+05. Category --done
+06. user Management --done 
+08. blog --done
+09. 
+
+
+
+design only --start 
+Notifications 
+07. live chat admin --done
+coupons, --done 
+email send, --done -start only test
+reviews, --done localhost/test
+
+settings --done
+ --font fimily  
+
+
+
+
+finsla test start hare 
+button enble disable responsive fix all pages 
+ 
+ --auth -done
+ --navbar --done
+ --offers --done 
+ --404 page --done 
+--wishlist  --done
+ --login Registration --done
+ --profile id --done
+ --cartsidebar --done  
+  --order procces --done
+ --Confirmation order --done
+--myoder  --done
+
+ --blog --done
+ --blog details --done 
+
+ --product --done
+ --product details loding add
+ --category --done gap fix
+ --category product details --done
+ --Search --done gap fix mob
+ 
+ --home page --start
+
+live fix
+ --start admin 
+ --pagesatting --done
+ --erro hadnling erros display only blog time creating time
+    
+--ids --start
+
+loading add
+0.2 handle errors 
+add 404 401 erros 
+button enble disable
+buttons loading 
+ 2. linke loading 
+ page pagetiontion add
+ popup auto close 
+loading 
+ -- order page 
+ --profile id --start
+ --/order 
+ --user Dashboard 
+ --product loading link 
+
+
+ 
+satting updats  
+ --satting charnge 
+ --banner update text display or not dont display it 
+ 
+add api --done
+ --about page --done 
+ --CookiesPolicy --done
+ --FAQ --done
+ --Privacy --done
+ --ReturnExchange --done
+ --Shipping --done
+ --TermsConditions --done 
+ --ContactUs --done 
+--footer --start api 
+
+home page 
+ banner --done
+ Categories --done add 10+ category and chekc 
+ product --done
+ footer --done
+
+admin chat delte
+fix all pages one by one 
+variyant name 
+simpal just fix ui only 
+final test 
+
+banner same size images 
+category 
+ --arros no work
+ --text trim add 8 word
+// end 
+
+
+`${styles.closeButton} lgcolor`
+
+
+
+
+adnavce funsaanaliys
+ 01. Multiple Payment 
+ 02.  thame satting
+   --- font color
+  --product style --admin choose to display product design multi and also 
+  show and hide titme price and rating  
+backendgrund color,
+ --button color 
+ --cardbgcolors 
+ --p tag color
+ --heading s
+ --subheading
+ --desciption color
+ --box sodado
+ --buttonbgcolor2
+ --hover colors 
+ --brands --comapte section with api
+advnace 
+add addriboute for products 
+size color meatiral payment update 
+phonepay payment getway 
+thame satting 
+ --product grid 
+ --thame colors 
+ --font sizes 
+ --banner images size container full screen and hef screen ok 
+ --offer page 50% off details page most images is simgle page only better lading page type design ok 
+ --create add pages and create api and html editor add
+ --email verfiy 
+ --all pages fronted data "containt" 
+ --banner in pages add 2 3 in page top centoer bottom
+ --user images in navbar top and bottom
+ --thame product banners up and down funsaliys 
+ --display product by category in home page 
+gird prodcut api
+
+
+
+npm i 
+@next/third-parties @paypal/checkout-server-sdk @stripe/react-stripe-js  @stripe/stripe-js
+
+    
+axios bcryptjs chart.js cloudinary  express formidable fs 
+gsap http jsonwebtoken jspdf jspdf-autotable jwt-decode 
+mongodb mongoose multiparty nodemailer quill quill-image-resize-module-react 
+razorpay react-chartjs-2 react-dom react-helmet-async 
+react-icons  react-paginate react-quill  react-toastify 
+recharts scrolltrigger sharp socket.io socket.io-client
+stripe 
+
+packgage.js
+  {
+    "name": "eco",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "dev": "node --max-old-space-size=4096 server.js",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint"
+    },
+    "dependencies": {
+      "@next/third-parties": "^14.2.10",
+      "@paypal/checkout-server-sdk": "^1.0.3",
+      "@stripe/react-stripe-js": "^2.8.0",
+      "@stripe/stripe-js": "^4.5.0",
+      "axios": "^1.7.4",
+      "bcryptjs": "^2.4.3",
+      "chart.js": "^4.4.4",
+      "cloudinary": "^2.4.0",
+      "express": "^4.21.1",
+      "formidable": "^3.5.1",
+      "fs": "^0.0.1-security",
+      "gsap": "^3.12.5",
+      "http": "^0.0.1-security",
+      "jsonwebtoken": "^9.0.2",
+      "jspdf": "^2.5.1",
+      "jspdf-autotable": "^3.8.3",
+      "jwt-decode": "^4.0.0",
+      "mongodb": "^6.10.0",
+      "mongoose": "^8.5.3",
+      "multiparty": "^4.2.3",
+      "next": "^14.2.16",
+      "nodemailer": "^6.9.15",
+      "quill": "^1.3.7",
+      "quill-image-resize-module-react": "^3.0.0",
+      "razorpay": "^2.9.4",
+      "react": "^18",
+      "react-chartjs-2": "^5.2.0",
+      "react-dom": "^18",
+      "react-helmet-async": "^2.0.5",
+      "react-icons": "^5.3.0",
+      "react-paginate": "^8.2.0",
+      "react-quill": "^1.3.5",
+      "react-toastify": "^10.0.5",
+      "recharts": "^2.12.7",
+      "scrolltrigger": "^1.0.1",
+      "sharp": "^0.33.5",
+      "socket.io": "^4.7.5",
+      "socket.io-client": "^4.7.5",
+      "stripe": "^16.12.0",
+      "swiper": "^11.1.14"
+    },
+    "devDependencies": {
+      "@types/node": "^20",
+      "@types/react": "^18",
+      "@types/react-dom": "^18",
+      "@types/react-helmet": "^6.1.11",
+      "eslint": "^8",
+      "eslint-config-next": "14.2.5",
+      "postcss": "^8",
+      "tailwindcss": "^3.4.10",
+      "typescript": "^5"
+    }
+  }

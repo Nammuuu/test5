@@ -1,0 +1,45 @@
+
+
+
+
+
+
+
+
+ .graphContainer {
+  margin-top: 30px;
+  /* padding: 20px; */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.graphWrapper {
+  width: 75%;
+  height: 400px; 
+  max-width: 1000px; 
+}
+
+@media (max-width: 768px) {
+  .graphWrapper {
+    width: 90%;
+    height: 300px; 
+  }
+
+  .graphContainer {
+    margin-top: 0px;
+    padding: 20px;
+    margin-bottom: 70px;
+  }
+
+}
+
+
+
+

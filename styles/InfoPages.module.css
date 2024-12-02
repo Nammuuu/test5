@@ -1,0 +1,57 @@
+
+
+
+
+
+
+
+
+.pageContainer {
+    max-width: 1200px;
+    margin: 40px 0 0 0;
+    padding: 20px;
+    text-align: left;
+    color: #333;
+  }
+
+ 
+  
+  .pageContainer h1 {
+    font-size: 2.25rem;
+    margin-bottom: 10px;
+    color: #333;
+    text-transform: uppercase;
+    margin: 8px 0;
+  }
+  
+  .pageContainer p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #444;
+    line-height: 1.6;
+    margin: 8px 0;
+  }
+
+  .pageContainer span{
+    font-size: 0.95rem;
+    margin: 8px 0;
+  }
+  
+
+
+
+  /* contact usr page  */
+
+  .ContcatpageContainer {
+    display: flex;
+    justify-content: space-around;
+
+  }
+
+  .ContcatpageContainerp  p{
+    margin: 0;
+  }
+
+  .ContcatpageContainer p {
+    margin: 0;
+  }

@@ -1,0 +1,508 @@
+
+
+/* Container for the entire profile section */
+.containerprofileid {
+  padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .containerprofileid {
+    grid-template-columns: 1fr; /* Stack vertically on smaller screens */
+  }
+}
+
+/* Back to Home button */
+/* .backHome {
+  display: inline-flex;
+  align-items: center;
+  font-size: 24px;
+  color: #000000a8;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.backHome svg {
+  margin-right: 8px;
+} */
+
+/* Profile form styling */
+.profileForm {
+  display: grid;
+  grid-template-columns: auto 1fr; 
+  gap: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+.formGroupprofile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  /* background-color: #c82333; */
+  height: 500px;
+  background-color: #fff;
+}
+
+
+
+.profileForm .label{
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+/* Label for input fields */
+.label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+
+/* Input fields */
+.inputField,
+.addressInput {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Profile picture upload container */
+
+.formGroupprofile {
+  /* width: 100%;  */
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 20px;
+  /* background-color: #fff; */
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+/* Back to Home Icon */
+.backHome {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Profile Picture Container */
+.profileContainer {
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Profile Picture or Default Avatar */
+.profilePicture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  background-color: #f0f0f0;
+}
+
+.defaultPicture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+/* Add Profile Icon */
+.addProfileIcon {
+  position: absolute;
+  right: -10px;
+  bottom: 10px;
+  background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+
+.addProfileIcon:hover {
+  background: linear-gradient(135deg, #ff6b52 0%, #fea65c 100%);
+}
+
+/* Hidden file input */
+.fileInput {
+  display: none;
+}
+
+/* User Info */
+.userInfo {
+  text-align: center;
+}
+
+.userInfo h3 {
+  margin: 10px 0 5px;
+  font-size: 20px;
+  color: #333;
+}
+
+
+
+/* profile end here  */
+
+.ShippingAddresses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* .firstAddressContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%; 
+} */
+
+.addressContainer {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+.ShippingAddressescontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.addButton {
+  background-color: #ff6b52;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background-color: #ff6b52;
+}
+
+.addressInput {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+  .ShippingAddresses {
+    flex-direction: column;
+  }
+
+  .firstAddressContainer,
+  .addressContainer {
+    width: 100%; /* Stack addresses full-width on smaller screens */
+  }
+}
+
+
+/* delete and buttons desinf  */
+.formGroupx {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+}
+.formGroupx {
+display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  background-color: #f9f9f9; /* Light background for form section */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  width: 100%;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.checkbox {
+  margin-left: 10px;
+  transform: scale(1.2);
+  accent-color: #ff7e5f; /* Light gradient-like color */
+}
+
+.icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+
+/* Add New Address Button */
+.addButton {
+  background-color: #ff6b52;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.addButton svg {
+  font-size: 18px;
+}
+
+.addButton:hover {
+  background-color: #ff7e5f;
+}
+
+/* Checkbox for account deletion */
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox {
+  margin-left: 10px;
+}
+
+/* Submit and Delete buttons */
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submitButton {
+  background-color: #ff6b52; /* Soft green */
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:disabled {
+  background-color: #999; /* Disabled soft green */
+  cursor: not-allowed;
+}
+
+.submitButton:hover {
+  background-color: #ff7e5f;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .buttonContainer {
+    align-items: stretch; /* Buttons take full width on mobile */
+  }
+}
+
+.submitButton:hover {
+  background-color: #ff6b52;
+}
+
+.deleteButton {
+  background-color: rgba(252, 38, 38, 0.808); /* Light coral tone */
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  gap: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.deleteButton:disabled {
+  background-color: #999; /* Disabled button color */
+  cursor: not-allowed;
+}
+
+.deleteButton:hover {
+  background-color: #ff6b52;
+}
+
+
+
+
+
+.userId {
+  display: none;
+}
+
+
+
+/* media screen finsal  */
+
+
+@media (max-width: 768px) {
+  
+  /* Profile Form Layout */
+  .profileForm {
+    grid-template-columns: 1fr; /* Stack form elements vertically */
+    padding: 15px;
+  }
+
+  .ShippingAddressescontainer {
+    margin-top: 0;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 0;
+  }
+
+  /* Reduce profile form padding */
+  .formGroupprofile {
+    padding: 15px;
+    height: 250px;
+  }
+
+ 
+
+  .formGroupx {
+    padding: 20px 0;
+  }
+
+  /* Adjust Add Profile Icon position */
+  .addProfileIcon {
+    width: 25px;
+    height: 25px;
+    right: -5px;
+    bottom: 5px;
+  }
+
+  /* Font size adjustments for headings and text */
+  .userInfo h3 {
+    font-size: 18px;
+  }
+
+  .profileForm .label{
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+  .label {
+    font-size: 1rem; /* Slightly reduce font size */
+  }
+
+
+
+  /* Input fields should take full width */
+  .inputField,
+  .addressInput {
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  /* Button adjustments */
+  .submitButton,
+  .deleteButton {
+    padding: 10px;
+    font-size: 14px; /* Slightly smaller font for buttons */
+  }
+
+  /* Stack buttons vertically on smaller screens */
+  .buttonContainer {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .submitButton, .deleteButton {
+    width: 100%; /* Full width for buttons on mobile */
+  }
+
+  /* Adjust the address grid */
+  .addressContainer {
+    grid-template-columns: 1fr; /* Stack addresses vertically */
+    gap: 15px; /* Adjust gap between addresses */
+  }
+  
+  /* Adjustments for smaller screens */
+  .containerprofileid {
+    margin-top: 40px;
+    padding: 10px 0;
+  }
+
+  .displayNone {
+    display: none !important;
+  }
+  
+}

@@ -1,0 +1,90 @@
+
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+
+/* --client-font: "Urbanist", sans-serif;
+    --admin-font: "Public Sans", sans-serif; */
+
+
+/* *{
+    font-family: "Urbanist", sans-serif;  
+}
+
+body {
+    margin-top: 60px;
+}
+.css {
+    margin-top: 100px;
+} */
+
+/* *, :after, :before {
+   box-sizing: content-box !important;
+} */
+
+
+.className {
+ font-family: "Urbanist", sans-serif;
+}
+
+
+
+
+
+/* login regiter */
+.popupicons {
+    color: #f03e17;
+}
+ .popupicons:hover {
+    color: #f03e17;
+ }
+ .fontcolor { 
+    color: #111;
+ }
+
+ .lglabelcolor {
+    color:#666;
+ }
+
+ .lginputcolor {
+    color:#999;
+ }
+
+ .lgbuttoncolor{
+    background-color: #f03e17
+ }
+
+ .lgbuttoncolor:hover{
+    background-color: #f0ba17e1
+ }
+
+ .lgdes {
+    color:#999; 
+ }
+
+ 
+
+
+
+.MainColor {
+ color: #f03e17;
+}
+
+.bgcomanColor {
+
+}
+.fontColor { 
+
+}
+
+/* svg  */
+.icons a svg { 
+    background-color: #f03e17
+}
+
+
+a:hover{
+
+}

@@ -1,0 +1,289 @@
+
+
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* topbar text id and user id   */
+/* design new   */
+
+.ShippingInformation h1{
+  color: #333;
+  font-size: 2.2rem;
+    margin: 0;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+
+.ShippingInformation {
+  display: flex;
+  text-align: center;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.arrowButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 24px; /* Adjust the size of the icon */
+  display: flex;
+  align-items: start;
+}
+
+.arrowButton svg {
+  color: rgb(242 62 20); /* Set the icon color */
+}
+
+.arrowButton svg:hover {
+  color: rgba(242, 61, 20, 0.571); /* Set the icon color */
+}
+
+
+
+.categoryName {
+  font-size: 1.4rem; /* Adjust font size for a balanced look */
+  font-weight: 600; /* Make it bold to stand out */
+  color: #333; /* Use a dark neutral color */
+  text-align: center; /* Center-align the text */
+  margin-top: 10px; /* Add spacing above */
+  margin-bottom: 5px; /* Slight spacing below */
+  transition: color 0.3s ease; /* Smooth transition on hover */
+}
+
+.categoryName:hover {
+  color: rgb(242, 62, 20); /* Highlight color on hover */
+}
+
+
+
+
+/* topbar text id and user id end   */
+
+  
+  .button {
+  
+   
+    font-size: 24px; /* Adjust the size of the icon */
+    display: flex;
+    align-items: start;
+
+    background-color: rgb(242 62 20); 
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: rgba(242, 61, 20, 0.571);
+  }
+  
+  .categoryGrid {
+    display: grid;
+  display: flex;
+  flex-wrap: wrap;
+    /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .categoryCard {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .categoryCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+
+
+
+
+  
+  .previewImage {
+    border-radius: 5px;
+    width: 200px;
+    height: auto;
+    margin-top: 10px;
+  }
+  
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+
+/* Close button styling */
+.closeButton {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: rgb(242, 62, 20);
+}
+
+/* Modal heading */
+.modal h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Input field styling */
+.modal input[type="text"],
+.modal input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.modal input[type="text"]:focus,
+.modal input[type="file"]:focus {
+  border-color: rgb(242, 62, 20);
+  outline: none;
+}
+
+
+
+
+
+
+
+
+  .categoryCardButton {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    margin-top: 10px; /* Add some spacing */
+  }
+  
+  .categoryCardButton button {
+    background-color: rgb(242, 62, 20); /* Use the primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px; /* Add padding for a better look */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .categoryCardButton button:disabled {
+    background-color: rgba(242, 62, 20, 0.5); /* Lighter color when disabled */
+    cursor: not-allowed; /* Change cursor for disabled state */
+  }
+  
+  .categoryCardButton button:hover:not(:disabled) {
+    background-color: rgb(200, 50, 15); /* Darker shade on hover */
+  }
+  
+  .categoryCardButton button svg {
+    margin-right: 5px; /* Space between icon and text */
+    font-size: 18px; /* Adjust icon size */
+  }
+  
+
+
+
+  @media (max-width: 768px) {
+    .modal h2 {
+      font-size: 1.2rem;
+    }
+
+    .modal { 
+      width: 70%;
+    }
+    .button {
+      font-size: 16px;
+      grid-column: 1 / 3;
+      justify-content: center;
+    }
+    .ShippingInformation {
+      text-align: start;
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      justify-content: flex-start;
+      align-items: self-start;
+      gap: 0;
+    }
+
+    .ShippingInformation h1 { 
+      font-size: 1.1rem;
+      margin: revert-layer;
+    }
+
+    .container {
+      padding: 0; 
+     
+      margin: 60px 0 60px 0;
+    }
+
+    .categoryCard {
+      width: auto; 
+    }
+
+    .previewImage {
+      width: 100px;
+    }
+.categoryGrid {
+    display: grid;
+    margin-top: 0px;
+}
+
+  }

@@ -1,0 +1,75 @@
+
+
+
+.contactpageContainer {
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .contactpageContainer h1 {
+    font-size: 2.25rem;
+    margin-bottom: 10px;
+    color: #333;
+    text-transform: uppercase;
+  }
+  
+  .contactpageContainer p,
+  .contactpageContainer span {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .contactpageContainer p {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .contactpageContainer span {
+    display: block;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .ContcatpageContainerp {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    color: #333;
+  }
+  
+  .ContcatpageContainerp p {
+    font-weight: bold;
+    color: #f23e14;
+  }
+  
+  .ContcatpageContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .ContcatpageContainer div {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .ContcatpageContainer p {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: #f23e14;
+  }
+  
+  .ContcatpageContainer span {
+    font-size: 1em;
+    line-height: 1.5;
+    color: #666;
+  }
+  

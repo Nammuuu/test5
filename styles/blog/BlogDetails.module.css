@@ -1,0 +1,392 @@
+
+
+
+
+.container {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 20px;
+}
+
+/* .title { */
+  /* font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px; */
+/* } */
+
+.heading {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.imageContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.metadata {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.metadata p {
+  font-size: 0.9rem;
+  color: #777;
+  display: flex;
+   
+    gap: 10px;
+}
+
+.author {
+  font-weight: 600;
+}
+
+.tags {
+  margin-bottom: 20px;
+}
+
+.tag {
+  display: inline-block;
+  background: #f0f0f0;
+  padding: 5px 10px;
+  margin-right: 10px;
+  font-size: 0.85rem;
+  border-radius: 3px;
+  color: #333;
+}
+
+.socialSharing {
+  margin-top: 30px;
+}
+
+.socialButton {
+  background: #f23e14;;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+
+.socialButton a{
+  /* background: #f23e14; */
+  background: none;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  
+  text-decoration: none;
+}
+
+
+
+
+.container {
+  /* max-width: 900px; */
+  margin: 80px auto;
+  padding: 20px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    width: unset;
+    margin: 40px 0 10px 0;
+  }
+
+  .socialSharing {
+    flex-direction: column;
+  }
+}
+
+.title {
+  /* font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #333;
+  line-height: 1.2; */
+
+  font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+.heading {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 1.5rem;
+    text-align: start;
+  }
+}
+
+.imageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.imageContainer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-align: justify;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    font-size: 1rem;
+  }
+}
+
+.metadata {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.metadata p {
+  margin: 0;
+}
+
+.author {
+  font-weight: bold;
+  color: #555;
+}
+
+.tags {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag {
+  background-color: #eee;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  border-radius: 5px;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.tag:hover {
+  background-color: #dcdcdc;
+}
+
+.socialSharing {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.socialButton {
+  background-color: #f23e14;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.socialButton:hover {
+  background-color: #e95534;
+}
+
+@media (max-width: 768px) {
+  .socialButton {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Blog Content Styling */
+.content {
+  font-size: 1.2rem;   /* Default text size for readability */
+  line-height: 1.8;    /* Better spacing between lines */
+  color: #333;         /* Darker text color for contrast */
+  margin-bottom: 40px; /* Spacing at the bottom */
+  word-wrap: break-word; /* Prevent long words from overflowing */
+}
+
+@media (max-width: 768px) {
+  .content {
+    font-size: 1rem;   /* Smaller font size on smaller screens */
+  }
+}
+
+/* Responsive Images */
+.content img {
+  max-width: 100%;      /* Ensure images do not overflow their container */
+  height: auto;         /* Maintain aspect ratio */
+  margin: 15px 0;       /* Add vertical spacing */
+  border-radius: 10px;  /* Rounded corners for images */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better aesthetics */
+}
+
+/* Responsive Headings */
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  font-weight: bold;
+  color: #222;          /* Darker color for headings */
+  margin-top: 20px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* .content h1 { */
+  /* font-size: 2.5rem;    */
+/* } */
+.content h2 {
+  font-size: 2rem;      /* Subtitle size */
+}
+.content h3 {
+  font-size: 1.75rem;   /* Smaller title size */
+}
+.content h4 {
+  font-size: 1.5rem;
+}
+.content h5 {
+  font-size: 1.25rem;
+}
+.content h6 {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .content h1 {
+    font-size: 2rem;
+  }
+  .content h2 {
+    font-size: 1.75rem;
+  }
+  .content h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Paragraphs */
+.content p {
+  margin-bottom: 15px;  /* Add spacing between paragraphs */
+  text-align: justify;  /* Better readability */
+}
+
+/* Blockquotes */
+.content blockquote {
+  padding: 15px;
+  margin: 20px 0;
+  background-color: #f9f9f9;
+  border-left: 5px solid #ccc;
+  font-style: italic;
+  color: #555;
+}
+
+/* Lists */
+.content ul, .content ol {
+  margin: 20px 0;
+  padding-left: 40px;  /* Indent for better structure */
+}
+
+.content li {
+  margin-bottom: 10px; /* Space between list items */
+}
+
+/* Links */
+.content a {
+  color: #f23e14;      /* Primary link color */
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.content a:hover {
+  color: #e95534;      /* Darken link color on hover */
+}
+
+/* Responsive Tables */
+.content table {
+  width: 100%;         /* Full-width table */
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.content th, .content td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .content table,
+  .content thead,
+  .content tbody,
+  .content th,
+  .content td,
+  .content tr {
+    display: block;     /* Make tables block-level for small screens */
+  }
+  .content th {
+    background-color: #f9f9f9;
+    padding: 5px;
+    font-weight: bold;
+  }
+  .content td {
+    padding: 5px;
+  }
+
+  
+
+
+}
+
+

@@ -1,0 +1,304 @@
+
+
+
+/* MyOrders.module.css */
+
+ /* .myOrdersContainer {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+  
+  .h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .orderCard {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  
+  .orderCard h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .orderCard p {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+  
+  .orderCard ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .orderCard ul li {
+    font-size: 1rem;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .cancelButton {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .cancelButton:hover {
+    background-color: #ff1a1a;
+  }
+  
+  @media (max-width: 768px) {
+    .orderCard {
+      padding: 15px;
+    }
+  
+    .h1 {
+      font-size: 1.5rem;
+    }
+  
+    .orderCard h2 {
+      font-size: 1.25rem;
+    }
+  
+    .orderCard p {
+      font-size: 0.9rem;
+    }
+  
+    .cancelButton {
+      font-size: 0.9rem;
+      padding: 8px 12px;
+    }
+  }  */
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  .myOrdersContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    gap: 20px;
+  }
+  
+  .myOrdersContainer h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  /* Order card style */
+  .orderCard {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+  }
+  
+  .orderCard:hover {
+    transform: translateY(-5px); /* Subtle hover effect */
+  }
+
+
+  .sectionorderCard {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+   
+  }
+  
+  .sectionorderCard:hover {
+    transform: translateY(-5px); /* Subtle hover effect */
+  }
+
+
+  
+  .myOrdersContainer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #007bff; /* Primary theme color */
+  }
+  
+  /* Info styling */
+  .myOrdersContainer p {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  /* Coupon info */
+  .couponInfo {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .myOrdersContainer  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #007bff;
+  }
+  
+  /* Order items list */
+  .orderItemsList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .orderItemsList li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .orderItemsList li img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+  
+  .orderItemsList li div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Buttons style */
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .invoiceButton,
+  .cancelButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .invoiceButton {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .cancelButton {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .invoiceButton:hover,
+  .cancelButton:hover {
+    transform: scale(1.05); /* Hover effect */
+  }
+  
+  .invoiceButton:disabled,
+  .cancelButton:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .myOrdersContainer {
+      padding: 10px;
+    }
+  
+    .orderCard {
+      padding: 15px;
+    }
+
+    .sectionorderCard {
+      padding: 15px;
+    }
+  
+    .myOrdersContainer   h1 {
+      font-size: 2rem;
+    }
+  
+    .myOrdersContainer  h2 {
+      font-size: 1.3rem;
+    }
+  
+    .myOrdersContainer p {
+      font-size: 1rem;
+    }
+  
+    .buttons {
+      flex-direction: column;
+    }
+  
+    .invoiceButton,
+    .cancelButton {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .myOrdersContainer   h1 {
+      font-size: 1.8rem;
+    }
+    .orderCard {
+     
+      grid-template-columns: repeat(1, 1fr); 
+     
+    }
+  
+    .orderItemsList li img {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .buttons {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .buttons .sectionorderCard{
+      display: flex;
+      justify-content: space-evenly;
+      text-align: center;
+    }
+  }
+
+
+
+
+
+

@@ -1,0 +1,285 @@
+.productDetails {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.imageGallery {
+  display: flex;
+  gap: 20px;
+}
+
+.mainImage {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.thumbnailContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumbnail {
+  max-width: 100px;
+  height: auto;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+
+.thumbnail:hover {
+  border-color: #333;
+}
+
+.name {
+  font-size: 2rem;
+  margin: 0 0 10px;
+}
+
+.p {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.options {
+  margin: 20px 0;
+}
+
+.options h3 {
+  margin: 0 0 10px;
+}
+
+.optionsContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.optionButton {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+.optionButton.selected {
+  background: #ddd;
+}
+
+.tags {
+  margin: 20px 0;
+}
+
+.tags ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tags li {
+  display: inline-block;
+  margin-right: 10px;
+  background: #eee;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.actions {
+  margin: 20px 0;
+}
+
+.cartButton, .wishlistButton {
+  padding: 10px 20px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.cartButton {
+  background-color: #28a745;
+}
+
+.wishlistButton {
+  background-color: #007bff;
+}
+
+
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reviewSection {
+  margin-top: 2rem;
+}
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.ratingInput {
+  display: flex;
+  align-items: center;
+}
+
+.ratingInput label {
+  cursor: pointer;
+}
+
+.ratingInput input[type="radio"] {
+  display: none;
+}
+
+.submitButton {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+.reviews {
+  margin-top: 2rem;
+}
+
+.review {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* In your ProductDetails.module.css file */
+.profilePicture {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.placeholderProfilePicture {
+  width: 50px;
+  height: 50px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .imageGallery {
+    flex-direction: column;
+  }
+
+  .thumbnailContainer {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .thumbnail {
+    max-width: 80px;
+  }
+
+  .optionsContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .optionButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cartButton, .wishlistButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .productDetails {
+    padding: 10px;
+  }
+
+  .mainImage {
+    max-width: 100%;
+  }
+
+  .thumbnail {
+    max-width: 60px;
+  }
+
+  .optionButton {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .tags li {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+
+
+
+.shareButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+
+  background-color: #25D366; /* WhatsApp color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+
+}
+
+.shareButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #000;
+  transition: color 0.3s;
+}
+
+.shareButton:hover {
+  color: #007bff; /* Change this to your preferred hover color */
+}
+
+
+/* Add this to ProductDetails.module.css */
+
+
+.copyButton {
+  background-color: #007bff; /* Bootstrap primary color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}

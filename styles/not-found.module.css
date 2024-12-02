@@ -1,0 +1,63 @@
+/* not-found.module.css */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f9;
+  text-align: center;
+  padding: 20px;
+}
+
+.error_code {
+  font-size: 12rem; /* Increase the size of 404 */
+  font-weight: bold;
+  color: rgb(242, 62, 20); /* Highlighting with your preferred color */
+  margin: 0;
+}
+
+.error_message {
+  font-size: 2rem;
+  color: #333;
+  margin: 20px 0;
+}
+
+.home_link {
+  margin-top: 40px;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: rgb(242, 62, 20);
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.home_link:hover {
+  background-color: #d04e18;
+}
+
+.animation-container {
+  margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .container {
+   
+    height: 70vh;
+    
+  }
+  .error_code {
+    font-size: 8rem; /* Adjust size for smaller screens */
+  }
+
+  .error_message {
+    font-size: 1.5rem;
+  }
+
+  .home_link {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,157 @@
+/* Order.module.css */
+
+  .headingContainer {
+  display: flex;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0 5%;
+}
+
+.tableContainer {
+  overflow-x: auto; /* Enables horizontal scrolling */
+  width: 100%;
+  margin: 20px 0; /* Optional: Adds spacing above and below the table */
+}
+
+.orderTable {
+  min-width: 800px; /* Ensures the table has a minimum width for better visibility */
+  width: 100%; /* Maintains full width for larger screens */
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* .orderTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+  
+  .tableContainer {
+    overflow-x: auto;
+    width: 100%;
+  }
+   */
+  
+  
+  .container  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* .orderTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  } */
+
+
+  
+  .orderTable th, .orderTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .orderTable th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .orderTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .productImage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .select {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    font-size: 1rem;
+    /* background-color: #fff; */
+  }
+  
+  .optionpending {
+    color: #ffffff;
+    background-color:#ffc107; 
+    font-size: 1rem;
+    border-radius: 5px;
+    font-weight: 700;
+  }
+  
+  .option-shipped {
+    color: #007bff; /* Blue for Shipped */
+  }
+  
+  .option-delivered {
+    color: #28a745; /* Green for Delivered */
+  }
+  
+  .option-cancelled {
+    color: #dc3545; /* Red for Cancelled */
+  }
+  
+  .link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+
+    .Container { 
+      margin-top: 80px;
+    margin-bottom: 60px; 
+    }
+.headingContainer {
+  flex-direction: column;
+}
+
+.tableContainer {
+  margin: 0px 0; 
+}
+
+    .orderTable {
+      font-size: 14px;
+    }
+  
+    .productImage {
+      width: 50px;
+      height: 50px;
+    }
+  
+    .button {
+      width: 100%;
+    }
+  }
+  

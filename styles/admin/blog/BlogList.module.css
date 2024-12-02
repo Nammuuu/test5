@@ -1,0 +1,134 @@
+
+
+
+
+
+   .container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .blogTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .blogTable th, .blogTable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .blogTable th {
+    background-color: #f7f7f7;
+    color: #444;
+    font-weight: bold;
+  }
+  
+  .blogTable td {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  /* Responsive Buttons */
+  .publishButton, .privateButton, .deleteButton {
+    padding: 8px 15px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .publishButton {
+    background-color: #28a745;
+    margin-right: 5px;
+  }
+  
+  .privateButton {
+    background-color: #ff9800;
+    margin-right: 5px;
+  }
+  
+  .deleteButton {
+    background-color: #dc3545;
+  }
+  
+  .publishButton:hover, .privateButton:hover, .deleteButton:hover {
+    opacity: 0.9;
+  }
+  
+  /* Table and Button Responsiveness */
+  @media (max-width: 768px) {
+
+    .container {
+      padding: 0px;
+    margin: 0 auto 60px auto; 
+    }
+
+    .blogTable th, .blogTable td {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    .publishButton, .privateButton, .deleteButton {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .blogTable {
+      display: block;
+      overflow-x: auto;
+      width: 100%;
+    }
+  }
+  
+  
+  /* Mobile View */
+  @media (max-width: 480px) {
+    .container h2 {
+      font-size: 24px;
+    }
+  
+    .blogTable {
+      display: block;
+      overflow-x: auto;
+    }
+  
+    .blogTable th, .blogTable td {
+      white-space: nowrap;
+    }
+  
+    .publishButton, .privateButton, .deleteButton {
+      padding: 5px 8px;
+      font-size: 12px;
+    }
+  }
+  
+  /* Link Styling */
+  .container a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color:  #f26a20;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .container a:hover {
+    background-color:  #f26920e2;
+  }
+  

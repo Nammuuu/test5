@@ -1,0 +1,382 @@
+/* order.module.css */
+
+.checkoutPag {
+    margin-top: 80px;
+    background-color: #f9f9f9;
+}
+ 
+
+
+.checkoutPage {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #f7f7f7;
+   
+  }
+  
+  .checkoutForm {
+    flex: 1;
+    /* min-width: 320px; */
+    max-width: 700px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 5px;
+  }
+  
+  .checkoutPage  h1,
+  .checkoutPage  h2,
+  .checkoutPage  h3 {
+    
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .checkoutPage h1 {
+    font-size: 36px;
+  }
+  .checkoutPag h1 {
+    font-size: 36px;
+  }
+  
+  .checkoutPage h2 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+  
+  .checkoutPage h3 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  .shippingForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formGroup label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .formGroup input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
+  
+  .formGroup input:focus {
+    border-color: rgb(242 62 20);;
+  }
+  
+  .errorInput {
+    border-color: rgb(242 62 20);;
+  }
+  
+  .errorMessage {
+    color: rgb(242 62 20);;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .paymentMethod {
+    margin-top: 30px;
+  }
+  
+  .paymentButtons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .paymentButton {
+    flex: 1;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #f7f7f7;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .paymentButton:hover {
+    background-color:rgba(242, 61, 20, 0.901);
+    color: #fff;
+  }
+  
+  .paymentButton.selected {
+    background-color: rgb(242 62 20);;
+    color: white;
+    border-color: rgba(242, 61, 20, 0.571);
+  }
+  
+  .cardContainer {
+    margin-top: 20px;
+  }
+  
+  .cardTitle {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
+  .cardElement {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .orderSummary {
+    flex: 1;
+    /* max-width: 400px; */
+    background-color: #fff;
+    /* padding: 20px; */
+    border-radius: 10px;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .orderSummary h2 {
+    margin-bottom: 15px;
+  }
+  
+  .orderSummary ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .orderSummary li {
+    display: flex;
+   gap: 30px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .orderImage {
+    border-radius: 5px;
+  }
+
+  
+  
+  .orderSummary h3 {
+    font-size: 18px;
+    margin: 15px 0;
+    text-align: right;
+  }
+  
+  .couponSection {
+    margin-top: 30px;
+  }
+  
+  .couponSection input {
+    padding: 10px;
+    width: 60%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .couponSection button {
+    padding: 10px 20px;
+    background-color: rgb(242 62 20);;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .couponSection button:hover {
+    background-color: rgba(242, 61, 20, 0.571);
+  }
+
+  .btncouponSection {
+    margin-top: 10px;
+  }
+  
+  .orderButton {
+    margin-top: 30px;
+    padding: 15px;
+    width: 100%;
+    background-color: rgb(242 62 20);;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .orderButton:hover {
+    background-color: rgba(242, 61, 20, 0.571);
+  }
+  
+ 
+
+   
+
+
+
+/* design new   */
+
+.ShippingInformation h1{
+  color: #333;
+  font-size: 2.25rem;
+}
+
+.ShippingInformation {
+  display: flex;
+  gap: 10px; /* Space between arrow button and text */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 8px;
+  max-width: 1200px;
+    margin: 0 auto;
+}
+
+.arrowButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 24px; /* Adjust the size of the icon */
+  display: flex;
+  align-items: start;
+}
+
+.arrowButton svg {
+  color: rgb(242 62 20); /* Set the icon color */
+}
+
+.arrowButton svg:hover {
+  color: rgba(242, 61, 20, 0.571); /* Set the icon color */
+}
+
+.ShippingInformationh1 h1 {
+  font-size: 20px;
+  margin: 0;
+  color: #000; /* Text color for the heading */
+}
+
+.ShippingInformationh1 p {
+  font-size: 16px;
+  color: #666; /* Text color for the paragraph */
+  margin: 5px 0 0 0;
+}
+
+
+
+
+/* size color  */
+.sizecolor {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #333;
+}
+
+.sizecolor p {
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  margin: 5px 0;
+}
+
+.sizecolor p:hover {
+  color: #000;
+}
+
+.sizecolor p:first-of-type::after {
+  /* content: '|'; Adds a pipe separator between size and color */
+  margin-left: 5px;
+}
+
+
+@media (max-width: 768px) {
+
+  .checkoutPag {
+    margin-top: 70px !important;;
+  }
+  .ShippingInformation {
+    padding: 0px !important;;
+  }
+
+  .ShippingInformationh1 h1 {
+    font-size: 14px;
+    word-break: break-all;
+  }
+
+  .ShippingInformationh1 p {
+    font-size: 12px;
+    word-break: break-all;
+  }
+
+  
+  .checkoutPage {
+    flex-direction: column;
+    padding: 0px;
+  }
+
+  .checkoutForm
+   {
+    /* width: 100%; */
+    padding: 10px;
+    margin-bottom: 60px;
+
+  }
+
+ 
+  .couponSection input {
+    width: 80%;
+  }
+ 
+
+  .orderSummary {
+      /* width: 100%; */
+    margin-bottom: 20px;
+  font-size: 18px;
+  margin: 0;
+  text-align: left;
+  }
+
+  .orderSummary h1,
+  .orderSummary h2,
+  .orderSummary h3
+  {    
+  text-align: left;
+  }
+
+
+  .shippingForm {
+    grid-template-columns: 1fr;
+  }
+
+  .paymentButtons {
+    flex-direction: column;
+  }
+
+  .paymentButton {
+    margin-bottom: 10px;
+  }
+
+  .couponSection input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .couponSection button {
+    width: 100%;
+  }
+}

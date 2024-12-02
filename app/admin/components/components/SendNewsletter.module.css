@@ -1,0 +1,132 @@
+   /* Container */
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Heading */
+  .container  h2 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styling */
+  .form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  /* Input and Textarea Fields */
+  .form input[type="text"],
+  .form input[type="email"],
+  .form input[type="file"],
+  .form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .form textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  /* Labels */
+  .form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #555;
+    font-size: 1.3rem;
+  }
+  
+  /* Buttons */
+  .form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* User and Email Lists */
+  .form ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+  }
+  
+  .form ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .form ul li button {
+    background-color: #dc3545;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    color: white;
+  }
+  
+  .form  ul li button:hover {
+    background-color: #c82333;
+  }
+  
+  /* Section Headings */
+  .form h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0px;
+    }
+
+    .form input[type="text"],
+    .form input[type="email"],
+    .form input[type="file"],
+    .form textarea {
+      width: 90%;
+    }
+
+  
+    .form {
+      grid-template-columns: 1fr;
+    }
+    .form h3{
+      margin: 5px 0;
+    }
+  
+    .form  ul li {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .form ul li button {
+      margin-top: 5px;
+    }
+  }
+  

@@ -1,0 +1,265 @@
+/* Wrapper for sidebar and chat */
+.chatWrapper {
+  display: flex;
+  height: 100vh;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  width: 280px;
+  background-color: #343a40;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.sidebarTitle {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #f26a20;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.sidebarUser {
+  padding: 15px;
+  background-color: #495057;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  gap: 10px;
+}
+
+
+.sidebarUser:hover {
+  background-color: #6c757d;
+}
+
+.activeUser {
+  background-color: #f26a20;
+}
+
+.userid {
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: white;
+  margin: 0;
+}
+
+.lastMessage {
+  font-size: 0.85rem;
+  color: #ccc;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 150px;
+  margin: 5px;
+}
+
+/* Chat Container */
+.chatContainer {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 20px;
+}
+
+/* Message List */
+.messageList {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.userMsg, .adminMsg {
+  max-width: 60%;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: flex-start;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.userMsg {
+  background-color: #f1f1f1;
+  color: #333;
+  align-self: flex-start;
+}
+
+.adminMsg {
+  background-color: #f26a20;
+  color: white;
+  align-self: flex-end;
+}
+
+/* Reply Section */
+.replySection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+}
+
+.replyBtn {
+  background-color: #f26a20;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.replyBtn:disabled {
+  background-color: #ccc;
+}
+
+.replyBtn:hover:not(:disabled) {
+  background-color: #d85c1a;
+}
+
+/* Delete Icon */
+.deleteIcon {
+  color: #ff4d4d;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.deleteIcon:hover {
+  color: #ff0000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chatWrapper {
+      flex-direction: column;
+      padding: 10px;
+  }
+
+  .sidebar {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+
+  .chatContainer {
+      /* height: auto; */
+      height: 500px;
+      margin-bottom: 30px;
+  }
+
+  .messageList {
+      font-size: 0.9rem;
+  }
+
+  .input {
+      font-size: 0.9rem;
+  }
+
+  .replyBtn {
+      font-size: 0.9rem;
+  }
+
+  .replySection {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar {
+  height: 100%;
+  /* overflow-y: clip; */
+}
+
+}
+
+@media (max-width: 480px) {
+
+  .messageList {
+    gap: 5px;
+  }
+  .adminMsg { 
+    max-width: 90%;
+    padding: 8px;
+    margin: 5px;
+  }
+    .userMsg{ 
+      max-width: 90%;
+      padding: 8px;
+      margin: 5px;
+    }
+  .sidebar {
+    width: 90%;
+  }
+ 
+  .chatWrapper {
+    padding: 0px;
+    margin: 100px 0;
+  }
+  .chatContainer {
+    padding: 5px;
+  }
+
+
+  .replySection {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .messageList {
+      font-size: 0.85rem;
+  }
+
+  .input {
+      font-size: 0.85rem;
+  }
+
+  .replyBtn {
+      padding: 10px;
+      font-size: 0.85rem;
+  }
+
+  
+}

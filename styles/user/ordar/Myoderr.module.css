@@ -1,0 +1,263 @@
+
+  
+  /* Container for My Orders */
+  .myOrdersContainerone {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow: hidden;
+    margin-top: 60px;
+    margin-bottom: 200px;
+  }
+  
+  .myOrdersContainer h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    position: relative;
+  }
+  
+  /* Order Card Styling */
+  .orderCard {
+    background-color: #fff;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .sectionorderCard {
+    margin-bottom: 15px;
+  }
+  
+  .orderCard h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+    word-wrap: break-word; /* Fix for overflow issues */
+  }
+  
+  .orderCard p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  .orderCard .subHeading {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  /* Buttons Styling */
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .invoiceButton,
+  .cancelButton {
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .invoiceButton {
+    background-color: #e0eafc;
+    /* color: #007BFF; */
+    padding: 10px 15px;
+    /* background-color: #3333330a; */
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    width: 30%;
+    border: none;
+  }
+  
+  .cancelButton {
+    background-color: #fcf4f4;
+    color: #dc3545;
+    border: none;
+  }
+  
+  .invoiceButton:hover,
+  .cancelButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+
+    .invoiceButton { 
+      width: max-content;
+    border: none;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    }
+    .topBar {
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0 0 ; 
+     border: none;
+    }
+    .topBar button {
+      width: 100% !important;
+      font-size: 14px !important;
+    font-weight: 400 !important;
+    }
+    .myOrdersContainerone {
+      padding: 10px;
+    }
+  
+    .orderCard {
+      padding: 15px;
+    }
+  .productImage{
+    width: 100px;
+    height: 100px;
+  }
+    .buttons {
+     display: flex;
+    }
+  }
+  
+  /* Order Items Styling */
+  .orderItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .orderItem p {
+    margin-left: 10px;
+  }
+  
+  .productImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .productImage:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Top Bar and Buttons */
+  .topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border: 2px solid #3333;
+    border-radius: 10px;
+    color: #fff;
+  }
+  
+  .topBar button {
+    padding: 10px 15px;
+    background-color: #3333330a;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    width: 30%;
+  }
+  
+  .topBar button:hover {
+    background-color: #d0dffc;
+  }
+  
+  .topBar button.active {
+    background-color: #9ab9e81a;
+    color: #bb5a5a;
+  }
+  
+  /* Animations with GSAP */
+  .gsap-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  
+  .gs-animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Hover Animation on Buttons */
+  .invoiceButton:hover,
+  .cancelButton:hover,
+  .topBar button:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+  }
+  
+  
+
+
+  .msgcontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .noOrderMessage {
+    font-size: 2rem;
+    color: #333;
+    margin: 20px 0;
+  }
+  
+  .homeLink {
+    margin-top: 40px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: #fff;
+    background-color: rgb(242, 62, 20);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .homeLink:hover {
+    background-color: #d04e18;
+  }
+  
+  @media (max-width: 768px) {
+    .noOrderMessage {
+      font-size: 1.5rem;
+    }
+  
+    .homeLink {
+      font-size: 1rem;
+    }
+  }
+  
