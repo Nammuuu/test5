@@ -260,7 +260,10 @@
       grid-template-columns: repeat(2, auto);
       justify-content: flex-start;
       align-items: self-start;
-      gap: 0;
+      padding: 0 20px;
+    }
+    .categoryCardButton {
+      justify-content: center;
     }
 
     .ShippingInformation h1 { 
@@ -271,11 +274,12 @@
     .container {
       padding: 0; 
      
-      margin: 60px 0 60px 0;
+      
     }
 
     .categoryCard {
       width: auto; 
+      padding: 20px 0;
     }
 
     .previewImage {
@@ -283,6 +287,7 @@
     }
 .categoryGrid {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     margin-top: 0px;
 }
 

@@ -28,13 +28,13 @@
 
 @media (max-width: 768px) {
   .graphWrapper {
-    width: 90%;
+    width: 100%;
     height: 300px; 
   }
 
   .graphContainer {
     margin-top: 0px;
-    padding: 20px;
+    padding: 20px 0;
     margin-bottom: 70px;
   }
 

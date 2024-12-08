@@ -43,10 +43,19 @@
     word-wrap: break-word; /* Fix for overflow issues */
   }
   
+
+  .orderCard .titlell {
+    font-size: 1rem;
+    color: #222;
+    font-weight: 550;
+  }
   .orderCard p {
     font-size: 1rem;
-    color: #555;
+    color: #444;
     margin: 5px 0;
+    font-weight: 450;
+    text-transform: capitalize;
+    margin: 10px 0 10px 10px !important;
   }
   
   .orderCard .subHeading {
@@ -126,7 +135,7 @@
     }
   
     .orderCard {
-      padding: 15px;
+      padding: 0px;
     }
   .productImage{
     width: 100px;

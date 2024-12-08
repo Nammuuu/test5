@@ -17,7 +17,7 @@ import Image from 'next/image';
 import CartSidebar from '../../../../../components/Home/CartSidebar';
 import { IoIosArrowBack } from "react-icons/io";
 import { TbHeart, TbShoppingBag,  } from "react-icons/tb";
-import Loader from "../../../components/Loader";
+import Loader from "../../../../../components/Loader";
 const ProductDetailsPage = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);

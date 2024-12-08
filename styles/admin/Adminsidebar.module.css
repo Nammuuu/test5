@@ -948,7 +948,7 @@ font-size: 1.5rem;
   /* align-items: center; */
   transition: all 0.5s ease;
   z-index: 999;
-  overflow: scroll;
+  /* overflow: scroll; */
     padding: 0 0 60px 0;
     width: 70%;
   }
@@ -957,13 +957,23 @@ font-size: 1.5rem;
   left: 0; /* Slide in from left */
   }
 
+
+  @media (max-width: 768px) {
+
+
+    .sidePanel {
+      position: fixed;
+      overflow: scroll;
+      
+    }
+
+  }
 @media (min-width: 768px) {
 
-
-.sidePanel {
-  position: fixed;
-  width: 20%;
-}
+  .sidePanel {
+   
+    width: 15%;
+  }
 
 .hamburger {
   display: flex; /* Hide hamburger on desktop */

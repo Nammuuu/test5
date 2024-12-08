@@ -34,14 +34,20 @@ const OrderStatistics = ({
       <h2 className={styles.header}>Order Statistics</h2>
       <div className={styles.statisticsGrid}>
         {stats.map((stat, index) => (
-          <div key={index} className={styles.card} style={{ borderTop: `5px solid ${stat.color}` }}>
-            <div className={styles.iconContainer} style={{ color: stat.color }}>
+          <div key={index} className={styles.card} style={{ borderTop: `0px solid ${stat.color}` }}>
+            <div className={styles.iconContainer} style={{ backgroundColor: stat.color,  color: stat.color  }}>
               {stat.icon}
             </div>
+            
             <div className={styles.cardContent}>
               <h3 className={styles.cardTitle}>{stat.title}</h3>
               <p className={styles.cardValue}>{stat.value}</p>
             </div>
+
+
+            
+
+
           </div>
         ))}
       </div>

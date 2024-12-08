@@ -102,7 +102,7 @@
   @media (max-width: 768px) {
     .graphContainer {
       padding: 0px; 
-    margin: 80px 0 0 0;
+    /* margin: 80px 0 0 0; */
     }
 
     .Heading {

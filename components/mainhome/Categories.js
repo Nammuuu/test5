@@ -77,7 +77,8 @@ const Categories = () => {
                   height={500}
                   priority
                 />
-                <h2 className={styles.categoryheading}>{category.name}</h2>
+                <h2 className={styles.categoryheading}>{category?.name?.length > 13 ? category.name.slice(0, 13) + "..." : category.name}</h2>
+                {/* <h2 className={styles.categoryheading}>{category.name}</h2> */}
               </Link>
             </div>
           ))}

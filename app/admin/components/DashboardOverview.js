@@ -60,7 +60,7 @@ return (
   <> 
   <div className={styles.overviewcontainer}>
   <div className={styles.greeting}>
-  <h2>{getGreetingMessage()}</h2>
+  <h2 className={styles.goodmoring} >{getGreetingMessage()}</h2>
 </div>
 <div className={styles.orderview}> <h1> Overview </h1> </div> 
   <div className={styles.dashboardContainer}>

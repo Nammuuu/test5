@@ -2,14 +2,15 @@
 
 
 .statisticsContainer {
-    margin: 20px;
+    margin: 0px;
   }
   
   .header {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-    color: #333;
+    font-size: 1.45rem;
+    margin: 15px 0;
+    color: #000;
+    font-weight: 500;
+    text-align: left;
   }
   
   .statisticsGrid {
@@ -25,6 +26,9 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease;
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
   }
   
   .card:hover {
@@ -34,6 +38,10 @@
   .iconContainer {
     font-size: 2rem;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
   }
   
   .cardContent {
@@ -41,13 +49,13 @@
   }
   
   .cardTitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 5px 0;
     color: #555;
   }
   
   .cardValue {
-    font-size: 1.5rem;
+    font-size: 0.90rem;
     font-weight: bold;
     color: #222;
   }

@@ -19,9 +19,9 @@
   }
   
   .icon {
-    width: 28px; /* Icon size */
-    height: 28px; /* Icon size */
-    color: #666; /* Default color */
+    width: 25px; /* Icon size */
+    height: 25px; /* Icon size */
+    color: #444; /* Default color */
     transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
     cursor: pointer; /* Pointer cursor */
   }
@@ -90,7 +90,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: 20px;
-  padding: 14px;
+  padding: 11px;
   background-color: #fff;
   position: fixed; /* Fix to top */
   top: 0;
@@ -717,6 +717,8 @@
 /* Desktop-specific styles */
 
 @media (max-width: 768px) {
+  
+   
   .mediadisplaynone {
     display: none;
   }
@@ -756,8 +758,13 @@
   
     .close_logo_container {
       width: 90%;
-      
+      gap: 0%;
     }
+
+    .navbarHeader {
+      gap: 10%;
+    }
+    
 
 }
 
@@ -864,7 +871,7 @@
 
 
 .userActive {
-  color: #666; /* Active color when user is logged in */
+  color: #444; /* Active color when user is logged in */
 }
 
 .activeDot {
@@ -1035,6 +1042,7 @@
 
   .logo {
     font-size: 2rem;
+    display: flex;
   }
 
   /* .navItems li {

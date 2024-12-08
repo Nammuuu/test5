@@ -344,7 +344,7 @@ const MyOrdersPage = () => {
               />
             )}
             <div>
-              <p>{item.product?.name.length > 30 ? item.product?.name.slice(0, 30) + "..." : item.product?.name}</p>
+              <p  className={styles.titlell}>{item.product?.name.length > 30 ? item.product?.name.slice(0, 30) + "..." : item.product?.name}</p>
               <p>Quantity: {item.quantity}</p>
               {item.size && <p>Size: {item.size}</p>}
               {item.color && <p>Color: {item.color}</p>}

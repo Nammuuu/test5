@@ -309,6 +309,7 @@ admin chat delte
 fix all pages one by one 
 variyant name 
 simpal just fix ui only 
+all images heght and width full 700px 
 final test 
 
 banner same size images 

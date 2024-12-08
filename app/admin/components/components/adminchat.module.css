@@ -236,7 +236,7 @@
  
   .chatWrapper {
     padding: 0px;
-    margin: 100px 0;
+    /* margin: 100px 0; */
   }
   .chatContainer {
     padding: 5px;

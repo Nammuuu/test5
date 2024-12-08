@@ -25,6 +25,10 @@ body {
 } */
 
 
+body {
+   background: #fcfcfc;
+}
+
 .className {
  font-family: "Urbanist", sans-serif;
 }

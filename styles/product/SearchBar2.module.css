@@ -2,14 +2,15 @@
 .searchBarContainer {
   padding: 20px;
   max-width: 1200px;
-  margin: 70px auto;
+  /* margin: 70px auto; */
   
 }
 
 /* Grid layout for filters and products */
 .searchBarContainerto {
   display: grid;
-  grid-template-columns: 1fr 3fr; /* Sidebar on the left, content on the right */
+  /* grid-template-columns: 1fr 3fr;  */
+  /* Sidebar on the left, content on the right */
   gap: 20px;
 }
 
@@ -683,7 +684,7 @@
 .product_list_containet h4 {
   font-size: 1.1rem;
   margin-bottom: 8px;
-  font-weight: 600;
+  font-weight: 450;
   color: #333;
   text-transform: capitalize;
 }
@@ -703,6 +704,7 @@
   align-items: center;
   font-size: 1rem;
   gap: 10px;
+  font-weight: 450;
 }
 
 .price_containet p {
@@ -712,7 +714,7 @@
 .price  {
   color: #000;
   font-size: 1.2rem;
-  font-weight: 900;
+  font-weight: 450;
   margin: 5px 0;
   letter-spacing: 2px;
 }
@@ -785,8 +787,9 @@
 
 .product_name {
   font-size: 1.8rem;
-  font-weight: bold;
-  margin: 10px 0px;
+  font-weight: 450;
+  margin: 10px 0;
+  word-break: break-all;
 }
 
 .product_des {
@@ -844,6 +847,7 @@
     transition: background-color 0.3s ease;
     font-size: 1.1rem;
     width: 50%;
+    text-transform: capitalize;
 }
 
 .quickViewProduct_product_cart:hover {
@@ -880,7 +884,7 @@
 .price_quick {
   color: #000;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 450;
 
   letter-spacing: 2px;
 }
@@ -967,7 +971,8 @@
 @media (max-width: 768px) {
   .quick_view_content {
     flex-direction: column;
-    max-height: 90vh;
+    /* max-height: 90vh; */
+    padding: 14px;
   }
 
   .products { 
@@ -990,7 +995,8 @@
 
   .quickViewProduct_images {
     width: 100%;
-    height: 250px;
+    /* height: 250px; */
+    height: 100%;
     object-fit: cover;
   }
 }
@@ -1449,8 +1455,8 @@ color: #d04e18;
 
 
   .price_quick {
-    color: #111;
-    font-weight: 600;
+    color: #222;
+    font-weight: 450;
     letter-spacing: 0;
   }
 .quick_view_content {
@@ -1468,7 +1474,7 @@ height: 50px;
 
   .searchBarContainer {
     padding: 0;
-    margin: 50px 0 0 0;
+    /* margin: 50px 0 0 0; */
   }
 
   .searchBar button svg{
@@ -1519,7 +1525,7 @@ height: 50px;
   }
   .price {
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 450;
     letter-spacing: 0;
   }
 
@@ -1555,6 +1561,7 @@ height: 50px;
   /* quice view  */
 .quick_view_modal {
   width: 90%;
+  align-items: unset;
 }
 
 .quickViewProduct_product_cart_link {

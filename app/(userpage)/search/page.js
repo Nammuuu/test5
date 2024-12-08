@@ -484,7 +484,7 @@ const toggleSidebar = () => {
           <p className={styles.price}>₹{product.price}</p>
           <p className={styles.discountPrice}>₹{product.discountPrice}</p>
         </div>
-        <p className={styles.white_space}>Sales: {product.salesCount} | Views: {product.viewsCount}</p>
+        {/* <p className={styles.white_space}>Sales: {product.salesCount} | Views: {product.viewsCount}</p> */}
         
         <div className={styles.product_icons}>
           <FaHeart

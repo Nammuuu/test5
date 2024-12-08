@@ -17,6 +17,8 @@
   text-align: center;
   border-bottom: 2px solid #ddd;
   padding-bottom: 10px;
+  display: flex;
+
 }
 
 /* Responsive user table */

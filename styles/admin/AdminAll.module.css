@@ -24,8 +24,12 @@
    */
 
 
+
+
+
    .dashboardContainer {
     display: flex;
+    background-color: #f7f7fc;
     transition: all 0.3s ease;
   }
   
@@ -35,7 +39,8 @@
   }
   
   .sidebarClosed {
-    margin-left: 80px; /* Adjust to the width of the closed sidebar */
+    /* margin-left: 80px;  */
+    /* Adjust to the width of the closed sidebar */
   }
   
   .mainContent {

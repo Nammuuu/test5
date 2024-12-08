@@ -201,6 +201,7 @@ align-items: center;
 /* Responsive */
 @media (max-width: 768px) {
 
+ 
   .bannerContainer {
     padding: 0px;
     margin: 55px auto 0;
@@ -226,7 +227,12 @@ align-items: center;
 
   .viewButtonContainer {
     right: 1%;
-    bottom: 22%;
+    bottom: 10px;
+    font-size: .8rem;
+  }
+
+  .viewButtonContainer a{
+    padding: 5px 10px;
   }
 
   .prevButton,

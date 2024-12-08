@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import styles from '../../../styles/product/SearchBar2.module.css';
+import styles from './Adminproduct.module.css';
 import Link from 'next/link';
 import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
@@ -804,7 +804,7 @@ const getFiveDaysAgo = () => {
     <div className={styles.searchBarContainerto}>
   
 
-
+ 
           {/* Product Display */}
 {/* Product Display */}
 <div className={styles.products}>

@@ -45,11 +45,28 @@
    */
 
 
+
+
+   .greeting h2{
+    font-size: 1.45rem;
+    margin: 15px 0;
+    color: #000;
+    font-weight: 700;
+   }
+
+   .orderview h1{
+    font-size: 1.8rem;
+    margin: 15px 0;
+    color: #000;
+    font-weight: 500;
+   }
+
+
    .dashboardContainer {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 16px;
+    padding: 16px 0;
   }
   
   @media (min-width: 768px) {
@@ -66,7 +83,7 @@
   
   .card {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
       background-color: #ffffff;
     /* padding: 24px; */
     padding: 10px;
@@ -99,7 +116,7 @@
   }
   
   .cardTitle {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
     margin-bottom: 8px;
     color: #fff;
@@ -107,7 +124,7 @@
   }
   
   .cardValue {
-    font-size: 1.5rem;
+    font-size: 0.90rem;
     font-weight: 700;
     color: #ffff;
     margin: 8px 0;

@@ -234,7 +234,7 @@ useEffect(() => {
                </div>
 
           <div className={styles.navIcons}>
-            <li >
+            <li className={styles.mediadisplaynone} >
               <Link onClick={() => handleLinkClick("/search")} href="/search">
               <TbSearch  className={styles.icon} />
               </Link>

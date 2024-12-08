@@ -21,10 +21,11 @@
 
   .categoryHeadingtitle {
     font-size: 2.25rem;
-    color: #222;
+    color: #2a2a2a;
     margin: 50px 0 20px 0;
     font-family: ui-monospace;
     text-transform: capitalize;
+    font-weight: 550;
   }
 
 
@@ -71,7 +72,9 @@
   }
   
   .categoryContainer {
-    flex: 0 0 calc(100% / 6); /* 3 items per slide */
+    /* flex: 0 0 calc(100% / 6);  */
+    flex: 0 0 calc(100% / 9); 
+    /* 3 items per slide */
     padding: 10px;
     box-sizing: border-box;
   }
@@ -131,6 +134,13 @@
   /* Responsive Design */
   @media (max-width: 768px) {
 
+    
+
+    
+    .categoryContainer {
+      padding: 10px 10px 10px 0px;
+      flex: 0 0 calc(100% / 9); 
+    }
     .container {
       padding: 0px;
       text-align: start;
@@ -144,7 +154,7 @@
     /* padding: 0; */
     word-break: break-all;
     font-size: 1.5rem;
-    font-weight: 900;
+    font-weight: 550;
     line-height: unset;
     }
 
@@ -164,7 +174,7 @@
     .categoryheading {
       padding: 0 0;
       font-size: .85rem;
-      white-space: unset;
+      
     }
 
   
