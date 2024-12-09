@@ -248,24 +248,14 @@ button enble disable responsive fix all pages
   --order procces --done
  --Confirmation order --done
 --myoder  --done
-
  --blog --done
  --blog details --done 
-
  --product --done
  --product details loding add
- --category --done gap fix
+ --category --done 
  --category product details --done
- --Search --done gap fix mob
- 
- --home page --start
-
-live fix
- --start admin 
- --pagesatting --done
- --erro hadnling erros display only blog time creating time
-    
---ids --start
+ --Search --done 
+ --home page --done
 
 loading add
 0.2 handle errors 
@@ -275,15 +265,12 @@ buttons loading
  2. linke loading 
  page pagetiontion add
  popup auto close 
+
+ --start admin 
+--ids --start
 loading 
- -- order page 
- --profile id --start
- --/order 
- --user Dashboard 
  --product loading link 
 
-
- 
 satting updats  
  --satting charnge 
  --banner update text display or not dont display it 
@@ -300,22 +287,20 @@ add api --done
 --footer --start api 
 
 home page 
- banner --done
- Categories --done add 10+ category and chekc 
  product --done
  footer --done
 
-admin chat delte
+--pagesatting --done
+
 fix all pages one by one 
 variyant name 
 simpal just fix ui only 
 all images heght and width full 700px 
+live chat add 
+--erro hadnling erros display only blog time creating time
+admin chat delte
 final test 
 
-banner same size images 
-category 
- --arros no work
- --text trim add 8 word
 // end 
 
 

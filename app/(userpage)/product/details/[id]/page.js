@@ -582,18 +582,6 @@ const productNameTrim = (name) => {
                 </div>
               )}
 
-
-
-
-
-              <div className={styles.line}></div>
-
-
-
-              
-
-
-
               <div className={styles.actions}>
               
                 <button onClick={handleAddToCart} className={styles.cartButton}> <TbShoppingBag /> Add to Cart</button>
@@ -601,6 +589,8 @@ const productNameTrim = (name) => {
                 <button onClick={handleAddToWishlist} className={styles.wishlistButton}> <TbHeart /> Add to Wishlist</button>
               </div>
 
+
+              <div className={styles.line}></div>
             </div>
 
           </div>

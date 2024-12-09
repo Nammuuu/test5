@@ -200,9 +200,9 @@ gsap.registerPlugin(ScrollTrigger);
           <li className="sidebarItem" onClick={() => { setActiveSection("Reviews"); toggleSidebar(); }}>
               <FaClipboardList /> <span>My Reviews</span>
           </li>
-          <li className="sidebarItem" onClick={() => { setActiveSection("cart"); toggleSidebar(); }}>
+          {/* <li className="sidebarItem" onClick={() => { setActiveSection("cart"); toggleSidebar(); }}>
               <FaShoppingCart /> <span>Cart</span>
-          </li>
+          </li> */}
 
 
           <li className="sidebarItem" onClick={() => { handleLogout(); toggleSidebar(); }}>
@@ -477,7 +477,8 @@ gsap.registerPlugin(ScrollTrigger);
             )}
             <div>
               <p className={styles.productName}>
-                {review.product?.name || "Unnamed Product"}
+              {review.product?.name.length > 30 ? review.product?.name.slice(0, 30) + "..." : review.product?.name}
+                {/* {review.product?.name || "Unnamed Product"} */}
               </p>
               <p className={styles.reviewDate}>
                 {new Date(review.createdAt).toLocaleDateString()}
