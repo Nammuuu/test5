@@ -235,8 +235,8 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState('Dashboard'); 
   const [stockAlerts, setStockAlerts] = useState([]);
 

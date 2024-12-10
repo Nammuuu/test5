@@ -470,6 +470,7 @@ const BlogEditor = () => {
       const token = localStorage.getItem('token');
   
       if (!token) {
+        toast.error('Authentication required.');
         router.push('/login');
         return;
       }
@@ -487,9 +488,16 @@ const BlogEditor = () => {
           setUserId(data.userId);
         })
         .catch((error) => {
-          console.error('Error verifying admin:', error);
-          toast.error('Failed to verify admin');
-          router.push('/login');
+          // console.error('Error verifying admin:', error);
+          // toast.error('Failed to verify admin');
+          // router.push('/login');
+
+          const errorMessage =
+        error.response?.data?.message || 'Failed to verify admin';
+      toast.error(errorMessage);
+      console.error('Admin verification error:', error.response || error);
+      router.push('/login');
+
         });
     }
   }, [router]);
@@ -525,10 +533,31 @@ const BlogEditor = () => {
 
 
 
+  const validateForm = () => {
+    if (!title.trim()) {
+      toast.error('Title is required.');
+      return false;
+    }
+    if (!content.trim()) {
+      toast.error('Content is required.');
+      return false;
+    }
+    if (!urlSlug.trim()) {
+      toast.error('URL slug is required.');
+      return false;
+    }
+    if (!metaDescription.trim()) {
+      toast.error('Meta description is required.');
+      return false;
+    }
+    return true;
+  };
 
+  
   
   // Handle blog submission
   const handleSubmit = async () => {
+    if (!validateForm()) return;
     try {
       const token = localStorage.getItem('token');
       setLoading(true);
@@ -551,7 +580,15 @@ const BlogEditor = () => {
       toast.success('Blog created successfully');
       setLoading(false);
     } catch (error) {
-      toast.error('Error creating blog');
+
+      const errorMessage =
+      error.response?.data?.message || 'Unexpected error occurred';
+    toast.error(`Error: ${errorMessage}`);
+    console.error('Blog creation error:', error.response || error);
+      // toast.error('Error creating blog');
+      // setLoading(false);
+    }
+    finally {
       setLoading(false);
     }
   };
@@ -564,7 +601,11 @@ const BlogEditor = () => {
       const { data } = await axios.get('/api/admin/blog/images'); // Your API endpoint to get all images
       setAllImages(data.images);
     } catch (error) {
-      toast.error('Error fetching images');
+      // toast.error('Error fetching images');
+      const errorMessage =
+      error.response?.data?.message || 'Failed to fetch images';
+    toast.error(`Error: ${errorMessage}`);
+    console.error('Fetching images error:', error.response || error);
     }
   };
 

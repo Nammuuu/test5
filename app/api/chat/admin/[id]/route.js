@@ -1,5 +1,5 @@
 
-
+ 
 
 
 import { NextResponse } from 'next/server';
@@ -47,9 +47,24 @@ export async function DELETE(req, { params }) {
   
       const { userId } = params; // Extract userId from request params
   
+      if (!userId) {
+        return NextResponse.json({ message: "Invalid user ID" }, { status: 400 });
+      }
+
+
       // Delete all chat messages of this user
-      await Chat.deleteMany({ $or: [{ sender: userId }, { receiver: userId }] });
+      // await Chat.deleteMany({ $or: [{ sender: userId }, { receiver: userId }] });
   
+      const result = await Chat.deleteMany({ $or: [{ sender: userId }, { receiver: userId }] });
+    
+    if (result.deletedCount === 0) {
+      return NextResponse.json(
+        { message: "No chats found for the specified user" },
+        { status: 404 }
+      );
+    }
+
+    
       return NextResponse.json({ message: 'User chats deleted successfully' }, { status: 200 });
     } catch (error) {
       console.error('Error deleting user chats:', error);

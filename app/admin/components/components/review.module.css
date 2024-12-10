@@ -26,7 +26,7 @@
   }
 
   .container { 
-    margin: 60px 0; 
+    margin: 60px 0;
     padding: 0px;
   }
   .productCardContainer {
@@ -90,7 +90,7 @@
 
 .productName {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 450;
   color: #333;
   flex: 1;
 }

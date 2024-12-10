@@ -3,7 +3,8 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "../../../styles/admin/setting/settings.module.css";
+// import styles from "../../../styles/admin/setting/settings.module.css";
+import styles from "../../../styles/admin/setting/settings2.module.css";
 import { FaEdit, FaCreditCard, FaChartBar, FaFont, FaStore, FaTimes } from 'react-icons/fa';
 
 

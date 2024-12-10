@@ -107,7 +107,7 @@
 
 
 
-
+ 
  
 
 "use client"; 
@@ -188,13 +188,16 @@ const UserListPage = () => {
       try {
         const token = localStorage.getItem('token');
         await axios.put('/api/admin/users', {
+
           userId: selectedUser._id,
           username,
           email,
           phoneNumber,
           role,
         }, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { 
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json" },
         });
         setUsers(users.map(u => u._id === selectedUser._id ? { ...u, ...userData } : u));
         toast.success('User updated successfully');

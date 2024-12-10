@@ -18,8 +18,13 @@ const AdminChat = () => {
   const [socket, setSocket] = useState(null);
   const [activeUser, setActiveUser] = useState(''); // Track active user in sidebar
 
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  
   useEffect(() => {
-    const socketIo = io('http://localhost:3000');
+    // const socketIo = io('http://localhost:3000');
+    const socketIo = io(baseUrl);
+
     setSocket(socketIo);
 
     socketIo.emit('joinRoom', { userId: 'admin' });

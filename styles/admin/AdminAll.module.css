@@ -89,8 +89,9 @@
 @media (max-width: 768px) {
 
   .mainContent {
-   
+    
  padding: 0;
+ 
  width: 100%;
  height: auto;
  overflow: scroll;

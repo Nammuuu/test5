@@ -726,8 +726,9 @@ const getFiveDaysAgo = () => {
             <FaTimes />
           </button>
 
-          <h2 className={styles.product_name} >{product.name}</h2>
-          <p className={styles.product_des} >{product.description.slice(0, 200)}...</p>
+          <h2 className={styles.product_name}>{product.name.slice(0, 30)}...</h2>
+          {/* <h2 className={styles.product_name} >{product.name}</h2> */}
+          {/* <p className={styles.product_des} >{product.description.slice(0, 200)}...</p> */}
           <p className={styles.product_name} >{product.seles} </p>
           <div className={styles.price_containet}>
             <p className={styles.price_quick}>₹{product.price}</p>

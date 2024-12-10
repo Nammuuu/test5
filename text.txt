@@ -266,7 +266,21 @@ buttons loading
  page pagetiontion add
  popup auto close 
 
- --start admin 
+--start admin  --loader
+home  -icons
+admin dashbord   
+product
+orders
+categories --done
+users --update fix test
+blog  --test
+chat  --delte --test
+notifications
+reviews 
+settings  --test
+edit home --start
+page setting
+
 --ids --start
 loading 
  --product loading link 
@@ -298,7 +312,7 @@ simpal just fix ui only
 all images heght and width full 700px 
 live chat add 
 --erro hadnling erros display only blog time creating time
-admin chat delte
+
 final test 
 
 // end 

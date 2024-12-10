@@ -13,7 +13,7 @@
   
   /* Grid layout for filters and products */
   .searchBarContainerto {
-    display: grid;
+    /* display: grid; */
     grid-template-columns: 1fr 3fr; /* Sidebar on the left, content on the right */
     gap: 20px;
   }
@@ -689,7 +689,7 @@
   .product_list_containet h4 {
     font-size: 1.1rem;
     margin-bottom: 8px;
-    font-weight: 600;
+    font-weight: 450;
     color: #333;
     text-transform: capitalize;
   }
@@ -718,7 +718,7 @@
   .price  {
     color: #000;
     font-size: 1.2rem;
-    font-weight: 900;
+    font-weight: 450;
     margin: 5px 0;
     letter-spacing: 2px;
   }
@@ -791,7 +791,7 @@
   
   .product_name {
     font-size: 1.8rem;
-    font-weight: bold;
+    font-weight: 450;
     margin: 10px 0px;
   }
   
@@ -886,7 +886,7 @@
   .price_quick {
     color: #000;
     font-size: 2rem;
-    font-weight: 900;
+    font-weight: 450;
   
     letter-spacing: 2px;
   }
@@ -987,6 +987,7 @@
   
     .searchInput {
       flex-grow: unset;
+      width: 100%;
     }
   
     .quickView_images_ccontainer, .quickViewProduct_container {
@@ -1118,6 +1119,11 @@
     
     .container button:hover {
       background-color: #005bb5;
+    }
+
+
+    .discountPrice {
+      font-weight: 450;
     }
     
     .error {
@@ -1456,7 +1462,7 @@
   
     .price_quick {
       color: #111;
-      font-weight: 600;
+      font-weight: 450;
       letter-spacing: 0;
     }
   .quick_view_content {
@@ -1474,11 +1480,19 @@
   
     .searchBarContainer {
       padding: 0;
-      margin: 50px 0 0 0;
+      margin: s0;
     }
   
     .searchBar button svg{
       font-size: 1.2rem;
+    }
+    .productItem {
+      padding: 0px;
+    }
+
+    .searchBar button {
+      font-size: .85rem;
+      padding: 5px 5px;
     }
   
     .searchBarContainerto {
@@ -1525,7 +1539,7 @@
     }
     .price {
       font-size: 1.2rem;
-      font-weight: 600;
+      font-weight: 450;
       letter-spacing: 0;
     }
   
