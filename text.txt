@@ -272,14 +272,17 @@ admin dashbord
 product
 orders
 categories --done
+edit home --done
+reviews  --done
+blog  --done
+notifications --done
+
 users --update fix test
-blog  --test
-chat  --delte --test
-notifications
-reviews 
-settings  --test
-edit home --start
-page setting
+chat  --delte --test fix it 
+settings  --start
+page setting --add all
+-- order id
+-- home icon  + font 
 
 --ids --start
 loading 

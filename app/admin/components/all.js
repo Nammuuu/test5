@@ -230,6 +230,7 @@ import ReviewsAdminPanel from "../components/components/Review"
 import PageEditor from "../components/components/PageData"
 
 import OrderStatistics from "./adminhome/OrderStatistics";
+import Loader from "../../../components/Loader"
 
 const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -387,6 +388,7 @@ totalOrders={orderData.totalOrders}
     {...orderData} />
 
 
+<Product />
             {/* <Graph chartData={[dashboardData.totalUsers, dashboardData.totalProducts, dashboardData.totalOrders, dashboardData.totalCategories, dashboardData.totalViewsCount]} /> */}
             <Graph chartData={[dashboardData.totalUsers,
              dashboardData.totalProducts,
@@ -443,7 +445,7 @@ totalOrders={orderData.totalOrders}
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />; 
 
   return (
     <div className={`${styles.dashboardContainer} ${isSidebarOpen ? styles.sidebarOpen : styles.sidebarClosed}`}>
