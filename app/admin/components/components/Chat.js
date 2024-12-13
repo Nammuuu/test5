@@ -117,23 +117,53 @@ const groupedMessages = messages.reduce((acc, msg) => {
  
 
 
- const handleDeleteUserChats = async (userId) => {
- try {
-        const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
-      if (!token) {
-        toast.error("Unauthorized: Please log in as admin.");
-        return;
-      }
+//  const handleDeleteUserChats = async (userId) => {
+//  try {
+//         const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
+//       if (!token) {
+//         toast.error("Unauthorized: Please log in as admin.");
+//         return;
+//       }
 
-      await axios.delete(`/api/chat/admin/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      }); // API to delete user's chats
+//       await axios.delete(`/api/chat/admin/${userId}`, {
+//         headers: { Authorization: `Bearer ${token}` },
+//       }); // API to delete user's chats
 
-      setMessages((prevMessages) => prevMessages.filter(msg => msg.sender !== userId && msg.receiver !== userId));
-    } catch (error) {
-      console.error('Error deleting user chats:', error);
+//       setMessages((prevMessages) => prevMessages.filter(msg => msg.sender !== userId && msg.receiver !== userId));
+//     } catch (error) {
+//       console.error('Error deleting user chats:', error);
+//     }
+//   };
+
+
+const handleDeleteUserChats = async (userId) => {
+  try {
+    const token = localStorage.getItem('token'); // Assuming admin token
+    if (!token) {
+      alert('Unauthorized: Please log in as admin.');
+      return;
     }
-  };
+
+    await axios.delete(`/api/chat/admin/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    // Remove messages related to the user from the state
+    setMessages((prevMessages) =>
+      prevMessages.filter(
+        (msg) => msg.sender !== userId && msg.receiver !== userId
+      )
+    );
+
+    // Reset current user and active state if the deleted user is active
+    if (currentUserId === userId) {
+      setCurrentUserId('');
+      setActiveUser('');
+    }
+  } catch (error) {
+    console.error('Error deleting user chats:', error);
+  }
+};
 
 
   return (

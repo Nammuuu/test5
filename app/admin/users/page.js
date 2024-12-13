@@ -117,6 +117,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import styles from '../../../styles/admin/users/UserList.module.css';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import Loader from "../../../components/Loader"
+
 
 const UserListPage = () => {
   const [users, setUsers] = useState([]);
@@ -183,7 +185,7 @@ const UserListPage = () => {
 
   const handleUpdateSubmit = async () => {
     const { username, email, phoneNumber, role } = userData;
-
+ 
     if (username && email) {
       try {
         const token = localStorage.getItem('token');
@@ -212,11 +214,15 @@ const UserListPage = () => {
     setSelectedUser(null);
   };
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <div className={styles.userContainer}>
       <h2>User List</h2>
       {loading ? (
-        <p>Loading users...</p>
+       <Loader />
       ) : (
         <table className={styles.userTable}>
           <thead>

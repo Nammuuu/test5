@@ -62,7 +62,7 @@ export async function DELETE(req, { params }) {
         { message: "No chats found for the specified user" },
         { status: 404 }
       );
-    }
+    } 
 
     
       return NextResponse.json({ message: 'User chats deleted successfully' }, { status: 200 });
@@ -70,5 +70,5 @@ export async function DELETE(req, { params }) {
       console.error('Error deleting user chats:', error);
       return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
     }
-  }
+}
   

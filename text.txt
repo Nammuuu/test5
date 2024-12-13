@@ -277,15 +277,16 @@ reviews  --done
 blog  --done
 notifications --done
 
-users --update fix test
-chat  --delte --test fix it 
+users --update --test 
+chat  --delte --test 
+page setting --test
+
 settings  --start
-page setting --add all
 -- order id
 -- home icon  + font 
 
 --ids --start
-loading 
+loading  
  --product loading link 
 
 satting updats  

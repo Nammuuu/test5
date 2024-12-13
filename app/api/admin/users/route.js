@@ -124,12 +124,17 @@ export async function PUT(req) {
         return NextResponse.json({ message: 'Unauthorized: User not found or not an admin' }, { status: 401 });
       }
   
-      const { userId, username, email, phoneNumber } = await req.json();
+      const { userId, username, email, phoneNumber, role } = await req.json();
   
+
+
+      if (role && !['user', 'admin'].includes(role)) {
+        return NextResponse.json({ message: 'Invalid role value' }, { status: 400 });
+      }
       // Update the user
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        { username, email, phoneNumber },
+        { username, email, phoneNumber, role },
         { new: true } // Return the updated document
       );
   
