@@ -246,6 +246,10 @@ export default function SettingsPage() {
          
         
 
+         <button onClick={toggleSidebar2} className={styles.toggleButton2}>
+          {isSidebarOpen ? <FaTimes /> : <FaStore />}
+        </button>
+        
           {/* Sidebar Buttons */}
           <button
           className={`${styles.menuButton} ${activeSection === 'shopInfo' ? styles.active : ''}`}

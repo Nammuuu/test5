@@ -144,9 +144,14 @@ const handleDeleteUserChats = async (userId) => {
       return;
     }
 
+    // await axios.delete(`/api/chat/admin/${userId}`, {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // });
+
     await axios.delete(`/api/chat/admin/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
+    
 
     // Remove messages related to the user from the state
     setMessages((prevMessages) =>

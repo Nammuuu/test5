@@ -1357,6 +1357,19 @@ word-wrap: break-word;
 }
 
 .navItemadmin svg { 
-  font-size: 2rem;
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.homelinksidebar {
+  display: flex;
+   gap: 5px;
+    align-items: center;
+    text-align: center;
+    margin: 0rem 1.2rem;
+}
+
+.TbHome  svg{
+  font-size: 1.5rem;
   color: #444;
 }

@@ -396,7 +396,7 @@ const navigateToHome = () => {
     <button onClick={navigateToHome} className={styles.arrowButton} >  <FaArrowLeft /></button>
     <div className={styles.ShippingInformationh1}>
      
-      <h1>Order ID: <span> {order?._id} </span></h1>
+      {/* <h1>Order ID: <span> {order?._id} </span></h1> */}
       <h1> User  ID: <span> {order?.user} </span></h1>
       </div>
     </div>

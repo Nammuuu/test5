@@ -388,13 +388,14 @@ totalOrders={orderData.totalOrders}
     {...orderData} />
 
 
-<Product />
+
             {/* <Graph chartData={[dashboardData.totalUsers, dashboardData.totalProducts, dashboardData.totalOrders, dashboardData.totalCategories, dashboardData.totalViewsCount]} /> */}
             <Graph chartData={[dashboardData.totalUsers,
              dashboardData.totalProducts,
             dashboardData.totalOrders,
             dashboardData.totalCategories, ]} />
            
+           <Product />
           </>
         );
       case 'Products':

@@ -3,7 +3,8 @@
 
 
 .orderContainermain {
-  margin-top: 80px;
+  margin: 80px 10px;
+    
 }
 .orderContainer {
   
@@ -425,11 +426,19 @@ background-color: rgba(242, 61, 20, 0.571);
 /* Responsive design */
 @media (max-width: 768px) {
   
+  .ShippingInformation h1{ 
+    display: flex;
+    flex-direction: column;
+  }
+  .ShippingInformation h1 span{ 
+    word-break: break-all;
+  }
+
   .productDetails > :last-child {
     grid-column: 1 / 3;
   }
   .orderContainermain {
-    margin-top: 40px;
+    margin: 50px 5px;
   }.ShippingInformation {
     padding: 0px;
   }.orderContainer {

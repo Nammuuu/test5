@@ -635,8 +635,8 @@ useEffect(() => {
           <ul className={styles.navItems}>
            
               <li>
-            <Link href="/" onClick={() => handleLinkClick("/")}>
-              Home
+            <Link className={styles.homelinksidebar} href="/" onClick={() => handleLinkClick("/")}>
+           <div className={styles.TbHome} > <TbHome /> </div>   Home
             </Link>
           </li>
 

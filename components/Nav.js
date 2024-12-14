@@ -21,7 +21,7 @@ import Loader from "../components/Loader"
 
 const Navbar = () => {
  
-
+ 
   
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState('');

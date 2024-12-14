@@ -277,13 +277,14 @@ reviews  --done
 blog  --done
 notifications --done
 
-users --update --test 
-chat  --delte --test 
-page setting --test
+users --update --desing --pagition
+chat  --delte --not word
+page setting --test 
+loader false not word --pages setting all pages --test
 
 settings  --start
 -- order id
--- home icon  + font 
+-- home icon  + font  --test 
 
 --ids --start
 loading  

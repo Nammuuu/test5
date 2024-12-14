@@ -40,7 +40,8 @@ const DynamicPage = ({ pageName }) => {
 
       {!isLoading && pageData && (
         <>
-          <h1>{pageData.title}</h1>
+        {/* <h1>{pageData.title}</h1>   */}
+          
           <div className={styles.content} dangerouslySetInnerHTML={{ __html: pageData.content }}></div>
         </>
       )}
