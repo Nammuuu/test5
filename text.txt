@@ -276,11 +276,10 @@ edit home --done
 reviews  --done
 blog  --done
 notifications --done
+page setting --done 
 
 users --update --desing --pagition
 chat  --delte --not word
-page setting --test 
-loader false not word --pages setting all pages --test
 
 settings  --start
 -- order id

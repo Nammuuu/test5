@@ -90,6 +90,21 @@ gap: 20px;
 }
 
 
+.conmmanClassname .fa-star {
+  color: #ffc107;
+}
+
+.conmmanClassname svg {
+  fill: none;
+  border-color: #ffc107;
+  stroke-width: 30;
+  stroke: #ffe254;
+}
+
+
+
+
+
 /* Header */
 .header {
   display: flex;
@@ -782,8 +797,8 @@ gap: 20px;
 }
 
 .product_name {
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 1.34rem;
+  font-weight: 450;
   margin: 10px 0px;
 }
 
@@ -796,12 +811,12 @@ gap: 20px;
 
 
 
-.price_containet p {
-  /* font-size: 1.2rem;
+/* .price_containet p {
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #000; */
+  color: #000;
   margin: 5px 0;
-}
+} */
 
 .product_color,
 .product_size {
@@ -873,7 +888,7 @@ gap: 20px;
 .price_quick {
   color: #000;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 450;
 
   letter-spacing: 2px;
 }
@@ -966,6 +981,9 @@ grid-template-columns: repeat(2, 1fr);
 gap: 20px;
 }
  
+.product_name {
+  font-weight: 450;
+}
 
   .quick_view_modal {
     position: fixed;
@@ -975,7 +993,7 @@ gap: 20px;
     height: 100vh;
     background: rgba(0, 0, 0, 0.6);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     z-index: 99;
     padding: 20px;
@@ -1054,7 +1072,8 @@ gap: 20px;
     right: 10px;
   }
   .product_iconsto svg{
-   font-size: 1.1rem;
+    font-size: 0.8rem;
+    padding: 5px;
   }
 
   .price_containet {

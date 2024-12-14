@@ -456,7 +456,7 @@ totalOrders={orderData.totalOrders}
         {renderSection()}
       </main>
     </div>
-  );
+  )
 };
 
 export default AdminDashboard;
