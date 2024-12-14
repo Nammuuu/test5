@@ -56,9 +56,9 @@ const Banner = () => {
             
             {(banner?.title || banner?.heading || banner?.description) && (
               <div className={styles.bannerItemDetailsContainer}>
-                <h2>{banner?.title?.length > 50 ? banner.title.slice(0, 50) + "..." : banner.title}</h2>
-                <h3>{banner?.heading?.length >  30 ? banner.heading.slice(0, 30) + "..." : banner.heading}</h3>
-                <p>{banner?.description?.length > 100 ? banner.description.slice(0, 100) + "..." : banner.description}</p>
+                {/* <h2>{banner?.title?.length > 50 ? banner.title.slice(0, 50) + "..." : banner.title}</h2> */}
+                {/* <h3>{banner?.heading?.length >  30 ? banner.heading.slice(0, 30) + "..." : banner.heading}</h3> */}
+                {/* <p>{banner?.description?.length > 100 ? banner.description.slice(0, 100) + "..." : banner.description}</p> */}
               </div>
             )}
             
@@ -66,8 +66,8 @@ const Banner = () => {
           <Image
                 src={banner.images}
                 alt={banner.title}
-                width={500}
-                height={500}  
+                width={900}
+                height={900}  
               />
 
               <div className={styles.paginationContainer}>

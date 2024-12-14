@@ -238,7 +238,7 @@ export default function SettingsPage() {
         {/* Sidebar Menu */}
 
         <button onClick={toggleSidebar2} className={styles.toggleButton2}>
-          {isSidebarOpen ? <FaTimes /> : <FaStore />}
+          {isSidebarOpen ? <FaTimes /> : <FaTimes />}
         </button>
 
         {isSidebarOpen && (
@@ -247,7 +247,7 @@ export default function SettingsPage() {
         
 
          <button onClick={toggleSidebar2} className={styles.toggleButton2}>
-          {isSidebarOpen ? <FaTimes /> : <FaStore />}
+          {isSidebarOpen ? <FaTimes /> : <FaTimes />}
         </button>
         
           {/* Sidebar Buttons */}
@@ -319,7 +319,7 @@ export default function SettingsPage() {
 <div> 
 <h2>Settings Overview</h2>
 <button onClick={toggleSidebar2} className={styles.toggleButton2}>
-          {isSidebarOpen ? <FaTimes /> : <FaStore />}
+          {isSidebarOpen ? <FaTimes /> : <FaTimes />}
         </button>
 </div> 
 

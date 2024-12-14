@@ -49,6 +49,7 @@
   justify-content: center;
   align-items: center;
   z-index: 1111;
+  
 }
 
 .popupContent {
@@ -60,6 +61,7 @@
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   margin-top: 80px;
   margin-bottom: 60px;
+  overflow: scroll;
 }
 
 .popupContent h2 {
@@ -243,8 +245,14 @@
 /* for logo and font femily  */
 
 
+/* for pop banner  */
 
-
+.popoimage {
+  color: transparent;
+    max-width: 100px;
+    width: 100%;
+    height: auto;
+}
 
 
 /* Container for the entire page */

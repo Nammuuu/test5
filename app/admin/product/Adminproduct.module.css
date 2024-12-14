@@ -971,6 +971,8 @@
   
   /* Responsive Design */
   @media (max-width: 768px) {
+
+
     .quick_view_content {
       flex-direction: column;
       max-height: 90vh;
@@ -1690,3 +1692,16 @@
   
   }
   
+
+
+
+
+  @media (max-width: 768px) { 
+    .inputcontainer {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .modalOverlay {
+      padding: 0px;
+    }
+  }

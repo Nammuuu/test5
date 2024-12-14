@@ -107,7 +107,7 @@
   .container {
     padding: 10px;
     width: unset;
-    margin: 40px 0 10px 0;
+    /* margin: 40px 0 10px 0; */
   }
 
   .socialSharing {

@@ -353,7 +353,7 @@ const QuickViewModal = ({
                   <p className={styles.price}>₹{product.price}</p>
                   <p className={styles.discountPrice}>₹{product.discountPrice}</p>
                 </div>
-                <p className={styles.salesCount}>Sales: {product.salesCount} | Views: {product.viewsCount}</p>
+                {/* <p className={styles.salesCount}>Sales: {product.salesCount} | Views: {product.viewsCount}</p> */}
                 <div className={styles.product_icons}>
                   <FaHeart
                     onClick={() => handleAddToWishlist(product)}

@@ -251,24 +251,14 @@ button enble disable responsive fix all pages
  --blog --done
  --blog details --done 
  --product --done
- --product details loding add
+ --product details --done
  --category --done 
  --category product details --done
  --Search --done 
  --home page --done
 
-loading add
-0.2 handle errors 
-add 404 401 erros 
-button enble disable
-buttons loading 
- 2. linke loading 
- page pagetiontion add
- popup auto close 
-
---start admin  --loader
-home  -icons
-admin dashbord   
+--start admin  
+admin dashbord  --done
 product
 orders
 categories --done
@@ -277,22 +267,14 @@ reviews  --done
 blog  --done
 notifications --done
 page setting --done 
+users --done 
 
-users --update --desing --pagition
 chat  --delte --not word
+page pagetiontion add
+footer --test
+--order id
+setting --start
 
-settings  --start
--- order id
--- home icon  + font  --test 
-
---ids --start
-loading  
- --product loading link 
-
-satting updats  
- --satting charnge 
- --banner update text display or not dont display it 
- 
 add api --done
  --about page --done 
  --CookiesPolicy --done
@@ -302,29 +284,13 @@ add api --done
  --Shipping --done
  --TermsConditions --done 
  --ContactUs --done 
---footer --start api 
 
-home page 
- product --done
- footer --done
 
---pagesatting --done
-
-fix all pages one by one 
 variyant name 
-simpal just fix ui only 
-all images heght and width full 700px 
 live chat add 
---erro hadnling erros display only blog time creating time
-
 final test 
 
 // end 
-
-
-`${styles.closeButton} lgcolor`
-
-
 
 
 adnavce funsaanaliys

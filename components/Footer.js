@@ -25,6 +25,39 @@ const Footer = () => {
   const [isLoading, setIsLoading] = useState(false); // State to track loading
   const [prevPathname, setPrevPathname] = useState(pathname);
 
+  const [formData, setFormData] = useState({
+   
+    themeColor: "#ffffff", 
+    shopName: "",
+    website: "",
+    font: "Poppins", 
+    address: "",
+    postCode: "", 
+    contact: "",
+    email: "",
+    facebook: "",
+    instagram: "",
+    twitter: "",
+    youtube: "",
+
+  });
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await axios.get("/api/admin/setting");
+        if (res?.data) {
+          setFormData(res.data);  // Ensure you update the formData with the correct settings
+        
+         
+        }
+      } catch (error) {
+        console.error("Failed to load settings:", error);
+      }
+    };
+  
+    fetchSettings();
+  }, []);
 
  // Handle route change events
 
@@ -124,7 +157,7 @@ useEffect(() => {
       <div className={styles.subscribeSection}>
 
       <div> 
-      <h1 className={styles.logo}> Logo </h1>
+      <h1 className={styles.logo}> {formData?.shopName} </h1>
       </div>
       
       <h3>Subscribe to our newsletter</h3>
@@ -188,11 +221,15 @@ useEffect(() => {
           <h4>Contact Us</h4>
           <ul>
             
-            <li>House: 25, Road No: 2, Block A,
-            <br />
-             Mirpur-1, Dhaka 1216</li>
-            <li>Email: info@inilabs.net</li>
-            <li>Phone: 13333846282</li>
+          <li>
+           Address:  {formData?.address}
+            {formData?.postCode}
+            
+            </li>
+            <li>Email: {formData?.email} </li>
+            <li>Phone: {formData?.contact}</li>
+
+            
           </ul>
         </div>
 
@@ -200,7 +237,7 @@ useEffect(() => {
       
       </div>
       <div className={styles.copyright}>
-      <p>© Shop by inodri 2024, All Rights Reserved</p>
+      <p>© Shop by {formData?.shopName} 2050, All Rights Reserved</p>
     </div>
     </footer>
     </div>

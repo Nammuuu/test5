@@ -259,6 +259,8 @@ import {
   FaChartLine,
   FaCog,
 } from "react-icons/fa";
+import Loader from "../../../../components/Loader";
+
 import ThamwSettingsPage from "./Themasatting"
 
 export default function BannerPage() {
@@ -266,7 +268,7 @@ export default function BannerPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showPopup, setShowPopup] = useState(false); // Popup state
-
+  // const [loading, setLoading] = useState(false);
   // Banner form state
   const [formData, setFormData] = useState({
     title: "",
@@ -282,6 +284,7 @@ export default function BannerPage() {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
+        setLoading(true);
         const res = await axios.get("/api/admin/home/banner");
         setBanners(res.data);
       } catch (error) {
@@ -319,6 +322,8 @@ export default function BannerPage() {
   // Handle form submission to create a new banner
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+
     if (!formData.image) {
       alert("Please upload an image.");
       return;
@@ -331,7 +336,10 @@ export default function BannerPage() {
     formDataToSend.append("productUrl", formData.productUrl);
     formDataToSend.append("image", formData.image);
 
+    setLoading(true);
+
     try {
+
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -363,10 +371,15 @@ export default function BannerPage() {
     } catch (error) {
       alert("Failed to create banner");
     }
+    finally {
+      setLoading(false);
+    }
   };
 
   // Handle deleting a banner
   const handleDelete = async (bannerId) => {
+    
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -382,9 +395,12 @@ export default function BannerPage() {
     } catch (error) {
       alert("Failed to delete banner");
     }
-  };
+    finally {
+      setLoading(false);
+    }
+  }; 
 
-  if (loading) return <p>Loading banners...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>{error}</p>;
 
 
@@ -450,7 +466,7 @@ export default function BannerPage() {
             
           
             
-          
+           
               <div className={styles.gridItemFull}>
                 <label>Description:</label>
                 <textarea
@@ -479,6 +495,7 @@ export default function BannerPage() {
                   <h4 className={styles.imagePreviewh}>Image Preview:</h4>
                   <Image
                 src={imagePreview}
+                className={styles.popoimage}
                     alt="Image Preview"
                     style={{ maxWidth: "100px", }}
         width={500}
