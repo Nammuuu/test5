@@ -231,7 +231,9 @@ reviews, --done localhost/test
 settings --done
  --font fimily  
 
-
+add loader 
+ -- category carete time
+ --product creating time
 
 
 finsla test start hare 

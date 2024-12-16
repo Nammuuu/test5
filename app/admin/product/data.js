@@ -589,6 +589,8 @@ const handleCreateProduct = async () => {
       },
     });
 
+    // await fetchProductsAndCategories();
+
     setProducts([...products, response.data.product]);
     setNewProduct({
       name: '',
