@@ -41,7 +41,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await axios.get("/api/admin/setting");
+        const res = await axios.get("/api/admin/setting" , {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
         if (res?.data) {
           setFormData(res.data);  // Ensure you update the formData with the correct settings
         

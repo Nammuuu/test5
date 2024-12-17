@@ -35,7 +35,11 @@ const HomePage = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/user/product/home');
+        const response = await axios.get('/api/user/product/home', {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
         setProducts(response.data.products);
       } catch (error) {
         console.error('Failed to fetch products', error);
