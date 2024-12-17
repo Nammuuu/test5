@@ -19,11 +19,33 @@ const Categories = () => {
   const itemsPerSlide = 3; 
 
   // Fetch all categories
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await axios.get("/api/user/category/cate");
+  //       setCategories(response.data.categories);
+  //     } catch (error) {
+  //       console.error("Error fetching categories:", error);
+  //       toast.error("Failed to fetch categories.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchCategories();
+  // }, []);
+
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("/api/user/category/cate");
+        const response = await axios.get("/api/user/category/cate", {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
         setCategories(response.data.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -32,9 +54,11 @@ const Categories = () => {
         setLoading(false);
       }
     };
-
+  
     fetchCategories();
   }, []);
+
+  
 
   // Handle navigation between slides
   const nextSlide = () => {
