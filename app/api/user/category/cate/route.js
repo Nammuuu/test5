@@ -11,29 +11,63 @@ export async function GET(req) {
     // Connect to the database
     await connectToDatabase();
 
-    // Fetch all categories from the Category model
+    // Fetch all categories from the database
     const categories = await Category.find({});
 
-    // Disable caching by setting no-store headers
-    const headers = new Headers({
-      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-      Pragma: 'no-cache',
-      Expires: '0',
-      'Surrogate-Control': 'no-store',
-    });
-
-    // Return the categories as a JSON response
-    return NextResponse.json(
-      { message: "Categories retrieved successfully", categories },
-      { status: 200, headers }
+    // Return categories with no-cache headers
+    return new NextResponse(
+      JSON.stringify({
+        message: "Categories retrieved successfully",
+        categories,
+      }),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
     );
   } catch (error) {
     console.error("Error retrieving categories:", error);
-
-    // Handle any errors with a 500 response
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    return new NextResponse(
+      JSON.stringify({ message: "Internal server error" }),
+      { status: 500 }
+    );
   }
 }
+
+
+// export async function GET(req) {
+//   try {
+//     // Connect to the database
+//     await connectToDatabase();
+
+//     // Fetch all categories from the Category model
+//     const categories = await Category.find({});
+
+//     // Disable caching by setting no-store headers
+//     const headers = new Headers({
+//       'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+//       Pragma: 'no-cache',
+//       Expires: '0',
+//       'Surrogate-Control': 'no-store',
+//     });
+
+//     // Return the categories as a JSON response
+//     return NextResponse.json(
+//       { message: "Categories retrieved successfully", categories },
+//       { status: 200, headers }
+//     );
+//   } catch (error) {
+//     console.error("Error retrieving categories:", error);
+
+//     // Handle any errors with a 500 response
+//     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+//   }
+// }
 
 
 // export async function GET(req) {

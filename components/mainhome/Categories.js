@@ -36,14 +36,16 @@ const Categories = () => {
   //   fetchCategories();
   // }, []);
 
-
+ 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         setLoading(true);
         const response = await axios.get("/api/user/category/cate", {
           headers: {
-            'Cache-Control': 'no-cache',
+           "Cache-Control": "no-cache",
+            Pragma: "no-cache",
+            Expires: "0",
           },
         });
         setCategories(response.data.categories);
