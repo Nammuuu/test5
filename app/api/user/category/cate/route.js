@@ -7,34 +7,52 @@ import Category from "../../../../../models/Category";
 
 
 
-export async function GET() {
+// export async function GET() {
+//   try {
+//     // Connect to the database
+//     await connectToDatabase();
+
+//     // Fetch all categories from the database
+//     // const categories = await Category.find({});
+//     const categories = await Category.find();
+
+//     // Return categories with no-cache headers
+//     return NextResponse.json(
+//       { message: "Categories retrieved successfully", categories },
+//       {
+//         status: 200,
+//         headers: {
+//           "Content-Type": "application/json",
+//           "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+//           Pragma: "no-cache",
+//           Expires: "0",
+//         },
+//       }
+//     );
+//   } catch (error) {
+//     console.error("Error retrieving categories:", error);
+//     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+//   }
+// }
+
+
+
+export async function GET(req) {
   try {
-    // Connect to the database
-    await connectToDatabase();
+    await connectToDatabase(); // Connect to MongoDB
 
-    // Fetch all categories from the database
-    const categories = await Category.find({});
+    // Fetch all banners
+    // const banners = await Banner.find();
+    const categories = await Category.find();
 
-    // Return categories with no-cache headers
-    return NextResponse.json(
-      { message: "Categories retrieved successfully", categories },
-      {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json",
-          "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-        },
-      }
-    );
+    // message: "Categories retrieved successfully", categories },
+
+    return NextResponse.json(categories, { status: 200 });
   } catch (error) {
-    console.error("Error retrieving categories:", error);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    console.error('Error retrieving categories:', error);
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
-
-
 
 // export async function GET(req) {
 //   try {
