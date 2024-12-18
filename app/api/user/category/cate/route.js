@@ -41,7 +41,9 @@ export async function GET() {
     await connectToDatabase();
 
     // Fetch all categories or return an empty array
-    const categories = await Category.find() || [];
+    // const categories = await Category.find() || [];
+
+    const categories = await Category.find({}).lean() || [];
 
     // Return categories with no-cache headers
     return NextResponse.json(
