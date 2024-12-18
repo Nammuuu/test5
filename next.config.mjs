@@ -1,14 +1,30 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
+  images: {
     remotePatterns: [
       {
         hostname: "res.cloudinary.com",
-       
       },
     ],
   },
-  swcMinify: true
+  swcMinify: true, // Enable SWC minification for faster builds
+  async headers() {
+    return [
+      {
+        // Match all API routes
+        source: "/api/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-store, no-cache, must-revalidate, proxy-revalidate",
+          },
+          { key: "Pragma", value: "no-cache" },
+          { key: "Expires", value: "0" },
+          { key: "Surrogate-Control", value: "no-store" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
