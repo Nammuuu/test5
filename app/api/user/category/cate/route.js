@@ -6,7 +6,8 @@ import connectToDatabase from "../../../../../lib/mongodb";
 import Category from "../../../../../models/Category";
 
 
-export async function GET(req) {
+
+export async function GET() {
   try {
     // Connect to the database
     await connectToDatabase();
@@ -15,11 +16,8 @@ export async function GET(req) {
     const categories = await Category.find({});
 
     // Return categories with no-cache headers
-    return new NextResponse(
-      JSON.stringify({
-        message: "Categories retrieved successfully",
-        categories,
-      }),
+    return NextResponse.json(
+      { message: "Categories retrieved successfully", categories },
       {
         status: 200,
         headers: {
@@ -32,12 +30,10 @@ export async function GET(req) {
     );
   } catch (error) {
     console.error("Error retrieving categories:", error);
-    return new NextResponse(
-      JSON.stringify({ message: "Internal server error" }),
-      { status: 500 }
-    );
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
+
 
 
 // export async function GET(req) {
