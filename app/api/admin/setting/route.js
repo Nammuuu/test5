@@ -1,6 +1,30 @@
 
 export const dynamic = 'force-dynamic';
 
+// import { NextResponse } from 'next/server';
+// import connectToDatabase from '../../../../lib/mongodb';
+// import Settings from '../../../../models/Settings'; // Assume you have a Settings model
+// import jwt from 'jsonwebtoken';
+// import User from '../../../../models/User';
+
+
+
+// const JWT_SECRET = process.env.JWT_SECRET;
+
+// // GET: Fetch settings
+// export async function GET() {
+//   try {
+//     await connectToDatabase();
+//     const settings = await Settings.findOne(); // Assuming there is only one settings document
+//     return NextResponse.json(settings, { status: 200 });
+//   } catch (error) {
+//     console.error('Failed to fetch settings:', error);
+//     return NextResponse.json({ message: "Failed to fetch settings" }, { status: 500 });
+//   }
+// }
+
+
+
 import { NextResponse } from 'next/server';
 import connectToDatabase from '../../../../lib/mongodb';
 import Settings from '../../../../models/Settings'; // Assume you have a Settings model
