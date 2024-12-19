@@ -12,49 +12,49 @@ import User from '../../../../models/User';
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // GET: Fetch settings
-// export async function GET() {
-//   try {
-//     await connectToDatabase();
-//     const settings = await Settings.findOne(); // Assuming there is only one settings document
-//     return NextResponse.json(settings, { status: 200 });
-//   } catch (error) {
-//     console.error('Failed to fetch settings:', error);
-//     return NextResponse.json({ message: "Failed to fetch settings" }, { status: 500 });
-//   }
-// }
-
-
-export async function GET(req) {
+export async function GET() {
   try {
-    // Connect to the database
     await connectToDatabase();
-
-    // Fetch all products from the products model
-    const settings = await Settings.findOne();
-
-    // Disable caching by setting no-store headers
-    const headers = new Headers({
-      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-      Pragma: 'no-cache',
-      Expires: '0',
-      'Surrogate-Control': 'no-store',
-    });
-
-    // Return the categories as a JSON response
-    // return NextResponse.json(settings, { status: 200 });
-
-    return NextResponse.json(
-      { message: 'Products retrieved successfully', settings },
-      {
-        status: 200,
-      }
-    );
-
+    const settings = await Settings.findOne(); // Assuming there is only one settings document
+    return NextResponse.json(settings, { status: 200 });
   } catch (error) {
     console.error('Failed to fetch settings:', error);
     return NextResponse.json({ message: "Failed to fetch settings" }, { status: 500 });
   }
 }
+
+
+// export async function GET(req) {
+//   try {
+//     // Connect to the database
+//     await connectToDatabase();
+
+//     // Fetch all products from the products model
+//     const settings = await Settings.findOne();
+
+//     // Disable caching by setting no-store headers
+//     const headers = new Headers({
+//       'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+//       Pragma: 'no-cache',
+//       Expires: '0',
+//       'Surrogate-Control': 'no-store',
+//     });
+
+//     // Return the categories as a JSON response
+//     // return NextResponse.json(settings, { status: 200 });
+
+//     return NextResponse.json(
+//       { message: 'Products retrieved successfully', settings },
+//       {
+//         status: 200,
+//       }
+//     );
+
+//   } catch (error) {
+//     console.error('Failed to fetch settings:', error);
+//     return NextResponse.json({ message: "Failed to fetch settings" }, { status: 500 });
+//   }
+// }
 
 
 
