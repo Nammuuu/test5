@@ -1,6 +1,6 @@
 
 
-
+export const dynamic = 'force-dynamic';
 // pages/api/auth/request-reset.js
 import { NextResponse } from 'next/server';
 import connectToDatabase from '../../../../../lib/mongodb';

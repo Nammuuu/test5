@@ -1,3 +1,7 @@
+
+
+export const dynamic = 'force-dynamic';
+
 import connectToDatabase from '../../../../../../lib/mongodb'; // Update the path as needed
 import Order from '../../../../../../models/Order'; // Import the Order model
 import jwt from 'jsonwebtoken';

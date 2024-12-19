@@ -1,6 +1,6 @@
 
 
-
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import connectToDatabase from '../../../../lib/mongodb';  // Assume db.js connects to MongoDB
 import Coupons from '../../../../models/Coupons';  // Your Coupons model

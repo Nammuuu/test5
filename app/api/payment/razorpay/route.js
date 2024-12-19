@@ -2,7 +2,7 @@
 
 
 
-
+export const dynamic = 'force-dynamic';
 // api/payment/razorpay.js
 import { NextResponse } from 'next/server';
 import Razorpay from 'razorpay';

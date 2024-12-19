@@ -63,7 +63,7 @@
 //   }
 // }
 
-
+export const dynamic = 'force-dynamic';
 import connectToDatabase from '../../../../../lib/mongodb';
 import Order from '../../../../../models/Order';
 import Product from '../../../../../models/Product';  // Import the Product model

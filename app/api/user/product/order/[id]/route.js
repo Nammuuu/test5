@@ -1,5 +1,5 @@
 // File: /pages/api/user/get.js
-
+export const dynamic = 'force-dynamic';
 import connectToDatabase from '../../../../../../lib/mongodb';
 
 import User from '../../../../../../models/User';

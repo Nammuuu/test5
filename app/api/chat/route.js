@@ -69,7 +69,7 @@
 
 
 
-
+export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import Chat from '@/models/Chat'; // Adjust the path to your Chat model

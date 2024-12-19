@@ -1,5 +1,5 @@
 
-
+export const dynamic = 'force-dynamic';
 import connectToDatabase from '../../../../lib/mongodb'; // Adjust the import path as needed
 import User from '../../../../models/User'; // Adjust the import path as needed
 import UserProfile from '../../../../models/UserProfile'; // Adjust the import path as needed

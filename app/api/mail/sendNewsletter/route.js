@@ -2,7 +2,7 @@
 
 
 
-
+export const dynamic = 'force-dynamic';
 import nodemailer from 'nodemailer';
 // import connectToDatabase from '../../../../';
 // import User from '../../../../../models/User';

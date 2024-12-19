@@ -1,6 +1,6 @@
 
 
-
+export const dynamic = 'force-dynamic';
 import connectToDatabase from "../../../../../../lib/mongodb";
 import Order from "../../../../../../models/Order";
 import { NextResponse } from "next/server";
