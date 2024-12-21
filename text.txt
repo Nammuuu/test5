@@ -290,6 +290,8 @@ add api --done
 
 variyant name 
 live chat add 
+add product and categori ok 
+all done last check and update 
 final test 
 
 // end 

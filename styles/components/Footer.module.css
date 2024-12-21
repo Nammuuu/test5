@@ -76,11 +76,13 @@
   font-size: 2rem;
   color: #f23e14;
   margin-bottom: 10px;
+  text-transform: capitalize;
 }
 
 .subscribeSection h3 {
   font-size: 1.2rem;
   color: #fff;
+  font-weight: 500;
   margin-bottom: 15px;
 }
 
@@ -256,24 +258,25 @@
   }
 .benefitItem svg {
   font-size: 1.4rem;
+  margin: 5px;
 }
 
 .benefitItem h3 {
-  font-weight: 600;
-    margin: 8px 0 8px;
+  font-size: .95rem;
+  color: #666;
+  margin: 5px ;
+   font-weight: 600;
+   
   word-spacing: 0;
     word-break: break-all;
     white-space: break-spaces;
-    font-size: 0.95rem;
+    /* font-size: 0.95rem; */
     white-space: nowrap;
     line-height: 1.5rem;
 }
 
-.benefitItem h3 { 
-  font-size: .85rem;
-    color: #666;
-    margin: 5px 0;
-    word-break: break-all;
+.benefitItem p {
+  margin: 5px;
 }
 
 
@@ -299,8 +302,9 @@ display: flex;
     text-align: center;
       }
 
+
   .footerSections div {
-    margin: 20px 0 0 0;
+    margin: 10px 0 0 0;
   }
   .subscribeSection h3{
     margin: 12px 0;
@@ -308,7 +312,14 @@ display: flex;
 
   .footerSections h4 {
     font-size: 2rem;
+    margin: 8px;
   }
+
+  .footerSections ul {
+    margin: 0 8px;
+  }
+
+
 .footerSections ul li a {
   font-size: 1.1rem;
 }

@@ -181,8 +181,11 @@ const Categories = () => {
       <div className={styles.categoryHeadingContainer}>
         <h1 className={styles.categoryHeadingtitle}>Browse by Categories</h1>
         <div className={styles.categoryIconsContainer}>
-          <FaArrowLeft onClick={prevSlide} className={styles.arrow} />
-          <FaArrowRight onClick={nextSlide} className={styles.arrow} />
+        <FaArrowLeft  className={styles.arrow} />
+        <FaArrowRight className={styles.arrow} />
+
+          {/* <FaArrowLeft onClick={prevSlide} className={styles.arrow} />
+          <FaArrowRight onClick={nextSlide} className={styles.arrow} /> */}
         </div>
       </div>
 
@@ -199,8 +202,8 @@ const Categories = () => {
                     src={category.categoryImage || "/path/to/default-image.jpg"}
                     alt={category.name}
                     className={styles.previewImage}
-                    width={500}
-                    height={500}
+                    width={900}
+                    height={900}
                     priority
                   />
                   <h2 className={styles.categoryheading}>

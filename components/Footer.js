@@ -194,22 +194,25 @@ useEffect(() => {
         <div className={styles.support}>
           <h4>Support</h4>
           <ul>
-            <li> <Link onClick={() => handleLinkClick("/faq")} href="/faq">FAQ </Link></li>
+            
             <li> <Link onClick={() => handleLinkClick("/Shipping")} href="/Shipping">Shipping</Link></li>
+            <li> <Link  href="/ContactUs" onClick={() => handleLinkClick("/ContactUs")} >Contact Us</Link></li>
             <li> <Link onClick={() => handleLinkClick("/ReturnExchange")} href="/ReturnExchange">Return & Exchange</Link></li>
-           
-            <li> <Link  onClick={() => handleLinkClick("/AboutUs")} href="/AboutUs"> About Us</Link></li>
+            <li> <Link onClick={() => handleLinkClick("/CookiesPolicy")}  href="/CookiesPolicy">Cookies Policy</Link></li>
+            
           </ul>
         </div>
 
         <div className={styles.legal}>
           <h4>Legal</h4>
           <ul>
-            <li> <Link onClick={() => handleLinkClick("/CookiesPolicy")}  href="/CookiesPolicy">Cookies Policy</Link></li>
+          <li> <Link onClick={() => handleLinkClick("/faq")} href="/faq">FAQ </Link></li>
+          <li> <Link  onClick={() => handleLinkClick("/AboutUs")} href="/AboutUs"> About Us</Link></li>
+            
             <li> <Link  onClick={() => handleLinkClick("/TermsConditions")} href="/TermsConditions">Terms & Conditions</Link></li>
            <li>  <Link href="/privacy" onClick={() => handleLinkClick("/privacy")}>Privacy Policy</Link> </li>
          
-            <li> <Link  href="/ContactUs" onClick={() => handleLinkClick("/ContactUs")} >Contact Us</Link></li>
+            
            
 
             
