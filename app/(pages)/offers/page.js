@@ -321,9 +321,9 @@ const QuickViewModal = ({
     }
 
     return (
-      <div className="productsContainer">
-        <h1 className="title_heading">Offer Products</h1>
-        <div className="productgrid">
+      <div className= {styles.productsContainer} >
+        <h1 className= {styles.title_heading} >Offer Products</h1>
+        <div className={styles.productgrid}>
           {currentProducts.map(product => (
             <div className={styles.product_card} key={product._id}>
             <div className={styles.productItem}>
