@@ -246,10 +246,10 @@ button enble disable responsive fix all pages
 --wishlist  --done
 --cartsidebar --done  
  --login Registration --done
- 
  --profile id --done
  
-  --order procces --done
+
+--order procces --done
  --Confirmation order --done
 --myoder  --done
  --blog --done
@@ -291,8 +291,7 @@ add api --done
 
 
 variyant name 
-live chat add 
-add product and categori ok 
+live chat add  
 all done last check and update 
 add foveicons
 final test 

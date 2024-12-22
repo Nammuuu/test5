@@ -259,9 +259,11 @@
 
 .selectedSize p {
   color: #666;
-  margin: 5px 0;
+ 
   text-transform: capitalize;
   text-align: left;
+  margin: 0 !important;
+    width: 100%;
 }
 
 .selectedSize p:hover {
@@ -270,7 +272,7 @@
 
 .selectedSize p:first-of-type::after {
   content: '|'; /* Adds a pipe separator between size and color */
-  margin-left: 5px;
+  margin-left: 2px;
 }
 
 

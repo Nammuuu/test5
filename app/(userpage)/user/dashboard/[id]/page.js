@@ -338,15 +338,17 @@ gsap.registerPlugin(ScrollTrigger);
               <h3>Product Details:</h3>
               {order.orderItems.map((item) => (
                 <div key={item.product?._id || item._id} className={styles.orderCardpendding}>
+                 
+                 {/* src={item.product?.media?.[0] || "/placeholder-image.png"} */}
                   <Image
-                    src={item.product?.media?.[0] || "/placeholder-image.png"}
+                    src={item.product?.media?.[0] || ""}
                     alt={item.product?.name || "Product Image"}
                     className={styles.productImage}
                     width={900}
                     height={900} 
                   />
 
-                  <div>
+                   <div> 
                     <p>{item.product?.name?.slice(0, 15) || "Unnamed Product"}...</p>
                     <p>Price: ${item.product?.price}</p>
                     <p>Quantity: {item.quantity}</p>
