@@ -238,8 +238,10 @@ add loader
 
 finsla test start hare 
 button enble disable responsive fix all pages 
- 
+ --HomePage --done
+
  --auth -done
+ add to card open login +
  --navbar --done
  --offers --done 
  --404 page --done 
@@ -257,7 +259,7 @@ button enble disable responsive fix all pages
  --category --done 
  --category product details --done
  --Search --done 
- --home page --done
+
 
 --start admin  
 admin dashbord  --done
@@ -292,6 +294,7 @@ variyant name
 live chat add 
 add product and categori ok 
 all done last check and update 
+add foveicons
 final test 
 
 // end 

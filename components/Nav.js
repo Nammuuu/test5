@@ -123,7 +123,7 @@ const Navbar = () => {
   const handleSignOut = () => {
     localStorage.removeItem('token');
     window.location.reload();
-    router.push('/login');
+    // router.push('/login');
   };
 
   // const toggleMenu = () => {
@@ -459,8 +459,8 @@ useEffect(() => {
             {/* If user is not logged in */}
             {!user && (
               <>
-              <li><button  className={`${styles.signOutx} ${styles.navButtonx}`}> Register </button></li>
-                  <li ><button className={`${styles.signOutx} ${styles.navButtonx}`}> Login </button></li>
+              <li><button  className={`${styles.signOutx} ${styles.navButtonx}`}>  <Auth className={`${styles.icon} ${styles.userActive}`} /> Register </button></li>
+                  <li ><button className={`${styles.signOutx} ${styles.navButtonx}`}>  <Auth className={`${styles.icon} ${styles.userActive}`} /> Login </button></li>
               </>
             )}
 
