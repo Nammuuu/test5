@@ -139,7 +139,7 @@
     }
     .myOrdersContainerone {
       padding: 10px;
-      width: 100%;
+      
     }
   
     .orderCard {
@@ -157,7 +157,7 @@
   /* Order Items Styling */
   .orderItem {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 10px;
   }
   
