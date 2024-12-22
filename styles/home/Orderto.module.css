@@ -6,6 +6,17 @@
 }
  
 
+.orderproductname{
+  text-transform: capitalize;
+  font-size: 1.1rem;
+  margin: 5px 0;
+  font-weight: 450;
+  font-size: 17px;
+}
+
+.nameprice {
+  width: 100%;
+}
 
 .checkoutPage {
     max-width: 1200px;
@@ -306,11 +317,17 @@
 
 @media (max-width: 768px) {
 
+  .orderSummary li {
+    width: 100%;
+    gap: 10px;
+    align-items: self-start;
+  }
   .checkoutPag {
     margin-top: 70px !important;;
   }
   .ShippingInformation {
-    padding: 0px !important;;
+    padding: 0px !important;
+    gap: 10px;
   }
 
   .ShippingInformationh1 h1 {

@@ -44,7 +44,7 @@
 
 .cartItems {
   margin-top: 20px;
-  height: calc(100vh - 300px);
+  height: calc(100vh - 250px);
   overflow-y: auto;
  /* Hide scrollbar for Webkit browsers (Chrome, Safari, etc.) */
  -ms-overflow-style: none;  /* Internet Explorer 10+ */

@@ -719,8 +719,8 @@ const OrderPage = () => {
             )}
 
             {/* Product Details */}
-            <div className={styles.nameprice}> 
-            <span>{item.name.length > 30 ? item.name.slice(0, 30) + "..." : item.name}</span>
+            <div className={styles.nameprice}>  
+            <span className={styles.orderproductname}>{item.name.length > 30 ? item.name.slice(0, 30) + "..." : item.name}</span>
             
             <div className={styles.sizecolor}>
             <p>₹{item.price} x {item.quantity}</p> 
