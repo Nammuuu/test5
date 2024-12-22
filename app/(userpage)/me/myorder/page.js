@@ -15,7 +15,7 @@ import "jspdf-autotable";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
-import Loader from "../Loader";
+import Loader from "../../../../components/Loader";
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -284,7 +284,7 @@ const MyOrdersPage = () => {
     return <Loader />; 
   }
 
-  
+
   return (
     <div className={`${styles.myOrdersContainerone} parallax gsap-animate`}>
        {loading && <Loader />}
