@@ -459,10 +459,57 @@ useEffect(() => {
             {/* If user is not logged in */}
             {!user && (
               <>
+
+               <div className={`${styles.loginLink} ${styles.userActive}`}>
+              <div className={styles.userContainer}>
+
+              <Auth className={`${styles.icon} ${styles.userActive}`} />
+                <span className={styles.activename} >Log-in</span>
+              </div>
+            </div>
+            
               <li><button  className={`${styles.signOutx} ${styles.navButtonx}`}>  <Auth className={`${styles.icon} ${styles.userActive}`} /> Register </button></li>
-                  <li ><button className={`${styles.signOutx} ${styles.navButtonx}`}>  <Auth className={`${styles.icon} ${styles.userActive}`} /> Login </button></li>
+                  <li ><button className={`${styles.signOutx} ${styles.navButtonx}`}>   <div className={`${styles.loginLink} ${styles.userActive}`}>
+              <div className={styles.userContainer}>
+
+              <Auth className={`${styles.icon} ${styles.userActive}`} />
+                <span className={styles.activename} >Log-in</span>
+              </div>
+            </div>
+            
+             Login </button></li>
               </>
             )}
+{/* 
+{user ? 
+            <Link onClick={() => handleLinkClick(`/user/dashboard/${userId}`)} href={`/user/dashboard/${userId}`}>
+            <Link href={`/user/dashboard/${userId}`}>
+
+            <div className={`${styles.loginLink} ${styles.userActive}`}>
+              <div className={styles.userContainer}>
+
+                <TbUser className={`${styles.icon} ${styles.userActive}`} />
+
+             
+               <span> Profile </span>
+              </div>
+              
+            </div>
+
+            </Link>
+
+
+          </Link> :
+
+            <div className={`${styles.loginLink} ${styles.userActive}`}>
+              <div className={styles.userContainer}>
+
+              <Auth className={`${styles.icon} ${styles.userActive}`} />
+                <span className={styles.activename} >Log-in</span>
+              </div>
+            </div>
+          } */}
+
 
 
 
@@ -504,7 +551,7 @@ useEffect(() => {
     onClick={() => handleLinkClick(formData?.twitter || '#')} 
     href={formData?.twitter || '#'}
   >
-    <FaTwitter />
+    <FaTwitter />r
   </Link>
   <Link 
     onClick={() => handleLinkClick(formData?.youtube || '#')} 
