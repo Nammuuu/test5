@@ -262,7 +262,7 @@ const QuickViewModal = ({
           </button>
 
           <h2 className={styles.product_name} >{product.name}</h2>
-          <p className={styles.product_des} >{product.description.slice(0, 200)}...</p>
+          {/* <p className={styles.product_des} >{product.description.slice(0, 200)}...</p> */}
           <div className={styles.price_containet}>
             <p className={styles.price_quick}>₹{product.price}</p>
             <p className={styles.discountPrice}>₹{product.discountPrice}</p>
@@ -323,7 +323,7 @@ const QuickViewModal = ({
     return (
       <div className= {styles.productsContainer} >
         <h1 className= {styles.title_heading} >Offer Products</h1>
-        <div className={styles.productgrid}>
+        <div className={styles.products_grid}>
           {currentProducts.map(product => (
             <div className={styles.product_card} key={product._id}>
             <div className={styles.productItem}>
@@ -370,17 +370,33 @@ const QuickViewModal = ({
           ))}
         </div>
 
+
+        {/* {filteredProducts.length > itemsPerPage && (
+        <ReactPaginate
+          previousLabel={<FaArrowLeft />}
+          nextLabel={<FaArrowRight />}
+          pageCount={Math.ceil(filteredProducts.length / itemsPerPage)}
+          onPageChange={handlePageClick}
+          containerClassName={styles.pagination}
+          activeClassName={styles.active}
+          pageLinkClassName={styles.page_link}
+          previousLinkClassName={styles.prev_link}
+          nextLinkClassName={styles.next_link}
+        />
+      )} */}
+
+
         {products.length > itemsPerPage && (
           <ReactPaginate
             previousLabel={<FaArrowLeft />}
             nextLabel={<FaArrowRight />}
             pageCount={Math.ceil(products.length / itemsPerPage)}
             onPageChange={handlePageClick}
-            containerClassName="pagination"
-            activeClassName="active"
-            pageLinkClassName="page_link"
-            previousLinkClassName="prev_link"
-            nextLinkClassName="next_link"
+            containerClassName={styles.pagination}
+            activeClassName={styles.active}
+            pageLinkClassName={styles.page_link}
+            previousLinkClassName={styles.prev_link}
+            nextLinkClassName={styles.next_link}
           />
         )}
       </div>
