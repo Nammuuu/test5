@@ -152,7 +152,7 @@ const handleCheckout = () => {
                 </div>
 
                  <div className={styles.priceDisplay}>
-                  <p>${(item.price * (item.quantity || 1)).toFixed(2)}</p>
+                  <p>₹{(item.price * (item.quantity || 1)).toFixed(2)}</p>
                 </div>
               
               <div className={styles.quantityControl}>

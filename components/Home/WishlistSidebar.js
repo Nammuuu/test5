@@ -111,7 +111,7 @@ const WishlistSidebar = ({ isOpen, onClose, wishlistUpdated }) => {
                 </div>
 
                  <div className={styles.priceDisplay}>
-                  <p>${(item.price * (item.quantity || 1)).toFixed(2)}</p>
+                  <p>₹{(item.price * (item.quantity || 1)).toFixed(2)}</p>
                 </div>
               
              

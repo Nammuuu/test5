@@ -241,13 +241,14 @@ button enble disable responsive fix all pages
  --HomePage --done
  --auth -done
  --navbar --done
- 
  --offers --done 
  --404 page --done 
+
 --wishlist  --done
+--cartsidebar --done  
  --login Registration --done
  --profile id --done
- --cartsidebar --done  
+ 
   --order procces --done
  --Confirmation order --done
 --myoder  --done
