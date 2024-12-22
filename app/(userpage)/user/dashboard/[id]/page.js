@@ -273,7 +273,7 @@ gsap.registerPlugin(ScrollTrigger);
           ) }
 
 
-{activeSection === "penddingorders" && (
+{/* {activeSection === "penddingorders" && (
   <div className={styles.pendingOrdersContainer}>
     <h2 className={styles.pendingOrdersHeader}>Pending Orders</h2>
     {userData?.pendingOrders?.length ? (
@@ -299,7 +299,7 @@ gsap.registerPlugin(ScrollTrigger);
                   />
 
                   <div>
-                    <p>{item.product.name.length > 15 ? item.product.name.slice(0, 15) + "..." : item.product.name}</p>
+                    <p>{item.product?.name.length > 15 ? item.product.name.slice(0, 15) + "..." : item.product.name}</p>
                     <p>Price: ${item.product.price}</p>
                     <p>Quantity: {item.quantity}</p>
                   </div>
@@ -307,6 +307,56 @@ gsap.registerPlugin(ScrollTrigger);
                   <button className={styles.viewDetailsButton}>
                     <Link className={styles.link} href="/me/myorder">View Details</Link>
                   </button>
+                </div>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p className={styles.noOrders}>No pending orders.</p>
+    )}
+  </div>
+)} */}
+
+
+
+{activeSection === "penddingorders" && (
+  <div className={styles.pendingOrdersContainer}>
+    <h2 className={styles.pendingOrdersHeader}>Pending Orders</h2>
+    {userData?.pendingOrders?.length ? (
+      <ul className={styles.pendingOrdersList}>
+        {userData.pendingOrders.map((order) => (
+          <li key={order._id} className={styles.orderCard}>
+            <div className={styles.orderInfo}>
+              <p><strong>Order ID:</strong> {order._id}</p>
+              <p><strong>Status:</strong> {order.orderStatus}</p>
+              <p><strong>Total:</strong> ${order.totalPrice}</p>
+            </div>
+
+            <div className={styles.orderProductInfo}>
+              <h3>Product Details:</h3>
+              {order.orderItems.map((item) => (
+                <div key={item.product?._id || item._id} className={styles.orderCardpendding}>
+                  <Image
+                    src={item.product?.media?.[0] || "/placeholder-image.png"}
+                    alt={item.product?.name || "Product Image"}
+                    className={styles.productImage}
+                    width={900}
+                    height={900} 
+                  />
+
+                  <div>
+                    <p>{item.product?.name?.slice(0, 15) || "Unnamed Product"}...</p>
+                    <p>Price: ${item.product?.price}</p>
+                    <p>Quantity: {item.quantity}</p>
+                  </div>
+
+                  {item.product && (
+                    <button className={styles.viewDetailsButton}>
+                      <Link className={styles.link} href="/me/myorder">View Details</Link>
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
@@ -484,8 +534,8 @@ gsap.registerPlugin(ScrollTrigger);
                 // src={review.profilePictureImagePreview}
                 alt="User Profile"
                 className={styles.profilePicture}
-                width={900}
-                height={900}
+                width={50}
+                height={50}
               />
             )}
 
