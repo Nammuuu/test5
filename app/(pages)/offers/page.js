@@ -341,7 +341,7 @@ const QuickViewModal = ({
                   />
                 </div>
               </Link>
-              <div className={styles.product_list_containet}>
+               <div className={styles.product_list_containet}>
               
                {product?.seles && (
   <h3 className={styles.selstagt}>{product.seles}</h3>

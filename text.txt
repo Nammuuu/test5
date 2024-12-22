@@ -239,10 +239,9 @@ add loader
 finsla test start hare 
 button enble disable responsive fix all pages 
  --HomePage --done
-
  --auth -done
- add to card open login +
  --navbar --done
+ 
  --offers --done 
  --404 page --done 
 --wishlist  --done
