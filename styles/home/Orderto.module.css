@@ -4,7 +4,7 @@
     margin-top: 80px;
     background-color: #f9f9f9;
 }
- 
+  
 
 .orderproductname{
   text-transform: capitalize;
@@ -12,6 +12,12 @@
   margin: 5px 0;
   font-weight: 450;
   font-size: 17px;
+  color: #111;
+}
+
+.orderproductname:first-of-type::after {
+  content: '|'; /* Adds a pipe separator between size and color */
+  margin-left: 2px;
 }
 
 .nameprice {
@@ -317,9 +323,13 @@
 
 @media (max-width: 768px) {
 
+  .sizecolor p {
+    font-size: .85rem;
+    margin: 5px 0 0;
+  }
   .orderSummary li {
     width: 100%;
-    gap: 10px;
+    gap: 20px;
     align-items: self-start;
   }
   .checkoutPag {
@@ -327,8 +337,11 @@
   }
   .ShippingInformation {
     padding: 0px !important;
-    gap: 10px;
+    
   }
+  .ShippingInformation .arrowButton {
+    padding: 0 0 0 10px;
+}
 
   .ShippingInformationh1 h1 {
     font-size: 14px;
@@ -350,13 +363,13 @@
    {
     /* width: 100%; */
     padding: 10px;
-    margin-bottom: 60px;
+    /* margin-bottom: 60px; */
 
   }
 
  
   .couponSection input {
-    width: 80%;
+    width: 90%;
   }
  
 
@@ -389,7 +402,7 @@
   }
 
   .couponSection input {
-    width: 100%;
+    /* width: 100%; */
     margin-bottom: 10px;
   }
 

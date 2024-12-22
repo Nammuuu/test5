@@ -51,12 +51,24 @@ const OrderConfirmationPage = () => {
       } 
     };
 
+    const clearCart = () => {
+      localStorage.removeItem("cart");
+      // localStorage.removeItem("cartItems");
+    };
+    clearCart();
     fetchOrderDetails();
   }, [id, router]);
 
+
+  // useEffect(() => {
+    
+  // }, [id]);
+
+  
   if (!orderDetails) {
     return <div>Loading order details...</div>;
   }
+
 
 
 
@@ -133,7 +145,7 @@ const OrderConfirmationPage = () => {
                   
                   <p>{item.product?.name.length > 30 ? item.product?.name.slice(0, 30) + "..." : item.product?.name || "Unnamed Product" }</p>
 
-<p>Price: ${item.product.price} x {item.quantity}</p>
+<p>Price: ${item.product?.price} x {item.quantity}</p>
                   <div className={styles.sizecolor}>
 
             
@@ -187,6 +199,14 @@ const OrderConfirmationPage = () => {
     </div>
   );
   
+
+
+
+};
+
+export default OrderConfirmationPage;
+
+
 
 
   // {orderDetails.coupon && (
@@ -339,7 +359,3 @@ const OrderConfirmationPage = () => {
       
 //     </div>
 //   );
-
-};
-
-export default OrderConfirmationPage;
