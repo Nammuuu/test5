@@ -15,12 +15,15 @@ import { FaStar, FaSearch,
    FaSortAmountDown,
     FaHeart,
   FaEye,
+  FaArrowLeft, FaArrowRight,
   FaShoppingCart,
  } from 'react-icons/fa';
 import Image from "next/image";
 import CartSidebar from "../../../components/Home/CartSidebar";
 import WishlistSidebar from "../../../components/Home/WishlistSidebar";
 import { useRouter } from 'next/navigation';
+
+import ReactPaginate from 'react-paginate';
 
 const SearchBarPage = () => {
   const [query, setQuery] = useState('');
@@ -40,6 +43,10 @@ const SearchBarPage = () => {
   const [allProducts, setAllProducts] = useState(initialProducts || []);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
+
 
 const toggleSidebar = () => {
   setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
@@ -128,6 +135,10 @@ const toggleSidebar = () => {
 
   const toggleShowAllCategories = () => {
     setShowAllCategories((prev) => !prev);
+  };
+
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected);
   };
 
   // const handleSearchChange = (e) => {
@@ -454,36 +465,81 @@ const toggleSidebar = () => {
     };
 
 
+ 
+  // const ProductCard = ({ product }) => (
+
+
+   
+  //   <div className={styles.productItem}>
+  //     <div className={styles.product_iconsto}> 
+  //       <FaEye onClick={() => openQuickView(product)} />
+  //     </div>
+  //     <Link href={`/product/details/${product._id}`}>
+  //     <div className={styles.mainproduct_images}>
+  //     <Image
+  //       className={styles.product_list_images}
+  //       src={product.media[0] || ""}
+  //       alt={product.name}
+  //       width={100}
+  //       height={100}
+  //     />
+  //   </div>
+
+  //     </Link>
+  //     <div className={styles.product_list_containet}>
+  //     <h4>{product.name.length > 15 ? product.name.slice(0, 15) + "..." : product.name}</h4>
+        
+  //       <p className={styles.conmmanClassname}>{renderRating(product.averageRating)}</p>
+
+
+  //       <div className={styles.price_containet}>
+  //         <p className={styles.price}>₹{product.price}</p>
+  //         <p className={styles.discountPrice}>₹{product.discountPrice}</p>
+  //       </div>
+  //       {/* <p>Sales: {product.salesCount} | Views: {product.viewsCount}</p> */}
+        
+  //       <div className={styles.product_icons}>
+  //         <FaHeart
+  //           onClick={() => handleAddToWishlist(product)}
+  //           style={{ color: isInWishlist(product._id) ? "rgb(242, 62, 20)" : "inherit" }}
+  //         />
+  //         <FaShoppingCart
+  //           onClick={() => handleAddToCart(product)}
+  //           style={{ color: isInCart(product._id) ? "rgb(242, 62, 20)" : "inherit" }}
+  //         />
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
+
 
   const ProductCard = ({ product }) => (
     <div className={styles.productItem}>
-      <div className={styles.product_iconsto}> 
+      <div className={styles.product_iconsto}>
         <FaEye onClick={() => openQuickView(product)} />
       </div>
       <Link href={`/product/details/${product._id}`}>
-      <div className={styles.mainproduct_images}>
-      <Image
-        className={styles.product_list_images}
-        src={product.media[0] || ""}
-        alt={product.name}
-        width={100}
-        height={100}
-      />
-    </div>
-
+        <div className={styles.mainproduct_images}>
+          <Image
+            className={styles.product_list_images}
+            src={product.media[0] || ""}
+            alt={product.name}
+            width={100}
+            height={100}
+          />
+        </div>
       </Link>
       <div className={styles.product_list_containet}>
-      <h4>{product.name.length > 15 ? product.name.slice(0, 15) + "..." : product.name}</h4>
-        
+        <h4>
+          {product.name.length > 15 ? product.name.slice(0, 15) + "..." : product.name}
+        </h4>
         <p className={styles.conmmanClassname}>{renderRating(product.averageRating)}</p>
-
 
         <div className={styles.price_containet}>
           <p className={styles.price}>₹{product.price}</p>
           <p className={styles.discountPrice}>₹{product.discountPrice}</p>
         </div>
-        {/* <p>Sales: {product.salesCount} | Views: {product.viewsCount}</p> */}
-        
+
         <div className={styles.product_icons}>
           <FaHeart
             onClick={() => handleAddToWishlist(product)}
@@ -497,6 +553,9 @@ const toggleSidebar = () => {
       </div>
     </div>
   );
+
+
+
 
   const QuickViewModal = ({
     product,
@@ -595,7 +654,8 @@ const toggleSidebar = () => {
     )
   );
 
-  
+   
+
 
 
 
@@ -747,28 +807,38 @@ const toggleSidebar = () => {
 
   <div className={styles.productsGrid}>
     {selectedRating && filteredProducts.length > 0 ? (
-      filteredProducts.map((product) => (
+     
+     filteredProducts.map((product) => (
+      displayedProducts.map((product) => (
         <ProductCard key={product._id} product={product} />
+      ))
       ))
     ) : query && suggestions.length > 0 ? (
       suggestions.map((product) => (
+        displayedProducts.map((product) => (
         <ProductCard key={product._id} product={product} />
       ))
+    ))
 
     ) :  suggestions.length > 0 ? (
       suggestions.map((product) => (
-        <ProductCard key={product._id} product={product} />
-    ))
+        displayedProducts.map((product) => (
+             <ProductCard key={product._id} product={product} />
+      ))
+     ))
 
     ) : !query && initialProducts.length >  0 ? (
       initialProducts.map((product) => (
+        displayedProducts.map((product) => (
         <ProductCard key={product._id} product={product} />
       ))
+    ))
  
     ) : initialProducts.length > 0 ? (
       initialProducts.map((product) => (
-        <ProductCard key={product._id} product={product} />
-      ))
+        displayedProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
+      )) ))
     ) :
     
     (
@@ -791,6 +861,27 @@ const toggleSidebar = () => {
       closeQuickView={closeQuickView}
     />
   )}
+
+<ReactPaginate
+        previousLabel={<FaArrowLeft />}
+        nextLabel={<FaArrowRight />}
+        
+        breakLabel={"..."}
+       
+        pageCount={Math.ceil(filteredProducts.length / itemsPerPage)}
+        
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+      
+        onPageChange={handlePageChange}
+       
+        containerClassName={styles.pagination}
+        activeClassName={styles.active}
+        pageLinkClassName={styles.page_link}
+        previousLinkClassName={styles.prev_link}
+        nextLinkClassName={styles.next_link}
+      />
+
 </div>
 
 
@@ -806,7 +897,8 @@ const toggleSidebar = () => {
 
 <WishlistSidebar isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlistUpdated={wishlistUpdated} />
 
- 
+
+
 
 
     </div>

@@ -243,17 +243,17 @@ button enble disable responsive fix all pages
  --navbar --done
  --offers --done 
  --404 page --done 
---wishlist  --done
---cartsidebar --done  
+ --wishlist  --done
+ --cartsidebar --done  
  --login Registration --done
  --profile id --done
  --order procces --done
  --Confirmation order --done
- 
---myoder  --done
+ --myoder  --done
  --blog --done
  --blog details --done 
- --product --done
+
+ --product --done add pagination
  --product details --done
  --category --done 
  --category product details --done
