@@ -44,13 +44,6 @@ const SearchBarPage = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 10;
-
-
-const toggleSidebar = () => {
-  setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
-};
 
 
   
@@ -67,6 +60,14 @@ const toggleSidebar = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   const router = useRouter();
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
+
+const toggleSidebar = () => {
+  setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
+};
+
 
   useEffect(() => {
     const fetchInitialProducts = async () => {
@@ -137,9 +138,17 @@ const toggleSidebar = () => {
     setShowAllCategories((prev) => !prev);
   };
 
-  const handlePageChange = (selectedPage) => {
+
+
+  const displayedProducts = filteredProducts.slice(
+    currentPage * itemsPerPage,
+    (currentPage + 1) * itemsPerPage
+  );
+  
+    const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage.selected);
   };
+
 
   // const handleSearchChange = (e) => {
   //   setQuery(e.target.value);
