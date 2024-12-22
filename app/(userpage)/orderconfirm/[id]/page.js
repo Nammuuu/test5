@@ -7,10 +7,12 @@ import Link from 'next/link';
 import styles from '../../../../styles/home/Orderid.module.css';
 import { FaBoxOpen, FaCheckCircle, FaShippingFast, FaCreditCard, FaMapMarkerAlt, FaClipboardList } from 'react-icons/fa';
 import Image from 'next/image';
+import Loader from "../../../../components/Loader";
 
 const OrderConfirmationPage = () => {
   const [orderDetails, setOrderDetails] = useState(null);
   const [finalPrice, setFinalPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(AuthContext);
   const router = useRouter();
   const { id } = useParams();
@@ -18,6 +20,7 @@ const OrderConfirmationPage = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
+        setLoading(true);
         const token = localStorage.getItem('token');
         if (!token) {
           router.push('/login');
@@ -49,6 +52,9 @@ const OrderConfirmationPage = () => {
       } catch (error) {
         console.error('Error fetching order details:', error);
       } 
+      finally {
+        setLoading(false);
+      }
     };
 
     const clearCart = () => {
@@ -66,9 +72,12 @@ const OrderConfirmationPage = () => {
 
   
   if (!orderDetails) {
-    return <div>Loading order details...</div>;
+    return <Loader />;
   }
 
+  if (loading) {
+    return <Loader />; 
+  }
 
 
 
@@ -76,6 +85,7 @@ const OrderConfirmationPage = () => {
   return (
     <div className={styles.pageWrapper}>
       {/* Modal-like Card */}
+      {loading && <Loader />}
       <div className={styles.modalBox}>
 
       <div className={styles.conatinerorserid}> 

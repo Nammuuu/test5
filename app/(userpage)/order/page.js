@@ -14,7 +14,7 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import Image from 'next/image';
 import axios from 'axios';
 import { FaStar, FaArrowLeft } from 'react-icons/fa';
-
+import Loader from "../../../components/Loader";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const OrderPage = () => {
@@ -44,6 +44,7 @@ const OrderPage = () => {
   const stripe = useStripe();
   const elements = useElements();
 
+  const [loading, setLoading] = useState(false);
   // const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
   useEffect(() => {
@@ -53,6 +54,7 @@ const OrderPage = () => {
 
     const checkUserAuthentication = async () => {
       try {
+        setLoading(true);
         const token = localStorage.getItem('token');
         if (!token) {
           router.push('/login');
@@ -90,6 +92,9 @@ const OrderPage = () => {
         console.error('Error checking user authentication:', error);
         router.push('/login');
       }
+      finally {
+        setLoading(false);
+      }
     };
 
     checkUserAuthentication();
@@ -101,6 +106,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
+        setLoading(true);
         const response = await fetch('/api/admin/setting');
         if (response.ok) {
           const data = await response.json();
@@ -110,6 +116,9 @@ const OrderPage = () => {
         }
       } catch (error) {
         console.error('Error fetching settings:', error);
+      }
+      finally {
+        setLoading(false);
       }
     };
 
@@ -168,6 +177,7 @@ const OrderPage = () => {
       }
   
       try {
+        setLoading(true);
         const { data } = await axios.get(`/api/user/me/profile`, {
           headers: {
             'Content-Type': 'application/json',
@@ -193,6 +203,9 @@ const OrderPage = () => {
       } catch (error) {
         console.error('Error fetching user data:', error.response?.data?.message || error.message);
       }
+      finally {
+        setLoading(false);
+      }
     };
   
     fetchUserData();
@@ -203,6 +216,7 @@ const OrderPage = () => {
 
   const fetchGlobalCoupon = async () => {
     try {
+      setLoading(true);
       const response = await fetch('/api/admin/coupons');
       const data = await response.json();
       const activeCoupon = data.find((coupon) => new Date(coupon.validUntil) > new Date());
@@ -215,6 +229,9 @@ const OrderPage = () => {
     } catch (error) {
       console.error('Error fetching global coupons:', error);
     }
+    finally {
+      setLoading(false);
+    }
   };
 
   const applyCoupon = async () => {
@@ -224,6 +241,7 @@ const OrderPage = () => {
     }
 
     try {
+      setLoading(true);
       let productCoupon = cartItems.find((item) =>
         item.coupons?.some((coupon) => coupon.code === couponCode)
       );
@@ -256,6 +274,9 @@ const OrderPage = () => {
       console.error('Error applying coupon:', error);
       alert('Failed to apply coupon');
     }
+    finally {
+      setLoading(false);
+    }
   };
 
   const removeCoupon = () => {
@@ -270,13 +291,6 @@ const OrderPage = () => {
     if (!validateForm()) {
       return;  // Exit if the form is not valid
     }
-
-    
-
-
-  
-
-
     if (
       Object.values(shippingAddress).some((value) => !value) ||
       !paymentMethod ||
@@ -677,11 +691,13 @@ const OrderPage = () => {
   };
 
 
- 
+  if (loading) {
+    return <Loader />; 
+  }
 
   return (
     <div className={styles.checkoutPag}>
-    
+      {loading && <Loader />}
     <div className={styles.ShippingInformation}> 
     <button className={styles.arrowButton} >  <FaArrowLeft /></button>
     <div className={styles.ShippingInformationh1}>
