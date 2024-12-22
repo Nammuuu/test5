@@ -166,8 +166,8 @@ gsap.registerPlugin(ScrollTrigger);
         src={userData?.profilePicture || "/default-profile.png"}
         alt="Profile"
         className={styles.topprofilepic}
-        width={500}
-        height={500}
+        width={900}
+        height={900}
       />     
           </div>
         </div>
@@ -239,8 +239,8 @@ gsap.registerPlugin(ScrollTrigger);
         src={userData?.profilePicture || "/default-profile.png"}
         alt="Profile"
         className={styles.topprofilepic}
-        width={500}
-        height={500}
+        width={900}
+        height={900}
       />
        
             <FiChevronDown className={styles.chevronIcon} />
@@ -291,12 +291,13 @@ gsap.registerPlugin(ScrollTrigger);
               {order.orderItems.map((item) => (
                 <div key={item.product._id} className={styles.orderCardpendding}>
                   <Image
-                    src={item.product.media[0]}
-                    alt={item.product.name}
+                    src={item.product?.media[0] || ""}
+                    alt={item.product?.name}
                     className={styles.productImage}
-                    width={500}
-                    height={500}
+                    width={900}
+                    height={900} 
                   />
+
                   <div>
                     <p>{item.product.name.length > 15 ? item.product.name.slice(0, 15) + "..." : item.product.name}</p>
                     <p>Price: ${item.product.price}</p>
@@ -342,8 +343,8 @@ gsap.registerPlugin(ScrollTrigger);
          src={item.product.media[0]}
          alt={item.product.name}
          className={styles.productImage}
-        width={500}
-        height={500}
+        width={900}
+        height={900}
       />
 
                             <div>
@@ -444,8 +445,8 @@ gsap.registerPlugin(ScrollTrigger);
                 src={review.profilePictureImagePreview} 
                 alt="User Profile" 
                 className="h-10 w-10 rounded-full" 
-        width={500}
-        height={500}
+        width={900}
+        height={900}
       />
 
               )}
@@ -466,16 +467,31 @@ gsap.registerPlugin(ScrollTrigger);
       reviews.map((review, index) => (
         <div key={index} className={styles.reviewCard}>
           <div className={styles.reviewHeader}>
-            {review.profilePictureImagePreview && (
+            {/* {review.profilePictureImagePreview && (
               <Image
                 src={review.profilePictureImagePreview}
                 alt="User Profile"
                 className={styles.profilePicture}
-                width={50}
-                height={50}
+                width={900}
+                height={900}
+              />
+            )} */}
+
+{review.product.media && (
+              <Image
+              // src={product.media[0] || ""}
+              src={review.product.media[0] || ""}
+                // src={review.profilePictureImagePreview}
+                alt="User Profile"
+                className={styles.profilePicture}
+                width={900}
+                height={900}
               />
             )}
+
             <div>
+            {/* <Link href={`/product/details/${product._id}`}> */}
+            {/* <Link className={styles.link} href="/me/myorder">View Details</Link>  */}
               <p className={styles.productName}>
               {review.product?.name.length > 30 ? review.product?.name.slice(0, 30) + "..." : review.product?.name}
                 {/* {review.product?.name || "Unnamed Product"} */}
