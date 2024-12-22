@@ -248,7 +248,7 @@ const QuickViewModal = ({
   );
 
 
-  const ProductList = ({ title, displayOption }) => {v
+  const ProductList = ({ title, displayOption }) => {
   const filteredProducts = products.filter(p => p.displayOptions === displayOption);
   
 
