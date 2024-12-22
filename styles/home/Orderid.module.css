@@ -7,7 +7,7 @@
   min-height: 100vh;
   background-color: #f9f9f9;
   padding: 20px;
-  margin-top: 70px;
+  margin-top: 65px;
 }
 
 
@@ -23,7 +23,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 30px;
-  
+  padding: 0 1.5rem;
   width: 100%;
   margin: auto;
 }
@@ -220,9 +220,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
 
-  .shippingAddressSectionx {
-    padding: 0rem;
-  }
+  
   .pageWrapper {
     padding: 1px;
   }
@@ -233,7 +231,7 @@
   }
 
   .modalBox {
-    padding: 1.5rem 0;
+    padding: 0;
   }
 
   .modalHeader h1 {

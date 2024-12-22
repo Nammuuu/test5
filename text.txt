@@ -247,10 +247,9 @@ button enble disable responsive fix all pages
 --cartsidebar --done  
  --login Registration --done
  --profile id --done
- 
-
---order procces --done
+ --order procces --done
  --Confirmation order --done
+ 
 --myoder  --done
  --blog --done
  --blog details --done 

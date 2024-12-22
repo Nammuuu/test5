@@ -15,6 +15,7 @@ import "jspdf-autotable";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import Loader from "../Loader";
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -25,12 +26,13 @@ const MyOrdersPage = () => {
   const [selectedOrder, setSelectedOrder] = useState("order");
   const [showDetails, setShowDetails] = useState('order');
   const [activeButton, setActiveButton] = useState('order');
-
+  const [loading, setLoading] = useState(false);
   const ordersRef = useRef(null);
 
   useEffect(() => {
     const fetchUserOrders = async () => {
       try {
+        setLoading(true);
         const token = localStorage.getItem("token");
         if (!token) {
           router.push("/login");
@@ -57,6 +59,9 @@ const MyOrdersPage = () => {
       } catch (error) {
         console.error("Error fetching user orders:", error);
         alert("An error occurred while fetching orders. Please try again.");
+      }
+      finally {
+        setLoading(false);
       }
     };
 
@@ -168,6 +173,7 @@ const MyOrdersPage = () => {
     if (!confirmCancel) return;
 
     try {
+      setLoading(true);
       const token = localStorage.getItem("token");
       const response = await fetch(`/api/user/me/myorder/${orderId}`, {
         method: "PUT",
@@ -193,6 +199,9 @@ const MyOrdersPage = () => {
     } catch (error) {
       console.error("Error cancelling order:", error);
       alert("An error occurred while cancelling the order. Please try again.");
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -271,8 +280,15 @@ const MyOrdersPage = () => {
     setActiveButton('order');
   };
   
+  if (loading) {
+    return <Loader />; 
+  }
+
+  
   return (
     <div className={`${styles.myOrdersContainerone} parallax gsap-animate`}>
+       {loading && <Loader />}
+       
     <h1 className="TypingEffect"> My Orders </h1>
 
     <div className={styles.myOrdersContainer}>

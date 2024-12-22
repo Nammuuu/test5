@@ -2,18 +2,25 @@
   
   /* Container for My Orders */
   .myOrdersContainerone {
-    font-family: 'Arial', sans-serif;
+    /* font-family: 'Arial', sans-serif; */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 1200px;
-    margin: 20px auto;
-    overflow: hidden;
-    margin-top: 60px;
-    margin-bottom: 200px;
+    margin: 60px auto 0;
+    overflow: hidden;    
   }
   
+  .myOrdersContainerone h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    position: relative;
+  }
+
+ 
   .myOrdersContainer h1 {
     font-size: 2rem;
     text-align: center;
@@ -132,10 +139,11 @@
     }
     .myOrdersContainerone {
       padding: 10px;
+      width: 100%;
     }
   
     .orderCard {
-      padding: 0px;
+      padding: 20px 10px;
     }
   .productImage{
     width: 100px;
@@ -149,7 +157,7 @@
   /* Order Items Styling */
   .orderItem {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 10px;
   }
   
