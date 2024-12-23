@@ -144,11 +144,21 @@ const toggleSidebar = () => {
 
 
 
-  const displayedProducts = filteredProducts.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
-  
+  // const displayedProducts = filteredProducts.slice(
+  //   currentPage * itemsPerPage,
+  //   (currentPage + 1) * itemsPerPage
+  // );
+
+  // const displayedProducts =
+  //  (selectedRating ? filteredProducts : query ? suggestions : initialProducts).slice(startIndex, endIndex);
+
+  const startIndex = currentPage * itemsPerPage;
+const endIndex = startIndex + itemsPerPage;
+
+  const displayedProducts = 
+  (selectedRating ? filteredProducts : query ? suggestions : initialProducts).slice(startIndex, endIndex);
+
+
     const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage.selected);
   };
