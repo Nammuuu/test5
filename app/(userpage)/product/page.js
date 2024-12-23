@@ -64,6 +64,10 @@ const SearchBarPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
 
+  const [showAllTags, setShowAllTags] = useState(false);
+ const toggleShowAllTags = () => setShowAllTags(!showAllTags);
+
+
 const toggleSidebar = () => {
   setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
 };
@@ -533,8 +537,8 @@ const toggleSidebar = () => {
             className={styles.product_list_images}
             src={product.media[0] || ""}
             alt={product.name}
-            width={100}
-            height={100}
+            width={900}
+            height={900}
           />
         </div>
       </Link>
@@ -585,8 +589,8 @@ const toggleSidebar = () => {
         className={styles.quickViewProduct_images}
         src={quickViewProduct.media[0] || "/default-image.png"}
          alt={quickViewProduct.name}
-        width={300}
-        height={300}
+        width={900}
+        height={900}
       />
 
         </div>
@@ -696,8 +700,8 @@ const toggleSidebar = () => {
                     src={category.categoryImage || "/path/to/default-image.jpg"} // Use default image if categoryImage is not available
                     alt={category.name}
                     className={styles.previewImage}
-                    width={200}
-                    height={200}
+                    width={900}
+                    height={900}
                     priority
                   />
 
@@ -722,7 +726,7 @@ const toggleSidebar = () => {
       <div className={styles.tagsSection}>
       <h3>Popular Tags</h3>
       <div className={styles.tags}>
-        {tags.length > 0 ? (
+        {/* {tags.length > 0 ? (
           tags.map((tag, index) => (
             <span key={index} className={styles.tag} onClick={() => handleTagClick(tag)}>
               {tag}
@@ -730,7 +734,23 @@ const toggleSidebar = () => {
           ))
         ) : (
           <span>No tags available</span>
-        )}
+        )} */}
+
+{tags.length > 0 ? (
+  tags.slice(0, showAllTags ? tags.length : 10).map((tag, index) => (
+    <span key={index} className={styles.tag} onClick={() => handleTagClick(tag)}>
+      {tag}
+    </span>
+  ))
+) : (
+  <span>No tags available</span>
+)}
+{tags.length > 10 && (
+  <button onClick={toggleShowAllTags}>
+    {showAllTags ? 'Show Less' : 'Show More'}
+  </button>
+)}
+
       </div>
     </div>
           
