@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 // import styles from '../../../../../styles/product/ProductDetails.module.css';
 import styles from '../../../../../styles/product/productde.module.css';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'; 
 import { FaStar, FaHome, FaAngleRight, FaFacebookF, FaTwitter, FaCopy, FaArrowLeft, FaArrowRight, FaLinkedinIn, FaShareAlt, FaWhatsapp } from 'react-icons/fa';
 import Link from 'next/link'
 import Image from 'next/image';

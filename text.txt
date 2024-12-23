@@ -252,12 +252,12 @@ button enble disable responsive fix all pages
  --myoder  --done
  --blog --done
  --blog details --done 
-
  --product --done add pagination + loder
- --product details --done
- --category --done 
+ --category --test mob 
  --category product details --done
  --Search --done 
+
+ --product details --start
 
 
 --start admin  
