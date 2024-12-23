@@ -814,7 +814,7 @@ const toggleSidebar = () => {
     {selectedRating ? `Filtered Products with ${selectedRating} Star Rating` : 'All Products'}
   </h4>
 
-  <div className={styles.productsGrid}>
+ {/* <div className={styles.productsGrid}>
     {selectedRating && filteredProducts.length > 0 ? (
      
      filteredProducts.map((product) => (
@@ -853,7 +853,35 @@ const toggleSidebar = () => {
     (
       <p>No products found</p>
     )}
-  </div>
+  </div> */}
+
+
+  <div className={styles.productsGrid}>
+  {selectedRating && filteredProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : query && suggestions.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : suggestions.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : !query && initialProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : initialProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : (
+    <p>No products found</p>
+  )}
+</div>
+
 
   {/* Quick View Modal */}
   {quickViewProduct && (

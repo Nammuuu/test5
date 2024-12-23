@@ -253,7 +253,7 @@ button enble disable responsive fix all pages
  --blog --done
  --blog details --done 
 
- --product --done add pagination
+ --product --done add pagination + loder
  --product details --done
  --category --done 
  --category product details --done
