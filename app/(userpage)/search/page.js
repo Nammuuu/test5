@@ -933,6 +933,22 @@ const toggleShowAllTags = () => setShowAllTags(!showAllTags);
 
 
 
+
+
+
+</div>
+
+
+
+
+
+<CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cartUpdated={cartUpdated} />
+    
+
+<WishlistSidebar isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlistUpdated={wishlistUpdated} />
+
+ 
+
 <ReactPaginate
         previousLabel={<FaArrowLeft />}
         nextLabel={<FaArrowRight />}
@@ -952,22 +968,7 @@ const toggleShowAllTags = () => setShowAllTags(!showAllTags);
         previousLinkClassName={styles.prev_link}
         nextLinkClassName={styles.next_link}
       />
-
-
-</div>
-
-
-
-
-
-<CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} cartUpdated={cartUpdated} />
-    
-
-<WishlistSidebar isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlistUpdated={wishlistUpdated} />
-
- 
-
-
+      
     </div>
 );
 
