@@ -105,6 +105,8 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../../../../styles/home.module.css";
 
+import ReactPaginate from 'react-paginate';
+
 const CategoryPage = () => {
   const router = useRouter();
   const { id } = useParams();
@@ -119,6 +121,9 @@ const CategoryPage = () => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedMaterial, setSelectedMaterial] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10;
 
   // Fetch products based on category ID
   useEffect(() => {
@@ -337,6 +342,20 @@ const QuickViewModal = ({
   };
 
 
+  
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  
+  const displayedProducts = products.slice(startIndex, endIndex);
+  
+
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected);
+  };
+  
+
+
+
   if (loading) {
     return <Loader />;
   }
@@ -345,7 +364,7 @@ const QuickViewModal = ({
     <div className={styles.categoryContainer}>
       <h1>Products in this Category</h1>
       <div className={styles.products_grid}>
-        {products.map((product) => (
+        {displayedProducts.map((product) => (
         
             <div className={styles.product_card} key={product._id}
             >
@@ -414,6 +433,22 @@ const QuickViewModal = ({
     
 
 <WishlistSidebar isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlistUpdated={wishlistUpdated} />
+
+<ReactPaginate
+  previousLabel={<FaArrowLeft />}
+  nextLabel={<FaArrowRight />}
+  breakLabel={"..."}
+  pageCount={Math.ceil(products.length / itemsPerPage)}
+  marginPagesDisplayed={2}
+  pageRangeDisplayed={3}
+  onPageChange={handlePageChange}
+  containerClassName={styles.pagination}
+  activeClassName={styles.active}
+  pageLinkClassName={styles.page_link}
+  previousLinkClassName={styles.prev_link}
+  nextLinkClassName={styles.next_link}
+/>
+
 
  
 

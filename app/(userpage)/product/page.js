@@ -92,6 +92,7 @@ const toggleSidebar = () => {
   useEffect(() => {
     const fetchSuggestions = async () => {
       try {
+        setLoading(true);
         const response = await axios.get('/api/user/product/search', {
           params: {
             query,
@@ -105,6 +106,9 @@ const toggleSidebar = () => {
       } catch (error) {
         console.error('Error fetching suggestions:', error);
       }
+      finally {
+        setLoading(false);
+      }
     };
 
     if (query || sortByLatest || sortByPrice || selectedCategory) {
@@ -116,10 +120,14 @@ const toggleSidebar = () => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
+        setLoading(true);
         const response = await axios.get('/api/user/product/search/tag');
         setTags(response.data.tags);
       } catch (error) {
         console.error('Error fetching tags:', error);
+      }
+      finally {
+        setLoading(false);
       }
     };
     fetchTags();
@@ -129,10 +137,14 @@ const toggleSidebar = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
+        setLoading(true);
         const response = await axios.get('/api/user/category/cate');
         setCategories(response.data.categories || []);
       } catch (error) {
         console.error('Error fetching categories:', error);
+      }
+      finally {
+        setLoading(false);
       }
     };
     fetchCategories();
@@ -143,14 +155,6 @@ const toggleSidebar = () => {
   };
 
 
-
-  // const displayedProducts = filteredProducts.slice(
-  //   currentPage * itemsPerPage,
-  //   (currentPage + 1) * itemsPerPage
-  // );
-
-  // const displayedProducts =
-  //  (selectedRating ? filteredProducts : query ? suggestions : initialProducts).slice(startIndex, endIndex);
 
   const startIndex = currentPage * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;

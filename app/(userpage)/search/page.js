@@ -13,6 +13,7 @@ import { FaStar, FaSearch,
    FaSortAmountDown,
     FaHeart,
   FaEye,
+  FaArrowLeft, FaArrowRight,
   FaShoppingCart,
  } from 'react-icons/fa';
 import Image from "next/image";
@@ -20,6 +21,7 @@ import CartSidebar from "../../../components/Home/CartSidebar";
 import WishlistSidebar from "../../../components/Home/WishlistSidebar";
 import { useRouter } from 'next/navigation';
 
+import ReactPaginate from 'react-paginate';
 
 const SearchBarPage = () => {
   const [query, setQuery] = useState('');
@@ -62,6 +64,12 @@ const toggleSidebar = () => {
   setIsSidebarOpen((prev) => !prev); // Toggle sidebar state
 };
 
+const [currentPage, setCurrentPage] = useState(0);
+const itemsPerPage = 12;
+
+const [showAllTags, setShowAllTags] = useState(false);
+const toggleShowAllTags = () => setShowAllTags(!showAllTags);
+
 
 
   useEffect(() => {
@@ -96,6 +104,9 @@ const toggleSidebar = () => {
       } catch (error) {
         console.error('Error fetching suggestions:', error);
       }
+      finally {
+        setLoading(false);
+      }
     };
 
     if (query || sortByLatest || sortByPrice || selectedCategory) {
@@ -107,10 +118,14 @@ const toggleSidebar = () => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
+        setLoading(true);
         const response = await axios.get('/api/user/product/search/tag');
         setTags(response.data.tags);
       } catch (error) {
         console.error('Error fetching tags:', error);
+      }
+      finally {
+        setLoading(false);
       }
     };
     fetchTags();
@@ -120,10 +135,14 @@ const toggleSidebar = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
+        setLoading(true);
         const response = await axios.get('/api/user/category/cate');
         setCategories(response.data.categories || []);
       } catch (error) {
         console.error('Error fetching categories:', error);
+      }
+      finally {
+        setLoading(false);
       }
     };
     fetchCategories();
@@ -157,6 +176,18 @@ const toggleSidebar = () => {
     setSelectedRating(null); 
     
   };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  
+  const displayedProducts = 
+  (selectedRating ? filteredProducts : query ? suggestions : initialProducts).slice(startIndex, endIndex);
+  
+  
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected);
+   };
+
 
   const handleSearchSubmit = async () => {
     setLoading(true);
@@ -613,17 +644,7 @@ const toggleSidebar = () => {
 
 
     <div className={styles.searchBarContainerto}>
-
-    
-  
-
     <div className={`${styles.searchfiltersproductcontainer} ${isSidebarOpen ? styles.sidebarOpen : ''}`}>
-
-  
-  
-
-  
-
         <div className={styles.filters}>
 
         <div className={`${styles.sidebarToggle} ${styles.filtersidebarToggleclose}`} onClick={toggleSidebar}>
@@ -737,7 +758,7 @@ const toggleSidebar = () => {
           <div className={styles.line}> </div>
 
           {/* Price Range Filter */}
-          <div className={styles.priceFilter}>
+          {/* <div className={styles.priceFilter}>
             <label>
               <FaFilter /> <h3> Price Range</h3>
               <div className={styles.sliderContainer}>
@@ -763,12 +784,12 @@ const toggleSidebar = () => {
             </label>
           </div>
 
-          <div className={styles.line}> </div>
+          <div className={styles.line}> </div> */}
              {/* Popular Tags Section */}
         <div className={styles.tagsSection}>
         <h3>Popular Tags</h3>
         <div className={styles.tags}>
-          {tags.length > 0 ? (
+          {/* {tags.length > 0 ? (
             tags.map((tag, index) => (
               <span key={index} className={styles.tag} onClick={() => handleTagClick(tag)}>
                 {tag}
@@ -776,7 +797,24 @@ const toggleSidebar = () => {
             ))
           ) : (
             <span>No tags available</span>
-          )}
+          )} */}
+
+
+{tags.length > 0 ? (
+  tags.slice(0, showAllTags ? tags.length : 10).map((tag, index) => (
+    <span key={index} className={styles.tag} onClick={() => handleTagClick(tag)}>
+      {tag}
+    </span>
+  ))
+) : (
+  <span>No tags available</span>
+)}
+{tags.length > 10 && (
+  <button onClick={toggleShowAllTags}>
+    {showAllTags ? 'Show Less' : 'Show More'}
+  </button>
+)}
+
         </div>
       </div>
 
@@ -817,7 +855,7 @@ const toggleSidebar = () => {
     {selectedRating ? `Filtered Products with ${selectedRating} Star Rating` : 'All Products'}
   </h4>
 
-  <div className={styles.productsGrid}>
+  {/* <div className={styles.productsGrid}>
     {selectedRating && filteredProducts.length > 0 ? (
       filteredProducts.map((product) => (
         <ProductCard key={product._id} product={product} />
@@ -846,7 +884,34 @@ const toggleSidebar = () => {
     (
       <p>No products found</p>
     )}
-  </div>
+  </div> */}
+
+
+<div className={styles.productsGrid}>
+  {selectedRating && filteredProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : query && suggestions.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : suggestions.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : !query && initialProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : initialProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : (
+    <p>No products found</p>
+  )}
+</div>
 
   {/* Quick View Modal */}
   {quickViewProduct && (
@@ -865,6 +930,28 @@ const toggleSidebar = () => {
   )}
 </div>
 
+
+
+
+<ReactPaginate
+        previousLabel={<FaArrowLeft />}
+        nextLabel={<FaArrowRight />}
+        
+        breakLabel={"..."}
+       
+        pageCount={Math.ceil(filteredProducts.length / itemsPerPage)}
+        
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+      
+        onPageChange={handlePageChange}
+       
+        containerClassName={styles.pagination}
+        activeClassName={styles.active}
+        pageLinkClassName={styles.page_link}
+        previousLinkClassName={styles.prev_link}
+        nextLinkClassName={styles.next_link}
+      />
 
 
 </div>
