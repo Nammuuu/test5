@@ -74,13 +74,18 @@ color: #333;
 /* Responsive Design */
 @media (max-width: 768px) {
   .url {
-    font-size: 1rem;
+    font-size: .89rem;
     word-break: break-all;
     width: auto;
     margin: 0;
-    padding: 0 10px;
-    gap: 10px;
+    padding: 0 ;
+    gap: 5px;
   }
+
+  .url a {
+    gap: 3px;
+  }
+
 
   .homeIcon {
     font-size: 1.2rem;
@@ -152,7 +157,7 @@ color: #333;
   }
   
   .thumbnail:hover {
-    border: 2px solid #ffc107;
+    border-color: rgb(242 62 20);
   }
   
   .mainImage {
@@ -195,6 +200,7 @@ color: #333;
     border-color: #ffc107;
     stroke-width: 30;
     stroke: #ffe254;
+    margin: 0 5px 0 0;
   }
   
   .productdescription p {
@@ -273,7 +279,8 @@ color: #333;
     font-size: 24px; /* Increase font size */
     font-weight: bold;
    
-    margin: 5px 0; /* Close gap between price and discount price */
+    margin: 1px 0; 
+    /* Close gap between price and discount price */
   }
   .productpricecontent .price  {
     color: rgb(250 94 94);
@@ -297,7 +304,7 @@ color: #333;
 
   .stock {
     margin: 10px 0;
-    
+    font-size: 1.2rem;
   }
 
   .stock span {
@@ -386,8 +393,8 @@ color: #333;
     }
   
     .thumbnail {
-      width: 70px;
-        height: 70px;
+      /* width: 70px;
+        height: 70px; */
         border-radius: 10px;
         padding: 2px;    
         transform: scale(1);
@@ -406,8 +413,15 @@ color: #333;
     width: 100%;
     overflow: scroll;
     border-radius: 0px;
+    gap: 5px;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; 
 
     }
+
+    .imageGalleryContainer::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+  }
    
   
    
@@ -1009,7 +1023,7 @@ color: #333;
   max-width: 500px;
   height: auto;
   border-radius: 10px;
-  object-fit: cover;
+  /* object-fit: cover; */
   transition: transform 0.3s ease;
   position: relative;
 }

@@ -402,7 +402,7 @@ const handleThumbnailClick = (index) => {
 };
 
 const productNameTrim = (name) => {
-  return name.length > 20 ? name.substring(0, 20) + '...' : name;
+  return name.length > 18 ? name.substring(0, 18) + '...' : name;
 };
 
 
@@ -443,8 +443,8 @@ const productNameTrim = (name) => {
                key={index}
                src={url}
                alt={`Thumbnail ${index + 1}`}
-                        width={150}
-                        height={150}
+                        width={900}
+                        height={900}
                        
                         priority
                         onClick={() => {
@@ -480,8 +480,8 @@ const productNameTrim = (name) => {
             <Image
                         src={product.media[mainImageIndex]} alt={product.name} className={styles.mainImage} 
 
-                        width={150}
-                        height={150}
+                        width={900}
+                        height={900}
                        
                         priority
                       />
@@ -508,7 +508,8 @@ const productNameTrim = (name) => {
                   <FaStar
                     key={index}
                     size={20}
-                    color={index + 1 <= calculateAverageRating(product.reviews) ? '#ffc107' : '#e4e5e9'}
+                    fill={index + 1 <= calculateAverageRating(product.reviews) ? '#ffc107' : '#e4e5e9'}
+                    // color={index + 1 <= calculateAverageRating(product.reviews) ? '#ffc107' : '#e4e5e9'}
                   />
                 ))}
               </div>
@@ -517,7 +518,6 @@ const productNameTrim = (name) => {
 
 <p className={styles.Discount}> <span  className={styles.price}>₹{product.price}.00</span> <span className={styles.Discountprce}>₹{product.discountPrice}</span></p>
 
-<p className={styles.stock} >Limited Stock: <span>{product.stock}</span></p>
 
 {/* <p className={styles.Discount}> Price: <span>${product.discountPrice}</span></p>
 <p className={styles.price}> Discount Price: <span>${product.price}</span></p>
@@ -527,6 +527,13 @@ const productNameTrim = (name) => {
 
 <div className={styles.line}></div>
 
+<div className={styles.productpricecontent}>
+<p className={styles.stock} >
+  Limited Stock : 
+  <span>{product.stock}</span></p>
+   </div>
+
+   <div className={styles.line}></div>
 
               {product.colors.length > 0 && (
                 <div className={styles.options}>
@@ -653,8 +660,8 @@ const productNameTrim = (name) => {
                       src={rev.profilePictureImagePreview || '/default-profile.png'}
                       alt={rev.user ? rev.user.username : 'Anonymous'}
                       className={styles.thumbnailreview}
-                        width={150}
-                        height={150}
+                        width={950}
+                        height={950}
                        
                         priority
                       />
@@ -823,8 +830,8 @@ const productNameTrim = (name) => {
                 className={styles.product_list_images}
                 src={recommendedProduct.media.length > 0 ? recommendedProduct.media[0] : '/default-image.jpg'}
                 alt={recommendedProduct.name}
-                width={500}
-                height={500}
+                width={900}
+                height={900}
               />
             </div>
 
