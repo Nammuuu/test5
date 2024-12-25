@@ -11,13 +11,20 @@ import { useRouter } from 'next/navigation';
 import styles from '../../../../../styles/product/productde.module.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-import { FaStar, FaHome, FaAngleRight, FaFacebookF, FaTwitter, FaCopy, FaArrowLeft, FaArrowRight, FaLinkedinIn, FaShareAlt, FaWhatsapp } from 'react-icons/fa';
+import { FaStar, FaHome, FaAngleRight,
+   FaFacebookF, FaTwitter,
+   FaCopy, FaArrowLeft, FaArrowRight, 
+   FaLinkedinIn, FaShareAlt, FaWhatsapp,
+   
+   } from 'react-icons/fa';
 import Link from 'next/link'
 import Image from 'next/image';
 import CartSidebar from '../../../../../components/Home/CartSidebar';
 import { IoIosArrowBack } from "react-icons/io";
 import { TbHeart, TbShoppingBag,  } from "react-icons/tb";
 import Loader from "../../../../../components/Loader";
+import ReactPaginate from 'react-paginate';
+
 const ProductDetailsPage = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -48,6 +55,9 @@ const [selectedSize, setSelectedSize] = useState(null);
 
   const [isCartOpen, setIsCartOpen] = useState(false); // Control cart visibility
 const [cartUpdated, setCartUpdated] = useState(false);
+
+const [currentPage, setCurrentPage] = useState(0);
+const itemsPerPage = 10;
 
 
 
@@ -123,6 +133,17 @@ const [cartUpdated, setCartUpdated] = useState(false);
     };
     fetchRecommendedProducts();
   }, []);
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedProducts = recommendedProducts.slice(startIndex, endIndex);
+
+  // Handle page change
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected);
+  };
+  
+
 
   const trimText = (text, maxLength) => {
     if (text.length > maxLength) {
@@ -531,7 +552,7 @@ const productNameTrim = (name) => {
 
               {product.colors.length > 0 && (
                 <div className={styles.options}>
-                  <h3>Color :</h3>
+                  <h3>Color:</h3>
                   <div className={styles.optionsContainer}>
                     {product.colors.map((color, index) => (
                       <button
@@ -549,7 +570,7 @@ const productNameTrim = (name) => {
 
               {product.sizes.length > 0 && (
                 <div className={styles.options}>
-                  <h3>Size :</h3>
+                  <h3>Size:</h3>
                   <div className={styles.optionsContainer}>
                     {product.sizes.map((size, index) => (
                       <button
@@ -567,7 +588,7 @@ const productNameTrim = (name) => {
 
               {product.materials.length > 0 && (
                 <div className={styles.options}>
-                  <h3>Material :</h3>
+                  <h3>Material:</h3>
                   <div className={styles.optionsContainer}>
                     {product.materials.map((materials, index) => (
                       <button
@@ -821,9 +842,9 @@ const productNameTrim = (name) => {
     
     <div className={styles.productList}>
     <h2 className={styles.producthad}>Related Products</h2>
-    {recommendedProducts.length > 0 ? (
+    {displayedProducts.length > 0 ? (
       <div className={styles.productGrid}>
-        {recommendedProducts.map((recommendedProduct) => (
+        {displayedProducts.map((recommendedProduct) => (
           <div key={recommendedProduct._id} className={styles.productItem}>
             <Link className={styles.link} href={`/product/details/${recommendedProduct._id}`}>
 
@@ -854,6 +875,25 @@ const productNameTrim = (name) => {
       ) : (
         <p>Product not found</p>
       )}
+
+
+{recommendedProducts.length > itemsPerPage && (
+        <ReactPaginate
+          previousLabel={<FaArrowLeft />}
+          nextLabel={<FaArrowRight />}
+          breakLabel="..."
+          pageCount={Math.ceil(recommendedProducts.length / itemsPerPage)}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={3}
+          onPageChange={handlePageChange}
+          containerClassName={styles.pagination}
+          activeClassName={styles.active}
+          pageLinkClassName={styles.page_link}
+          previousLinkClassName={styles.prev_link}
+          nextLinkClassName={styles.next_link}
+        />
+      )}
+
     </div>
   );
 }

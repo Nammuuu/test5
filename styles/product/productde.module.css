@@ -917,6 +917,37 @@ color: #333;
   right: 10px; /* Position for right arrow */
 }
 
+
+
+/* for pagination  */
+.pagination {
+  display: flex;
+    justify-content: flex-end;
+   
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.page_link, .prev_link, .next_link {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.page_link:hover, .prev_link:hover, .next_link:hover {
+  background-color: #f2f2f2;
+}
+
+.active .page_link {
+  background-color: rgb(242, 62, 20);
+  color: white;
+}
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .productDetails {
@@ -943,15 +974,6 @@ color: #333;
   }
 }
 
-@media (max-width: 480px) {
-  .arrowButton {
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-  }
-
-  
-}
 
 
 /* Example CSS for cart sidebar */
@@ -1123,24 +1145,38 @@ color: #333;
     }
 
     .options {
-      display: block;
+      margin: 10px 0;
     }
     
     .options h3 {
-      margin: 10px 0;
+      margin:  0;
+      font-weight: 450;
+      width: unset;
     }
     
     .optionsContainer {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      justify-content: flex-start;
-      align-items: flex-end;
-      margin: 0 30px;
+      margin: 0 0px 0px 10px;
       text-align: center;
-      text-align: right;
-      /* width: 100%; */
       gap: 3px
     }
+
+    .optionButton {
+      padding: 0px;   
+    }
   }
+
+  @media (max-width: 480px) {
+    .arrowButton {
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+    }
   
+    
+  }
+ 
+    
+  
+
