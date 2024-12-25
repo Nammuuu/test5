@@ -214,8 +214,8 @@ color: #333;
   
     margin: 0;
     display: flex;
-    justify-content: center;
-    align-items: self-end;
+    /* justify-content: center; */
+    /* align-items: self-end; */
   }
   
   .options h3 {
@@ -974,13 +974,13 @@ color: #333;
         flex-wrap: wrap;
         margin: 10px;
     }
-    .productDescriptionContainer {
-      font-size: 1rem;
+    .productDescriptionContainer p{
+      /* font-size: 1rem; */
     line-height: 1.3;
     margin-bottom: 5px;
-    font-weight: 400;
+    /* font-weight: 400; */
     color: #777;
-    text-align: left;
+    /* text-align: left; */
     font-family: auto;
     text-transform: capitalize;
     padding: 0 0;
@@ -1039,7 +1039,7 @@ color: #333;
     }
 
 
-    .productDescriptionContainer {
+    .productDescriptionContainer p{
       font-size: 1rem;
       font-weight: 450;
     }

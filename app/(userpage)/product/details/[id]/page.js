@@ -586,11 +586,11 @@ const productNameTrim = (name) => {
 
 <div className={styles.line}></div>
 
-<div className={styles.productpricecontent}>
+{/* <div className={styles.productpricecontent}>
 <p className={styles.stock} >
   Limited Stock : 
   <span>{product.stock}</span></p>
-   </div>
+   </div> */}
 
               <div className={styles.actions}>
               
