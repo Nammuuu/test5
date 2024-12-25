@@ -525,19 +525,13 @@ const productNameTrim = (name) => {
 
 </div>
 
-<div className={styles.line}></div>
 
-<div className={styles.productpricecontent}>
-<p className={styles.stock} >
-  Limited Stock : 
-  <span>{product.stock}</span></p>
-   </div>
 
    <div className={styles.line}></div>
 
               {product.colors.length > 0 && (
                 <div className={styles.options}>
-                  <h3>Color:</h3>
+                  <h3>Color :</h3>
                   <div className={styles.optionsContainer}>
                     {product.colors.map((color, index) => (
                       <button
@@ -555,7 +549,7 @@ const productNameTrim = (name) => {
 
               {product.sizes.length > 0 && (
                 <div className={styles.options}>
-                  <h3>Size:</h3>
+                  <h3>Size :</h3>
                   <div className={styles.optionsContainer}>
                     {product.sizes.map((size, index) => (
                       <button
@@ -573,7 +567,7 @@ const productNameTrim = (name) => {
 
               {product.materials.length > 0 && (
                 <div className={styles.options}>
-                  <h3>Material:</h3>
+                  <h3>Material :</h3>
                   <div className={styles.optionsContainer}>
                     {product.materials.map((materials, index) => (
                       <button
@@ -588,6 +582,15 @@ const productNameTrim = (name) => {
                   </div>
                 </div>
               )}
+
+
+<div className={styles.line}></div>
+
+<div className={styles.productpricecontent}>
+<p className={styles.stock} >
+  Limited Stock : 
+  <span>{product.stock}</span></p>
+   </div>
 
               <div className={styles.actions}>
               
@@ -751,7 +754,7 @@ const productNameTrim = (name) => {
               <div className={styles.tagContainer}>
               <h1 className={styles.productheadingdetails}>Product Shipping & Return </h1>
                <div>
-               <ul>
+               <ul className={styles.return_ul}>
                <li>We do not offer item exchanges for online orders at this time. To exchange an item for a new size or color you must return the unwanted item(s) and place a new web order for the desired item(s). Your returned item will be processed and a refund will be granted to the original form of payment as long as the item meets our return policy terms. Availability of replacement items is not guaranteed.
                </li>
                <li>Once a return is received, please allow 7-14 business days to process and 3-5 business days for the refund to be credited to the payment method used at the time of purchase.</li>
