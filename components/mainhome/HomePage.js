@@ -192,8 +192,8 @@ const QuickViewModal = ({
         className={styles.quickViewProduct_images}
         src={quickViewProduct.media[0] || "/default-image.png"}
          alt={quickViewProduct.name}
-        width={300}
-        height={300}
+        width={900}
+        height={900}
       />
 
         </div>
@@ -207,7 +207,12 @@ const QuickViewModal = ({
         
           <div className={styles.price_containet}>
             <p className={styles.price_quick}>₹{product.price}</p>
-            <p className={styles.discountPrice}>₹{product.discountPrice}</p>
+           
+            {product.discountPrice && (
+   <p className={styles.discountPrice}>₹{product.discountPrice}</p>         
+)}
+
+         
           </div>
   
           {/* Options: Sizes, Colors, Materials */}
@@ -301,7 +306,12 @@ const QuickViewModal = ({
                 <p className={styles.conmmanClassname}>{renderRating(product.averageRating)}</p>
                 <div className={styles.price_containet}>
                   <p className={styles.price}>₹{product.price}</p>
-                  <p className={styles.discountPrice}>₹{product.discountPrice}</p>
+                  
+                  {product.discountPrice && (
+   <p className={styles.discountPrice}>₹{product.discountPrice}</p>         
+)}
+
+                  {/* <p className={styles.discountPrice}>₹{product.discountPrice}</p> */}
                 </div>
                 <p className={styles.white_space}>Sales: {product.salesCount} | Views: {product.viewsCount}</p>
                 <div className={styles.product_icons}> 

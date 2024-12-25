@@ -537,7 +537,14 @@ const productNameTrim = (name) => {
 
               <div className={styles.productpricecontent}>
 
-<p className={styles.Discount}> <span  className={styles.price}>₹{product.price}.00</span> <span className={styles.Discountprce}>₹{product.discountPrice}</span></p>
+<p className={styles.Discount}> 
+  <span  className={styles.price}>₹{product.price}.00</span>
+  {product.discountPrice && (
+  <span className={styles.Discountprce}>₹{product.discountPrice}</span>
+)}
+
+ {/* <span className={styles.Discountprce}>₹{product.discountPrice}</span> */}
+ </p>
 
 
 {/* <p className={styles.Discount}> Price: <span>${product.discountPrice}</span></p>
@@ -837,7 +844,7 @@ const productNameTrim = (name) => {
 
      
     
-
+      <div className={styles.line}></div>
 
     
     <div className={styles.productList}>

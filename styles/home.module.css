@@ -1034,8 +1034,14 @@ gap: 20px;
 
   .quickViewProduct_images {
     width: 100%;
-    height: 250px;
+    height: 100%;
+    /* height: 250px; */
     object-fit: cover;
+  }
+  .quickViewProduct_product_cart {
+    font-size: 14px;
+    padding: 10px 5px;
+    font-weight: 400;
   }
 
   .hompagemaincontainerproduct {
