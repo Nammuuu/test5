@@ -21,6 +21,7 @@ import { FaStar, FaSearch,
     FaTrash,
   FaEye,
   FaShoppingCart,
+  FaArrowLeft, FaArrowRight
  } from 'react-icons/fa';
 import Image from "next/image";
 import CartSidebar from "../../../components/Home/CartSidebar";
