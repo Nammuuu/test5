@@ -506,7 +506,7 @@ useEffect(() => {
     onClick={() => handleLinkClick(formData?.twitter || '#')} 
     href={formData?.twitter || '#'}
   >
-    <FaTwitter />r
+    <FaTwitter />
   </Link>
   <Link 
     onClick={() => handleLinkClick(formData?.youtube || '#')} 
