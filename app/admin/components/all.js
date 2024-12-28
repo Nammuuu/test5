@@ -253,24 +253,59 @@ const AdminDashboard = () => {
   });
 
 const [orderData, setOrderData] = useState({
+    // totalOrders: 0,
+    // pending: 0,
+    // confirmed: 0,
+    // ongoing: 0,
+    // delivered: 0,
+    // canceled: 0,
+    // returned: 0,
+    // rejected: 0,
+
     totalOrders: 0,
     pending: 0,
-    confirmed: 0,
-    ongoing: 0,
+    shipped: 0,
     delivered: 0,
     canceled: 0,
-    returned: 0,
-    rejected: 0,
+    orders: { data: [], totalPages: 1, currentPage: 1 },
+
   });
+
+
 
 
 
   const [adminName, setAdminName] = useState("Admin");
 
+
+
+  const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`/api/admin/dashboard/dashboardData/orderdata`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setOrderData(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         const token = localStorage.getItem('token');
+        const query = status === "All" ? "" : `&status=${status}`;
+
         const response = await axios.get(`/api/admin/dashboard/dashboardData?page=${currentPage}&limit=10`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -347,6 +382,8 @@ const [orderData, setOrderData] = useState({
         setStockAlerts(alerts);
         setTotalPages(data.users.totalPages); 
         
+        setOrderData((prev) => ({ ...prev, orders: response.data.orders }));
+
         setOrderData(response.data);
 
         setOrderData(
@@ -367,6 +404,14 @@ const [orderData, setOrderData] = useState({
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  const handleFilterChange = (e) => {
+    const selectedStatus = e.target.value;
+    setFilter(selectedStatus);
+    fetchFilteredOrders(selectedStatus);
+  };
+
+  if (loading) return <Loader />;
 
   const renderSection = () => {
     switch (currentSection) {
@@ -390,9 +435,32 @@ const [orderData, setOrderData] = useState({
 totalOrders={orderData.totalOrders}
     {...orderData} />
 
-<OrderStatistics {...orderData} />
+{/* <OrderStatistics {...orderData} /> */}
 
 
+<OrderStatistics {...dashboardData} />
+        <div className={styles.filterContainer}>
+          <label htmlFor="filter">Filter Orders by Status:</label>
+          <select id="filter" value={filter} onChange={handleFilterChange}>
+            <option value="All">All</option>
+            <option value="Pending">Pending</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div className={styles.ordersList}>
+          <h2>Orders</h2>
+          {dashboardData.orders.data.map((order) => (
+            <div key={order._id} className={styles.orderCard}>
+              <p>Order ID: {order._id}</p>
+              <p>Status: {order.orderStatus}</p>
+              <p>Total Price: ${order.totalPrice}</p>
+            </div>
+          ))}
+        </div>
+
+        
 
             {/* <Graph chartData={[dashboardData.totalUsers, dashboardData.totalProducts, dashboardData.totalOrders, dashboardData.totalCategories, dashboardData.totalViewsCount]} /> */}
             <Graph chartData={[dashboardData.totalUsers,
