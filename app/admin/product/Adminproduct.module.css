@@ -975,7 +975,11 @@
 
     .quick_view_content {
       flex-direction: column;
-      max-height: 90vh;
+      /* max-height: 90vh; */
+    }
+
+    .quickViewProduct_product_cart {
+      font-size: .90rem;
     }
   
     .products { 
@@ -1017,6 +1021,10 @@
   @media (max-width: 768px) {
     .product_list {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product_name {
+      font-size: 1rem;
     }
   }
   
@@ -1444,7 +1452,22 @@
   /* Sidebar styles for screens with max width of 700px */
   @media (max-width: 700px) {
   
-  
+  .colorSizeMatrialTagcontinaer {
+    gap: 0px;
+  }
+
+  .colorSizeMatrialTagcontinaer span{
+    color: #fff;
+  }
+    .container input[type="text"] {
+      margin-bottom: 10px;
+    }
+
+    .container input[type="file"] {
+      margin-bottom: 0;
+    padding: 10px 10px;
+    border: none;
+    } 
     .CategorySection ul{
       font-size: small;
       list-style: none;
@@ -1455,7 +1478,26 @@
       flex-wrap: wrap;
       gap: 8px;
     }
+    .fileUploadContainer label{
+      font-weight: 400;
+      padding: 5px 20px;
+    }
+
+    .inputcontainerbuttons {
+      gap: 0px; 
+    justify-content: flex-end;
+    margin-top: 10px;
+    }
+    .inputcontainerbuttonscontainer {
+      gap: 10px; 
+    }
+    .inputcontainerbuttonscontainer button{
+      gap: 10px; 
+      padding: 12px 10px;
+    font-size: .9rem;
+    }
   
+    
     .CategorySection ul li{
       display: block;
       
@@ -1702,6 +1744,44 @@
       gap: 0;
     }
     .modalOverlay {
-      padding: 0px;
+      width: 90%;
     }
+  .modalContenthtag {
+    display: none;
   }
+  }
+
+
+
+/* for pagination  */
+.pagination {
+  display: flex;
+    justify-content: flex-end;
+   
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.page_link, .prev_link, .next_link {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.page_link:hover, .prev_link:hover, .next_link:hover {
+  background-color: #f2f2f2;
+}
+
+.active .page_link {
+  background-color: rgb(242, 62, 20);
+  color: white;
+}
+
+.product_selstag {
+  font-size: 1rem;
+    font-weight: 450;
+    margin: 0;
+}

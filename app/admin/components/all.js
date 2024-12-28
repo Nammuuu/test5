@@ -346,6 +346,9 @@ const [orderData, setOrderData] = useState({
         });
         setStockAlerts(alerts);
         setTotalPages(data.users.totalPages); 
+        
+        setOrderData(response.data);
+
         setOrderData(
           ...data,
           orderSummary);
@@ -386,6 +389,8 @@ const [orderData, setOrderData] = useState({
 <OrderStatistics 
 totalOrders={orderData.totalOrders}
     {...orderData} />
+
+<OrderStatistics {...orderData} />
 
 
 

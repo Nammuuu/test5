@@ -62,7 +62,9 @@ return (
   <div className={styles.greeting}>
   <h2 className={styles.goodmoring} >{getGreetingMessage()}</h2>
 </div>
-<div className={styles.orderview}> <h1> Overview </h1> </div> 
+  <div className={styles.orderview}>
+    <h1> Overview </h1> 
+   </div> 
   <div className={styles.dashboardContainer}>
 
   
@@ -79,41 +81,46 @@ return (
       </div>
     ))}
 
-    {/* Stock Alerts Section */}
-    <div className={styles.stockAlertsContainer}>
-     
-      {stockAlerts?.map((product, index) => (
-        <div 
-          key={index} 
-          className={styles.stockAlert} 
-          style={{ borderLeft: `5px solid ${product.alertType === 'Out of Stock' ? '#FF5252' : '#FFEB3B'}` }}
-        >
-          <div className={styles.iconContainer} style={{ backgroundColor: product.alertType === 'Out of Stock' ? '#FF5252' : '#FFEB3B' }}>
-            <FaExclamationTriangle />
-          </div>
-          <div className={styles.cardContent}>
-          <h3 className={styles.cardTitle}>Stock Alerts</h3>
-            <p className={styles.cardValue}>{product.name}</p>
-            <p className={styles.cardDescription}>{product.alertType}</p>
-            <button onClick={() => handleDetailsClick(product)}>Details</button>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    {/* Popup */}
-    {selectedProduct && (
-      <div className={styles.popupOverlay} onClick={handleClosePopup}>
-        <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
-          <h2>Product Details</h2>
-          <p><strong>Name:</strong> {selectedProduct.name}</p>
-          <p><strong>Stock:</strong> {selectedProduct.stock}</p>
-          <p><strong>Alert Type:</strong> {selectedProduct.alertType}</p>
-          <button onClick={handleClosePopup}>Close</button>
-        </div>
-      </div>
-    )}
+ 
   </div>
+
+
+     {/* Stock Alerts Section */}
+     <div className={styles.stockAlertsContainer}>
+     
+     {stockAlerts?.map((product, index) => (
+       <div 
+         key={index} 
+         className={styles.stockAlert} 
+         style={{ borderLeft: `5px solid ${product.alertType === 'Out of Stock' ? '#FF5252' : '#FFEB3B'}` }}
+       >
+         <div className={styles.iconContainer} style={{ backgroundColor: product.alertType === 'Out of Stock' ? '#FF5252' : '#FFEB3B' }}>
+           <FaExclamationTriangle />
+         </div>
+         <div className={styles.cardContent}>
+         <h3 className={styles.cardTitle}>Stock Alerts</h3>
+           <p className={styles.cardValue}>{product.name}</p>
+           <p className={styles.cardDescription}>{product.alertType}</p>
+           <button onClick={() => handleDetailsClick(product)}>Details</button>
+         </div>
+       </div>
+     ))}
+   </div>
+
+   {/* Popup */}
+   {selectedProduct && (
+     <div className={styles.popupOverlay} onClick={handleClosePopup}>
+       <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
+         <h2>Product Details</h2>
+         <p><strong>Name:</strong> {selectedProduct.name}</p>
+         <p><strong>Stock:</strong> {selectedProduct.stock}</p>
+         <p><strong>Alert Type:</strong> {selectedProduct.alertType}</p>
+         <button onClick={handleClosePopup}>Close</button>
+       </div>
+     </div>
+   )}
+
+
   </div>
   </>
 );

@@ -27,6 +27,8 @@ import CartSidebar from "../../../components/Home/CartSidebar";
 import WishlistSidebar from "../../../components/Home/WishlistSidebar";
 
 import { useRouter } from "next/navigation";
+import ReactPaginate from 'react-paginate';
+
 
 const ProductDetails = () => {
   const [query, setQuery] = useState('');
@@ -64,6 +66,8 @@ const ProductDetails = () => {
 
   const router = useRouter();
 
+  const [currentPage, setCurrentPage] = useState(0);
+const itemsPerPage = 12;
   // product creating start 
 
   
@@ -189,6 +193,18 @@ const ProductDetails = () => {
     setSelectedRating(null); 
     
   };
+
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  
+  const displayedProducts = 
+  (selectedRating ? filteredProducts : query ? suggestions : initialProducts).slice(startIndex, endIndex);
+  
+  
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage.selected);
+   };
+
 
   const handleSearchSubmit = async () => {
     setLoading(true);
@@ -731,7 +747,11 @@ const getFiveDaysAgo = () => {
           <h2 className={styles.product_name}>{product.name.slice(0, 30)}...</h2>
           {/* <h2 className={styles.product_name} >{product.name}</h2> */}
           {/* <p className={styles.product_des} >{product.description.slice(0, 200)}...</p> */}
-          <p className={styles.product_name} >{product.seles} </p>
+          {/* <p className={styles.product_selstag} >{product.seles} </p> */}
+          {product.seles && (
+  <p className={styles.product_selstag}>{product.seles}</p>
+)}
+
           <div className={styles.price_containet}>
             <p className={styles.price_quick}>₹{product.price}</p>
             <p className={styles.discountPrice}>₹{product.discountPrice}</p>
@@ -841,14 +861,15 @@ const getFiveDaysAgo = () => {
       <FaSearch />
     </button>
   </div>
-
+ 
   {/* Product Listing */}
   <h4 className={styles.allheading}>
     {selectedRating ? `Filtered Products with ${selectedRating} Star Rating` : 'Product List'}
   </h4>
 
-  <div className={styles.productsGrid}>
+  {/* <div className={styles.productsGrid}>
     {selectedRating && filteredProducts.length > 0 ? (
+      
       filteredProducts.map((product) => (
         <ProductCard key={product._id} product={product} />
       ))
@@ -876,7 +897,35 @@ const getFiveDaysAgo = () => {
     (
       <p>No products found</p>
     )}
-  </div>
+  </div> */}
+
+
+<div className={styles.productsGrid}>
+  {selectedRating && filteredProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : query && suggestions.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : suggestions.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : !query && initialProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : initialProducts.length > 0 ? (
+    displayedProducts.map((product) => (
+      <ProductCard key={product._id} product={product} />
+    ))
+  ) : (
+    <p>No products found</p>
+  )}
+</div>
+
 
   {/* Quick View Modal */}
   {quickViewProduct && (
@@ -906,7 +955,7 @@ const getFiveDaysAgo = () => {
     
       <div className={styles.modalContent}>
 
-      <h2>Create Product</h2>
+      <h2  className={styles.modalContenthtag}>Create Product</h2>
 
         <div className={styles.inputcontainer}>
 
@@ -1339,6 +1388,26 @@ height={500}
     
 
 <WishlistSidebar isOpen={isWishlistOpen} onClose={() => setIsWishlistOpen(false)} wishlistUpdated={wishlistUpdated} />
+
+<ReactPaginate
+        previousLabel={<FaArrowLeft />}
+        nextLabel={<FaArrowRight />}
+        
+        breakLabel={"..."}
+       
+        pageCount={Math.ceil(filteredProducts.length / itemsPerPage)}
+        
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+      
+        onPageChange={handlePageChange}
+       
+        containerClassName={styles.pagination}
+        activeClassName={styles.active}
+        pageLinkClassName={styles.page_link}
+        previousLinkClassName={styles.prev_link}
+        nextLinkClassName={styles.next_link}
+      />
 
  
 
