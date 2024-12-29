@@ -85,7 +85,7 @@ const OrderStatistics = ({
 
   // canceled ,
   returned ,
-canceledOrders ,
+// canceledOrders ,
   Processing ,
 
 }) => {
