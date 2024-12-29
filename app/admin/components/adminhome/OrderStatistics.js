@@ -97,7 +97,7 @@ const OrderStatistics = ({
     { title: "Delivered Orders", value: deliveredOrders, icon: <FaBox />, color: "#6c757d" },
     { title: "Canceled Orders", value: canceledOrders, icon: <FaTimesCircle />, color: "#dc3545" },
     { title: "Returned Orders", value: returnedOrders, icon: <FaUndo />, color: "#fd7e14" },
-    { title: "Rejected Orders", value: returned, icon: <FaTimesCircle />, color: "#343a40" },
+    // { title: "Rejected Orders", value: returned, icon: <FaTimesCircle />, color: "#343a40" },
   ];
 
   return (

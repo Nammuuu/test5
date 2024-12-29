@@ -41,11 +41,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    border-radius: 50%;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .iconContainer .canl:last {
+    color: red;
   }
   
   .cardContent {
-    text-align: center;
+    text-align: start;
   }
   
   .cardTitle {

@@ -4,9 +4,15 @@
 
 "use client";
 
-import React from "react";
+// import React from "react";
+import React, { useState } from "react";
+
 import styles from "../../../styles/admin/DashboardOverview.module.css";
-import { FaShoppingCart, FaBoxOpen, FaTags, FaDollarSign, FaUsers, FaEye, FaExclamationTriangle } from "react-icons/fa";
+import { FaShoppingCart, FaBoxOpen,
+   FaTags, FaDollarSign, FaUsers, 
+   FaEye, FaExclamationTriangle,
+  FaEyeSlash
+  } from "react-icons/fa";
 
 
 const DashboardOverview = ({ 
@@ -21,8 +27,17 @@ const DashboardOverview = ({
   // totalViewsCount, 
   totalSalesCount, // Accept totalSalesCount
   stockAlerts, // Accept stockAlerts
-  adminName
+  adminName,
+
+  stockAlerts, handleDetailsClick 
 }) => {
+
+
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
 
   const getGreetingMessage = () => {
     const hour = new Date().getHours();
@@ -30,6 +45,7 @@ const DashboardOverview = ({
     if (hour < 18) return `Good Afternoon, ${adminName}`;
     return `Good Evening, ${adminName}`;
   };
+
 
   const stats = [
     { title: "Total Earnings", value: `$${totalSales}`, icon: <FaDollarSign />, color: "#ff0166", description: "Total sales revenue" },
@@ -40,6 +56,8 @@ const DashboardOverview = ({
     // { title: "Total Views Count", value: totalViewsCount, icon: <FaEye />, color: "#009688", description: "Total product views" }, // Use totalViewsCount
 
   ];
+
+
 
   const [selectedProduct, setSelectedProduct] = React.useState(null);
 
@@ -86,7 +104,7 @@ return (
 
 
      {/* Stock Alerts Section */}
-     <div className={styles.stockAlertsContainer}>
+     {/* <div className={styles.stockAlertsContainer}>
      
      {stockAlerts?.map((product, index) => (
        <div 
@@ -99,16 +117,69 @@ return (
          </div>
          <div className={styles.cardContent}>
          <h3 className={styles.cardTitle}>Stock Alerts</h3>
-           <p className={styles.cardValue}>{product.name}</p>
+         
+           <p className={styles.cardValue}>{product.name.slice(0, 18)}...</p>
            <p className={styles.cardDescription}>{product.alertType}</p>
            <button onClick={() => handleDetailsClick(product)}>Details</button>
          </div>
        </div>
      ))}
-   </div>
+   </div> */}
+
+
+
+
+
+   <div className={styles.stockAlertsWrapper}>
+      <div className={styles.toggleButtonContainer}>
+        <button 
+          onClick={toggleVisibility} 
+          className={styles.toggleButton}
+        >
+          {isVisible ? <FaEyeSlash /> : <FaEye />} 
+          {isVisible ? " Hide Alerts" : " View Alerts"}
+        </button>
+      </div>
+
+      {isVisible && (
+        <div className={styles.stockAlertsContainer}>
+          {stockAlerts?.map((product, index) => (
+            <div 
+              key={index} 
+              className={styles.stockAlert} 
+              style={{
+                borderLeft: `5px solid ${
+                  product.alertType === 'Out of Stock' ? '#FF5252' : '#FFEB3B'
+                }`,
+              }}
+            >
+              <div 
+                className={styles.iconContainer} 
+                style={{
+                  backgroundColor: product.alertType === 'Out of Stock' ? '#FF5252' : '#FFEB3B',
+                }}
+              >
+                <FaExclamationTriangle />
+              </div>
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{product.name.slice(0, 18)}...</h3>
+                <p className={styles.cardValue}>{product.alertType}</p>
+                <button 
+                  className={styles.detailsButton} 
+                  onClick={() => handleDetailsClick(product)}
+                >
+                  Details
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
 
    {/* Popup */}
-   {selectedProduct && (
+   {/* {selectedProduct && (
      <div className={styles.popupOverlay} onClick={handleClosePopup}>
        <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
          <h2>Product Details</h2>
@@ -118,7 +189,7 @@ return (
          <button onClick={handleClosePopup}>Close</button>
        </div>
      </div>
-   )}
+   )} */}
 
 
   </div>

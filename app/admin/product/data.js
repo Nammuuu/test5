@@ -380,8 +380,8 @@ const itemsPerPage = 12;
                 src={product.media[0]}
                 alt={product.name}
                 style={{ objectFit: "cover" }}
-        width={500}
-        height={500}
+        width={900}
+        height={900}
       />
 
          
@@ -692,8 +692,8 @@ const getFiveDaysAgo = () => {
         className={styles.product_list_images}
         src={product.media[0] || ""}
         alt={product.name}
-        width={100}
-        height={100}
+        width={900}
+        height={900}
       />
     </div>
 
@@ -734,8 +734,8 @@ const getFiveDaysAgo = () => {
         className={styles.quickViewProduct_images}
         src={quickViewProduct.media[0] || "/default-image.png"}
          alt={quickViewProduct.name}
-        width={300}
-        height={300}
+        width={900}
+        height={900}
       />
 
         </div>
