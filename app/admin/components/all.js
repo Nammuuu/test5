@@ -47,7 +47,7 @@ const AdminDashboard = () => {
 
   const [orderData, setOrderData] = useState({
     totalOrders: 0,
-    pending: 0,
+    pendingOrders: 0,
     shipped: 0,
     delivered: 0,
     canceled: 0,
@@ -125,7 +125,7 @@ const AdminDashboard = () => {
         // Map backend response to frontend structure
         const mappedOrderData = {
           totalOrders: data.totalOrders || 0,
-          pending: data.pendingOrders || 0,
+          pendingOrders: data.pendingOrders || 0,
           confirmed: data.confirmedOrders || 0,
           ongoing: data.ongoingOrders || 0,
           delivered: data.deliveredOrders || 0,
