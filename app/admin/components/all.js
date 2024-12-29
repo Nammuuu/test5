@@ -44,36 +44,108 @@ const AdminDashboard = () => {
     stockAlerts: 0,
   });
 
-const [orderData, setOrderData] = useState({
+
+  const [orderData, setOrderData] = useState({
     totalOrders: 0,
     pending: 0,
     shipped: 0,
     delivered: 0,
     canceled: 0,
+    returned: 0,
+    rejected: 0,
     orders: { data: [], totalPages: 1, currentPage: 1 },
   });
 
   const [adminName, setAdminName] = useState("Admin");
-  const [filter, setFilter] = useState("All");
+  // const [filter, setFilter] = useState("All");
+
+  // useEffect(() => {
+  //   const fetchDashboardData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       if (!token) {
+  //         console.error("No token found in localStorage");
+  //         setLoading(false);
+  //         return;
+  //       }
+  
+  //       const response = await axios.get(`/api/admin/dashboard/dashboardData/orderdata`, {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+  
+  //       const data = response.data;
+  
+  //       // Validate the structure of the backend response
+  //       if (!data || typeof data !== "object") {
+  //         console.error("Invalid response structure:", data);
+  //         setLoading(false);
+  //         return;
+  //       }
+  
+  //       // Default structure in case some fields are missing
+  //       const orderSummary = {
+  //         totalOrders: data.totalOrders || 0,
+  //         pending: data.pending || 0,
+  //         shipped: data.shipped || 0,
+  //         delivered: data.delivered || 0,
+  //         canceled: data.canceled || 0,
+  //         returned: data.returned || 0,
+  //         rejected: data.rejected || 0,
+  //         orders: data.orders || { data: [], totalPages: 1, currentPage: 1 },
+  //       };
+  
+  //       // Update the state with validated data
+  //       setOrderData(orderSummary);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching dashboard data:", error);
+  //       setLoading(false);
+  //     }
+  //   };
+  
+  //   fetchDashboardData();
+  // }, []);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error("No token found in localStorage");
+          setLoading(false);
+          return;
+        }
+  
         const response = await axios.get(`/api/admin/dashboard/dashboardData/orderdata`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setOrderData(response.data);
+  
+        const data = response.data;
+  
+        // Map backend response to frontend structure
+        const mappedOrderData = {
+          totalOrders: data.totalOrders || 0,
+          pending: data.pendingOrders || 0,
+          confirmed: data.confirmedOrders || 0,
+          ongoing: data.ongoingOrders || 0,
+          delivered: data.deliveredOrders || 0,
+          canceled: data.canceledOrders || 0,
+          returned: data.returnedOrders || 0,
+          rejected: data.rejectedOrders || 0,
+          orders: data.orders || { data: [], totalPages: 1, currentPage: 1 },
+        };
+  
+        setOrderData(mappedOrderData);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
         setLoading(false);
       }
     };
-
+  
     fetchDashboardData();
   }, []);
-
+  
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -102,48 +174,8 @@ const [orderData, setOrderData] = useState({
       
         const allViewsCount = data.products.data.reduce((acc, product) => acc + (product.viewsCount || 0), 0); // Calculate total views
          // Aggregate order status counts
-        const orders = data.data || [];
-        const orderSummary = orders.reduce(
-          (acc, order) => {
-            acc.totalOrders++;
-            switch (order.orderStatus) {
-              case "Pending":
-                acc.pending++;
-                break;
-              case "Confirmed":
-                acc.confirmed++;
-                break;
-              case "Processing":
-                acc.ongoing++;
-                break;
-              case "Delivered":
-                acc.delivered++;
-                break;
-              case "Canceled":
-                acc.canceled++;
-                break;
-              case "Returned":
-                acc.returned++;
-                break;
-              case "Rejected":
-                acc.rejected++;
-                break;
-              default:
-                break;
-            }
-            return acc;
-          },
-          {
-            totalOrders: 0,
-            pending: 0,
-            confirmed: 0,
-            ongoing: 0,
-            delivered: 0,
-            canceled: 0,
-            returned: 0,
-            rejected: 0,
-          }
-        );
+       
+    
 
         setDashboardData({
           ...data,
@@ -160,11 +192,6 @@ const [orderData, setOrderData] = useState({
         //   ...data,
         //   orderSummary);
 
-        setOrderData((prev) => ({
-          ...prev,
-          orders: data.orders || { data: [], totalPages: 1, currentPage: 1 },
-          ...orderSummary, // Add order summary to the data
-        }));
 
         
         setLoading(false);
@@ -185,7 +212,7 @@ const [orderData, setOrderData] = useState({
 
   const handleFilterChange = (e) => {
     const selectedStatus = e.target.value;
-    setFilter(selectedStatus);
+    // setFilter(selectedStatus);
     fetchFilteredOrders(selectedStatus);
   };
 
@@ -214,10 +241,7 @@ totalOrders={orderData.totalOrders}
     {...orderData} />
 
 <OrderStatistics {...orderData} />
-
-
-<OrderStatistics {...dashboardData} />
-    
+   
 
         
 
