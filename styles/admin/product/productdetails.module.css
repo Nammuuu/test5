@@ -86,10 +86,6 @@
       margin-top: 10px;
     }
   
-    .imageGallery {
-      flex-direction: column;
-    }
-  
     .imageContainer {
       width: 100%;
     }
@@ -233,7 +229,7 @@
 
 @media (max-width: 768px) {
   .inputcontainer {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
   .formGroupContainer {
     display: block;
@@ -241,12 +237,14 @@
   .mainImageContainer {
     display: grid;
     width: 300px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     margin: 0;
     gap: 20px;
   }
   .imageGallery {
     margin-top: 0;
+    flex-wrap: wrap;
+        justify-content: start;
   }
 
 

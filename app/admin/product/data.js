@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect,  useCallback } from 'react';
 import axios from 'axios';
 import styles from './Adminproduct.module.css';
 import Link from 'next/link';
@@ -27,7 +27,7 @@ import Image from "next/image";
 import CartSidebar from "../../../components/Home/CartSidebar";
 import WishlistSidebar from "../../../components/Home/WishlistSidebar";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname  } from 'next/navigation';
 import ReactPaginate from 'react-paginate';
 
 
@@ -64,8 +64,12 @@ const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedMaterial, setSelectedMaterial] = useState(null);
-
+  const pathname = usePathname();
   const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState(false); // State to track loading
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
 
   const [currentPage, setCurrentPage] = useState(0);
 const itemsPerPage = 12;
@@ -678,6 +682,55 @@ const getFiveDaysAgo = () => {
   return fiveDaysAgo.toISOString().split('T')[0]; // Format as YYYY-MM-DD
 };
 
+
+
+
+
+
+// Handler for link clicks
+const handleLinkClick = (link) => {
+  if (link === pathname) {
+    console.log("Same page click, no loader.");
+    return; // Don't trigger loading for the same page
+  }
+  
+  console.log(`Navigating to ${link}`);
+  setIsLoading(true);
+  router.push(link); // Change route using Next.js router
+};
+
+
+// Effect to track pathname changes for loading state
+useEffect(() => {
+  // Whenever the pathname changes, we set loading to true
+  const handlePathChange = () => {
+    setIsLoading(true);
+  };
+
+  // Set loading to false after navigating
+  const handlePathChangeComplete = () => {
+    console.log("Route change completed");
+    setIsLoading(false);
+  };
+
+  // Listen to pathname changes
+  handlePathChange();
+
+  // You can use a small timeout to simulate the completion of loading
+  const timeout = setTimeout(() => {
+    handlePathChangeComplete();
+  }, 500); // Adjust the timeout based on your loading needs
+
+  // Clean up timeout on component unmount
+  return () => {
+    clearTimeout(timeout);
+  };
+}, [pathname]); // Run effect on pathname change
+
+
+
+
+
 // product creating end  
 
 
@@ -686,7 +739,11 @@ const getFiveDaysAgo = () => {
       <div className={styles.product_iconsto}> 
         <FaEye onClick={() => openQuickView(product)} />
       </div>
-      <Link  href={`/admin/product/${product._id}`}>
+
+     
+
+      {product._id ?
+      <Link onClick={() => handleLinkClick(`/admin/product/${product._id}`)}  href={`/admin/product/${product._id}`}>
       <div className={styles.mainproduct_images}>
       <Image
         className={styles.product_list_images}
@@ -697,7 +754,8 @@ const getFiveDaysAgo = () => {
       />
     </div>
 
-      </Link>
+      </Link> : 'Loading...'}
+
       <div className={styles.product_list_containet}>
         <h4>{product.name.length > 20 ? product.name.slice(0, 20) + "..." : product.name}</h4>
         
