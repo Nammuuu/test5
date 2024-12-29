@@ -226,7 +226,7 @@ const DashboardOverview = ({
   adminName,
   handleDetailsClick: propHandleDetailsClick, // Rename to avoid conflict
 }) => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const toggleVisibility = () => {
