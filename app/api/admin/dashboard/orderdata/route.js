@@ -2,6 +2,7 @@
 
 
 export const dynamic = 'force-dynamic';
+
 import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';
@@ -53,6 +54,7 @@ export async function GET(req) {
     // Structure the response
     const dashboardData = {
       totalOrders,
+      processing: statusCounts["Processing"] || 0,
       pending: statusCounts["Pending"] || 0,
       shipped: statusCounts["Shipped"] || 0,
       delivered: statusCounts["Delivered"] || 0,

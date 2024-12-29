@@ -77,21 +77,27 @@ const OrderStatistics = ({
   totalOrders,
   pendingOrders,
   confirmedOrders,
-  ongoingOrders,
+  // ongoingOrders,
   deliveredOrders,
   canceledOrders,
   returnedOrders,
-  rejectedOrders,
+  // rejectedOrders,
+
+  // canceled ,
+  returned ,
+canceledOrders ,
+  Processing ,
+
 }) => {
   const stats = [
     { title: "Total Orders", value: totalOrders, icon: <FaShoppingCart />, color: "#007bff" },
     { title: "Pending Orders", value: pendingOrders, icon: <FaHourglassHalf />, color: "#ffc107" },
     { title: "Confirmed Orders", value: confirmedOrders, icon: <FaCheckCircle />, color: "#28a745" },
-    { title: "Ongoing Orders", value: ongoingOrders, icon: <FaTruck />, color: "#17a2b8" },
+    { title: "Ongoing Orders", value: Processing, icon: <FaTruck />, color: "#17a2b8" },
     { title: "Delivered Orders", value: deliveredOrders, icon: <FaBox />, color: "#6c757d" },
     { title: "Canceled Orders", value: canceledOrders, icon: <FaTimesCircle />, color: "#dc3545" },
     { title: "Returned Orders", value: returnedOrders, icon: <FaUndo />, color: "#fd7e14" },
-    { title: "Rejected Orders", value: rejectedOrders, icon: <FaTimesCircle />, color: "#343a40" },
+    { title: "Rejected Orders", value: returned, icon: <FaTimesCircle />, color: "#343a40" },
   ];
 
   return (

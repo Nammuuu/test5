@@ -48,11 +48,12 @@ const AdminDashboard = () => {
   const [orderData, setOrderData] = useState({
     totalOrders: 0,
     pendingOrders: 0,
-    shipped: 0,
-    delivered: 0,
-    canceled: 0,
+    confirmedOrders: 0,
+    deliveredOrders: 0,
+    // canceled: 0,
     returned: 0,
-    rejected: 0,
+canceledOrders: 0,
+    Processing: 0,
     orders: { data: [], totalPages: 1, currentPage: 1 },
   });
 
@@ -126,12 +127,12 @@ const AdminDashboard = () => {
         const mappedOrderData = {
           totalOrders: data.totalOrders || 0,
           pendingOrders: data.pendingOrders || 0,
-          confirmed: data.confirmedOrders || 0,
-          ongoing: data.ongoingOrders || 0,
-          delivered: data.deliveredOrders || 0,
-          canceled: data.canceledOrders || 0,
-          returned: data.returnedOrders || 0,
-          rejected: data.rejectedOrders || 0,
+          confirmedOrders: data.confirmedOrders || 0,
+          Processing: data.Processing || 0,        
+          deliveredOrders: data.deliveredOrders || 0,
+          canceledOrders: data.canceledOrders || 0,
+          returned: data.canceledOrders || 0,
+          canceledOrders: data.canceledOrders || 0,
           orders: data.orders || { data: [], totalPages: 1, currentPage: 1 },
         };
   
@@ -240,8 +241,8 @@ const AdminDashboard = () => {
 totalOrders={orderData.totalOrders}
     {...orderData} />
 
-<OrderStatistics {...orderData} />
-   
+{/* <OrderStatistics {...orderData} />
+    */}
 
         
 
