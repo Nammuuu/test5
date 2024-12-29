@@ -34,6 +34,7 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
   const [selectedImage, setSelectedImage] = useState(''); 
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
   useEffect(() => {
     const token = localStorage.getItem('token');
