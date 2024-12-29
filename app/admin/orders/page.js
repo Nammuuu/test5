@@ -518,179 +518,179 @@ const AdminOrders = () => {
 
 
 // add product image done ok 
-// const generatePDF = async (order) => {
-//   const doc = new jsPDF();
-
-//   // Add the title
-//   doc.text(`Invoice for Order ID: ${order._id}`, 10, 10);
-
-//   // Define columns and data for the table
-//   const columns = [
-//     { header: 'Product', dataKey: 'productName' },
-//     { header: 'Quantity', dataKey: 'quantity' },
-//     { header: 'Price', dataKey: 'price' },
-//     { header: 'Image', dataKey: 'image' }, // Added Image column
-//   ];
-
-//   // Map order items to data array and fetch images
-//   const dataPromises = order.orderItems.map(async (item) => {
-//     const imageUrl = item.product.media[0]; // Use the first image
-//     let imageDataUrl = '';
-
-//     // Fetch the image data
-//     try {
-//       const response = await fetch(imageUrl);
-//       const blob = await response.blob();
-//       imageDataUrl = URL.createObjectURL(blob);
-//     } catch (error) {
-//       console.error('Error fetching image:', error);
-//     }
-
-//     return {
-//       productName: item.product.name,
-//       quantity: item.quantity,
-//       price: item.product.price,
-//       image: imageDataUrl, // Add the image data URL
-//     };
-//   });
-
-//   const data = await Promise.all(dataPromises);
-
-//   // Add table with product data
-//   doc.autoTable({
-//     columns,
-//     body: data,
-//     didDrawCell: (data) => {
-//       if (data.column.dataKey === 'image') {
-//         const imgX = data.cell.x + 5;
-//         const imgY = data.cell.y + 2;
-//         const imgWidth = 30;
-//         const imgHeight = 30;
-
-//         if (data.cell.raw) {
-//           doc.addImage(data.cell.raw, 'JPEG', imgX, imgY, imgWidth, imgHeight);
-//         }
-//       }
-//     },
-//   });
-
-//   // Add additional details
-//   doc.text(`Total Price: ${order.totalPrice}`, 10, doc.lastAutoTable.finalY + 10);
-
-//   // Save the PDF
-//   doc.save(`Invoice_${order._id}.pdf`);
-// };
-
-
-
-
-
-const generatePDF = (order) => {
+const generatePDF = async (order) => {
   const doc = new jsPDF();
-  
-  // Set margin and spacing variables
-  const marginX = 10;
-  let currentY = 10; // Tracks Y position on the PDF for dynamic content placement
-  
-  // Add title
-  doc.setFontSize(16);
-  doc.text(`Invoice for Order ID: ${order._id}`, marginX, currentY);
-  currentY += 10;
 
-  // Add user details
-  doc.setFontSize(12);
-  doc.text(`User Email: ${order.user.email}`, marginX, currentY);
-  currentY += 10;
-  
-  // Add shipping address
-  doc.text(`Shipping Address:`, marginX, currentY);
-  currentY += 7;
-  doc.text(`${order.shippingAddress.fullName}`, marginX, currentY);
-  currentY += 7;
-  doc.text(`${order.shippingAddress.address}, ${order.shippingAddress.address2}`, marginX, currentY);
-  currentY += 7;
-  doc.text(`${order.shippingAddress.city}, ${order.shippingAddress.state}`, marginX, currentY);
-  currentY += 7;
-  doc.text(`${order.shippingAddress.country}, ${order.shippingAddress.pinCode}`, marginX, currentY);
-  currentY += 10;
+  // Add the title
+  doc.text(`Invoice for Order ID: ${order._id}`, 10, 10);
 
   // Define columns and data for the table
   const columns = [
     { header: 'Product', dataKey: 'productName' },
     { header: 'Quantity', dataKey: 'quantity' },
     { header: 'Price', dataKey: 'price' },
-    { header: 'Product Image', dataKey: 'productImage' }, // Image column
+    { header: 'Image', dataKey: 'image' }, // Added Image column
   ];
-  
-  // const data = order.orderItems.map((item) => ({
-  //   productName: item.product.name,
-  //   quantity: item.quantity,
-  //   price: item.product.price,
-  //   productImage: item.product.media.length > 0 ? item.product.media[0] : '', // Ensure image URL or empty string
-  // }));
 
-  const data = order.orderItems.map((item) => ({
-    productName: item.product?.name || 'N/A', // Fallback to 'N/A' if product or name is unavailable
-    quantity: item.quantity,
-    price: item.product?.price || 'N/A', // Fallback for price
-    productImage: item.product?.media?.[0] || '', // Ensure fallback for image URL
-  }));
-  
+  // Map order items to data array and fetch images
+  const dataPromises = order.orderItems.map(async (item) => {
+    const imageUrl = item.product.media[0]; // Use the first image
+    let imageDataUrl = '';
 
-  // Add product table
-  doc.autoTable({
-    head: [columns],
-    body: data.map(row => [
-      row.productName,
-      row.quantity,
-      row.price,
-      row.productImage ? { content: '', styles: { cellWidth: 30, minCellHeight: 30 } } : '' // Handle image cell or empty
-    ]),
-    startY: currentY,
-    theme: 'grid',
-    styles: { fontSize: 10, cellPadding: 3 },
-    columnStyles: {
-      0: { cellWidth: 60 }, // Product name
-      1: { cellWidth: 30 }, // Quantity
-      2: { cellWidth: 30 }, // Price
-      3: { cellWidth: 40 }  // Image placeholder
-    },
-    didDrawCell: (data) => {
-      if (data.column.dataKey === 3 && data.cell.section === 'body') {
-        const imgUrl = data.row.raw[3];
-        if (imgUrl) {
-          const img = new Image();
-          img.src = imgUrl;
-          img.onload = () => {
-            doc.addImage(img, 'JPEG', data.cell.x + 2, data.cell.y + 2, 30, 30);
-          };
-        }
-      }
+    // Fetch the image data
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      imageDataUrl = URL.createObjectURL(blob);
+    } catch (error) {
+      console.error('Error fetching image:', error);
     }
+
+    return {
+      productName: item.product.name,
+      quantity: item.quantity,
+      price: item.product.price,
+      image: imageDataUrl, // Add the image data URL
+    };
   });
 
-  // Update Y position after table
-  currentY = doc.lastAutoTable.finalY + 10;
+  const data = await Promise.all(dataPromises);
 
-  // Add additional order details
-  doc.text(`Total Price: ${order.totalPrice}`, marginX, currentY);
-  currentY += 7;
-  doc.text(`Order Status: ${order.orderStatus}`, marginX, currentY);
-  currentY += 7;
-  doc.text(`Payment Method: ${order.paymentMethod}`, marginX, currentY);
-  currentY += 10;
+  // Add table with product data
+  doc.autoTable({
+    columns,
+    body: data,
+    didDrawCell: (data) => {
+      if (data.column.dataKey === 'image') {
+        const imgX = data.cell.x + 5;
+        const imgY = data.cell.y + 2;
+        const imgWidth = 30;
+        const imgHeight = 30;
 
-  // Add coupon details if available
-  if (order.coupon) {
-    doc.text(`Coupon Code: ${order.coupon.code}`, marginX, currentY);
-    currentY += 7;
-    doc.text(`Discount Amount: ${order.coupon.discount}`, marginX, currentY);
-    currentY += 10;
-  }
+        if (data.cell.raw) {
+          doc.addImage(data.cell.raw, 'JPEG', imgX, imgY, imgWidth, imgHeight);
+        }
+      }
+    },
+  });
+
+  // Add additional details
+  doc.text(`Total Price: ${order.totalPrice}`, 10, doc.lastAutoTable.finalY + 10);
 
   // Save the PDF
   doc.save(`Invoice_${order._id}.pdf`);
 };
+
+
+
+
+
+// const generatePDF = (order) => {
+//   const doc = new jsPDF();
+  
+//   // Set margin and spacing variables
+//   const marginX = 10;
+//   let currentY = 10; // Tracks Y position on the PDF for dynamic content placement
+  
+//   // Add title
+//   doc.setFontSize(16);
+//   doc.text(`Invoice for Order ID: ${order._id}`, marginX, currentY);
+//   currentY += 10;
+
+//   // Add user details
+//   doc.setFontSize(12);
+//   doc.text(`User Email: ${order.user.email}`, marginX, currentY);
+//   currentY += 10;
+  
+//   // Add shipping address
+//   doc.text(`Shipping Address:`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`${order.shippingAddress.fullName}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`${order.shippingAddress.address}, ${order.shippingAddress.address2}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`${order.shippingAddress.city}, ${order.shippingAddress.state}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`${order.shippingAddress.country}, ${order.shippingAddress.pinCode}`, marginX, currentY);
+//   currentY += 10;
+
+//   // Define columns and data for the table
+//   const columns = [
+//     { header: 'Product', dataKey: 'productName' },
+//     { header: 'Quantity', dataKey: 'quantity' },
+//     { header: 'Price', dataKey: 'price' },
+//     { header: 'Product Image', dataKey: 'productImage' }, // Image column
+//   ];
+  
+//   // const data = order.orderItems.map((item) => ({
+//   //   productName: item.product.name,
+//   //   quantity: item.quantity,
+//   //   price: item.product.price,
+//   //   productImage: item.product.media.length > 0 ? item.product.media[0] : '', // Ensure image URL or empty string
+//   // }));
+
+//   const data = order.orderItems.map((item) => ({
+//     productName: item.product?.name || 'N/A', // Fallback to 'N/A' if product or name is unavailable
+//     quantity: item.quantity,
+//     price: item.product?.price || 'N/A', // Fallback for price
+//     productImage: item.product?.media?.[0] || '', // Ensure fallback for image URL
+//   }));
+  
+
+//   // Add product table
+//   doc.autoTable({
+//     head: [columns],
+//     body: data.map(row => [
+//       row.productName,
+//       row.quantity,
+//       row.price,
+//       row.productImage ? { content: '', styles: { cellWidth: 30, minCellHeight: 30 } } : '' // Handle image cell or empty
+//     ]),
+//     startY: currentY,
+//     theme: 'grid',
+//     styles: { fontSize: 10, cellPadding: 3 },
+//     columnStyles: {
+//       0: { cellWidth: 60 }, // Product name
+//       1: { cellWidth: 30 }, // Quantity
+//       2: { cellWidth: 30 }, // Price
+//       3: { cellWidth: 40 }  // Image placeholder
+//     },
+//     didDrawCell: (data) => {
+//       if (data.column.dataKey === 3 && data.cell.section === 'body') {
+//         const imgUrl = data.row.raw[3];
+//         if (imgUrl) {
+//           const img = new Image();
+//           img.src = imgUrl;
+//           img.onload = () => {
+//             doc.addImage(img, 'JPEG', data.cell.x + 2, data.cell.y + 2, 30, 30);
+//           };
+//         }
+//       }
+//     }
+//   });
+
+//   // Update Y position after table
+//   currentY = doc.lastAutoTable.finalY + 10;
+
+//   // Add additional order details
+//   doc.text(`Total Price: ${order.totalPrice}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`Order Status: ${order.orderStatus}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`Payment Method: ${order.paymentMethod}`, marginX, currentY);
+//   currentY += 10;
+
+//   // Add coupon details if available
+//   if (order.coupon) {
+//     doc.text(`Coupon Code: ${order.coupon.code}`, marginX, currentY);
+//     currentY += 7;
+//     doc.text(`Discount Amount: ${order.coupon.discount}`, marginX, currentY);
+//     currentY += 10;
+//   }
+
+//   // Save the PDF
+//   doc.save(`Invoice_${order._id}.pdf`);
+// };
 
 
   useEffect(() => {
@@ -746,8 +746,8 @@ const generatePDF = (order) => {
                       src={order.orderItems[0].product.media[0]} // Access the first image from the media array
                         alt="Product Image"
                         className={styles.productImage}
-               width={500}
-               height={500}
+               width={900}
+               height={900}
              />
            
                     ) : (
