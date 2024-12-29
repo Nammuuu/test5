@@ -1469,7 +1469,7 @@ height={500}
       />
 
  
-
+{isLoading && <div className="loader"><Loader /></div>}
 
     </div>
 );

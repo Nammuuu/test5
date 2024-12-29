@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { FaTimes, FaUndo } from 'react-icons/fa';
 import Navbar from '../../../../components/Nav';
 // import Navbar from '../../components/Sidebar';
-
+import Loader from "../../../components/Loader";
 
 const ProductPage = ({ params }) => {
   const [product, setProduct] = useState({
@@ -33,7 +33,8 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
 
   const [selectedImage, setSelectedImage] = useState(''); 
   const [categories, setCategories] = useState([]);
-
+  const [loading, setLoading] = useState(false);
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -42,7 +43,9 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
     }
 
     const fetchProduct = async () => {
+      setLoading(true);
       try { 
+       
         const response = await axios.get(`/api/admin/product/create/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -59,34 +62,71 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
         setError('Failed to fetch product.');
         toast.error('Failed to fetch product.');
       }
+      setLoading(false);
     };
 
     fetchProduct();
   }, [id, router]);
 
 
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   const fetchCategories = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const categoriesResponse = await axios.get('/api/admin/product/category', {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       });
+  //       setCategories(categoriesResponse.data.categories);
+  //     } catch (error) {
+  //       console.error('Error fetching categories:', error);
+  //       toast.error('Failed to fetch categories.');
+  //     }
+  //     setLoading(false);
+  //   };
+  //   fetchCategories();
+  // }, []);
+
+  
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const fetchCategories = async () => {
+      setLoading(true);
       try {
-        const categoriesResponse = await axios.get('/api/admin/product/category', {
+        const categoriesResponse = await axios.get("/api/admin/product/category", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCategories(categoriesResponse.data.categories);
+        // Set the first category as the default if none is selected
+        if (!product.category && categoriesResponse.data.categories.length > 0) {
+          setProduct((prevProduct) => ({
+            ...prevProduct,
+            category: categoriesResponse.data.categories[0].name,
+          }));
+        }
       } catch (error) {
-        console.error('Error fetching categories:', error);
-        toast.error('Failed to fetch categories.');
+        console.error("Error fetching categories:", error);
+        toast.error("Failed to fetch categories.");
       }
+      setLoading(false);
     };
     fetchCategories();
   }, []);
 
-  
+
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setProduct({ ...product, [name]: value });
+  // };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+    }));
   };
+
 
   const handleTagsChange = (e) => {
     setProduct({ ...product, tags: e.target.value.split(',').map(tag => tag.trim()) });
@@ -130,7 +170,7 @@ const handleRemoveMedia = (url) => {
       router.push('/login');
       return;
     }
-
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append('name', product.name);
@@ -141,6 +181,7 @@ const handleRemoveMedia = (url) => {
       formData.append('tags', product.tags.join(','));
       formData.append('sizes', product.sizes.join(','));
       formData.append('colors', product.colors.join(','));
+      formData.append('displayOptions', product.displayOptions);
 
            // Append media to remove
       mediaToRemove.forEach((url) => {
@@ -167,6 +208,7 @@ const handleRemoveMedia = (url) => {
       setError('Failed to update product.');
       toast.error('Failed to update product.');
     }
+    setLoading(false);
   };
 
   const handleDeleteProduct = async () => {
@@ -176,6 +218,8 @@ const handleRemoveMedia = (url) => {
       return;
     }
     
+    setLoading(true);
+
     try {
       await axios.delete(`/api/admin/product/create/${id}`, {
         headers: {
@@ -189,6 +233,7 @@ const handleRemoveMedia = (url) => {
       setError('Failed to delete product.');
       toast.error('Failed to delete product.');
     }
+    setLoading(false);
   };
 
 
@@ -198,7 +243,7 @@ const handleRemoveMedia = (url) => {
   
   return (
     <div className={styles.container}>
-
+ {loading && <Loader />}
 <Navbar />
       <h1>Product Details</h1>
       {error && <p className={styles.error}>{error}</p>}
@@ -247,7 +292,7 @@ const handleRemoveMedia = (url) => {
           <div  className={styles.formGroupContainer}>
           <div className={styles.formGroup}>
           <label>Category:</label>
-          <select
+          {/* <select
           className={styles.selectCat}
             name="category"
             value={product.category}
@@ -259,7 +304,43 @@ const handleRemoveMedia = (url) => {
                 {category.name}
               </option>
             ))}
-          </select>
+          </select> */}
+
+<select
+        className="selectCat"
+        name="category"
+        value={product.category} // Bind to the product state
+        onChange={handleInputChange}
+        disabled={loading || categories.length === 0} // Disable while loading
+      >
+        <option value="">Select a category</option>
+        {categories.map((category) => (
+          <option key={category._id} value={category.name}>
+            {category.name}
+          </option>
+        ))}
+      </select>
+
+      <div className={styles.formGroup}>
+      <label> Display Options:</label>
+      <select
+        className="selectCat"
+  name="displayOptions"
+  value={product.displayOptions}
+  onChange={(e) =>
+    setProduct({ ...product, displayOptions: e.target.value })
+  }
+>
+  <option value="recommended">Recommended</option>
+  <option value="allproducts">All Products</option>
+  <option value="latest">Latest</option>
+  <option value="future">Future</option>
+  <option value="toprating">Top Rating</option>
+</select>
+</div>
+
+
+
 
           </div>
 
@@ -368,7 +449,7 @@ const handleRemoveMedia = (url) => {
       )}
 
 
-
+{isLoading && <div className="loader"><Loader /></div>}
 
     </div>
   );

@@ -84,7 +84,10 @@ export async function PUT(req, { params }) {
     const colors = formData.get('colors') ? formData.get('colors').split(',') : [];
     const mediaToRemove = formData.getAll('mediaToRemove'); // URLs of media to remove
     const displayOptions = formData.get('displayOptions');
+    
+    
 
+    
     // Update fields if present
     if (name) product.name = name;
     if (description) product.description = description;
