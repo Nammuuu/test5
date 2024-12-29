@@ -35,7 +35,7 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -308,7 +308,7 @@ const handleRemoveMedia = (url) => {
           </select> */}
 
 <select
-        className="selectCat"
+       className={styles.selectCat}
         name="category"
         value={product.category} // Bind to the product state
         onChange={handleInputChange}
@@ -325,7 +325,7 @@ const handleRemoveMedia = (url) => {
       <div className={styles.formGroup}>
       <label> Display Options:</label>
       <select
-        className="selectCat"
+       className={styles.selectCat}
   name="displayOptions"
   value={product.displayOptions}
   onChange={(e) =>
