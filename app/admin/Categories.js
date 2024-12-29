@@ -15,7 +15,12 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-import { FaStar, FaTrash, FaArrowLeft, FaTimes,  } from 'react-icons/fa';
+import { FaStar, FaTrash,
+   FaArrowLeft, FaTimes,
+    FaArrowRight
+    } from 'react-icons/fa';
+
+import ReactPaginate from 'react-paginate';
 
 const Categories = ( { params }) => {
   const [newCategory, setNewCategory] = useState("");
@@ -252,6 +257,9 @@ const Categories = ( { params }) => {
           </div>
         </>
       )}
+
+
+      
     </div>
   );
 };
