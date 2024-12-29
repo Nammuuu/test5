@@ -59,29 +59,70 @@ canceledOrders: 0,
 
   const [adminName, setAdminName] = useState("Admin");
 
+  // useEffect(() => {
+  //   const fetchDashboardData = async () => {
+  //     try {
+  //       const token = localStorage.getItem('token');
+  //       if (!token) {
+  //         console.error("No token found in localStorage");
+  //         setLoading(false);
+  //         return;
+  //       }
+  //       const response = await axios.get(`/api/admin/dashboard/dashboardData/orderdata`, {
+  //         headers: { Authorization: `Bearer ${token}` }, 
+  //       });
+  //       const data = response.data;
+  //       // Map backend response to frontend structure
+  //       const mappedOrderData = {
+  //         totalOrders: data.totalOrders || 0,
+
+  //         confirmedOrders: data.confirmedOrders || 0,
+  //         pendingOrders: data.pending || 0,
+  //         Processing: data.processing || 0,        
+  //         deliveredOrders: data.deliveredOrders || 0,
+  //         canceledOrders: data.canceledOrders || 0,
+  //         returned: data.canceledOrders || 0,
+  //         returnedOrders: data.canceledOrders || 0,
+  //         orders: data.orders || { data: [], totalPages: 1, currentPage: 1 },
+  //       };
+  
+  //       setOrderData(mappedOrderData);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching dashboard data:", error);
+  //       setLoading(false);
+  //     }
+  //   };
+  
+  //   fetchDashboardData();
+  // }, []);
+  
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         if (!token) {
           console.error("No token found in localStorage");
           setLoading(false);
           return;
         }
+  
         const response = await axios.get(`/api/admin/dashboard/dashboardData/orderdata`, {
-          headers: { Authorization: `Bearer ${token}` }, 
+          headers: { Authorization: `Bearer ${token}` },
         });
+  
         const data = response.data;
+  
         // Map backend response to frontend structure
         const mappedOrderData = {
           totalOrders: data.totalOrders || 0,
-          confirmedOrders: data.confirmedOrders || 0,
-          pendingOrders: data.pendingOrders || 0,
-          Processing: data.Processing || 0,        
-          deliveredOrders: data.deliveredOrders || 0,
-          canceledOrders: data.canceledOrders || 0,
-          returned: data.canceledOrders || 0,
-          returnedOrders: data.canceledOrders || 0,
+          pendingOrders: data.pending || 0,
+          confirmedOrders: data.shipped || 0,
+          Processing: data.processing || 0,
+          deliveredOrders: data.delivered || 0,
+          canceledOrders: data.canceled || 0,
+          returnedOrders: data.canceled || 0, // Ensure this field exists in backend
           orders: data.orders || { data: [], totalPages: 1, currentPage: 1 },
         };
   
