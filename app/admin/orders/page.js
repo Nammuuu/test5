@@ -661,13 +661,23 @@ const generatePDF = (order) => {
     { header: 'Price', dataKey: 'price' },
   ];
 
+  // const data = order.orderItems.map((item) => ({
+  //   productName: item.product?.name || 'N/A', // Fallback to 'N/A' if product or name is unavailable
+  //   quantity: item.quantity,
+  //   size: item.size || 'N/A', // Fallback for size
+  //   color: item.color || 'N/A', // Fallback for color
+  //   price: item.product?.price || 'N/A', // Fallback for price
+  // }));
+
   const data = order.orderItems.map((item) => ({
-    productName: item.product?.name || 'N/A', // Fallback to 'N/A' if product or name is unavailable
-    quantity: item.quantity,
-    size: item.size || 'N/A', // Fallback for size
-    color: item.color || 'N/A', // Fallback for color
-    price: item.product?.price || 'N/A', // Fallback for price
+    productName: item.product?.name || 'N/A',
+    quantity: item.quantity || 0,
+    price: item.product?.price || 'N/A',
+    size: item.size || 'N/A',
+    color: item.color || 'N/A',
   }));
+
+  
 
   // Add product table
   doc.autoTable({
