@@ -246,13 +246,19 @@ export async function GET(req) {
 
     const dashboardData = {
       totalOrders,
-      pendingOrders: statusCounts['Pending'] || 0,
-      confirmedOrders: statusCounts['Confirmed'] || 0,
-      ongoingOrders: statusCounts['Ongoing'] || 0,
-      deliveredOrders: statusCounts['Delivered'] || 0,
-      canceledOrders: statusCounts['Canceled'] || 0,
-      returnedOrders: statusCounts['Returned'] || 0,
-      rejectedOrders: statusCounts['Rejected'] || 0,
+      // pendingOrders: statusCounts['Pending'] || 0,
+      // confirmedOrders: statusCounts['Confirmed'] || 0,
+      // ongoingOrders: statusCounts['Ongoing'] || 0,
+      // deliveredOrders: statusCounts['Delivered'] || 0,
+      // canceledOrders: statusCounts['Canceled'] || 0,
+      // returnedOrders: statusCounts['Returned'] || 0,
+      // rejectedOrders: statusCounts['Rejected'] || 0,
+
+      processing: statusCounts["Processing"] || 0,
+      pending: statusCounts["Pending"] || 0,
+      shipped: statusCounts["Shipped"] || 0,
+      delivered: statusCounts["Delivered"] || 0,
+      canceled: statusCounts["Cancelled"] || 0,
     };
 
     return NextResponse.json(dashboardData, { status: 200 });

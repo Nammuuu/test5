@@ -50,7 +50,7 @@ const AdminDashboard = () => {
     pendingOrders: 0,
     confirmedOrders: 0,
     deliveredOrders: 0,
-    // canceled: 0,
+    returnedOrders: 0,
     returned: 0,
 canceledOrders: 0,
     Processing: 0,
@@ -58,54 +58,6 @@ canceledOrders: 0,
   });
 
   const [adminName, setAdminName] = useState("Admin");
-  // const [filter, setFilter] = useState("All");
-
-  // useEffect(() => {
-  //   const fetchDashboardData = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       if (!token) {
-  //         console.error("No token found in localStorage");
-  //         setLoading(false);
-  //         return;
-  //       }
-  
-  //       const response = await axios.get(`/api/admin/dashboard/dashboardData/orderdata`, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-  
-  //       const data = response.data;
-  
-  //       // Validate the structure of the backend response
-  //       if (!data || typeof data !== "object") {
-  //         console.error("Invalid response structure:", data);
-  //         setLoading(false);
-  //         return;
-  //       }
-  
-  //       // Default structure in case some fields are missing
-  //       const orderSummary = {
-  //         totalOrders: data.totalOrders || 0,
-  //         pending: data.pending || 0,
-  //         shipped: data.shipped || 0,
-  //         delivered: data.delivered || 0,
-  //         canceled: data.canceled || 0,
-  //         returned: data.returned || 0,
-  //         rejected: data.rejected || 0,
-  //         orders: data.orders || { data: [], totalPages: 1, currentPage: 1 },
-  //       };
-  
-  //       // Update the state with validated data
-  //       setOrderData(orderSummary);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.error("Error fetching dashboard data:", error);
-  //       setLoading(false);
-  //     }
-  //   };
-  
-  //   fetchDashboardData();
-  // }, []);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -116,23 +68,20 @@ canceledOrders: 0,
           setLoading(false);
           return;
         }
-  
         const response = await axios.get(`/api/admin/dashboard/dashboardData/orderdata`, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${token}` }, 
         });
-  
         const data = response.data;
-  
         // Map backend response to frontend structure
         const mappedOrderData = {
           totalOrders: data.totalOrders || 0,
-          pendingOrders: data.pendingOrders || 0,
           confirmedOrders: data.confirmedOrders || 0,
+          pendingOrders: data.pendingOrders || 0,
           Processing: data.Processing || 0,        
           deliveredOrders: data.deliveredOrders || 0,
           canceledOrders: data.canceledOrders || 0,
           returned: data.canceledOrders || 0,
-          canceledOrders: data.canceledOrders || 0,
+          returnedOrders: data.canceledOrders || 0,
           orders: data.orders || { data: [], totalPages: 1, currentPage: 1 },
         };
   
