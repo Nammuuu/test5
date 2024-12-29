@@ -26,7 +26,7 @@ const DashboardOverview = ({
   totalUsers, 
   // totalViewsCount, 
   totalSalesCount, // Accept totalSalesCount
-  stockAlerts, // Accept stockAlerts
+   // Accept stockAlerts
   adminName,
 
   stockAlerts, handleDetailsClick 
