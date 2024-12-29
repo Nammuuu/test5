@@ -224,9 +224,10 @@ const DashboardOverview = ({
   totalSalesCount,
   stockAlerts,
   adminName,
-  handleDetailsClick,
+  handleDetailsClick: propHandleDetailsClick, // Rename to avoid conflict
 }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
@@ -246,10 +247,11 @@ const DashboardOverview = ({
     { title: "Total Customers", value: totalUsers, icon: <FaUsers />, color: "#7d11e9" },
   ];
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const handleDetailsClick = (product) => {
+  const handleLocalDetailsClick = (product) => {
     setSelectedProduct(product);
+    if (propHandleDetailsClick) {
+      propHandleDetailsClick(product); // Call the prop function if provided
+    }
   };
 
   const handleClosePopup = () => {
@@ -308,7 +310,7 @@ const DashboardOverview = ({
                     <p className={styles.cardValue}>{product.alertType}</p>
                     <button
                       className={styles.detailsButton}
-                      onClick={() => handleDetailsClick(product)}
+                      onClick={() => handleLocalDetailsClick(product)}
                     >
                       Details
                     </button>
