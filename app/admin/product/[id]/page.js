@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { FaTimes, FaUndo } from 'react-icons/fa';
 import Navbar from '../../../../components/Nav';
 // import Navbar from '../../components/Sidebar';
-import Loader from "../../../components/Loader";
+import Loader from "../../../../components/Loader";
 
 const ProductPage = ({ params }) => {
   const [product, setProduct] = useState({
