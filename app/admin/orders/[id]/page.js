@@ -152,7 +152,9 @@ import 'jspdf-autotable';
 import { FaStar, FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from "next/image";
-import  Sidebar from "../../components/Sidebar"
+// import  Sidebar from "../../components/Sidebar"
+
+import  Navbar from "../../../../components/Nav"
 
 const AdminOrderPage = ({ params }) => {
   const [order, setOrder] = useState(null);
@@ -318,16 +320,28 @@ const generatePDF = (order) => {
   const columns = [
     { header: 'Product', dataKey: 'productName' },
     { header: 'Quantity', dataKey: 'quantity' },
+    { header: 'Size', dataKey: 'size' },
+    { header: 'Color', dataKey: 'color' },
     { header: 'Price', dataKey: 'price' },
-    { header: 'Product Image', dataKey: 'productImage' }, // Image column
   ];
-  
+
+  // const data = order.orderItems.map((item) => ({
+  //   productName: item.product?.name || 'N/A', // Fallback to 'N/A' if product or name is unavailable
+  //   quantity: item.quantity,
+  //   size: item.size || 'N/A', // Fallback for size
+  //   color: item.color || 'N/A', // Fallback for color
+  //   price: item.product?.price || 'N/A', // Fallback for price
+  // }));
+
   const data = order.orderItems.map((item) => ({
-    productName: item.product.name,
-    quantity: item.quantity,
-    price: item.product.price,
-    productImage: item.product.media.length > 0 ? item.product.media[0] : '', // Ensure image URL or empty string
+    productName: item.product?.name || 'N/A',
+    quantity: item.quantity || 0,
+    price: item.product?.price || 'N/A',
+    size: item.size || 'N/A',
+    color: item.color || 'N/A',
   }));
+
+  
 
   // Add product table
   doc.autoTable({
@@ -335,8 +349,9 @@ const generatePDF = (order) => {
     body: data.map(row => [
       row.productName,
       row.quantity,
-      row.price,
-      row.productImage ? { content: '', styles: { cellWidth: 30, minCellHeight: 30 } } : '' // Handle image cell or empty
+      row.size,
+      row.color,
+      row.price
     ]),
     startY: currentY,
     theme: 'grid',
@@ -344,20 +359,9 @@ const generatePDF = (order) => {
     columnStyles: {
       0: { cellWidth: 60 }, // Product name
       1: { cellWidth: 30 }, // Quantity
-      2: { cellWidth: 30 }, // Price
-      3: { cellWidth: 40 }  // Image placeholder
-    },
-    didDrawCell: (data) => {
-      if (data.column.dataKey === 3 && data.cell.section === 'body') {
-        const imgUrl = data.row.raw[3];
-        if (imgUrl) {
-          const img = new Image();
-          img.src = imgUrl;
-          img.onload = () => {
-            doc.addImage(img, 'JPEG', data.cell.x + 2, data.cell.y + 2, 30, 30);
-          };
-        }
-      }
+      2: { cellWidth: 30 }, // Size
+      3: { cellWidth: 30 }, // Color
+      4: { cellWidth: 40 }  // Price
     }
   });
 
@@ -390,8 +394,9 @@ const navigateToHome = () => {
 };
 
   return (
+ <> <Navbar />
     <div className={styles.orderContainermain}>
-      <Sidebar />
+     
      <div className={styles.ShippingInformation}> 
     <button onClick={navigateToHome} className={styles.arrowButton} >  <FaArrowLeft /></button>
     <div className={styles.ShippingInformationh1}>
@@ -617,6 +622,8 @@ const navigateToHome = () => {
 
 </div>
     </div>
+
+    </>  
   );
 };
 
