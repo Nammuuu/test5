@@ -262,7 +262,8 @@ button enble disable responsive fix all pages
 
 --start admin  
 admin dashbord  --done
-product
+product add loader + link loader 
+--product details --start
 orders
 categories --done
 edit home --done

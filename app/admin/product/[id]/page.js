@@ -9,6 +9,9 @@ import styles from '../../../../styles/admin/product/productdetails.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaTimes, FaUndo } from 'react-icons/fa';
+// import Navbar from '../../../../components/Nav';
+import Navbar from '../../components/Sidebar';
+
 
 const ProductPage = ({ params }) => {
   const [product, setProduct] = useState({
@@ -195,6 +198,8 @@ const handleRemoveMedia = (url) => {
   
   return (
     <div className={styles.container}>
+
+<Navbar />
       <h1>Product Details</h1>
       {error && <p className={styles.error}>{error}</p>}
       {product ? (
@@ -350,15 +355,21 @@ const handleRemoveMedia = (url) => {
 
 
 
-
-        <button onClick={handleUpdateProduct}>Update Product</button>
-          <button onClick={handleDeleteProduct}>Delete Product</button>
+          <div className={styles.actionbutton}>
+       <button onClick={handleUpdateProduct}>Update Product</button>
+       <button onClick={handleDeleteProduct}>Delete Product</button>
+       </div>
+       
         </div>
 
-      
+     
       ) : (
         <p>Loading product details...</p>
       )}
+
+
+
+
     </div>
   );
 };

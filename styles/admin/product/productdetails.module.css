@@ -16,7 +16,7 @@
 
   .inputcontainer {
     display: grid;
-  grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   }
   
@@ -45,14 +45,17 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-   
+    font-family: __Inter_d65c78, __Inter_Fallback_d65c78;
+    font-style: normal;
+    text-transform: capitalize;
   }
   
   .container  textarea {
     resize: vertical;
+    height: 150px;
   }
   
-  .container  button {
+  .actionbutton  button {
     padding: 10px 15px;
     font-size: 1rem;
     border: none;
@@ -63,7 +66,7 @@
     margin-right: 10px;
   }
   
-  .container   button:hover {
+  .actionbutton   button:hover {
     background-color: #e1350c;
   }
   
@@ -78,7 +81,7 @@
       flex-direction: column;
     }
   
-    .container   button {
+    .actionbutton   button {
       width: 100%;
       margin-top: 10px;
     }
@@ -109,6 +112,7 @@
   flex-direction: column;
   align-items: center;
   margin: 20px 0;
+  width: 300px;
 }
 
 /* Main image */
@@ -225,6 +229,27 @@
     padding: 12px 24px;
     font-size: 16px;
   }
+}
+
+@media (max-width: 768px) {
+  .inputcontainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .formGroupContainer {
+    display: block;
+  }
+  .mainImageContainer {
+    display: grid;
+    width: 300px;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0;
+    gap: 20px;
+  }
+  .imageGallery {
+    margin-top: 0;
+  }
+
+
 }
 
 
