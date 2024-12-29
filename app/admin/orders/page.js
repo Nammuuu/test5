@@ -622,12 +622,20 @@ const generatePDF = (order) => {
     { header: 'Product Image', dataKey: 'productImage' }, // Image column
   ];
   
+  // const data = order.orderItems.map((item) => ({
+  //   productName: item.product.name,
+  //   quantity: item.quantity,
+  //   price: item.product.price,
+  //   productImage: item.product.media.length > 0 ? item.product.media[0] : '', // Ensure image URL or empty string
+  // }));
+
   const data = order.orderItems.map((item) => ({
-    productName: item.product.name,
+    productName: item.product?.name || 'N/A', // Fallback to 'N/A' if product or name is unavailable
     quantity: item.quantity,
-    price: item.product.price,
-    productImage: item.product.media.length > 0 ? item.product.media[0] : '', // Ensure image URL or empty string
+    price: item.product?.price || 'N/A', // Fallback for price
+    productImage: item.product?.media?.[0] || '', // Ensure fallback for image URL
   }));
+  
 
   // Add product table
   doc.autoTable({
