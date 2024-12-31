@@ -34,7 +34,7 @@ export default function SettingsPage() {
     twitter: "",
     youtube: "",
   });
-
+ 
 
   const [errors, setErrors] = useState({
     stripeError: false,

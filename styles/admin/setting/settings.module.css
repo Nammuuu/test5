@@ -101,7 +101,7 @@
   transition: left 0.4s ease-in-out, width 0.4s ease-in-out;
   position: absolute;
   right: 0;
-  width: calc(100% - 950px); 
+  width: 100% ; 
  
   display: none;
 }
@@ -278,7 +278,7 @@ display: none;
 }
 .contantContaiiner {
   display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     position: relative;
     width: 100%;
     gap: 20px;
@@ -328,16 +328,29 @@ display: none;
 @media (max-width: 576px) {
  
   .container {
-    margin-top: 60px; 
+    margin-top: 0px; 
   }
   .contantContaiinerContain {
     padding: 0px;
+  }
+  .settingContainer {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  .settingRow {
+    width: 100%;
+    border-bottom: 2px solid #eee8e8;
+    padding: 10px 0;
+    margin-bottom: 0px;
   }
 
   .layout { 
     display: flex;
     width: 100%;
-    padding: 5%;
+    padding: 0%;
   }
   .toggleButton2  {
  
@@ -389,16 +402,20 @@ display: none;
     display: flex;
     justify-content: center;
     align-items: center;
-  
-    position: fixed;
+    position: relative;
     bottom: 0;
   }
   .mainContent {
-    width: calc(100% - 40%);
+    /* width: calc(100% - 40%);
     top: 10%;
-    left: 15%;
+    left: 15%; */
+    z-index: 999;
+    width: 80%;
+        left: 0;
+        top: 0;
+
     overflow: scroll;
-    height: 600px;
+    /* height: 600px; */
     margin: 0;
     position: fixed; 
     overflow-wrap: break-word;
