@@ -262,22 +262,20 @@ button enble disable responsive fix all pages
 
 --start admin  
 admin dashbord  --done
-product add loader + link loader 
---product details --start
-orders
+product --done
+--product details --done
+orders --done
 categories --done
+
+pagition + loader --add
 edit home --done
 reviews  --done
 blog  --done
 notifications --done
 page setting --done 
 users --done 
-
 chat  --delte --not word
-page pagetiontion add
-footer --test
---order id
-setting --start
+setting --start design 
 
 add api --done
  --about page --done 

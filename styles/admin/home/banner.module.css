@@ -210,6 +210,9 @@
 /* Responsive styles */
 @media (max-width: 768px) {
  
+  .bannerItem {
+    width: 100%;
+  }
   .gridItemContainer {
     flex-direction: column;
   }

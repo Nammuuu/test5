@@ -342,11 +342,22 @@
     background-color: #005bb5;
   }
   
+  .cardTitlestock {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 10px 0;
+  }
 
   @media (max-width: 768px) {
    
    .dashboardContainer {
     padding: 0px;
+   }
+
+   .stockAlert {
+    
+    padding: 10px 0;
    }
 
     .stockAlertsContainer {

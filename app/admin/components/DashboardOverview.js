@@ -287,7 +287,7 @@ const DashboardOverview = ({
           {stat.icon}
         </div>
         <div className={styles.cardContent}>
-          <h3 className={styles.cardTitle}>{stat.title}</h3>
+          <h3 className={styles.cardTitlestock}>{stat.title}</h3>
           <p className={styles.cardValue}>{stat.value}</p>
           {/* <p className={styles.cardDescription}>{stat.description}</p> */}
         </div>

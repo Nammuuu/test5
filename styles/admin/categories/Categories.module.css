@@ -260,7 +260,7 @@
       grid-template-columns: repeat(2, auto);
       justify-content: flex-start;
       align-items: self-start;
-      padding: 0 20px;
+      padding: 10px 10px;
     }
     .categoryCardButton {
       justify-content: center;
@@ -289,6 +289,8 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin-top: 0px;
+    padding: 10px;
+    gap: 10px;
 }
 
   }
