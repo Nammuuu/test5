@@ -15,7 +15,7 @@ export default function Home() {
    <> 
 
     <Mainhomepage  />
-    {/* <Chat /> */}
+    <Chat />
     </>
   );
 }

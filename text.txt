@@ -268,7 +268,6 @@ orders --done
 categories --done
 
 pagition + loader --add
-
 edit home --done
 reviews  --done
 blog  --done
@@ -276,7 +275,7 @@ blog details --done
 notifications --done
 page setting --done 
 users --done 
-
+chat user + admin lodaer ---done
 chat  --fix --admin delete admin chat to delete all chat ok 
 setting --done
 
@@ -289,10 +288,10 @@ add api --done
  --Shipping --done
  --TermsConditions --done 
  --ContactUs --done 
-
+live chat add --start
 
 variyant name 
-live chat add  
+ 
 all done last check and update 
 add foveicons
 final test 

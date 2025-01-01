@@ -6,14 +6,24 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import { FaComments, FaPaperPlane } from 'react-icons/fa'; // Importing icons
 import styles from './userchat.module.css';
+import Loader from "../../../components/Loader";
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const Chat = () => {
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState('');
   const [userId, setUserId] = useState('');
-  const [isChatOpen, setIsChatOpen] = useState(false); // State to toggle chat window
-
+  const [isChatOpen, setIsChatOpen] = useState(false); 
+  const [loading, setLoading] = useState(false);
+  
+ 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+ 
   useEffect(() => {
     let storedUserId = localStorage.getItem('userId');
     if (!storedUserId) {
@@ -22,7 +32,8 @@ const Chat = () => {
     }
     setUserId(storedUserId);
 
-    const socketIo = io('http://localhost:3000');
+    // const socketIo = io('http://localhost:3000');
+    const socketIo = io(baseUrl);
     setSocket(socketIo);
 
     socketIo.emit('joinRoom', { userId: storedUserId });
@@ -49,6 +60,7 @@ const Chat = () => {
   const sendMessage = async () => {
     if (message.trim()) {
       try {
+        setLoading(true);
         const msgObj = {
           sender: userId,
           receiver: 'admin',
@@ -59,13 +71,25 @@ const Chat = () => {
         socket.emit('userMessage', msgObj);
         setMessage('');
       } catch (error) {
+        toast.error('Error sending message:', error)
         console.error('Error sending message:', error);
       }
+      finally {
+        setLoading(false);
+      }
     }
+
+    
   };
+
+  if (loading) {
+    return <Loader />; 
+  }
 
   return (
     <div>
+      {loading && <Loader />}
+
       {!isChatOpen && (
         <button className={styles.chatButton} onClick={() => setIsChatOpen(true)}>
           <FaComments className={styles.chatIcon} />

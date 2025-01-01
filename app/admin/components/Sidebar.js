@@ -588,7 +588,7 @@ useEffect(() => {
                 <Link href={`/user/dashboard/${userId}`} onClick={() => handleLinkClick(`/user/dashboard/${userId}`)}><div className={`${styles.loginLink} ${styles.userActive}`}>
                   <div className={styles.userContainer}>
 
-                  <TbUser className={`${styles.icon} ${styles.userActive}`} />
+                  <TbUserHeart className={`${styles.icon} ${styles.userActive}`} />
                     <span className={styles.activeDot}></span>
                   </div>
                 </div>
@@ -716,7 +716,7 @@ useEffect(() => {
             <div className={`${styles.loginLink} ${styles.userActive}`}>
               <div className={styles.userContainer}>
 
-                <TbUser className={`${styles.icon} ${styles.userActive}`} />
+                <TbUserHeart className={`${styles.icon} ${styles.userActive}`} />
 
              
                <span> Admin </span>

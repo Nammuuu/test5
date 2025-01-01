@@ -9,7 +9,10 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import styles from './adminchat.module.css'; 
 import { FaTrashAlt } from 'react-icons/fa';
+import Loader from "../../../../components/Loader";
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminChat = () => {
   const [messages, setMessages] = useState([]);
@@ -17,7 +20,7 @@ const AdminChat = () => {
   const [currentUserId, setCurrentUserId] = useState(''); // Current user being replied to
   const [socket, setSocket] = useState(null);
   const [activeUser, setActiveUser] = useState(''); // Track active user in sidebar
-
+  const [loading, setLoading] = useState(false);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
   
@@ -32,11 +35,16 @@ const AdminChat = () => {
     // Fetch all messages from server
     const fetchMessages = async () => {
       try {
+        setLoading(true);
         const response = await axios.get('/api/chat');
         setMessages(response.data);
         setCurrentUserId(response.data[0]?.sender); // Set the first user as default
       } catch (error) {
         console.error('Error fetching messages:', error);
+        toast.error('Error fetching messages: ', error);
+      }
+      finally {
+        setLoading(false);
       }
     };
     fetchMessages();
@@ -71,6 +79,7 @@ const AdminChat = () => {
   
         setResponse(''); // Clear input after sending
       } catch (error) {
+        toast.error('Error sending response:', error);
         console.error('Error sending response:', error);
       }
     }
@@ -125,10 +134,11 @@ const handleDeleteUserChats = async (userId) => {
   try {
     const token = localStorage.getItem("token"); // Assuming admin token
     if (!token) {
+      toast.error('Unauthorized: Please log in as admin.', error);
       alert("Unauthorized: Please log in as admin.");
       return;
     }
-
+    setLoading(true);
     // Call DELETE endpoint to remove chats
     const response = await axios.delete(`/api/chat/admin/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -148,19 +158,29 @@ const handleDeleteUserChats = async (userId) => {
         setActiveUser("");
       }
 
-      alert("User chats deleted successfully.");
+
+      toast.error("User chats deleted successfully.")
     } else {
       alert(response.data.message || "Failed to delete chats.");
     }
   } catch (error) {
     console.error("Error deleting user chats:", error);
-    alert("An error occurred while deleting chats.");
+    // alert("An error occurred while deleting chats.");
+     toast.error("An error occurred while deleting chats.")
+  }
+  finally {
+    setLoading(false);
   }
 };
+
+if (loading) {
+  return <Loader />; 
+}
 
 return (
   <div className={styles.chatWrapper}>
     {/* Sidebar */}
+    {loading && <Loader />}
     <div className={styles.sidebar}>
       <h2 className={styles.sidebarTitle}>Users</h2>
       {Object.keys(groupedMessages).length > 0 ? (
@@ -228,6 +248,8 @@ return (
         </button>
       </div>
     </div>
+
+  
   </div>
 );
 
