@@ -360,7 +360,7 @@ display: none;
         right: 0px;
         top: 0px;
         font-size: 2.15rem;
-        color: #333;
+        color: #f03e17;
   }
 
   .contantContaiiner {
@@ -376,7 +376,8 @@ display: none;
     height: 100%;
     z-index: 1000;
     /* transform: translateX(-100%); */
-    width: 80%;
+    width: 60%;
+    padding: 50px 20px;
   }
 
   .sidebar.open {
@@ -393,6 +394,7 @@ display: none;
   } */
   .section {
     grid-template-columns: repeat(1, 1fr);
+    gap: 0px;
   }
 
   .saveButton {
@@ -411,6 +413,7 @@ display: none;
     left: 15%; */
     z-index: 999;
     width: 80%;
+    height: 80%;
         left: 0;
         top: 0;
 
@@ -419,12 +422,22 @@ display: none;
     margin: 0;
     position: fixed; 
     overflow-wrap: break-word;
-    padding: 20px 40px;
-  }
+    scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.mainContent::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+
 
   .closeButton {
     top: 40px;
     right: 10px;
+  }
+  .mainContent {
+    margin: 8px 0;
   }
 
 }

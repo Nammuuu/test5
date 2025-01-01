@@ -277,7 +277,7 @@ notifications --done
 page setting --done 
 users --done 
 
-chat  --fix --admin chat admin not delete fix it ok 
+chat  --fix --admin delete admin chat to delete all chat ok 
 setting --start design 
 
 add api --done
