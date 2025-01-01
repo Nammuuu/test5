@@ -72,7 +72,7 @@ const ProductDetails = () => {
 
 
   const [currentPage, setCurrentPage] = useState(0);
-const itemsPerPage = 12;
+const itemsPerPage = 8;
   // product creating start 
 
   

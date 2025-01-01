@@ -330,6 +330,7 @@ import {
      TbMessages,
      TbPageBreak,
      TbSettings,
+     TbApps,
 
     } from "react-icons/tb";
 
@@ -405,7 +406,7 @@ const Navbar = ({ isOpen, toggleSidebar, setCurrentSection }) => {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const navItems = [
     { label: "Dashboard", icon: <TbDashboard />, section: "Dashboard" },
-    { label: "Products", icon: <FaBoxOpen />, section: "Products" },
+    { label: "Products", icon: <TbApps />, section: "Products" },
     { label: "Orders", icon: <TbShoppingBagCheck />, section: "Orders" },
     { label: "Categories", icon: <TbCategory />, section: "Categories" },
     { label: "Users", icon: <TbUserHeart />, section: "Users" },
