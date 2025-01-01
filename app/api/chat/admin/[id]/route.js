@@ -31,13 +31,7 @@ export async function DELETE(req, { params }) {
     }
 
     const token = authHeader.split(" ")[1];
-    let decodedToken;
-
-    try {
-      decodedToken = jwt.verify(token, JWT_SECRET);
-    } catch (error) {
-      return NextResponse.json({ message: "Invalid token" }, { status: 401 });
-    }
+    const decodedToken = jwt.verify(token, JWT_SECRET);
 
     const user = await User.findById(decodedToken.userId);
     if (!user || user.role !== "admin") {
@@ -47,7 +41,7 @@ export async function DELETE(req, { params }) {
       );
     }
 
-    const userId = params.userId || new URL(req.url).searchParams.get("userId");
+    const userId = params.userId || new URL(req.url).pathname.split('/').pop();
     if (!userId) {
       return NextResponse.json(
         { message: "Invalid user ID" },
@@ -55,7 +49,6 @@ export async function DELETE(req, { params }) {
       );
     }
 
-    // Delete all messages where sender or receiver matches userId
     const result = await Chat.deleteMany({
       $or: [{ sender: userId }, { receiver: userId }],
     });
@@ -76,6 +69,7 @@ export async function DELETE(req, { params }) {
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
+
 
 
 // export async function DELETE(req, { params }) {
