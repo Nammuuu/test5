@@ -278,7 +278,7 @@ page setting --done
 users --done 
 
 chat  --fix --admin delete admin chat to delete all chat ok 
-setting --start design 
+setting --done
 
 add api --done
  --about page --done 

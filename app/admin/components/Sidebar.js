@@ -307,22 +307,31 @@
 
 "use client";
 
-
-"use client";
-
 import Link from 'next/link';
 import {  useCallback, useEffect, useState, useRef } from 'react';
-
 import axios from "axios";
-
 import { useRouter, usePathname  } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 
-import { TbCategory,
+import { 
    TbX, TbHeart, 
    TbShoppingBag,
     TbHome, TbSearch,
-     TbUser } from "react-icons/tb";
+     TbUser,
+    
+     TbDashboard,
+     TbShoppingBagCheck,
+     TbCategory,
+     TbUserHeart,
+     TbPencilCheck,
+     TbBellCode,
+     TbClipboardCheck,
+     TbEdit,
+     TbMessages,
+     TbPageBreak,
+     TbSettings,
+
+    } from "react-icons/tb";
 
 import {
   FaBars,
@@ -395,18 +404,18 @@ const Navbar = ({ isOpen, toggleSidebar, setCurrentSection }) => {
 
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const navItems = [
-    { label: "Dashboard", icon: <FaTachometerAlt />, section: "Dashboard" },
+    { label: "Dashboard", icon: <TbDashboard />, section: "Dashboard" },
     { label: "Products", icon: <FaBoxOpen />, section: "Products" },
-    { label: "Orders", icon: <FaShoppingCart />, section: "Orders" },
-    { label: "Categories", icon: <FaChartLine />, section: "Categories" },
-    { label: "Users", icon: <FaUser />, section: "Users" },
-    { label: "Blog", icon: <FaPenAlt />, section: "Blog" },
-    { label: "Chat", icon: <FaComments />, section: "Chat" },
-    { label: "Notifications", icon: <FaBell />, section: "Components" },
-    { label: "Reviews", icon: <FaClipboard />, section: "Reviews" },
-    { label: "Settings", icon: <FaCog />, section: "Settings" },
-    { label: "Edit Home", icon: <TbHome />, section: "Home" },
-    { label: "Page Settings", icon: <FaCog />, section: "Pages" },
+    { label: "Orders", icon: <TbShoppingBagCheck />, section: "Orders" },
+    { label: "Categories", icon: <TbCategory />, section: "Categories" },
+    { label: "Users", icon: <TbUserHeart />, section: "Users" },
+    { label: "Blog", icon: <TbPencilCheck />, section: "Blog" },
+    { label: "Chat", icon: <TbMessages />, section: "Chat" },
+    { label: "Notifications", icon: <TbBellCode />, section: "Components" },
+    { label: "Reviews", icon: <TbClipboardCheck />, section: "Reviews" },
+    { label: "Settings", icon: <TbSettings />, section: "Settings" },
+    { label: "Edit Home", icon: <TbEdit />, section: "Home" },
+    { label: "Page Settings", icon: <TbPageBreak />, section: "Pages" },
   ];
 
   useEffect(() => {
@@ -647,9 +656,9 @@ useEffect(() => {
             onClick={() => setCurrentSection(item.section)}
             className={styles.navItemadmin}
           >
-            {item.icon}
+            
             <li className={`${styles.navIcons} ${!isOpen && styles.hidden}`}>
-              {item.label}
+            {item.icon}  {item.label}
             </li>
           </div>
         ))}
