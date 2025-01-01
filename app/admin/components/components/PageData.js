@@ -27,8 +27,6 @@ const PageEditor = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [userId, setUserId] = useState('');
 
-
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('token');
@@ -137,10 +135,6 @@ const PageEditor = () => {
 
   };
 
-
-
- 
-
   const formats = [
     "header",
     "font",
@@ -156,8 +150,6 @@ const PageEditor = () => {
     // "image",
     "color",
   ];
-
-
 
   const handleContentChange = (content, delta, source, editor) => {
     const selection = editor.getSelection();

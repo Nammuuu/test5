@@ -268,12 +268,15 @@ orders --done
 categories --done
 
 pagition + loader --add
+
 edit home --done
 reviews  --done
 blog  --done
+blog details --done
 notifications --done
 page setting --done 
 users --done 
+
 chat  --delte --not word
 setting --start design 
 
@@ -333,19 +336,15 @@ thame satting
  --display product by category in home page 
 gird prodcut api
 
-
-
 npm i 
-@next/third-parties @paypal/checkout-server-sdk @stripe/react-stripe-js  @stripe/stripe-js
-
-    
-axios bcryptjs chart.js cloudinary  express formidable fs 
-gsap http jsonwebtoken jspdf jspdf-autotable jwt-decode 
-mongodb mongoose multiparty nodemailer quill quill-image-resize-module-react 
-razorpay react-chartjs-2 react-dom react-helmet-async 
-react-icons  react-paginate react-quill  react-toastify 
-recharts scrolltrigger sharp socket.io socket.io-client
-stripe 
+ @next/third-parties @paypal/checkout-server-sdk @stripe/react-stripe-js  @stripe/stripe-js   
+ axios bcryptjs chart.js cloudinary  express formidable fs 
+ gsap http jsonwebtoken jspdf jspdf-autotable jwt-decode 
+ mongodb mongoose multiparty nodemailer quill quill-image-resize-module-react 
+ razorpay react-chartjs-2 react-dom react-helmet-async 
+ react-icons  react-paginate react-quill  react-toastify 
+ recharts scrolltrigger sharp socket.io socket.io-client
+ stripe 
 
 packgage.js
   {

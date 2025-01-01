@@ -7,7 +7,7 @@
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
-import styles from './adminchat.module.css'; // Import the CSS module
+import styles from './adminchat.module.css'; 
 import { FaTrashAlt } from 'react-icons/fa';
 
 
@@ -51,28 +51,6 @@ const AdminChat = () => {
     };
   }, []);
 
-  // const sendResponse = async () => {
-  //   if (response.trim() && currentUserId) {
-  //     try {
-  //       const msgObj = {
-  //         sender: 'admin',
-  //         receiver: currentUserId,
-  //         message: response
-  //       };
-
-  //       // Send message to server
-  //       await axios.post('/api/chat', msgObj);
-
-  //       // Emit message to the user via socket
-  //       socket.emit('adminReply', msgObj);
-  //       setResponse(''); // Clear input after sending
-  //     } catch (error) {
-  //       console.error('Error sending response:', error);
-  //     }
-  //   }
-  // };
-
-
   const sendResponse = async () => {
     if (response.trim() && currentUserId) {
       try {
@@ -98,8 +76,6 @@ const AdminChat = () => {
     }
   };
 
-  
-
   // Group messages by each user (by receiver or sender)
 const groupedMessages = messages.reduce((acc, msg) => {
     const userId = msg.sender !== 'admin' ? msg.sender : msg.receiver;
@@ -116,59 +92,72 @@ const groupedMessages = messages.reduce((acc, msg) => {
   };
  
 
-
-//  const handleDeleteUserChats = async (userId) => {
-//  try {
-//         const token = localStorage.getItem('token'); // Assuming token is stored in localStorage
-//       if (!token) {
-//         toast.error("Unauthorized: Please log in as admin.");
-//         return;
-//       }
-
-//       await axios.delete(`/api/chat/admin/${userId}`, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       }); // API to delete user's chats
-
-//       setMessages((prevMessages) => prevMessages.filter(msg => msg.sender !== userId && msg.receiver !== userId));
-//     } catch (error) {
-//       console.error('Error deleting user chats:', error);
+// const handleDeleteUserChats = async (userId) => {
+//   try {
+//     const token = localStorage.getItem('token'); // Assuming admin token
+//     if (!token) {
+//       alert('Unauthorized: Please log in as admin.');
+//       return;
 //     }
-//   };
+//     await axios.delete(`/api/chat/admin/${userId}`, {
+//       headers: { Authorization: `Bearer ${token}` },
+//     });
+    
+//     // Remove messages related to the user from the state
+//     setMessages((prevMessages) =>
+//       prevMessages.filter(
+//         (msg) => msg.sender !== userId && msg.receiver !== userId
+//       )
+//     );
+
+//     // Reset current user and active state if the deleted user is active
+//     if (currentUserId === userId) {
+//       setCurrentUserId('');
+//       setActiveUser('');
+//     }
+//   } catch (error) {
+//     console.error('Error deleting user chats:', error);
+//   }
+// };
 
 
 const handleDeleteUserChats = async (userId) => {
   try {
-    const token = localStorage.getItem('token'); // Assuming admin token
+    const token = localStorage.getItem("token"); // Assuming admin token
     if (!token) {
-      alert('Unauthorized: Please log in as admin.');
+      alert("Unauthorized: Please log in as admin.");
       return;
     }
 
-    // await axios.delete(`/api/chat/admin/${userId}`, {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // });
-
-    await axios.delete(`/api/chat/admin/${userId}`, {
+    // Call DELETE endpoint to remove chats
+    const response = await axios.delete(`/api/chat/admin/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    
 
-    // Remove messages related to the user from the state
-    setMessages((prevMessages) =>
-      prevMessages.filter(
-        (msg) => msg.sender !== userId && msg.receiver !== userId
-      )
-    );
+    if (response.status === 200) {
+      // Remove messages related to the user from the state
+      setMessages((prevMessages) =>
+        prevMessages.filter(
+          (msg) => msg.sender !== userId && msg.receiver !== userId
+        )
+      );
 
-    // Reset current user and active state if the deleted user is active
-    if (currentUserId === userId) {
-      setCurrentUserId('');
-      setActiveUser('');
+      // Reset current user and active state if the deleted user is active
+      if (currentUserId === userId) {
+        setCurrentUserId("");
+        setActiveUser("");
+      }
+
+      alert("User chats deleted successfully.");
+    } else {
+      alert(response.data.message || "Failed to delete chats.");
     }
   } catch (error) {
-    console.error('Error deleting user chats:', error);
+    console.error("Error deleting user chats:", error);
+    alert("An error occurred while deleting chats.");
   }
 };
+
 
 
   return (
@@ -191,12 +180,13 @@ const handleDeleteUserChats = async (userId) => {
             </div>
 
             <FaTrashAlt
-              className={styles.deleteIcon}
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering user selection
-                handleDeleteUserChats(userId);
-              }}
-            />
+  className={styles.deleteIcon}
+  onClick={(e) => {
+    e.stopPropagation(); // Prevent triggering user selection
+    handleDeleteUserChats(userId);
+  }}
+/>
+
 
           </div>
         ))}

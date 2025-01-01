@@ -18,6 +18,47 @@
 }
 
 @media (max-width: 768px) {
+  .review {
+    flex-direction: column;
+    align-items: baseline;
+    text-align: start;
+    gap: 10px;
+
+  }
+  .reviewsHeading {
+    margin: 8px 0;
+  }
+
+  .displayflex_flex_cul {
+    
+    align-items: self-start;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    
+  }
+  .stars {
+    display: flex;
+    gap: 10px;
+    text-align: start;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .reviewHeader {
+    align-items: normal;
+  }
+  .productContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: self-start;
+    flex-direction: column;
+  }
+  .productName {
+    margin: 8px 0;
+  }
+
+
   .heading {
     display: none;
   }
@@ -31,12 +72,13 @@
   }
   .productCardContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
     gap: 20px;
     overflow: auto;
     width: 100%;
   }
 }
+
 
 /* Product Card */
 .productCard {
