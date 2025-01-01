@@ -173,6 +173,23 @@
   color: #ff0000;
 }
 
+
+.noUsers {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.noMessages {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .chatWrapper {

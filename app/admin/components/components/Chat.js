@@ -158,73 +158,145 @@ const handleDeleteUserChats = async (userId) => {
   }
 };
 
-
-
-  return (
-    <div className={styles.chatWrapper}>
-      <div className={styles.sidebar}>
-        <h2 className={styles.sidebarTitle}>Users</h2>
-        {Object.keys(groupedMessages).map((userId, index) => (
+return (
+  <div className={styles.chatWrapper}>
+    {/* Sidebar */}
+    <div className={styles.sidebar}>
+      <h2 className={styles.sidebarTitle}>Users</h2>
+      {Object.keys(groupedMessages).length > 0 ? (
+        Object.keys(groupedMessages).map((userId, index) => (
           <div
             key={index}
             className={`${styles.sidebarUser} ${activeUser === userId ? styles.activeUser : ''}`}
             onClick={() => handleUserClick(userId)}
           >
-
-          <div className={styles.chatcontainer}>
-            <p className={styles.userid}>{userId.slice(0, 8)}...</p>
-           
-            <p className={styles.lastMessage}>
-              {groupedMessages[userId][groupedMessages[userId].length - 1]?.message}
-            </p>
+            <div className={styles.chatcontainer}>
+              <p className={styles.userid}>{userId.slice(0, 8)}...</p>
+              <p className={styles.lastMessage}>
+                {groupedMessages[userId][groupedMessages[userId].length - 1]?.message || 'No messages yet'}
+              </p>
             </div>
-
             <FaTrashAlt
-  className={styles.deleteIcon}
-  onClick={(e) => {
-    e.stopPropagation(); // Prevent triggering user selection
-    handleDeleteUserChats(userId);
-  }}
-/>
-
-
+              className={styles.deleteIcon}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent triggering user selection
+                handleDeleteUserChats(userId);
+              }}
+            />
           </div>
-        ))}
+        ))
+      ) : (
+        <p className={styles.noUsers}>No users available</p>
+      )}
+    </div>
+
+    {/* Chat Container */}
+    <div className={styles.chatContainer}>
+      <h1 className={styles.title}>Admin Chat</h1>
+      <div className={styles.messageList}>
+        {currentUserId && groupedMessages[currentUserId]?.length > 0 ? (
+          groupedMessages[currentUserId].map((msg, idx) => (
+            <p
+              key={idx}
+              className={msg.sender === 'admin' ? styles.adminMsg : styles.userMsg}
+            >
+              {msg.message}
+            </p>
+          ))
+        ) : (
+          <p className={styles.noMessages}>
+            {currentUserId ? 'No messages available for this user' : 'No user selected'}
+          </p>
+        )}
       </div>
 
-      <div className={styles.chatContainer}>
-        <h1 className={styles.title}>Admin Chat</h1>
-        <div className={styles.messageList}>
-          {groupedMessages[currentUserId]?.map((msg, idx) => (
-            <p key={idx} className={msg.sender === 'admin' ? styles.adminMsg : styles.userMsg}>
-              {msg.sender === 'admin' ? `${msg.message}` : `${msg.message}`}
-            </p>
-          ))}
-        </div>
-
-
-
-
-        {/* Reply section */}
-        <div className={styles.replySection}>
-          <input
-            type="text"
-            className={styles.input}
-            placeholder="Type a response"
-            value={response}
-            onChange={(e) => setResponse(e.target.value)}
-          />
-          <button
-            className={styles.replyBtn}
-            onClick={sendResponse}
-            disabled={!response.trim()}
-          >
-            Reply
-          </button>
-        </div>
+      {/* Reply Section */}
+      <div className={styles.replySection}>
+        <input
+          type="text"
+          className={styles.input}
+          placeholder="Type a response"
+          value={response}
+          onChange={(e) => setResponse(e.target.value)}
+        />
+        <button
+          className={styles.replyBtn}
+          onClick={sendResponse}
+          disabled={!response.trim()}
+        >
+          Reply
+        </button>
       </div>
     </div>
-  );
+  </div>
+);
+
+
+//   return (
+//     <div className={styles.chatWrapper}>
+//       <div className={styles.sidebar}>
+//         <h2 className={styles.sidebarTitle}>Users</h2>
+//         {Object.keys(groupedMessages).map((userId, index) => (
+//           <div
+//             key={index}
+//             className={`${styles.sidebarUser} ${activeUser === userId ? styles.activeUser : ''}`}
+//             onClick={() => handleUserClick(userId)}
+//           >
+
+//           <div className={styles.chatcontainer}>
+//             <p className={styles.userid}>{userId.slice(0, 8)}...</p>
+           
+//             <p className={styles.lastMessage}>
+//               {groupedMessages[userId][groupedMessages[userId].length - 1]?.message}
+//             </p>
+//             </div>
+
+//             <FaTrashAlt
+//   className={styles.deleteIcon}
+//   onClick={(e) => {
+//     e.stopPropagation(); // Prevent triggering user selection
+//     handleDeleteUserChats(userId);
+//   }}
+// />
+
+
+//           </div>
+//         ))}
+//       </div>
+
+//       <div className={styles.chatContainer}>
+//         <h1 className={styles.title}>Admin Chat</h1>
+//         <div className={styles.messageList}>
+//           {groupedMessages[currentUserId]?.map((msg, idx) => (
+//             <p key={idx} className={msg.sender === 'admin' ? styles.adminMsg : styles.userMsg}>
+//               {msg.sender === 'admin' ? `${msg.message}` : `${msg.message}`}
+//             </p>
+//           ))}
+//         </div>
+
+
+
+
+//         {/* Reply section */}
+//         <div className={styles.replySection}>
+//           <input
+//             type="text"
+//             className={styles.input}
+//             placeholder="Type a response"
+//             value={response}
+//             onChange={(e) => setResponse(e.target.value)}
+//           />
+//           <button
+//             className={styles.replyBtn}
+//             onClick={sendResponse}
+//             disabled={!response.trim()}
+//           >
+//             Reply
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
 };
 
 export default AdminChat;
