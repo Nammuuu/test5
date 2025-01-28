@@ -151,6 +151,7 @@ align-items: center;
   position: absolute;
   bottom: 20px;
   right: 10%;
+  display: none;
 }
 
 .viewButtonContainer a {

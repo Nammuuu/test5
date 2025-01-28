@@ -6,11 +6,12 @@ import Link from 'next/link';
 import {  useCallback, useEffect, useState, useRef } from 'react';
 
 import axios from "axios";
-
+ 
 import { useRouter, usePathname  } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 import { FaShoppingCart, FaHeart, FaTimes, FaSearch,  FaHome, FaUser, FaBars, FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { TbCategory, TbX, TbHeart, TbShoppingBag, TbHome, TbSearch, TbUser } from "react-icons/tb";
+import { TbCategory, TbX, TbHeart, TbShoppingBag, TbHome, TbSearch, TbUser, TbMail, TbPhoneRinging  } from "react-icons/tb";
+import { FaLocationDot } from "react-icons/fa6";
 import styles from '../styles/components/Nav2.module.css';
 import CartSidebar from "./Home/CartSidebar";
 
@@ -394,10 +395,6 @@ useEffect(() => {
 
 <li>{userId ? <Link  onClick={() => handleLinkClick(`/user/dashboard/${userId}`)}  href={`/user/dashboard/${userId}`} >Profile</Link> : 'Loading...'}</li>
 
-                {/* <li><Link href="/me/profile" onClick={() => handleLinkClick("/me/profile")}>Profile</Link></li> */}
-                <li><Link href="/me/myorder" onClick={() => handleLinkClick("/me/myorder")}>My Order</Link></li>
-
-                
                 <li>{userId ? <Link  onClick={() => handleLinkClick(`/user/dashboard/${userId}`)}  href={`/user/dashboard/${userId}`} >Dashboard</Link> : 'Loading...'}</li>
 
               </>
@@ -409,6 +406,23 @@ useEffect(() => {
             <li><Link href="/category" onClick={() => handleLinkClick("/category")}>Categorys</Link></li>
 
             <li> <Link onClick={() => handleLinkClick("/wishlist")} href="/wishlist"> My wishlist </Link></li>
+
+            {user && (
+              <>
+
+              
+            
+
+
+<li>{userId ? <Link  onClick={() => handleLinkClick(`/user/dashboard/${userId}`)}  href={`/user/dashboard/${userId}`} >Profile</Link> : 'Loading...'}</li>
+
+                {/* <li><Link href="/me/profile" onClick={() => handleLinkClick("/me/profile")}>Profile</Link></li> */}
+                <li><Link href="/me/myorder" onClick={() => handleLinkClick("/me/myorder")}>My Order</Link></li>
+
+                
+        
+              </>
+            )}
 
 
 
@@ -479,12 +493,12 @@ useEffect(() => {
 
             
             <li>
-           Address:  {formData?.address}
+            <FaLocationDot />    {formData?.address}
             {formData?.postCode}
             
             </li>
-            <li>Email: {formData?.email} </li>
-            <li>Phone: {formData?.contact}</li>
+            <li> <TbMail />  {formData?.email} </li>
+            <li> <TbPhoneRinging />   {formData?.contact}</li>
           
         </div>
 

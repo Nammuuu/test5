@@ -16,6 +16,8 @@ import {
   FaArrowLeft, FaArrowRight
 } from 'react-icons/fa';
 
+import { TbEye } from "react-icons/tb";
+
  
 import ReactPaginate from 'react-paginate';
 
@@ -283,7 +285,7 @@ const QuickViewModal = ({
           <div className={styles.product_card} key={product._id}>
             <div className={styles.productItem}>
               <div className={styles.product_iconsto}>
-                <FaEye onClick={() => openQuickView(product)} />
+                <TbEye onClick={() => openQuickView(product)} />
               </div>
               <Link href={`/product/details/${product._id}`}>
                 <div className={styles.mainproduct_images}>

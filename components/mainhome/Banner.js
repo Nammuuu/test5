@@ -8,6 +8,7 @@ import styles from "../../styles/components/banner.module.css";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight, FaShoppingCart, FaCircle, FaHeart } from "react-icons/fa";
 import Loader from "../Loader";
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const Banner = () => {
   const [banners, setBanners] = useState([]);
@@ -102,10 +103,10 @@ const Banner = () => {
 
       <div  className={styles.IconsnContainer}> 
       <button className={styles.prevButton} onClick={handlePrevSlide}>
-        <FaArrowLeft />
+        <IoIosArrowBack />
       </button>
       <button className={styles.nextButton} onClick={handleNextSlide}>
-        <FaArrowRight />
+        <IoIosArrowForward />
       </button>
       </div>
 

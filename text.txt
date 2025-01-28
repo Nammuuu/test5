@@ -291,7 +291,8 @@ add api --done
 live chat add --start
 
 variyant name 
- 
+fovIcon
+home page product details loader
 all done last check and update 
 add foveicons
 final test 
