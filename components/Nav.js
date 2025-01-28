@@ -10,7 +10,9 @@ import axios from "axios";
 import { useRouter, usePathname  } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 import { FaShoppingCart, FaHeart, FaTimes, FaSearch,  FaHome, FaUser, FaBars, FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { TbCategory, TbX, TbHeart, TbShoppingBag, TbHome, TbSearch, TbUser, TbMail, TbPhoneRinging  } from "react-icons/tb";
+import { TbCategory, TbX, TbHeart, TbShoppingBag, 
+  TbHome, TbSearch, TbUser, TbMail,
+  TbPhone } from "react-icons/tb";
 import { FaLocationDot } from "react-icons/fa6";
 import styles from '../styles/components/Nav2.module.css';
 import CartSidebar from "./Home/CartSidebar";
@@ -498,7 +500,7 @@ useEffect(() => {
             
             </li>
             <li> <TbMail />  {formData?.email} </li>
-            <li> <TbPhoneRinging />   {formData?.contact}</li>
+            <li> <TbPhone />   {formData?.contact}</li>
           
         </div>
 
