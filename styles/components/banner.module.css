@@ -216,6 +216,7 @@ align-items: center;
   .paginationContainer { 
     top: 78%;
     left: 35%;
+    display: none;
   }
   .paginationDot {
     font-size: .7rem;

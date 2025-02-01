@@ -24,6 +24,7 @@
     color: #444; /* Default color */
     transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
     cursor: pointer; /* Pointer cursor */
+    opacity: 0.8;
   }
   
   .icon:hover {
@@ -91,14 +92,14 @@
   align-items: center;
   gap: 20px;
   /* padding: 11px; */
-  padding: 14px;
+  padding: 15px;
   background-color: #fff;
   position: fixed; /* Fix to top */
   top: 0;
   left: 0;
   right: 0;
   z-index: 10;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgb(246 246 246 / 94%);
   transition: transform 0.3s ease;
 }
 
@@ -422,7 +423,7 @@
     line-height: 1.4;
     letter-spacing: 0.4px;
   /* font-family: fangsong; */
-  border-bottom: 2px solid #f3f3f3;
+  border-bottom: 1px solid #f3f3f3;
 }
 
  
@@ -545,8 +546,8 @@
     transition: transform .3s ease, color .3s ease;
     /* background: red; */
     border-radius: 50%;
-    height: 25px;
-    width: 25px;
+    height: 23px;
+    width: 23px;
     display: flex
 ;
     justify-content: center;
@@ -566,6 +567,9 @@
 .closeBtn::before {
   content: ''; 
   font-size: 3rem;
+}
+.closeBtn svg {
+  font-size: .7rem;
 }
 
 
@@ -962,7 +966,7 @@
 }
 
 .icons a svg {
-  color:  #000;
+  color:  #040131;
   margin: 0 2px;
   /* transition: color 0.3s ease; */
   
@@ -1020,7 +1024,7 @@
     cursor: pointer;
     
     text-transform: capitalize;
-    padding: 10px 0 10px 10px;
+    padding: 10px 0 10px 5px;
     transition: color 0.3s ease, background-color 0.3s ease;
     width: 100%;
     display: flex;
@@ -1039,10 +1043,16 @@
   padding: 3% 0;
   display: flex;
   word-wrap: break-word;
-  
+  margin: 0;
+  display: flex;
+    gap: 10px;
 }
 
-
+.about li svg {
+  width: 23px;
+    height: 23px;
+    color: #040131;
+}
 
 @media (min-width: 768px) {
 

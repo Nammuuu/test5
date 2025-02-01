@@ -24,6 +24,11 @@ body {
    box-sizing: content-box !important;
 } */
 
+*, :after, :before {
+   border: 0 solid #e5e7eb;
+   
+}
+
 
 body {
    background: #fcfcfc;
