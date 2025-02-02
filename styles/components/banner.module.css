@@ -205,13 +205,13 @@ align-items: center;
  
   .bannerContainer {
     padding: 0px;
-    margin: 70px auto 0;
+    margin: 80px auto 0;
   }
   .bannerImages {
  
     height: auto;
     
-    border-radius: 5px;
+    /* border-radius: 5px; */
   }
   .paginationContainer { 
     top: 78%;
