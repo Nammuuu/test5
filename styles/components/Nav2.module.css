@@ -245,8 +245,11 @@
   animation: none; 
 }
 
-.homeactive svg,
- span {
+.homeactive svg
+ {
+  color: #ff6347;
+}
+.homeactive span{
   color: #ff6347;
 }
 
