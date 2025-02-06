@@ -102,8 +102,8 @@ gap: 20px;
 .conmmanClassname svg {
   fill: none;
   border-color: #ffc107;
-  stroke-width: 30;
-  stroke: #ffe254;
+  stroke-width: 55;
+  stroke: #ffce11;
 }
 
 
@@ -1100,10 +1100,11 @@ gap: 20px;
 
   .title_heading {
     word-break: break-all;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 650;
     color: #000;
     margin: 20px 0;
+    opacity: .9;
   }
 
   .products_grid {
@@ -1164,7 +1165,7 @@ gap: 20px;
     margin: 4px 0;
   }
   .price {
-    font-size: .83rem;
+    font-size: 1rem;
     margin: 4px 0;
     font-weight: 700;
     letter-spacing: 0;
@@ -1195,7 +1196,7 @@ gap: 20px;
   .product_list_containet h4 {
     margin: 0;
     
-        font-size: 0.8rem;
+        font-size: 1rem;
         letter-spacing: 0.0px;
         padding: 0;
        

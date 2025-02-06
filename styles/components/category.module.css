@@ -169,9 +169,10 @@
       margin: 0;
     /* padding: 0; */
     word-break: break-all;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 550;
     line-height: unset;
+    opacity: .9;
     }
 
     
@@ -202,6 +203,7 @@
         border-bottom-right-radius: 1rem;
         border-bottom-left-radius: 1rem;
         color: #000;
+        opacity: .8;
     }
 
     .categoryList { 
