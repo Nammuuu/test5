@@ -305,13 +305,13 @@ const QuickViewModal = ({
   <h3 className={styles.selstagt}>{product.seles}</h3>
 )}
 
-                <h4>{product.name.length > 17 ? product.name.slice(0, 17) + ".." : product.name}</h4>
+                <h4>{product.name.length > 18 ? product.name.slice(0, 18) + ".." : product.name}</h4>
                 <p className={styles.conmmanClassname}>{renderRating(product.averageRating)}</p>
                 <div className={styles.price_containet}>
-                  <p className={styles.price}>₹{product.price}</p>
+                  <p className={styles.price}>₹{product.price}.00</p>
                   
                   {product.discountPrice && (
-   <p className={styles.discountPrice}>₹{product.discountPrice}</p>         
+   <p className={styles.discountPrice}>₹{product.discountPrice}.00</p>         
 )}
 
                   {/* <p className={styles.discountPrice}>₹{product.discountPrice}</p> */}

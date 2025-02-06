@@ -763,16 +763,20 @@
     display: flex;
   }
   .mobileBottomNav a svg {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
   }
   .mobileBottomNav a span,
-.mobileBottomNav button span,
+
 .mobileBottomNav .cartButtonx span {
   /* font-size: 0.95rem; */
 
   font-size: 12px; 
 }
+.mobileBottomNav button span {
+  font-size: 10px; 
+}
+
 
   .cartCount {
     font-size: 0.6rem;
@@ -901,11 +905,12 @@
   justify-content: center; /* Center content */
   text-align: center; /* Center text */
   flex-direction: column;
+  gap: 3px;
 }
 
 
 .userActive {
-  color: #444; /* Active color when user is logged in */
+  color: #666666; /* Active color when user is logged in */
 }
 
 .activeDot {
