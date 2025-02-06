@@ -766,13 +766,14 @@
     width: 20px;
     height: 20px;
   }
-  .mobileBottomNav a span,
 
+ 
 .mobileBottomNav .cartButtonx span {
   /* font-size: 0.95rem; */
-
   font-size: 12px; 
 }
+
+.mobileBottomNav a span,
 .mobileBottomNav button span {
   font-size: 10px; 
 }
@@ -906,6 +907,7 @@
   text-align: center; /* Center text */
   flex-direction: column;
   gap: 3px;
+  opacity: 0.8;
 }
 
 
