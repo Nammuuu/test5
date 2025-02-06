@@ -15,6 +15,7 @@ import {
   FaSortAmountUp, FaSortAmountDown, FaHeart, FaEye, FaShoppingCart,
   FaArrowLeft, FaArrowRight
 } from 'react-icons/fa';
+// import { FaEye } from "react-icons/fa";
 
 import { TbEye } from "react-icons/tb";
 
@@ -285,7 +286,7 @@ const QuickViewModal = ({
           <div className={styles.product_card} key={product._id}>
             <div className={styles.productItem}>
               <div className={styles.product_iconsto}>
-                <TbEye onClick={() => openQuickView(product)} />
+                <FaEye onClick={() => openQuickView(product)} />
               </div>
               <Link href={`/product/details/${product._id}`}>
                 <div className={styles.mainproduct_images}>

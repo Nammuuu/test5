@@ -485,7 +485,7 @@ useEffect(() => {
 
 
            
-<div className={styles.about}>
+{/* <div className={styles.about}>
           <h4>Contact</h4>
 
             
@@ -497,12 +497,12 @@ useEffect(() => {
             <li> Email:  {formData?.email} </li>
             <li> Phone:   {formData?.contact}</li>
           
-        </div>
+        </div> */}
 
     
 
 
-         {/* <div className={styles.about}>
+         <div className={styles.about}>
           <h4>Contact</h4>
 
             
@@ -514,7 +514,7 @@ useEffect(() => {
             <li> <TbMail />  {formData?.email} </li>
             <li> <TbPhone />   {formData?.contact}</li>
           
-        </div> */}
+        </div>
 
         
         <div className={styles.icons}>
