@@ -305,7 +305,7 @@ const QuickViewModal = ({
   <h3 className={styles.selstagt}>{product.seles}</h3>
 )}
 
-                <h4>{product.name.length > 20 ? product.name.slice(0, 20) + "..." : product.name}</h4>
+                <h4>{product.name.length > 17 ? product.name.slice(0, 17) + ".." : product.name}</h4>
                 <p className={styles.conmmanClassname}>{renderRating(product.averageRating)}</p>
                 <div className={styles.price_containet}>
                   <p className={styles.price}>₹{product.price}</p>

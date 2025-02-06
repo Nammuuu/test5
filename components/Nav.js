@@ -9,9 +9,15 @@ import axios from "axios";
  
 import { useRouter, usePathname  } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
-import { FaShoppingCart, FaHeart, FaTimes, FaSearch,  FaHome, FaUser, FaBars, FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaShoppingCart, FaHeart,
+   FaTimes, FaSearch,  FaHome,
+    FaUser, FaBars,
+   FaFacebook, FaInstagram,
+   FaRegUser, 
+   FaTwitter, FaYoutube } from 'react-icons/fa';
 import { TbCategory, TbX, TbHeart, TbShoppingBag, 
-  TbHome, TbSearch, TbUser, TbMail,
+  TbHome, TbSearch, TbUser,
+   TbMail,
   TbPhone } from "react-icons/tb";
 import { FaLocationDot } from "react-icons/fa6";
 import styles from '../styles/components/Nav2.module.css';
@@ -21,6 +27,9 @@ import WishlistSidebar from "./Home/WishlistSidebar";
 
 import Auth from "../app/(auth)/autth"
 import Loader from "../components/Loader"
+
+import { GrHomeRounded } from "react-icons/gr";
+
 
 const Navbar = () => {
  
@@ -310,7 +319,7 @@ useEffect(() => {
                 <Link href={`/user/dashboard/${userId}`} onClick={() => handleLinkClick(`/user/dashboard/${userId}`)}><div className={`${styles.loginLink} ${styles.userActive}`}>
                   <div className={styles.userContainer}>
 
-                  <TbUser className={`${styles.icon} ${styles.userActive}`} />
+                  <FaRegUser className={`${styles.icon} ${styles.userActive}`} />
                     <span className={styles.activeDot}></span>
                   </div>
                 </div>
@@ -562,9 +571,11 @@ useEffect(() => {
 
          
 
-          <Link onClick={() => handleLinkClick("/")} href="/">
-          <TbHome />
-          <span> Home </span> </Link>
+          <Link onClick={() => handleLinkClick("/")}  className={styles.homeactive} href="/">
+          {/* <TbHome /> */}
+          <GrHomeRounded />
+          <span> Home </span>
+           </Link>
 
           <Link onClick={() => handleLinkClick("/category")} href="/category"> <TbCategory /> 
           <span>Categories</span> </Link>
@@ -593,7 +604,7 @@ useEffect(() => {
             <div className={`${styles.loginLink} ${styles.userActive}`}>
               <div className={styles.userContainer}>
 
-                <TbUser className={`${styles.icon} ${styles.userActive}`} />
+                <FaRegUser className={`${styles.icon} ${styles.userActive}`} />
 
              
                <span> Profile </span>
