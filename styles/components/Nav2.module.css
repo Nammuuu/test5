@@ -24,7 +24,7 @@
     color: #444; /* Default color */
     transition: color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
     cursor: pointer; /* Pointer cursor */
-    opacity: 0.8;
+    opacity: 0.6;
   }
   
   .icon:hover {
@@ -771,7 +771,7 @@
     /* box-shadow: #f23e14 1px 1px 50px; */
     font-weight: 100;
     /* font-family: fangsong; */
-    stroke-width: 1;
+    stroke-width: 1.9;
   }
 
  
