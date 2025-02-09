@@ -1162,11 +1162,11 @@ gap: 20px;
     align-items: flex-start;
     gap: 20px;
     font-size: 1rem;
-    margin: 4px 0;
+    margin: 6px 0;
   }
   .price {
     font-size: 1rem;
-    margin: 4px 0;
+    margin: 6px 0;
     font-weight: 700;
     letter-spacing: 0;
     color: inherit;
@@ -1205,8 +1205,10 @@ gap: 20px;
       
         justify-content: flex-start;
         align-items: flex-start;
-        color: #000;
+        color: inherit;
         display: flex;
+        font-weight: 600;
+        opacity: .9;
   }
  
 

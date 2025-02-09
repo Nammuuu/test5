@@ -167,8 +167,9 @@
       margin-bottom: 20px;
     }
     .categoryHeadingtitle {
-      margin: 0;
+      /* margin: 0; */
     /* padding: 0; */
+    margin: 20px 0;
     word-break: break-all;
     font-size: 1.3rem;
     font-weight: 550;
