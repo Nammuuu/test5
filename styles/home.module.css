@@ -729,10 +729,12 @@ gap: 20px;
 }
 
 .product_list_containet .conmmanClassname {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #777;
   margin-bottom: 8px;
   margin: 8px 0;
+  display: flex;
+    gap: 2px;
 }
 
 .salesCount {
@@ -800,7 +802,15 @@ gap: 20px;
   z-index: 99;
   padding: 20px;
   overflow-y: auto;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+
+.quick_view_modal::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
 
 .quick_view_content {
   background-color: white;
@@ -808,7 +818,7 @@ gap: 20px;
   border-radius: 16px;
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 10px;
   max-width: 1000px;
   width: 90%;
   max-height: 80vh;
@@ -942,7 +952,7 @@ gap: 20px;
   right: 15px;
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   cursor: pointer;
   color: #555;
 }
@@ -962,7 +972,7 @@ gap: 20px;
   }
 
   .selector_container {
-    margin-bottom: 1rem;
+    margin-bottom: .8rem;
   }
   
   .selector_container label {
@@ -979,7 +989,8 @@ gap: 20px;
   }
 
   .option {
-    padding: 0.5rem 1rem;
+    font-size: .8rem;
+    padding: .2rem .5rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
@@ -1033,6 +1044,10 @@ gap: 20px;
   gap: 20px;
   }
 
+  .price_quick {
+    margin: 6px 0;
+  }
+
  }
 /* odffter page and here  */
 /* Responsive Design */
@@ -1059,12 +1074,14 @@ gap: 20px;
     align-items: flex-start;
     justify-content: center;
     z-index: 99;
-    padding: 20px;
+    padding: 10px;
     overflow-y: auto;
   }
   .quick_view_content {
     flex-direction: column;
-   
+    padding: 10px;
+    gap: 10px;
+    border-radius: 8px;
   }
   .quickViewProduct_product_cart_link {
     width: 85%;
@@ -1073,6 +1090,7 @@ gap: 20px;
   .quickView_images_ccontainer, .quickViewProduct_container {
     flex: unset;
     width: 100%;
+    gap: 5px;
   }
 
   .quickViewProduct_images {
@@ -1110,7 +1128,7 @@ gap: 20px;
   .products_grid {
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
-    gap: 10px;
+    gap: 5px;
   }
 
   .mainproduct_images {
@@ -1176,10 +1194,11 @@ gap: 20px;
 
 
   .price_containet {
-    
     margin: 0;
     gap: 5px;
+    align-items: self-end;
   }
+
   .discountPrice {
     font-size: 1rem;
     /* margin-top: 12px; */
@@ -1228,6 +1247,10 @@ gap: 20px;
 @media (max-width: 768px) {
   .product_list {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .modal_product_icons  {
+    gap: 5px;
+    margin-top: .6rem;
   }
 }
 

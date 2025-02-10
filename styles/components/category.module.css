@@ -83,7 +83,7 @@
     /* flex: 0 0 calc(100% / 6);  */
     /* flex: 0 0 calc(100% / 9);  */
     /* 3 items per slide */
-    padding: 0 10px 0 0px;
+    padding: 10px 10px 10px 0px;
     /* padding: 10px; */
     box-sizing: border-box;
   }

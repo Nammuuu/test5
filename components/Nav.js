@@ -577,7 +577,7 @@ useEffect(() => {
           <span> Home </span>
            </Link>
 
-          <Link onClick={() => handleLinkClick("/category")} href="/category"> <TbCategory /> 
+          <Link onClick={() => handleLinkClick("/category")}  className={styles.cat} href="/category"> <TbCategory /> 
           <span>Categories</span> </Link>
 
 
