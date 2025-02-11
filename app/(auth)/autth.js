@@ -5,8 +5,8 @@
 import { useState } from 'react';
 import LoginRegister from './login/page'; // Update with the correct path
 import styles from "./Auth.module.css"
-import { FaTimes, FaUser, FaSignInAlt } from 'react-icons/fa';
-
+import { FaTimes, FaRegUser, FaSignInAlt } from 'react-icons/fa';
+ 
 const Auth = () => {
   const [showPopup, setShowPopup] = useState(false);
 
@@ -17,7 +17,7 @@ const Auth = () => {
   return (
     <div>
       <div onClick={togglePopup} className={styles.openButton}>
-      <FaUser />
+      <FaRegUser />
       </div> 
 
       {showPopup && (
