@@ -10,7 +10,7 @@
     text-align: center;
     margin: 0px auto;
     max-width: 1200px;
-    background: #fff;
+    /* background: #fff; */
   }
   
   .categoryHeadingContainer {
@@ -24,8 +24,8 @@
     font-size: 2.25rem;
     color: #000;
     margin: 50px 0 20px 0;
-    font-family: ui-monospace;
-    text-transform: capitalize;
+    /* font-family: ui-monospace; */
+    /* text-transform: capitalize; */
     font-weight: 650;
   }
 
@@ -171,10 +171,12 @@
     /* padding: 0; */
     margin: 20px 0;
     word-break: break-all;
-    font-size: 1.3rem;
-    font-weight: 550;
+    font-size: 1.4rem;
+    font-weight: 750;
+    color: inherit;
     line-height: unset;
     opacity: .9;
+    
     }
 
     

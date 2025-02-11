@@ -7,7 +7,6 @@
 import Mainhomepage from "../components/product/Home"
 import Chat from "./(pages)/chat/page"
 
-// {/* <Chat /> */}
 export default function Home() {
 
   return (
@@ -15,7 +14,7 @@ export default function Home() {
    <> 
 
     <Mainhomepage  />
-    <Chat />
+    {/* <Chat /> */}
     </>
   );
 }

@@ -31,17 +31,25 @@ body {
 
 
 body {
-   background: #fcfcfc;
+   --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+    /* font-family: var(--client-font); */
+   /* background: #fcfcfc; */
+   scroll-behavior: smooth;
    margin: 0 3%;
+   transition: transform 0.5s ease;
+   overflow: scroll;
+   scrollbar-width: none;
+   -ms-overflow-style: none;
 }
 
 .className {
  font-family: "Urbanist", sans-serif;
 }
 
-
-
-
+body::-webkit-scrollbar {
+   display: none; 
+}
 
 /* login regiter */
 .popupicons {
@@ -82,12 +90,12 @@ body {
  color: #f03e17;
 }
 
-.bgcomanColor {
+/* .bgcomanColor {
 
-}
-.fontColor { 
+} */
+/* .fontColor { 
 
-}
+} */
 
 /* svg  */
 .icons a svg { 
@@ -95,6 +103,6 @@ body {
 }
 
 
-a:hover{
+/* a:hover{
 
-}
+} */

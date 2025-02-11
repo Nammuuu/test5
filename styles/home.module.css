@@ -509,7 +509,7 @@ gap: 20px;
     color: #2a2a2a;
     font-weight: 550;
     margin: 50px 0 20px 0;
-    font-family: ui-monospace;
+    /* font-family: ui-monospace; */
 } 
 
 
@@ -1118,11 +1118,11 @@ gap: 20px;
 
   .title_heading {
     word-break: break-all;
-    font-size: 1.3rem;
-    font-weight: 650;
-    color: #000;
     margin: 20px 0;
     opacity: .9;
+    font-size: 1.4rem;
+    font-weight: 750;
+    color: inherit;
   }
 
   .products_grid {
