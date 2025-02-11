@@ -42,6 +42,19 @@ body {
    scrollbar-width: none;
    -ms-overflow-style: none;
 }
+html {
+   margin: 0;
+    padding: 0;
+    background: #fff;
+    box-shadow: none;
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+    scroll-behavior: smooth;
+    transition: transform .5sease;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
 
 .className {
  font-family: "Urbanist", sans-serif;

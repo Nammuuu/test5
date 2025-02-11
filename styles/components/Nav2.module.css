@@ -632,7 +632,7 @@
     --tw-shadow-colored: 0px 4px 32px var(--tw-shadow-color);
     --tw-ring-offset-shadow: 0 0 #0000;
     --tw-ring-shadow: 0 0 #0000;
-    gap: 2px;
+    gap: 12px;
 }
 
 .mobileBottomNav a,
@@ -948,7 +948,7 @@
   text-align: center; /* Center text */
   flex-direction: column;
   gap: 3px;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 

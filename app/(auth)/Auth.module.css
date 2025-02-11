@@ -73,10 +73,19 @@
 @media (max-width: 550px) {
   .popup {
     width: auto;
-    height: 90vh;
+    height: 99vh;
   }
   .popupContent {
    
-    width: 70%; 
+    width: 85%; 
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .closeButton {
+    top: 10px;
+    right: 10px;
+  }
+  .title {
+    font-size: 1rem;
   }
 }
