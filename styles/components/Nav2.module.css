@@ -670,7 +670,7 @@
 
 
 .activename {
-  font-size: 13px;
+  font-size: 12px;
 }
 
 
@@ -789,13 +789,13 @@
   }
 
   .mobileBottomNav  .cat svg {
-    width: 24px !important;
-    height: 24px !important;
+    width: 23px !important;
+    height: 23px !important;
   }
 
   .mobileBottomNav .homeactive svg {
-    width: 18px !important;
-    height: 18px !important;
+    width: 20px !important;
+    height: 20px !important;
   }
 
   .mobileBottomNav a svg {
@@ -816,7 +816,7 @@
 
 .mobileBottomNav a span,
 .mobileBottomNav button span {
-  font-size: 13px; 
+  font-size: 12px; 
 }
 
 

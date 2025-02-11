@@ -621,7 +621,7 @@ useEffect(() => {
               <div className={styles.userContainer}>
 
               <Auth className={`${styles.icon} ${styles.userActive}`} />
-                <span className={styles.activename} >Log-in</span>
+                <span className={styles.activename} >Log-In</span>
               </div>
             </div>
           }
