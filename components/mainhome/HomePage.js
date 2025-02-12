@@ -17,6 +17,8 @@ import {
 } from 'react-icons/fa';
 // import { FaEye } from "react-icons/fa";
 
+import {  TbHeart, TbShoppingBag,  } from "react-icons/tb";
+
 import { TbEye } from "react-icons/tb";
 
  
@@ -206,7 +208,7 @@ const QuickViewModal = ({
             <FaTimes />
           </button>
 
-          <h2 className={styles.product_name} >{product.name.slice(0, 30)}...</h2>
+          <h2 className={styles.product_name} >{product.name.slice(0, 18)}...</h2>
         
           <div className={styles.price_containet}>
             <p className={styles.price_quick}>₹{product.price}</p>
@@ -239,11 +241,14 @@ const QuickViewModal = ({
           />
   
           {/* Add to Wishlist and Cart Buttons */}
+          {/* TbHeart, TbShoppingBag, */}
 
           <div className={styles.modal_product_icons}>
           <div className={styles.modal_product_buttons}>
-            <button  className={styles.quickViewProduct_product_cart}  onClick={() => handleAddToWishlist(product)}>Add to Wishlist</button>
-            <button  className={styles.quickViewProduct_product_cart} onClick={() => handleAddToCart(product)}>Add to Cart</button>
+            <button  className={styles.quickViewProduct_product_cart}  onClick={() => handleAddToWishlist(product)}>
+               <TbHeart /> Wishlist</button>
+            <button  className={styles.quickViewProduct_product_cart} onClick={() => handleAddToCart(product)}>
+            <TbShoppingBag /> Add to Cart</button>
            
           </div>
 

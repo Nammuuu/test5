@@ -936,6 +936,7 @@ gap: 20px;
     justify-content: space-around;
     width: 100%;
     gap: 10px;
+    flex-direction: column;
 }
 
 .price_quick {
@@ -990,7 +991,7 @@ gap: 20px;
 
   .option {
     font-size: .8rem;
-    padding: .2rem .5rem;
+    padding: .3rem .5rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
@@ -1061,6 +1062,7 @@ gap: 20px;
  
 .product_name {
   font-weight: 450;
+  margin: 0;
 }
 
   .quick_view_modal {
@@ -1079,12 +1081,14 @@ gap: 20px;
   }
   .quick_view_content {
     flex-direction: column;
-    padding: 10px;
+    padding: 15px;
     gap: 10px;
     border-radius: 8px;
+    max-height: 90vh;
   }
   .quickViewProduct_product_cart_link {
     width: 85%;
+    display: none;
   }
 
   .quickView_images_ccontainer, .quickViewProduct_container {
@@ -1100,9 +1104,10 @@ gap: 20px;
     object-fit: cover;
   }
   .quickViewProduct_product_cart {
-    font-size: 14px;
+    /* font-size: 14px;
     padding: 10px 5px;
-    font-weight: 400;
+    font-weight: 400; */
+    width: 100%;
   }
 
   .hompagemaincontainerproduct {
