@@ -25,6 +25,8 @@ import { TbHeart, TbShoppingBag,  } from "react-icons/tb";
 import Loader from "../../../../../components/Loader";
 import ReactPaginate from 'react-paginate';
 
+import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
+
 const ProductDetailsPage = ({ params }) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -440,12 +442,12 @@ const productNameTrim = (name) => {
 
         <div className={styles.url}>
         <Link href="/">
-         
-          Home <FaAngleRight className={styles.homeIcon} />
+       
+          Home <TfiAngleRight className={styles.homeIcon} />
         </Link>
         
         <Link href="/">{product?.categoryName}
-        <FaAngleRight className={styles.homeIcon} />
+        <TfiAngleRight className={styles.homeIcon} />
         </Link>
         
        

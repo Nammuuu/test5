@@ -1108,6 +1108,18 @@ gap: 20px;
     padding: 10px 5px;
     font-weight: 400; */
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
+    font-size: 18px;
+    /* background-color: #ff6003; */
+  }
+
+  .quickViewProduct_product_cart svg {
+    width: 23px;
+    height: 23px;
   }
 
   .hompagemaincontainerproduct {
