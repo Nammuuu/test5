@@ -6,9 +6,17 @@
 
 
 import styles from '../styles/components/Footer.module.css';
-import { FaLock, FaTruck, FaHeadset, FaDollarSign, FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaLock, FaTruck,
+   FaHeadset, FaDollarSign,
+   FaFacebook, FaInstagram,
+    FaTwitter, FaYoutube,
+    FaHeartbeat,
+    FaHandHoldingHeart,
+    FaWallet,
+   } from 'react-icons/fa';
 import Link from "next/link";
 import Loading from "./Loader"
+import { RiServiceFill } from "react-icons/ri";
 // import { useRouter,  } from 'next/navigation';
 
 import {  useCallback, useEffect, useState, useRef } from 'react';
@@ -111,14 +119,14 @@ useEffect(() => {
  
    <div className={styles.benefitContainer}>
      <div className={styles.benefitItem}>
-     <FaHeadset />
+     <RiServiceFill />
      <div>
        <h3>Professional Service</h3>
        <p>Efficient customer support from passionate team</p>
        </div>
      </div>
      <div className={styles.benefitItem}>
-     <FaLock />
+     <FaWallet />
      <div>
        <h3>Secure Payment</h3>
        <p>Different secure payment methods</p>
@@ -134,7 +142,7 @@ useEffect(() => {
      </div>
      <div className={styles.benefitItem}>
 
-     <FaDollarSign />
+     <FaHandHoldingHeart />
      <div>
        <h3>Quality & Savings</h3>
        <p>Comprehensive quality control and affordable prices</p>

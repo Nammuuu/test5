@@ -96,8 +96,8 @@ color: #333;
         font-weight: 100;
         opacity: .9;
         margin: 0;
-        width: auto;
-        height: 20px;
+        width: 13px;
+        height: 13px;
   }
 
 
@@ -1017,7 +1017,15 @@ color: #333;
       padding: 0;
       font-weight: 450;
       line-height: 1.5;
-
+      font-size: 1rem;
+    }
+    .review p {
+      color: inherit;
+      font-family: inherit;
+      padding: 0;
+      font-weight: 450;
+      line-height: 1.5;
+      font-size: 1rem;
     }
   
     .tabButton {
@@ -1037,6 +1045,12 @@ color: #333;
     .tagContainer ul {
       /* flex-direction: column; */
     word-break: break-word;
+    color: inherit;
+    font-family: inherit;
+    padding: 10px;
+    font-weight: 450;
+    line-height: 1.5;
+    font-size: 1rem;
     }
 
   
@@ -1076,7 +1090,7 @@ color: #333;
       align-items: center;
       text-align: center;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
     }
     .cartButton svg, .wishlistButton svg {
       height: 28px;
@@ -1145,7 +1159,9 @@ color: #333;
   
     .productcontent h1 {
       font-size: 24px;
-      margin: 0;
+        margin: 0;
+        color: inherit;
+        font-weight: 550;
     }
 
     .rating {
@@ -1185,16 +1201,17 @@ color: #333;
       display: flex;
       flex-wrap: wrap;
       margin: 0 0px 0px 10px;
-      text-align: center;
-      gap: 3px
+      text-align: left;
+        align-items: baseline;
     }
 
     .optionButton {
-      padding: 5px;
       border-radius: 10px;
-      border: none;
-      font-size: .75rem;
-      font-family: inherit;
+        border: none;
+        font-family: inherit;
+        line-height: 1;
+        padding: 10px 10px;
+        font-size: .85rem;
     }
   }
 
