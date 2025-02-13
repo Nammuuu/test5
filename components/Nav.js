@@ -292,9 +292,9 @@ if (error) return <p style={{ color: "red" }}>{error}</p>;
           </div>
 
           <div className={styles.close_logo_container}>
-                <div className={styles.logo}>
+                {/* <div className={styles.logo}>
                 <Link href="/" className="MainColor" onClick={() => handleLinkClick("/")}>{formData?.shopName}</Link>
-               </div>
+               </div> */}
 
 
                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "20px" }}>
