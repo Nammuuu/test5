@@ -4,7 +4,7 @@
 // thame settings --start
 //  --banners --start  --done 
 //  --font fimily  
-//  --logo
+//  --logo 
 
 
 "use client";

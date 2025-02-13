@@ -80,8 +80,8 @@ color: #333;
         margin: 0;
         padding: 0;
         gap: 5px;
-        margin: 10px 0;
-        font-weight: 400;
+        margin: 20px 0 10px;
+        font-weight: 550;
 
   }
 
@@ -95,9 +95,9 @@ color: #333;
     stroke-width: inherit;
         font-weight: 100;
         opacity: .9;
-        margin: 0;
-        width: 13px;
-        height: 13px;
+        /* margin: 0; */
+        width: 10px;
+        height: 10px;
   }
 
 
@@ -1128,8 +1128,8 @@ color: #333;
         border-radius: 10px;
         padding: 2px;    
         transform: scale(1);
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
     .arrowButton {
       background: none;

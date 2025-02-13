@@ -992,15 +992,18 @@ gap: 20px;
   .option {
     font-size: .8rem;
     padding: .3rem .5rem;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     border-radius: 5px;
     cursor: pointer;
     text-transform: capitalize;
     transition: background 0.3s, border-color 0.3s;
+    background-color: rgb(247 247 252);
+    color: rgb(31 31 57);
   }
   
   .option:hover {
-    background-color: #f0f0f0;
+    background-color:rgb(242 62 20);
+    color: #ffff;
   }
   
   .selected {
@@ -1116,7 +1119,7 @@ gap: 20px;
     font-size: 18px;
     /* background-color: #ff6003; */
   }
-
+ 
   .quickViewProduct_product_cart svg {
     width: 23px;
     height: 23px;

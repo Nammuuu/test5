@@ -29,7 +29,7 @@ import Auth from "../app/(auth)/autth"
 import Loader from "../components/Loader"
 
 import { GrHomeRounded } from "react-icons/gr";
-
+import Image from "next/image";
 
 const Navbar = () => {
  
@@ -55,6 +55,11 @@ const Navbar = () => {
   const [isLoading, setIsLoading] = useState(false); // State to track loading
   const [prevPathname, setPrevPathname] = useState(pathname);
 
+  const [logoUrl, setLogoUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+
   const [formData, setFormData] = useState({
    
     themeColor: "#ffffff", 
@@ -73,7 +78,7 @@ const Navbar = () => {
   });
   
   
-
+ 
   // useEffect(() => {
   //   const fetchSettings = async () => {
   //     try {
@@ -130,6 +135,31 @@ const Navbar = () => {
         console.error('Failed to decode token:', error);
       }
     }
+  }, []);
+
+
+  // for logo 
+  useEffect(() => {
+    const fetchLogo = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          throw new Error("No token found. Please log in.");
+        }
+
+        const response = await axios.get("/api/admin/setting/thamesatting", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setLogoUrl(response.data.themeSettings.loginlogo);
+      } catch (err) {
+        console.error("Error fetching logo:", err);
+        setError("Failed to load logo.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLogo();
   }, []);
 
   const handleSignOut = () => {
@@ -242,6 +272,9 @@ useEffect(() => {
 }, [pathname]); // Run effect on pathname change
 
 
+if (loading) return <p>Loading logo...</p>;
+if (error) return <p style={{ color: "red" }}>{error}</p>;
+
   return (
     <>
    
@@ -265,6 +298,21 @@ useEffect(() => {
                 <div className={styles.logo}>
                 <Link href="/" className="MainColor" onClick={() => handleLinkClick("/")}>{formData?.shopName}</Link>
                </div>
+
+
+               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: "20px" }}>
+  <div className={styles.logo} style={{ marginBottom: "20px" }}>
+    <Link href="/" className="MainColor" onClick={() => handleLinkClick("/")}>
+      {logoUrl ? (
+        <Image src={logoUrl} alt="Company Logo" width={300} height={300} priority />
+      ) : (
+        formData?.shopName
+      )}
+    </Link>
+  </div>
+</div>
+
+
 
           <div className={styles.navIcons}>
             <li className={styles.mediadisplaynone} >

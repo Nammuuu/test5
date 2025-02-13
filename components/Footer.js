@@ -125,14 +125,15 @@ useEffect(() => {
        <p>Efficient customer support from passionate team</p>
        </div>
      </div>
+     
      <div className={styles.benefitItem}>
-     <FaWallet />
-     <div>
-       <h3>Secure Payment</h3>
-       <p>Different secure payment methods</p>
-       </div>
-     </div>
 
+<FaHandHoldingHeart />
+<div>
+  <h3>Quality & Savings</h3>
+  <p>Comprehensive quality control and affordable prices</p>
+  </div>
+</div>
      <div className={styles.benefitItem}>
      <FaTruck />
      <div>
@@ -141,13 +142,14 @@ useEffect(() => {
        </div>
      </div>
      <div className={styles.benefitItem}>
-
-     <FaHandHoldingHeart />
+     <FaWallet />
      <div>
-       <h3>Quality & Savings</h3>
-       <p>Comprehensive quality control and affordable prices</p>
+       <h3>Secure Payment</h3>
+       <p>Different secure payment methods</p>
        </div>
      </div>
+
+     
    </div>
 
 
