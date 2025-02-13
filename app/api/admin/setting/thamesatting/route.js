@@ -97,7 +97,20 @@ export async function PUT(req) {
     const bgcolor = formData.get("bgcolor");
     const cardbgcolor = formData.get("cardbgcolor");
 
+    // const loginlogoFile = formData.get("loginlogo");
+
     const loginlogoFile = formData.get("loginlogo");
+
+if (loginlogoFile && loginlogoFile.name) { // Ensure the file exists
+  const loginlogoBase64 = await convertFileToBase64(loginlogoFile);
+  const uploadResult = await cloudinaryUploadThamesatting(loginlogoBase64, "loginlogo");
+  loginlogoUrl = uploadResult.secure_url;
+}
+
+
+    // Append the raw login logo file
+
+
 
     // Process the logo file if it exists
     let loginlogoUrl;

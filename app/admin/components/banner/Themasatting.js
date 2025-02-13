@@ -82,16 +82,32 @@ const ThamwSettingsPage = () => {
   }, [handleError, router]);
 
   // Handle file change and preview
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => setLoginLogoPreview(reader.result);
+  //     reader.readAsDataURL(file);
+  //     setThemeSettings({ ...themeSettings, loginlogo: file });
+  //   }
+  // };
+
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => setLoginLogoPreview(reader.result);
       reader.readAsDataURL(file);
-      setThemeSettings({ ...themeSettings, loginlogo: file });
+  
+      setThemeSettings((prev) => ({
+        ...prev,
+        loginlogoFile: file, // Ensure we're storing the actual file separately
+      }));
     }
   };
 
+  
   // Handle form submission to update theme settings
   const handleUpdateSettings = async (e) => {
     e.preventDefault();
@@ -108,8 +124,12 @@ const ThamwSettingsPage = () => {
       formData.append("cardbgcolor", themeSettings.cardbgcolor);
 
       // Append the raw login logo file (not base64)
+      // if (themeSettings.loginlogoFile) {
+      //   formData.append("loginlogo", themeSettings.loginlogoFile); // Raw file is appended
+      // }
+
       if (themeSettings.loginlogoFile) {
-        formData.append("loginlogo", themeSettings.loginlogoFile); // Raw file is appended
+        formData.append("loginlogo", themeSettings.loginlogoFile); // Make sure it's the raw file
       }
 
       const response = await axios.put("/api/admin/setting/thamesatting", formData, {
