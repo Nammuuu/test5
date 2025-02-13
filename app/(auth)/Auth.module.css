@@ -17,14 +17,16 @@
 
 
 .openButton svg {
-  color: #777;
+  color: #666;
     width: 20px;
     height: 20px;
     box-shadow: 0 2px 10px hsla(0, 100%, 98%, .1);
     font-weight: 100;
-    stroke-width: 1.9;
-    opacity: .9;
+    stroke-width: 1.5;
+    opacity: .6;
 }
+
+
 
 /* Popup overlay */
 .popup {

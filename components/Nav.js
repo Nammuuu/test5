@@ -20,6 +20,8 @@ import { TbCategory, TbX, TbHeart, TbShoppingBag,
    TbMail,
   TbPhone } from "react-icons/tb";
 import { FaLocationDot } from "react-icons/fa6";
+import { GrHomeRounded } from "react-icons/gr";
+
 import styles from '../styles/components/Nav2.module.css';
 import CartSidebar from "./Home/CartSidebar";
 
@@ -28,7 +30,7 @@ import WishlistSidebar from "./Home/WishlistSidebar";
 import Auth from "../app/(auth)/autth"
 import Loader from "../components/Loader"
 
-import { GrHomeRounded } from "react-icons/gr";
+
 import Image from "next/image";
 
 const Navbar = () => {
@@ -660,7 +662,7 @@ if (error) return <p style={{ color: "red" }}>{error}</p>;
               <div className={styles.userContainer}>
 
               <Auth className={`${styles.icon} ${styles.userActive}`} />
-                <span className={styles.activename} >Log-In</span>
+                <span className={styles.activenameloing} >Log-In</span>
               </div>
             </div>
           }
