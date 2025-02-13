@@ -142,13 +142,10 @@ const Navbar = () => {
   useEffect(() => {
     const fetchLogo = async () => {
       try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          throw new Error("No token found. Please log in.");
-        }
-
-        const response = await axios.get("/api/admin/setting/thamesatting", {
-          headers: { Authorization: `Bearer ${token}` },
+          const response = await axios.get("/api/admin/setting/thamesatting", {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
         });
 
         setLogoUrl(response.data.themeSettings.loginlogo);
