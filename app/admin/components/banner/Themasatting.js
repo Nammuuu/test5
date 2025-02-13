@@ -102,44 +102,82 @@ const ThamwSettingsPage = () => {
   
       setThemeSettings((prev) => ({
         ...prev,
-        loginlogoFile: file, // Ensure we're storing the actual file separately
+        loginlogo: file, // Store it properly
+        loginlogoFile: file, // Ensure it's included in FormData
       }));
     }
   };
+  
 
   
   // Handle form submission to update theme settings
+  // const handleUpdateSettings = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     const formData = new FormData(); // Use FormData for handling file uploads
+
+  //     // Append each field to FormData
+  //     formData.append("fontfamily", themeSettings.fontfamily);
+  //     formData.append("fontcolor", themeSettings.fontcolor);
+  //     formData.append("bgcolor", themeSettings.bgcolor);
+  //     formData.append("cardbgcolor", themeSettings.cardbgcolor);
+
+  //     // Append the raw login logo file (not base64)
+  //     // if (themeSettings.loginlogoFile) {
+  //     //   formData.append("loginlogo", themeSettings.loginlogoFile); // Raw file is appended
+  //     // }
+
+  //     if (themeSettings.loginlogoFile) {
+  //       formData.append("loginlogo", themeSettings.loginlogoFile); // Make sure it's the raw file
+  //     }
+
+  //     const response = await axios.put("/api/admin/setting/thamesatting", formData, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+
+  //     setThemeSettings(response.data.themeSettings);
+  //     toast.success("Theme settings updated successfully!");
+  //   } catch (error) {
+  //     handleError(error, "Failed to update theme settings.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
   const handleUpdateSettings = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
       const token = localStorage.getItem("token");
-      const formData = new FormData(); // Use FormData for handling file uploads
-
-      // Append each field to FormData
+      const formData = new FormData();
+  
       formData.append("fontfamily", themeSettings.fontfamily);
       formData.append("fontcolor", themeSettings.fontcolor);
       formData.append("bgcolor", themeSettings.bgcolor);
       formData.append("cardbgcolor", themeSettings.cardbgcolor);
-
-      // Append the raw login logo file (not base64)
-      // if (themeSettings.loginlogoFile) {
-      //   formData.append("loginlogo", themeSettings.loginlogoFile); // Raw file is appended
-      // }
-
+  
+      // Append the login logo file only if a new file is selected
       if (themeSettings.loginlogoFile) {
-        formData.append("loginlogo", themeSettings.loginlogoFile); // Make sure it's the raw file
+        formData.append("loginlogo", themeSettings.loginlogoFile);
       }
-
+  
       const response = await axios.put("/api/admin/setting/thamesatting", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       });
-
+  
       setThemeSettings(response.data.themeSettings);
+      setLoginLogoPreview(response.data.themeSettings.loginlogo); // Ensure UI updates
       toast.success("Theme settings updated successfully!");
     } catch (error) {
       handleError(error, "Failed to update theme settings.");
@@ -147,6 +185,7 @@ const ThamwSettingsPage = () => {
       setLoading(false);
     }
   };
+  
 
 
 

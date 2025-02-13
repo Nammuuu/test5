@@ -142,7 +142,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchLogo = async () => {
       try {
-          const response = await axios.get("/api/admin/setting/thamesatting", {
+          const response = await axios.get("/api/admin/setting/logoclint", {
           headers: {
             'Cache-Control': 'no-cache',
           },
