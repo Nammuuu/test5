@@ -118,6 +118,22 @@ useEffect(() => {
  {isLoading && <Loading />} 
  
    <div className={styles.benefitContainer}>
+
+   <div className={styles.benefitItem}>
+     <FaTruck />
+     <div>
+       <h3>Fast Delivery</h3>
+       <p>Fast and convenient door-to-door delivery</p>
+       </div>
+     </div>
+     <div className={styles.benefitItem}>
+     <FaWallet />
+     <div>
+       <h3>Secure Payment</h3>
+       <p>Different secure payment methods</p>
+       </div>
+     </div>
+     
      <div className={styles.benefitItem}>
      <RiServiceFill />
      <div>
@@ -134,20 +150,7 @@ useEffect(() => {
   <p>Comprehensive quality control and affordable prices</p>
   </div>
 </div>
-     <div className={styles.benefitItem}>
-     <FaTruck />
-     <div>
-       <h3>Fast Delivery</h3>
-       <p>Fast and convenient door-to-door delivery</p>
-       </div>
-     </div>
-     <div className={styles.benefitItem}>
-     <FaWallet />
-     <div>
-       <h3>Secure Payment</h3>
-       <p>Different secure payment methods</p>
-       </div>
-     </div>
+
 
      
    </div>

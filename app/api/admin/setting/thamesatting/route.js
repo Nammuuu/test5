@@ -51,15 +51,15 @@ export async function GET(req) {
   }
 }
 
-// PUT request to update theme settings
+// // PUT request to update theme settings
 
-// Convert file to Base64 using Node.js Buffer
-const convertFileToBase64 = async (file) => {
-  const fileBuffer = await file.arrayBuffer();  // Convert file to ArrayBuffer
-  const base64String = Buffer.from(fileBuffer).toString('base64');  // Convert ArrayBuffer to Base64
-  const mimeType = file.type;  // Get the file's MIME type
-  return `data:${mimeType};base64,${base64String}`;  // Return Base64 string with MIME type
-};
+// // Convert file to Base64 using Node.js Buffer
+// const convertFileToBase64 = async (file) => {
+//   const fileBuffer = await file.arrayBuffer();  // Convert file to ArrayBuffer
+//   const base64String = Buffer.from(fileBuffer).toString('base64');  // Convert ArrayBuffer to Base64
+//   const mimeType = file.type;  // Get the file's MIME type
+//   return `data:${mimeType};base64,${base64String}`;  // Return Base64 string with MIME type
+// };
 
 
 
@@ -97,15 +97,15 @@ const convertFileToBase64 = async (file) => {
 //     const bgcolor = formData.get("bgcolor");
 //     const cardbgcolor = formData.get("cardbgcolor");
 
-//     // const loginlogoFile = formData.get("loginlogo");
-
+//     // Process login logo file if uploaded
+//     let loginlogoUrl = null;
 //     const loginlogoFile = formData.get("loginlogo");
 
-// if (loginlogoFile && loginlogoFile.name) { // Ensure the file exists
-//   const loginlogoBase64 = await convertFileToBase64(loginlogoFile);
-//   const uploadResult = await cloudinaryUploadThamesatting(loginlogoBase64, "loginlogo");
-//   loginlogoUrl = uploadResult.secure_url;
-// }
+// // if (loginlogoFile && loginlogoFile.name) { // Ensure the file exists
+// //   const loginlogoBase64 = await convertFileToBase64(loginlogoFile);
+// //   const uploadResult = await cloudinaryUploadThamesatting(loginlogoBase64, "loginlogo");
+// //   loginlogoUrl = uploadResult.secure_url;
+// // }
 
 
 //     // Append the raw login logo file
@@ -113,7 +113,7 @@ const convertFileToBase64 = async (file) => {
 
 
 //     // Process the logo file if it exists
-//     let loginlogoUrl;
+//     // let loginlogoUrl;
 //     if (loginlogoFile && loginlogoFile.size > 0) {
 //       const loginlogoBase64 = await convertFileToBase64(loginlogoFile);  // Convert file to Base64
 //       const uploadResult = await cloudinaryUploadThamesatting(loginlogoBase64, "loginlogo");  // Upload to Cloudinary
@@ -129,7 +129,7 @@ const convertFileToBase64 = async (file) => {
 //         fontcolor,
 //         bgcolor,
 //         cardbgcolor,
-//         loginlogo: loginlogoUrl,
+//         loginlogo: loginlogoUrl || "",
 //       });
 //     } else {
 //       themeSettings.fontfamily = fontfamily;
@@ -146,10 +146,20 @@ const convertFileToBase64 = async (file) => {
 //     return NextResponse.json({ themeSettings }, { status: 200 });
 //   } catch (error) {
 //     console.error("Error updating theme settings:", error);
+//     console.log("updating theme settings erro:", error);
 //     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
 //   }
 // }
 
+
+
+
+// Convert file to Base64
+const convertFileToBase64 = async (file) => {
+  const fileBuffer = await file.arrayBuffer(); // Convert file to ArrayBuffer
+  const base64String = Buffer.from(fileBuffer).toString("base64"); // Convert to Base64
+  return `data:${file.type};base64,${base64String}`; // Return Base64 string with MIME type
+};
 
 export async function PUT(req) {
   try {
@@ -158,7 +168,10 @@ export async function PUT(req) {
     // Authorization check
     const authHeader = req.headers.get("authorization");
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json({ message: "Unauthorized: Missing or invalid authorization header" }, { status: 401 });
+      return NextResponse.json(
+        { message: "Unauthorized: Missing or invalid authorization header" },
+        { status: 401 }
+      );
     }
 
     const token = authHeader.split(" ")[1];
@@ -175,7 +188,10 @@ export async function PUT(req) {
     // Check if the user is an admin
     const user = await User.findById(userId);
     if (!user || user.role !== "admin") {
-      return NextResponse.json({ message: "Unauthorized: User not found or not an admin" }, { status: 401 });
+      return NextResponse.json(
+        { message: "Unauthorized: User not found or not an admin" },
+        { status: 401 }
+      );
     }
 
     const formData = await req.formData();
@@ -190,8 +206,12 @@ export async function PUT(req) {
     const loginlogoFile = formData.get("loginlogo");
 
     if (loginlogoFile && loginlogoFile.size > 0) {
-      const uploadResult = await cloudinaryUploadThamesatting(loginlogoFile, "loginlogo");
-      loginlogoUrl = uploadResult.secure_url;
+      const loginlogoBase64 = await convertFileToBase64(loginlogoFile); // Convert to Base64
+      const uploadResult = await cloudinaryUploadThamesatting(
+        loginlogoBase64,
+        "loginlogo"
+      ); // Upload to Cloudinary
+      loginlogoUrl = uploadResult.secure_url; // Get the secure URL
     }
 
     // Find and update theme settings
@@ -203,16 +223,17 @@ export async function PUT(req) {
         fontcolor,
         bgcolor,
         cardbgcolor,
-        loginlogo: loginlogoUrl || "", // Ensure it has a default value
+        loginlogo: loginlogoUrl || "",
       });
     } else {
-      themeSettings.fontfamily = fontfamily;
-      themeSettings.fontcolor = fontcolor;
-      themeSettings.bgcolor = bgcolor;
-      themeSettings.cardbgcolor = cardbgcolor;
-      if (loginlogoUrl) {
-        themeSettings.loginlogo = loginlogoUrl; // Update only if a new logo is uploaded
-      }
+      // Update existing settings
+      Object.assign(themeSettings, {
+        fontfamily,
+        fontcolor,
+        bgcolor,
+        cardbgcolor,
+        ...(loginlogoUrl && { loginlogo: loginlogoUrl }), // Only update logo if new file uploaded
+      });
     }
 
     await themeSettings.save();
@@ -220,6 +241,12 @@ export async function PUT(req) {
     return NextResponse.json({ themeSettings }, { status: 200 });
   } catch (error) {
     console.error("Error updating theme settings:", error);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
+
+
+
