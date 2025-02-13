@@ -63,6 +63,94 @@ const convertFileToBase64 = async (file) => {
 
 
 
+// export async function PUT(req) {
+//   try {
+//     await connectToDatabase(); // Connect to the database
+
+//     // Authorization check
+//     const authHeader = req.headers.get("authorization");
+//     if (!authHeader || !authHeader.startsWith("Bearer ")) {
+//       return NextResponse.json({ message: "Unauthorized: Missing or invalid authorization header" }, { status: 401 });
+//     }
+
+//     const token = authHeader.split(" ")[1];
+//     let decodedToken;
+
+//     try {
+//       decodedToken = jwt.verify(token, JWT_SECRET); // Verify the JWT
+//     } catch (error) {
+//       return NextResponse.json({ message: "Invalid token" }, { status: 401 });
+//     }
+
+//     const userId = decodedToken.userId;
+
+//     // Check if the user is an admin
+//     const user = await User.findById(userId);
+//     if (!user || user.role !== "admin") {
+//       return NextResponse.json({ message: "Unauthorized: User not found or not an admin" }, { status: 401 });
+//     }
+
+//     const formData = await req.formData();
+
+//     const fontfamily = formData.get("fontfamily");
+//     const fontcolor = formData.get("fontcolor");
+//     const bgcolor = formData.get("bgcolor");
+//     const cardbgcolor = formData.get("cardbgcolor");
+
+//     // const loginlogoFile = formData.get("loginlogo");
+
+//     const loginlogoFile = formData.get("loginlogo");
+
+// if (loginlogoFile && loginlogoFile.name) { // Ensure the file exists
+//   const loginlogoBase64 = await convertFileToBase64(loginlogoFile);
+//   const uploadResult = await cloudinaryUploadThamesatting(loginlogoBase64, "loginlogo");
+//   loginlogoUrl = uploadResult.secure_url;
+// }
+
+
+//     // Append the raw login logo file
+
+
+
+//     // Process the logo file if it exists
+//     let loginlogoUrl;
+//     if (loginlogoFile && loginlogoFile.size > 0) {
+//       const loginlogoBase64 = await convertFileToBase64(loginlogoFile);  // Convert file to Base64
+//       const uploadResult = await cloudinaryUploadThamesatting(loginlogoBase64, "loginlogo");  // Upload to Cloudinary
+//       loginlogoUrl = uploadResult.secure_url;  // Get the secure URL from Cloudinary
+//     }
+
+//     // Find and update theme settings
+//     let themeSettings = await ThemeSettings.findOne();
+
+//     if (!themeSettings) {
+//       themeSettings = new ThemeSettings({
+//         fontfamily,
+//         fontcolor,
+//         bgcolor,
+//         cardbgcolor,
+//         loginlogo: loginlogoUrl,
+//       });
+//     } else {
+//       themeSettings.fontfamily = fontfamily;
+//       themeSettings.fontcolor = fontcolor;
+//       themeSettings.bgcolor = bgcolor;
+//       themeSettings.cardbgcolor = cardbgcolor;
+//       if (loginlogoUrl) {
+//         themeSettings.loginlogo = loginlogoUrl;  // Update login logo URL if a new one is uploaded
+//       }
+//     }
+
+//     await themeSettings.save();
+
+//     return NextResponse.json({ themeSettings }, { status: 200 });
+//   } catch (error) {
+//     console.error("Error updating theme settings:", error);
+//     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+//   }
+// }
+
+
 export async function PUT(req) {
   try {
     await connectToDatabase(); // Connect to the database
@@ -97,27 +185,13 @@ export async function PUT(req) {
     const bgcolor = formData.get("bgcolor");
     const cardbgcolor = formData.get("cardbgcolor");
 
-    // const loginlogoFile = formData.get("loginlogo");
-
+    // Process login logo file if uploaded
+    let loginlogoUrl = null;
     const loginlogoFile = formData.get("loginlogo");
 
-if (loginlogoFile && loginlogoFile.name) { // Ensure the file exists
-  const loginlogoBase64 = await convertFileToBase64(loginlogoFile);
-  const uploadResult = await cloudinaryUploadThamesatting(loginlogoBase64, "loginlogo");
-  loginlogoUrl = uploadResult.secure_url;
-}
-
-
-    // Append the raw login logo file
-
-
-
-    // Process the logo file if it exists
-    let loginlogoUrl;
     if (loginlogoFile && loginlogoFile.size > 0) {
-      const loginlogoBase64 = await convertFileToBase64(loginlogoFile);  // Convert file to Base64
-      const uploadResult = await cloudinaryUploadThamesatting(loginlogoBase64, "loginlogo");  // Upload to Cloudinary
-      loginlogoUrl = uploadResult.secure_url;  // Get the secure URL from Cloudinary
+      const uploadResult = await cloudinaryUploadThamesatting(loginlogoFile, "loginlogo");
+      loginlogoUrl = uploadResult.secure_url;
     }
 
     // Find and update theme settings
@@ -129,7 +203,7 @@ if (loginlogoFile && loginlogoFile.name) { // Ensure the file exists
         fontcolor,
         bgcolor,
         cardbgcolor,
-        loginlogo: loginlogoUrl,
+        loginlogo: loginlogoUrl || "", // Ensure it has a default value
       });
     } else {
       themeSettings.fontfamily = fontfamily;
@@ -137,7 +211,7 @@ if (loginlogoFile && loginlogoFile.name) { // Ensure the file exists
       themeSettings.bgcolor = bgcolor;
       themeSettings.cardbgcolor = cardbgcolor;
       if (loginlogoUrl) {
-        themeSettings.loginlogo = loginlogoUrl;  // Update login logo URL if a new one is uploaded
+        themeSettings.loginlogo = loginlogoUrl; // Update only if a new logo is uploaded
       }
     }
 
