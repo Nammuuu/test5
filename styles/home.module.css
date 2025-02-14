@@ -1189,6 +1189,7 @@ gap: 20px;
   .product_iconsto {
     top: 10px;
     right: 10px;
+    display: none;
   }
   .product_iconsto svg{
     font-size: 0.8rem;
