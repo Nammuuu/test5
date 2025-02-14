@@ -250,7 +250,7 @@ const Homebanner = () => {
     <div className={styles.bannerContainer}>
       <div className={styles.slider} style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
         {banners.map((banner, index) => (
-          <div key={banner._id} className={`${styles.bannerItem} ${index === currentIndex ? styles.active : ""}`}>            
+          <div key={banner._id} className={`${styles.bannerImages} ${index === currentIndex ? styles.active : ""}`}>            
             <Image src={banner.images} alt={banner.title} width={900} height={900} />
             
             <div className={styles.viewButtonContainer}>
