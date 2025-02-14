@@ -4,11 +4,13 @@
 import React from 'react'
 import SettingsPage from "../../admin/settings/page"
 import PageEditor from "../../admin/components/components/PageData"
+import BannerPage from "../../admin/components/HomeBanners/Bnner"
 {/* <SettingsPage /> */}
 const mail = () => {
   return (
     <div>
-      <PageEditor />
+      <BannerPage />
+      {/* <PageEditor /> */}
     
 
     </div>
