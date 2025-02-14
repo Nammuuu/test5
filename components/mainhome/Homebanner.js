@@ -254,13 +254,26 @@ const Homebanner = () => {
            <div className={styles.bannerImages}>           
             <Image src={banner.images} alt={banner.title} width={900} height={900} />
             </div>
-            
+
             <div className={styles.viewButtonContainer}>
               <Link href={banner.productUrl} target="_blank" rel="noopener noreferrer">View Product</Link>
             </div>
           </div>
+
+
+
         ))}
       </div>
+
+      <div  className={styles.IconsnContainer}> 
+      <button className={styles.prevButton} onClick={handlePrevSlide}>
+        <IoIosArrowBack />
+      </button>
+      <button className={styles.nextButton} onClick={handleNextSlide}>
+        <IoIosArrowForward />
+      </button>
+      </div>
+      
     </div>
   );
 };
