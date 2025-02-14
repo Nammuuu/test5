@@ -132,7 +132,7 @@ import { FaCircle } from "react-icons/fa";
 import Loader from "../Loader";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const Banner = () => {
+const Homebanner = () => {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -200,4 +200,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default Homebanner;
