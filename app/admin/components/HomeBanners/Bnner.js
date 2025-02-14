@@ -65,18 +65,62 @@ export default function BannerPage() {
     }
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!formData.image) {
+  //     alert("Please upload an image.");
+  //     return;
+  //   }
+
+  //   const formDataToSend = new FormData();
+  //   formDataToSend.append("productUrl", formData.productUrl);
+  //   formDataToSend.append("image", formData.image);
+  //   formDataToSend.append("displayOptions", formData.displayOptions);
+
+  //   setLoading(true);
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     if (!token) {
+  //       alert("No token found, please log in.");
+  //       return;
+  //     }
+
+  //     const res = await axios.post("/api/admin/home/Banners", formDataToSend, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+
+  //     const newBanner = res.data.banner;
+  //     setBanners((prevBanners) => [...prevBanners, newBanner]);
+  //     alert("Banner created successfully");
+
+  //     setFormData({ productUrl: "", image: null, displayOptions: "Baner1" });
+  //     setImagePreview("");
+  //     setShowPopup(false);
+  //   } catch (error) {
+  //     alert("Failed to create banner");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.image) {
-      alert("Please upload an image.");
+  
+    if (!formData.image || !formData.productUrl || !formData.displayOptions) {
+      alert("All fields are required.");
       return;
     }
-
+  
     const formDataToSend = new FormData();
-    formDataToSend.append("productUrl", formData.productUrl);
+    formDataToSend.append("productUrl", formData.productUrl.trim());
     formDataToSend.append("image", formData.image);
     formDataToSend.append("displayOptions", formData.displayOptions);
-
+  
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
@@ -84,28 +128,29 @@ export default function BannerPage() {
         alert("No token found, please log in.");
         return;
       }
-
+  
       const res = await axios.post("/api/admin/home/Banners", formDataToSend, {
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
       const newBanner = res.data.banner;
       setBanners((prevBanners) => [...prevBanners, newBanner]);
       alert("Banner created successfully");
-
+  
       setFormData({ productUrl: "", image: null, displayOptions: "Baner1" });
       setImagePreview("");
       setShowPopup(false);
     } catch (error) {
+      console.error("Upload error:", error);
       alert("Failed to create banner");
     } finally {
       setLoading(false);
     }
   };
 
+  
   const handleDelete = async (bannerId) => {
     setLoading(true);
     try {
@@ -135,22 +180,47 @@ export default function BannerPage() {
         <button onClick={() => setShowPopup(true)} className={styles.createButton}>Create Banner</button>
        
       </div>
-      <select value={displayOptions} onChange={(e) => setDisplayOptions(e.target.value)}>
+     
+      {showPopup && (
+        <div className={styles.popup}>
+          <div className={styles.popupContent}>
+
+          <form onSubmit={handleSubmit} className={styles.formGrid}>
+  {/* Product URL Input */}
+
+  <select value={displayOptions} onChange={(e) => setDisplayOptions(e.target.value)}>
         <option value="Baner1">Banner 1</option>
         <option value="Baner2">Banner 2</option>
         <option value="Baner3">Banner 3</option>
         <option value="Baner4">Banner 4</option>
         <option value="Baner5">Banner 5</option>
       </select>
-      {showPopup && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <form onSubmit={handleSubmit} className={styles.formGrid}>
-              <input type="file" name="image" accept="image/*" onChange={handleInputChange} required />
-              {imagePreview && <Image src={imagePreview} alt="Preview" width={100} height={100} />}
-              <button type="submit">Create Banner</button>
-              <button type="button" onClick={() => setShowPopup(false)}>Close</button>
-            </form>
+      
+  <input 
+    type="text" 
+    name="productUrl" 
+    value={formData.productUrl} 
+    onChange={handleInputChange} 
+    placeholder="Enter product URL" 
+    required 
+  />
+
+  {/* Image Upload Input */}
+  <input 
+    type="file" 
+    name="image" 
+    accept="image/*" 
+    onChange={handleInputChange} 
+    required 
+  />
+  
+  {/* Image Preview */}
+  {imagePreview && <Image src={imagePreview} alt="Preview" width={100} height={100} />}
+  
+  {/* Submit and Close Buttons */}
+  <button type="submit">Create Banner</button>
+  <button type="button" onClick={() => setShowPopup(false)}>Close</button>
+</form>
           </div>
         </div>
       )}
