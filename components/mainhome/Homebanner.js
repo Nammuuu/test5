@@ -208,7 +208,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
-import styles from "../../styles/components/banner.module.css";
+import styles from "../../styles/components/banners.module.css";
 import Link from "next/link";
 import { FaCircle } from "react-icons/fa";
 import Loader from "../Loader";
@@ -252,23 +252,12 @@ const Homebanner = () => {
         {banners.map((banner, index) => (
           <div key={banner._id} className={`${styles.bannerItem} ${index === currentIndex ? styles.active : ""}`}>            
             <Image src={banner.images} alt={banner.title} width={900} height={900} />
-            <div className={styles.paginationContainer}>
-              {banners.map((_, i) => (
-                <button key={i} onClick={() => setCurrentIndex(i)} className={`${styles.paginationDot} ${i === currentIndex ? styles.activeDot : ""}`}>
-                  <FaCircle />
-                </button>
-              ))}
-            </div>
+            
             <div className={styles.viewButtonContainer}>
               <Link href={banner.productUrl} target="_blank" rel="noopener noreferrer">View Product</Link>
             </div>
           </div>
         ))}
-      </div>
-
-      <div className={styles.IconsnContainer}>
-        <button className={styles.prevButton} onClick={handlePrevSlide}><IoIosArrowBack /></button>
-        <button className={styles.nextButton} onClick={handleNextSlide}><IoIosArrowForward /></button>
       </div>
     </div>
   );

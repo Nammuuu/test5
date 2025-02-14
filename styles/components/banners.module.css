@@ -1,0 +1,273 @@
+.bannerContainer {
+    position: relative;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    overflow: hidden;
+    padding: 20px;
+    /* background: red; */
+  }
+  
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%; 
+   
+  }
+  
+  .bannerItem {
+    min-width: 100%;
+    position: relative;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+  }
+  
+  .active {
+    opacity: 1;
+  }
+  
+  /* .bannerImages {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    background-color: rebeccapurple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bannerImages img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+  } */
+  
+  .bannerItem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .bannerImages {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+   
+   /* padding: 15px; */
+   border-radius: 20px;
+  }
+  
+  .bannerImages img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+     /* object-fit: contain; */
+  }
+  
+  
+  .bannerItemDetailsContainer {
+    position: absolute;
+    top: 75%;
+    left: 5%;
+    transform: translateY(-50%);
+    color: white;
+    display: flex;
+      flex-direction: column;
+      width: 50%;
+  }
+  
+  .bannerItemDetailsContainer h2,
+  .bannerItemDetailsContainer h3,
+  .bannerItemDetailsContainer p {
+  margin: 5px 0;
+  
+  display: flex;
+  align-items: center;
+  }
+  
+  .bannerItemDetailsContainer h2 {
+    font-size: 2.25rem;
+    color: #333;
+    font-weight: 700;
+  }
+  
+  .bannerItemDetailsContainer h3 {
+    font-size: 18px;
+    color: #555;
+    font-weight: 600;
+  }
+  
+  .bannerItemDetailsContainer p {
+    font-size: 14px;
+    color: #999;
+    font-weight: 600;
+    display: flex;
+  }
+  
+  
+  
+  
+  
+  
+  .paginationContainer {
+    position: absolute;
+      top: 90%;
+      left: 45%;
+      transform: translateY(-50%);
+      color: white;
+      display: flex;
+      margin-top: 20px;
+  }
+  
+  .paginationDot {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ddd;
+    font-size: 0.9rem;
+    
+  }
+  
+  .activeDot {
+    color: rgb(242, 62, 20); /* Active dot color */
+  }
+  
+  
+  
+  
+  
+  .bannerActions {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    left: 10%;
+  }
+  
+  .icon {
+    color: white;
+    cursor: pointer;
+    font-size: 28px;
+  }
+  
+  .viewButtonContainer {
+    position: absolute;
+    bottom: 20px;
+    right: 10%;
+    display: none;
+  }
+  
+  .viewButtonContainer a {
+    background-color: rgb(242, 62, 20);
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .prevButton,
+  .nextButton {
+    position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      border-radius: 50%;
+      padding: 10px;
+      width: 45px;
+      height: 45px;
+      color: #333;
+      transition: background-color 0.3s ease; 
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+  }
+  
+  
+  .prevButton:hover,
+  .nextButton:hover {
+    color: #fff;
+    background-color: #f26a20;
+  }
+  
+  .prevButton {
+    left: 40px;
+  }
+  
+  .nextButton {
+    right: 40px;
+  }
+  
+  .IconsContainer {
+    position: relative;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+  
+   
+    .bannerContainer {
+      padding: 0px;
+      margin: 80px auto 0;
+    }
+    .bannerImages {
+   
+      height: auto;
+      
+      /* border-radius: 5px; */
+    }
+    .paginationContainer { 
+      top: 78%;
+      left: 35%;
+      display: none;
+    }
+    .paginationDot {
+      font-size: .7rem;
+    }
+    .bannerItemDetailsContainer {
+      top: 60%;
+      left: 5%;
+      display: none;
+    }
+  
+    .viewButtonContainer {
+      right: 1%;
+      bottom: 10px;
+      font-size: .8rem;
+    }
+  
+    .viewButtonContainer a{
+      padding: 5px 10px;
+    }
+  
+    .prevButton,
+    .nextButton {
+      font-size: 1rem;
+      color: #333;
+      width: 35px;
+      height: 35px;
+    }
+    .nextButton {
+      right: 2%;
+    }
+    .prevButton {
+      left: 2%;
+    }
+    .icon {
+      font-size: 24px;
+    }
+  
+    .prevButton,
+    .nextButton {
+      /* padding: 8px; */
+      width: 25px;
+          height: 25px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0;
+    }
+  }
+  
