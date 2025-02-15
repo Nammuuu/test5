@@ -18,7 +18,7 @@ import {
 // import { FaEye } from "react-icons/fa";
 
 import {  TbHeart, TbShoppingBag,  } from "react-icons/tb";
-import Homebanner from "./Homebanner"
+import Homebannermain from "./Homebanner"
 import { TbEye } from "react-icons/tb";
 
  
@@ -370,7 +370,7 @@ const QuickViewModal = ({
     {loading && <Loader />}
        
   
-  <Homebanner />
+  <Homebannermain />
       <div className={styles.productsGridmainreturn}>
 
         <ProductList title="All Products" displayOption="allproducts" />

@@ -88,7 +88,7 @@ import Homebanner from "./Homebanners/Bnner"
 import Homebannerto from "./Homebanners/Bnnerto"
 import Homebannerthre from "./Homebanners/Bnnerthree"
 
-const Homebanner = () => {
+const Homebannermain = () => {
   return (
     <div>
      
@@ -100,7 +100,7 @@ const Homebanner = () => {
   )
 }
 
-export default Homebanner
+export default Homebannermain
 
 // import { useState, useEffect } from "react";
 // import axios from "axios";
