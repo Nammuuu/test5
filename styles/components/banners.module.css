@@ -11,19 +11,30 @@
     display: flex;
     transition: transform 0.5s ease-in-out;
     width: 100%; 
-   
+    overflow: scroll;
+    display: flex;
+    gap: 10px;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+
+
+.slider::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
   
   .bannerItem {
-    min-width: 100%;
+    /* min-width: 100%; */
+    min-width: 70%;
     position: relative;
     transition: opacity 0.5s ease-in-out;
-    opacity: 0;
+    /* opacity: 0; */
   }
   
-  .active {
+  /* .active {
     opacity: 1;
-  }
+  } */
   
   /* .bannerImages {
     position: relative;

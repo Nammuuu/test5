@@ -225,7 +225,7 @@
       width: 15px;
       height: 15px;
       transform: translateY(0);
-
+      display: none;
     }
   }
   
