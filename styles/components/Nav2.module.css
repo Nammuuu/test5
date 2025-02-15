@@ -800,8 +800,8 @@
   }
 
   .mobileBottomNav a svg {
-    width: 23px;
-    height: 23px;
+    width: 22px;
+    height: 22px;
     box-shadow: 0 2px 10px rgb(255 247 247 / 10%);
     /* box-shadow: #f23e14 1px 1px 50px; */
     font-weight: 100;
@@ -888,17 +888,25 @@
 
 
 .signOutx {
-  color: #333;
+  /* color: #333;
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 500; */
+
+    color: #000;
+    font-weight: 400;
+    font-size: medium;
+    line-height: 1.4;
+    letter-spacing: .4px;
+    
+
  
     text-decoration: none;
     background: none;
-    border: none;
+    
     cursor: pointer;
     
     text-transform: capitalize;
-    padding: 10px 0 10px 10px;
+    padding: 7px 0 7px 7px;
     /* border-radius: 5px; */
     transition: color 0.3s ease, background-color 0.3s ease;
     width: 100%;
@@ -956,7 +964,7 @@
 
 .userActive {
   color: #666666; 
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .activenameloing {
@@ -1029,7 +1037,8 @@
 }
 
 .icons a svg {
-  color:  #040131;
+  background-color: #f7f7fc;
+    color: #1f1f39;
   margin: 0 2px;
   /* transition: color 0.3s ease; */
   
@@ -1053,19 +1062,14 @@
 
 /* Copyright */
 .copyright {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
     color: #333;
-    border-top: 1px solid #33333342;
-    /* padding: 20px; */
     position: relative;
-    margin: 0rem 1.2rem;
-
-
-   
+    margin: 0 .8rem 2rem;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     font-style: italic;
-  
+    border-bottom: 1px solid #33333342;
 }
 
 /* .copyright p{
@@ -1078,16 +1082,18 @@
   margin: 0rem .5rem;
 }
 .about h4 {
-  color: #333;
-  font-size: 1.2rem;
-  font-weight: 500;
+  
+  color: inherit;
+    font-weight: 750;
+    font-size: medium;
+    line-height: 1.4;
+    letter-spacing: .4px;
+
     text-decoration: none;
     background: none;
-    border: none;
     cursor: pointer;
-    
+    padding: 5px 0 5px 5px;
     text-transform: capitalize;
-    padding: 10px 0 10px 5px;
     transition: color 0.3s ease, background-color 0.3s ease;
     width: 100%;
     display: flex;
@@ -1098,22 +1104,27 @@
     font-family: '__Inter_d65c78';
     font-style: normal;
     /* font-family: fangsong; */
-    border-bottom: 2px solid #f3f3f3;
+    /* border-bottom: 2px solid #f3f3f3; */
 }
 
 .about li {
  
-  padding: 3% 0;
+  padding: 4% 0;
   display: flex;
   word-wrap: break-word;
-  margin: 0;
+  /* margin: 0;*/
   display: flex;
     gap: 10px;
+    align-items: self-start;
+    text-align: left;
+    font-size: .85rem;
+    line-height: 1.4;
+    font-weight: 400;
 }
 
 .about li svg {
-  width: 23px;
-    height: 23px;
+  width: 22px;
+    height: 22px;
     color: #040131;
 }
 
