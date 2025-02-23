@@ -618,8 +618,10 @@ if (error) return <p style={{ color: "red" }}>{error}</p>;
           <span> Home </span>
            </Link>
 
-          <Link onClick={() => handleLinkClick("/category")}  className={styles.cat} href="/category"> <TbCategory /> 
-          <span>Categories</span> </Link>
+           <Link onClick={() => handleLinkClick("/search")} href="/search">
+         <TbSearch /> 
+         <span> Search </span>
+        </Link>
 
 
           <button onClick={viewCart} className={`${styles.cartButtonmob} ${styles.navButton} ${styles.homeicon}`} >
@@ -628,12 +630,10 @@ if (error) return <p style={{ color: "red" }}>{error}</p>;
             
           </button>
 
-         
+          <Link onClick={() => handleLinkClick("/category")}  className={styles.cat} href="/category"> <TbCategory /> 
+          <span>Categories</span> </Link>
 
-        <Link onClick={() => handleLinkClick("/search")} href="/search">
-         <TbSearch /> 
-         <span> Search </span>
-        </Link>
+       
 
 
 

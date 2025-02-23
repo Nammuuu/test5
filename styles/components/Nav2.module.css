@@ -92,7 +92,7 @@
   align-items: center;
   gap: 20px;
   /* padding: 11px; */
-  padding: 8px 15px;
+  padding: 10px 15px;
   background-color: #fff;
   position: fixed; /* Fix to top */
   top: 0;
@@ -965,7 +965,7 @@
 
 
 .userActive {
-  color: #666666; 
+  color: #999; 
   opacity: 1;
 }
 

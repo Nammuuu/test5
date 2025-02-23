@@ -23,10 +23,14 @@
 .slider::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
 }
+
+.IconsnContainer {
+  display: none;
+}
   
   .bannerItem {
     /* min-width: 100%; */
-    min-width: 70%;
+    min-width: 57%;
     position: relative;
     transition: opacity 0.5s ease-in-out;
     /* opacity: 0; */
