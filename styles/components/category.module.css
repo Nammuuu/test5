@@ -172,7 +172,7 @@
     margin: 20px 0;
     word-break: break-all;
     font-size: 1.4rem;
-    font-weight: 750;
+    font-weight: 650;
     color: inherit;
     line-height: unset;
     opacity: .9;
@@ -211,6 +211,7 @@
         border-bottom-left-radius: 1rem;
         color: inherit;
         opacity: .8;
+        font-weight: 400;
     }
 
     .categoryList { 
