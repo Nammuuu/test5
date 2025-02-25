@@ -133,7 +133,8 @@ display: none; /* For Chrome, Safari, and Opera */
 }
 
 .sidePanel.open {
-  transform: translateX(0); /* Show side panel */
+  transform: translateX(0); 
+  box-shadow: 11px 0 100px rgba(0, 0, 0, 0.1);
 }
 
 .mobileBottomNav {
@@ -1139,7 +1140,7 @@ display: none; /* For Chrome, Safari, and Opera */
 }
 
 .logo {
-  width: 100px;
+  width: 110px;
   padding: 0;
   margin: 0;
   gap: 0;

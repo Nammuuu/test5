@@ -16,7 +16,8 @@
 
 
 .open {
-  transform: translateX(0); /* When open, show the sidebar */
+  transform: translateX(0); 
+  box-shadow: -5px 0 100px rgba(0, 0, 0, 0.1);
 }
 
 .header {
@@ -28,10 +29,11 @@
 }
 
 .header h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
+  font-size: 1.3rem;
+    font-weight: 550;
+    margin: 0;
+    color: inherit;
+    opacity: .8;
 }
 
 .closeButton {
@@ -39,7 +41,10 @@
   border: none;
   cursor: pointer;
   font-size: 1.5rem;
-  color: #ff6b6b; /* Soft red color for delete */
+  color: #ff6b6b; 
+  display: flex;
+    text-align: end;
+    align-items: self-end;
 }
 
 .cartItems {
@@ -103,6 +108,7 @@
   margin: 5px 0;
   color: #333;
   text-transform: capitalize;
+  word-break: break-all;
  
 }
 
@@ -263,7 +269,7 @@
   text-transform: capitalize;
   text-align: left;
   margin: 0 !important;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .selectedSize p:hover {
@@ -280,9 +286,14 @@
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 75%; /* Full width on mobile */
+    width: 75%; 
+    padding: 20px 10px 20px 20px;
   }
-
+  .itemImage {
+    width: 120px;
+    height: 150px;
+    margin-right: 10px;
+  }
 
   .itemImage img {
     height: 100%;

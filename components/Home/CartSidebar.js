@@ -137,7 +137,7 @@ const handleCheckout = () => {
 
               {/* Product Details */}
               <div className={styles.itemDetails}>
-                <h4>{item.name.length > 15 ? item.name.slice(0, 15) + '...' : item.name}</h4>
+                <h4>{item.name.length > 12 ? item.name.slice(0, 12) + '..' : item.name}</h4>
 
                   {/* Price Display */}
               <div className={styles.priceControlContainer}>

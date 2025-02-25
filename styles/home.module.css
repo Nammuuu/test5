@@ -1314,3 +1314,13 @@ gap: 20px;
 
 
 
+.categoryContainer {
+  margin-top: 20%;
+}
+.categoryContainer h1 {
+  font-size: 1.4rem;
+    text-transform: capitalize;
+    color: inherit;
+    border-bottom: 1px solid #31303029;
+    padding: 10px 0;
+}

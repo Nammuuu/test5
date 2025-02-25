@@ -1,82 +1,4 @@
 
-
-// "use client";
-
-// import { useState, useEffect } from "react";
-// import axios from "axios";
-// import { useRouter, useParams } from 'next/navigation'; 
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import Loader from "../../../../components/Loader";
-// // import styles from "../../../../styles/components/category.module.css";
-// import { FaHeart, FaEye, FaShoppingCart, FaStar } from "react-icons/fa";
-// import Link from "next/link";
-// import Image from "next/image";
-// import styles from "../../../../styles/home.module.css";
-
-// const CategoryPage = () => {
-//   const router = useRouter();
-//   const { id } = useParams();
-//   const [products, setProducts] = useState([]);
-//   const [loading, setLoading] = useState(false);
-
-//   // Fetch products based on category ID
-//   useEffect(() => {
-//     if (id) {
-//       const fetchProducts = async () => {
-//         try {
-//           setLoading(true);
-//           const response = await axios.get(`/api/user/category?category=${id}`);
-//           setProducts(response.data.products);
-//         } catch (error) {
-//           console.error("Error fetching products:", error);
-//           toast.error("Failed to fetch products.");
-//         } finally {
-//           setLoading(false);
-//         }
-//       };
-
-//       fetchProducts();
-//     }
-//   }, [id, router]);
-
-//   if (loading) {
-//     return <Loader />;
-//   }
-
-//   return (
-//     <div className={styles.categoryContainer}>
-//       <h1>Products in this Category</h1>
-//       <div className={styles.productList}>
-//         {products.map((product) => (
-//           <div key={product._id} className={styles.productItem}>
-//             <Image
-//               src={product.media[0] || "/default-image.png"}
-//               alt={product.name}
-//               width={200}
-//               height={200}
-//               className={styles.productImage}
-//             />
-//             <div className={styles.productDetails}>
-//               <h2>{product.name}</h2>
-//               <p>{product.description}</p>
-//               <div className={styles.productActions}>
-//                 <FaHeart className={styles.icon} />
-//                 <FaShoppingCart className={styles.icon} />
-//                 <FaEye className={styles.icon} />
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CategoryPage;
-
-
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -85,27 +7,18 @@ import { useRouter, useParams } from 'next/navigation';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../../../components/Loader";
-
-
 import CartSidebar from '../../../../components/Home/CartSidebar';
 import WishlistSidebar from '../../../../components/Home/WishlistSidebar';
-
-
-
 import {
     FaHeart, FaEye, FaShoppingCart, FaStar,
      FaSearch, FaBars, FaTimes, FaTag, FaFilter,
     FaSortAmountUp, FaSortAmountDown,
     FaArrowLeft, FaArrowRight
   } from 'react-icons/fa';
-  
-  
-  import ReactPaginate from 'react-paginate';
+import ReactPaginate from 'react-paginate';
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../../../../styles/home.module.css";
-
-// import ReactPaginate from 'react-paginate';
 
 const CategoryPage = () => {
   const router = useRouter();
@@ -390,7 +303,7 @@ const QuickViewModal = ({
                   <p className={styles.price}>₹{product.price}</p>
                   <p className={styles.discountPrice}>₹{product.discountPrice}</p>
                 </div>
-                <p>Sales: {product.salesCount} | Views: {product.viewsCount}</p>
+                {/* <p>Sales: {product.salesCount} | Views: {product.viewsCount}</p> */}
                 <div className={styles.product_icons}>
                   <FaHeart
                     onClick={() => handleAddToWishlist(product)}
