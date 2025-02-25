@@ -21,7 +21,8 @@
   border-radius: 8px;
   /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   transition: all 0.3s ease;
-  padding: 20px;
+  /* padding: 20px; */
+  padding: 20px 20px 20px 10px;
 }
 
 .sidebarOpen {
@@ -71,12 +72,12 @@
 /* Filter Sections */
 .filters h3 {
   margin-bottom: 10px;
-  font-size: 18px;
-  color: #333;
   display: flex;
   align-items: center;
   font-size: 1.5rem;
-    color: #333;
+  font-family: inherit;
+  color: #1f1f39;
+  line-height: 1;
     font-weight: 600;
 }
 
@@ -387,7 +388,7 @@
   
   border-radius: 12px;
   padding: 5px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1); */
   /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.4s ease, box-shadow 0.4s ease; */
@@ -697,6 +698,14 @@
   color: #777;
   /* margin-bottom: 8px; */
   margin: 8px 0;
+}
+
+.conmmanClassname svg {
+  fill: none;
+  border-color: #ffc107;
+  stroke-width: 30;
+  stroke: #ffe254;
+  margin: 0 5px 0 0;
 }
 
 
@@ -1451,10 +1460,10 @@ color: #d04e18;
     gap: 8px;
   }
 
-  .CategorySection ul li{
-    /* display: block; */
+  /* .CategorySection ul li{
+    display: block;
     
-  }
+  } */
 
 
   .price_quick {
@@ -1491,7 +1500,7 @@ height: 40px;
 
   .productsGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 5px;
   }
   .mainproduct_images {
     height: 150px;
@@ -1516,6 +1525,7 @@ height: 40px;
   .product_iconsto {
     top: 10px;
     right: 10px;
+    display: none;
   }
   .product_iconsto svg{
    font-size: 1.1rem;
@@ -1613,7 +1623,11 @@ height: 40px;
  
   .filters .filtersidebarToggleclose {
   position: absolute;
-  right: 10px; 
+  right: 20px; 
+  top: 45px;
+  font-family: inherit;
+    color: #1f1f39;
+    line-height: 1;
   }
 
   .filters {
@@ -1626,7 +1640,7 @@ height: 40px;
 transition: all 0.3s ease-out;
 height: 1.8em;
         width: 1.8em;
-        font-size: 1.2rem;
+        font-size: 1rem;
  }
 
   .sidebarToggle svg:hover,
@@ -1651,7 +1665,15 @@ height: 1.8em;
     background-color: #fefefe;
     overflow-y: scroll; /* Set vertical scroll */
     overflow-x: hidden; /* Prevent horizontal scroll if needed */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    /* box-shadow: 0 10px 100px rgba(0, 0, 0, 0.1); */
   }
+
+.sidebarOpen::-webkit-scrollbar {
+      display: none; /* For Chrome, Safari, and Opera */
+  }
+
   
   /* Scrollbar styling for WebKit browsers (Chrome, Safari) */
   .sidebarOpen::-webkit-scrollbar {

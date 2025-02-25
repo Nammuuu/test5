@@ -654,7 +654,7 @@ const toggleShowAllTags = () => setShowAllTags(!showAllTags);
           {/* Category Filter */}
           <div className={styles.CategorySection}>
 
-          <h3><FaTag /> Category</h3>
+          <h3>Category</h3>
 
          
         
@@ -693,7 +693,8 @@ const toggleShowAllTags = () => setShowAllTags(!showAllTags);
           {/* Rating Filter */}
 
           <div className={styles.RatingSection}>
-          <h3><FaTag /> Rating</h3>
+          {/* <h3><FaTag /> Rating</h3> */}
+          <h3>Rating</h3>
           <div className={styles.RatingList}>
             <ul>
               {[1, 2, 3, 4, 5].map((rating) => (
