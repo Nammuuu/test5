@@ -137,7 +137,7 @@ const handleCheckout = () => {
 
               {/* Product Details */}
               <div className={styles.itemDetails}>
-                <h4>{item.name.length > 20 ? item.name.slice(0, 20) + '...' : item.name}</h4>
+                <h4>{item.name.length > 15 ? item.name.slice(0, 15) + '...' : item.name}</h4>
 
                   {/* Price Display */}
               <div className={styles.priceControlContainer}>
@@ -186,7 +186,7 @@ const handleCheckout = () => {
 
       {cartItems.length > 0 && (
         <div className={styles.footer}>
-          <h3>Subtotal: <span> ${totalAmount.toFixed(2)} </span></h3>
+          <h3>Subtotal <span> ${totalAmount.toFixed(2)} </span></h3>
          
 
            <Link className={styles.checkoutButton}
