@@ -315,19 +315,34 @@
 }
 
 .tag {
-  background-color: #f23e14;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 16px;
-  cursor: pointer;
-  text-transform: capitalize;
-  transition: background-color 0.3s ease;
+ 
+border-radius: 10px;
+border: none;
+font-family: inherit;
+line-height: 1;
+padding: 10px;
+font-size: .75rem;
+cursor: pointer;
+margin: 0;
+height: 30px;
+justify-content: center;
+align-items: center;
+text-align: center;
+display: flex;
+border: 1px solid #ddd;
+text-transform: capitalize;
+background-color: #f7f7fc;
+color: #1f1f39;
+transition: background-color .3sease;
 }
+
+
 
 
 
 .tag:hover {
   background-color: #d83612;
+  color: #fff;
 }
 
 /* Product Section */
@@ -1448,12 +1463,14 @@ color: #d04e18;
 /* Sidebar styles for screens with max width of 700px */
 @media (max-width: 700px) {
 
-
+  .filters h2 {
+    font-size: 1.2rem;
+  }
   .CategorySection ul{
     font-size: small;
     list-style: none;
     padding: 0;
-    margin: 1px 15px;
+    margin: 1px 2px;
     text-transform: capitalize;
     display: flex;
     flex-wrap: wrap;
@@ -1695,14 +1712,27 @@ height: 1.8em;
   
   /* Scrollbar styling for Firefox */
   .sidebarOpen {
-    scrollbar-width: thin; /* Makes scrollbar thin */
-    scrollbar-color: #888 #f1f1f1; /* Thumb color and track color */
-  }
-  
-
+    scrollbar-width: none; 
+   -ms-overflow-style: none; 
+  box-shadow: 11px 0 100px rgba(0, 0, 0, 0.1);
 }
 
+.sidebarOpen::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+  .CategorySection button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  .tagsSection button
+  {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
 
+}
 
 
 

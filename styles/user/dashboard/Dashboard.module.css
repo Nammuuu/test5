@@ -210,7 +210,9 @@
   /* Responsive Design */
   @media (max-width: 768px) {
 
-  
+  .iconsContainer {
+    display: none;
+  }
     .container {
       margin: 60px 0 0 0;
       height: auto;
@@ -219,7 +221,11 @@
   text-align: left;
 }
 
-
+.userProfiledis {
+  display: none;
+    align-items: center;
+    position: relative;
+}
 
 
     .searchBar {
@@ -273,7 +279,15 @@
 /* Orders Section end*/
 .link {
   text-decoration: none;
-  color: #fff;
+  color: #1f1f39;
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
 } 
 
 /* ordrr component css  */
@@ -527,8 +541,9 @@
 
 /* Sidebar */
 .sidebar {
-  background-color: rgb(31 31 57);
-  color: #ffffff;
+  /* background-color: rgb(31 31 57); */
+  background-color: #fff;
+  color: #1f1f39;
   width: 250px;
   padding: 20px;
   transition: transform 0.3s ease-in-out;
@@ -551,21 +566,28 @@
 
 .sidebar ul li {
   display: flex;
-  align-items: center;
-  padding: 10px 0;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  color: #fff;
-    font-size: 1.3rem;
-    text-transform: capitalize;
-    gap: 10px;
+      align-items: center;
+      padding: 15px 0;
+      cursor: pointer;
+      transition: background-color .3sease;
+      font-size: 1.3rem;
+      text-transform: capitalize;
+      gap: 10px;
+      width: 100%;
+      border-bottom: 1px solid #10101012;
+      /* border: 1px solid #ddd; */
+      text-transform: capitalize;
+      /* background-color: #f7f7fc; */
+      color: #1f1f39;
+      font-weight: 500;
+      line-height: 1.5;
 }
 
-.sidebar ul li:hover {
+/* .sidebar ul li:hover {
   background-color: #374151;
   border-radius: 5px;
   color: #1d4ed8;
-}
+} */
 
 .sidebar ul li svg {
   margin-right: 10px;
@@ -598,7 +620,8 @@
   }
 
   .sidebar {
-      width: 70%;
+      width: 75%;
+      box-shadow: 11px 0 100px rgba(0, 0, 0, 0.1);
   }
 
   .mainContent {

@@ -161,7 +161,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
       <div className={styles.iconsContainer}>    
-          <div className={styles.userProfile}>
+          <div className={styles.userProfiledis}>
           <Image
         src={userData?.profilePicture || "/default-profile.png"}
         alt="Profile"
