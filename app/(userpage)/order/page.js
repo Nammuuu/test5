@@ -127,47 +127,6 @@ const OrderPage = () => {
   }, []);
 
 
-
-  // for user 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     const token = localStorage.getItem('token');
-
-  //   if (!token) {
-  //     console.error("user tokan issu")
-  //     return;
-  //   }
-
-  //     try {
-  //       const { data } = await axios.get(`/api/user/me/profile`, {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-         
-  //       if (data) {
-  //         setShippingAddress({
-  //           fullName: data.fullName || '',
-  //           address: data.address || '',
-  //           address2: data.address2 || '',
-  //           phoneNo: data.phoneNo || '',
-  //           city: data.city || '',
-  //           state: data.state || '',
-  //           landmark: data.landmark || '',
-  //           country: data.country || '',
-  //           pinCode: data.pinCode || '',
-  //         });
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching user data:', error.response?.data?.message || error.message);
-  //     }
-  //   };
-  
-  //   fetchUserData();
-  // }, []);
-  
-
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
@@ -727,8 +686,8 @@ const OrderPage = () => {
               <Image
                 src={item.media[0] || '/default-image.png'}
                 alt={item.name}
-                width={100}
-                height={100}
+                width={900}
+                height={900}
                 className={styles.orderImage}
                 priority
               />
