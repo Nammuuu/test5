@@ -40,6 +40,7 @@ const OrderPage = () => {
   const [paymentSettings, setPaymentSettings] = useState({});
   const [inputerrors, setInputerrors] = useState({});
   const router = useRouter();
+  
   const searchParams = useSearchParams();
 
   const stripe = useStripe();
@@ -248,6 +249,7 @@ const OrderPage = () => {
   
   const handleOrderSubmit = async () => {
 
+
     if (!validateForm()) {
       return;  // Exit if the form is not valid
     }
@@ -272,6 +274,8 @@ const OrderPage = () => {
       alert('Please fill in all the required address fields.');
       return;
     }
+    setLoading(true);
+
     const discount = couponDiscount || (globalCoupon ? globalCoupon.discount : 0);
     const finalTotal = couponDiscount > 0 ? totalAmount - (totalAmount * couponDiscount) / 100 : totalAmount;
     const discountedTotal = discount === 0 ? totalAmount : finalTotal;
@@ -303,6 +307,7 @@ const OrderPage = () => {
     };
 
     try {
+      setLoading(true);
       let paymentSuccess = false;
 
 
@@ -533,8 +538,13 @@ const OrderPage = () => {
         }
       }
     } catch (error) {
+      setLoading(false);
       console.error('Error placing order:', error);
       alert('An error occurred while placing the order.');
+    }
+
+    finally {
+      setLoading(false);
     }
   };
 

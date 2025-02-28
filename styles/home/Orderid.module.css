@@ -217,6 +217,28 @@
   color: #333;
 }
 
+/* size color  */
+.sizecolor {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #333;
+}
+
+.sizecolor p {
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.sizecolor p:hover {
+  color: #000;
+}
+
+.sizecolor p:first-of-type::after {
+  content: '|'; /* Adds a pipe separator between size and color */
+  margin-left: 5px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
 
@@ -274,35 +296,76 @@
 
 }
 
-@media (max-width: 308px) {
+@media (max-width: 380px) {
+
+  .modalHeader,
+  .orderDetailsSection,
+  .orderItemsSection,
+  .shippingAddressSectionx {
+    padding: 10px 10px;
+  }
+
+  .shippingAddressSectionx h2 {
+    display: flex;
+        justify-content: left;
+        gap: 10px;
+        margin: .4rem 0;
+        color: #1f1f39;
+        font-weight: 650;
+        font-size: 1.2rem;
+  }
 
 
+.pageWrapper {
+  background-color: #ffff;
+}
 .displayflexx {
+  padding: 10px 10px;
   justify-content: center;
 }
-
+.confirmIcon {
+  font-size: 20px;
+}
+.modalBox {
+  box-shadow: none;
+        border-radius: 0px;
+}
+.shippingAddressSection p {
+  justify-content: space-between;
+    padding: 10px 50px 5px 0;
+    color: #1f1f39; 
 }
 
-
-
-/* size color  */
 .sizecolor {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: #333;
+  flex-wrap: wrap;
 }
-
+.productDetails p{
+  margin: .4rem 0;
+  color: #1f1f39;
+    font-weight: 650;
+    font-size: medium;
+}
 .sizecolor p {
-  font-size: 1.1rem;
   text-transform: capitalize;
+    font-weight: 450;
+    font-size: .95rem;
+    margin: 0;
 }
 
-.sizecolor p:hover {
-  color: #000;
+.orderDetailsSection h2,
+.orderItemsSection h2,
+.shippingAddressSection h2 {
+display: flex;
+    justify-content: left;
+    gap: 10px;
+    margin: .4rem 0;
+    color: #1f1f39;
+    font-weight: 650;
+    font-size: 1.2rem;
 }
 
-.sizecolor p:first-of-type::after {
-  content: '|'; /* Adds a pipe separator between size and color */
-  margin-left: 5px;
 }
+
+
+
+
