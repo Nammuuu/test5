@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { AuthContext } from '../../../components/context/AuthContext';
 // import styles from '../../../styles/home/Order.module.css';
 import styles from '../../../styles/home/Orderto.module.css';
-import { showToast } from '../../../components/toastUtil';
+// import { showToast } from '../../../components/toastUtil';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 
@@ -74,9 +74,13 @@ const OrderPage = () => {
           },
         });
 
+        // if (!response.ok) {
+        //   router.push('/login');
+        //   return;
+        // }
+
         if (!response.ok) {
-          router.push('/login');
-          return;
+          throw new Error("Failed to fetch user data");
         }
 
         const data = await response.json();
@@ -528,12 +532,12 @@ const OrderPage = () => {
 
         if (orderResponse.ok) {
           const data = await orderResponse.json();
-          toast.success('Order placed successfully 3!', { autoClose: 3000 }); 
+          // toast.success('Order placed successfully 3!', { autoClose: 3000 }); 
           console.log("cod data",data)
-          // router.push(`/orderconfirm/${data.orderId}`);
-          setTimeout(() => {
+          router.push(`/orderconfirm/${data.orderId}`);
+          
             router.push(`/orderconfirm/${data.orderId}`);
-          }, 100);
+         
           
         } else {
           const errorData = await orderResponse.json();

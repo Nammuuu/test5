@@ -17,6 +17,8 @@ import Footer from "../components/Footer"
 import { usePathname } from "next/navigation";
 import "./globals.css";
 
+// import Head from "next/head";
+
 const inter = Inter({ subsets: ['latin'] });
 
 type RootLayoutProps = {
@@ -84,7 +86,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* <Navbar /> */}
           {!isAdminDashboard && <Navbar />}
           <ToastProvider />
-          <ToastContainer />
+          <ToastContainer 
+           position="bottom-left"
+           autoClose={5000}
+           hideProgressBar={false}
+           newestOnTop={false}
+           closeOnClick
+           rtl={false}
+           pauseOnFocusLoss
+           draggable
+           pauseOnHover
+           />
           {children}
           {/* <Footer /> */}
         {!isAdminDashboard && <Footer />}   {/* Uncomment if Footer is needed */}
