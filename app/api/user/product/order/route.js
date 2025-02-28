@@ -201,7 +201,7 @@ export async function POST(req) {
       })
     );
 
-    return NextResponse.json({ message: "Order placed successfully", orderId: newOrder._id }, { status: 201 });
+    return NextResponse.json({ message: "Order placed successfully backend error", orderId: newOrder._id }, { status: 201 });
   } catch (error) {
     console.error('Error placing order:', error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
