@@ -15,6 +15,7 @@ import Image from 'next/image';
 import axios from 'axios';
 import { FaStar, FaArrowLeft } from 'react-icons/fa';
 import Loader from "../../../components/Loader";
+import { RiArrowGoBackLine } from "react-icons/ri";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 const OrderPage = () => {
@@ -699,7 +700,7 @@ const OrderPage = () => {
     <div className={styles.checkoutPag}>
       {loading && <Loader />}
     <div className={styles.ShippingInformation}> 
-    <button className={styles.arrowButton} >  <FaArrowLeft /></button>
+    <button className={styles.arrowButton} >  <RiArrowGoBackLine /></button>
     <div className={styles.ShippingInformationh1}>
     <h1>Provide Your Shipping Information</h1>
     <p>Check your information before you continue</p>

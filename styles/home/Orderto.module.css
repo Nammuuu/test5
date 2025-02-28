@@ -291,7 +291,7 @@
 .ShippingInformationh1 p {
   font-size: 16px;
   color: #666; /* Text color for the paragraph */
-  margin: 5px 0 0 0;
+  margin: 10px 0 0 0;
 }
 
 
@@ -341,16 +341,21 @@
   }
   .ShippingInformation .arrowButton {
     padding: 0 0 0 10px;
+    font-size: 19px;
 }
 
   .ShippingInformationh1 h1 {
-    font-size: 14px;
+    font-size: medium;
     word-break: break-all;
+    color: inherit;
+    font-weight: 700;
   }
 
   .ShippingInformationh1 p {
-    font-size: 12px;
-    word-break: break-all;
+    font-size: 13px;
+        word-break: break-all;
+        font-weight: 600;
+        text-transform: capitalize;
   }
 
   
@@ -363,7 +368,7 @@
   .checkoutForm
    {
     /* width: 100%; */
-    padding: 10px;
+    padding: 10px 0;
     /* margin-bottom: 60px; */
     box-shadow: none;
   }
