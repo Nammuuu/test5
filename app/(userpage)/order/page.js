@@ -366,7 +366,7 @@ const OrderPage = () => {
 
                 if (orderResponse.ok) {
                   const data = await orderResponse.json();
-                  toast('Order placed successfully!', 'success');
+                  toast('Order placed successfully! 1', 'success');
                   router.push(`/orderconfirm/${data.orderId}`);
                 } else {
                   const errorData = await orderResponse.json();
@@ -480,7 +480,7 @@ const OrderPage = () => {
 
                 if (orderResponse.ok) {
                   const data = await orderResponse.json();
-                  toast('Order placed successfully!', 'success');
+                  toast('Order placed successfully! 2', 'success');
                   router.push(`/orderconfirm/${data.orderId}`);
                 } else {
                   const errorData = await orderResponse.json();
@@ -532,7 +532,7 @@ const OrderPage = () => {
 
         if (orderResponse.ok) {
           const data = await orderResponse.json();
-          toast.success('Order placed successfully!', 'success');
+          toast.success('Order placed successfully! 2', 'success');
           router.push(`/orderconfirm/${data.orderId}`);
         } else {
           const errorData = await orderResponse.json();

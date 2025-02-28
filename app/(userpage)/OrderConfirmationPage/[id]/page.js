@@ -3,6 +3,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useRouter, useParams } from 'next/navigation'; // Adjust imports as necessary
 import { AuthContext } from '../../../../components/context/AuthContext'; // Adjust the path as necessary
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const OrderConfirmationPage = () => {
   const [orderDetails, setOrderDetails] = useState(null);
