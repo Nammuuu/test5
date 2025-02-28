@@ -8,6 +8,8 @@ import styles from '../../../../styles/home/Orderid.module.css';
 import { FaBoxOpen, FaCheckCircle, FaShippingFast, FaCreditCard, FaMapMarkerAlt, FaClipboardList } from 'react-icons/fa';
 import Image from 'next/image';
 import Loader from "../../../../components/Loader";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const OrderConfirmationPage = () => {
   const [orderDetails, setOrderDetails] = useState(null);
@@ -93,7 +95,7 @@ const OrderConfirmationPage = () => {
       <div className={styles.displayflexx}>
       <FaCheckCircle className={styles.confirmIcon} />
       {/* <p><strong>Order ID:</strong> {orderDetails._id}</p> */}
-      <p><strong>Thank you for </strong> {orderDetails.shippingAddress.fullName}</p>
+      <p><strong>Thank you </strong> {orderDetails.shippingAddress.fullName}</p>
       </div>
       
      

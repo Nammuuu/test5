@@ -8,7 +8,9 @@ import { AuthContext } from '../../../components/context/AuthContext';
 // import styles from '../../../styles/home/Order.module.css';
 import styles from '../../../styles/home/Orderto.module.css';
 import { showToast } from '../../../components/toastUtil';
- 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
+
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import Image from 'next/image';
@@ -530,7 +532,7 @@ const OrderPage = () => {
 
         if (orderResponse.ok) {
           const data = await orderResponse.json();
-          showToast('Order placed successfully!', 'success');
+          toast.success('Order placed successfully!', 'success');
           router.push(`/orderconfirm/${data.orderId}`);
         } else {
           const errorData = await orderResponse.json();
