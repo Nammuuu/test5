@@ -532,7 +532,7 @@ const OrderPage = () => {
 
         if (orderResponse.ok) {
           const data = await orderResponse.json();
-          toast.success('Order placed successfully! 2', 'success');
+          toast.success('Order placed successfully! 3', 'success');
           router.push(`/orderconfirm/${data.orderId}`);
         } else {
           const errorData = await orderResponse.json();
