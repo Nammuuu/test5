@@ -497,11 +497,6 @@ const OrderPage = () => {
         }
 
 
-
-
-
-
-
         else if (paymentMethod === 'PayPal') {
           const response = await fetch('/api/payment/paypal', {
             method: 'POST',
@@ -532,8 +527,13 @@ const OrderPage = () => {
 
         if (orderResponse.ok) {
           const data = await orderResponse.json();
-          toast.success('Order placed successfully! 3', 'success');
-          router.push(`/orderconfirm/${data.orderId}`);
+          toast.success('Order placed successfully!'); 
+          console.log("cod data",data)
+          // router.push(`/orderconfirm/${data.orderId}`);
+          setTimeout(() => {
+            router.push(`/orderconfirm/${data.orderId}`);
+          }, 100);
+          
         } else {
           const errorData = await orderResponse.json();
           alert(`Order placement failed: ${errorData.message}`);
