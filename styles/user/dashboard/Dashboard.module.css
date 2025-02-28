@@ -567,7 +567,7 @@
 .sidebar ul li {
   display: flex;
       align-items: center;
-      padding: 15px 0;
+      padding: 8px 0;
       cursor: pointer;
       transition: background-color .3sease;
       font-size: 1.3rem;

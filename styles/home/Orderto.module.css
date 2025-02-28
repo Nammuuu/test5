@@ -357,6 +357,7 @@
   .checkoutPage {
     flex-direction: column;
     padding: 0px;
+    background-color: #fff;
   }
 
   .checkoutForm
@@ -364,7 +365,7 @@
     /* width: 100%; */
     padding: 10px;
     /* margin-bottom: 60px; */
-
+    box-shadow: none;
   }
 
  
