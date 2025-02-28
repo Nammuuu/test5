@@ -51,6 +51,8 @@ const OrderPage = () => {
   const [loading, setLoading] = useState(false);
   // const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
+  toast.configure();
+  
   useEffect(() => {
     setCouponCode('');
     setCouponDiscount(0);
