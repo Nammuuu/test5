@@ -1,6 +1,6 @@
 
 "use client"
-// import { showToast } from '../../../components/toastUtil';
+// import { toast } from '../../../components/toastUtil';
 
 import { useState, useEffect, useContext } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -212,7 +212,7 @@ const OrderPage = () => {
       if (productCoupon) {
         const appliedCoupon = productCoupon.coupons.find((coupon) => coupon.code === couponCode);
         setCouponDiscount(appliedCoupon.discount);
-        showToast(`Product coupon applied! ${appliedCoupon.discount}% discount`, 'success');
+        toast(`Product coupon applied! ${appliedCoupon.discount}% discount`, 'success');
         return;
       }
 
@@ -232,7 +232,7 @@ const OrderPage = () => {
       }
 
       setCouponDiscount(data.discount);
-      showToast(`Global coupon applied! ${data.discount}% discount`, 'success');
+      toast(`Global coupon applied! ${data.discount}% discount`, 'success');
     } catch (error) {
       console.error('Error applying coupon:', error);
       alert('Failed to apply coupon');
@@ -246,7 +246,7 @@ const OrderPage = () => {
     setCouponCode('');
     setCouponDiscount(0);
     setGlobalCoupon(null);
-    showToast('Coupon removed', 'info');
+    toast('Coupon removed', 'info');
   };
   
   const handleOrderSubmit = async () => {
@@ -366,7 +366,7 @@ const OrderPage = () => {
 
                 if (orderResponse.ok) {
                   const data = await orderResponse.json();
-                  showToast('Order placed successfully!', 'success');
+                  toast('Order placed successfully!', 'success');
                   router.push(`/orderconfirm/${data.orderId}`);
                 } else {
                   const errorData = await orderResponse.json();
@@ -480,7 +480,7 @@ const OrderPage = () => {
 
                 if (orderResponse.ok) {
                   const data = await orderResponse.json();
-                  showToast('Order placed successfully!', 'success');
+                  toast('Order placed successfully!', 'success');
                   router.push(`/orderconfirm/${data.orderId}`);
                 } else {
                   const errorData = await orderResponse.json();
