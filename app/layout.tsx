@@ -86,7 +86,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* <Navbar /> */}
           {!isAdminDashboard && <Navbar />}
           <ToastProvider />
-          <ToastContainer 
+          {/* <ToastContainer 
           position="top-right"
           autoClose={5000}
           hideProgressBar={false}
@@ -98,7 +98,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           pauseOnHover
           theme="light"
 
-           />
+           /> */}
           {children}
           {/* <Footer /> */}
         {!isAdminDashboard && <Footer />}   {/* Uncomment if Footer is needed */}
