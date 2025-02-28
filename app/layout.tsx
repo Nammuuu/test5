@@ -87,15 +87,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {!isAdminDashboard && <Navbar />}
           <ToastProvider />
           <ToastContainer 
-           position="bottom-left"
-           autoClose={5000}
-           hideProgressBar={false}
-           newestOnTop={false}
-           closeOnClick
-           rtl={false}
-           pauseOnFocusLoss
-           draggable
-           pauseOnHover
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+
            />
           {children}
           {/* <Footer /> */}
