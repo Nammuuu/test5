@@ -528,7 +528,7 @@ const OrderPage = () => {
 
         if (orderResponse.ok) {
           const data = await orderResponse.json();
-          toast.success('Order placed successfully!'); 
+          // toast.success('Order placed successfully!', { autoClose: 3000 }); 
           console.log("cod data",data)
           // router.push(`/orderconfirm/${data.orderId}`);
           setTimeout(() => {
