@@ -90,48 +90,29 @@ const OrderConfirmationPage = () => {
       {loading && <Loader />}
       <div className={styles.modalBox}>
 
-      <div className={styles.conatinerorserid}> 
+   {/*    <div className={styles.conatinerorserid}> 
      
       <div className={styles.displayflexx}>
       <FaCheckCircle className={styles.confirmIcon} />
-      {/* <p><strong>Order ID:</strong> {orderDetails._id}</p> */}
+     
       <p><strong>Thank you </strong> {orderDetails.shippingAddress.fullName}</p>
       </div>
       
      
+     </div> */}
+
+
+<div className={styles.modalHeader}>
+        
+        <h1>Thank You for Your Purchase!</h1>
+        <p>Your order has been placed successfully. We will notify you once its shipped.</p>
      </div>
-
-
-
          
 
         <div className={styles.gridContainer}>        
 
-          <div className={styles.shippingAddressSectionx}>
-            <h2><FaMapMarkerAlt /> Shipping Address</h2>
-            <div className={styles.shippingAddressSection}>
 
-            
-<div>
-            <p><strong>Address:</strong> {orderDetails.shippingAddress.address}</p>
-            {orderDetails.shippingAddress.address2 && <p><strong>Address 2:</strong> {orderDetails.shippingAddress.address2}</p>}
-            <p><strong>Landmark:</strong> {orderDetails.shippingAddress.landmark}</p>
-            </div>
-
-            <div>
-            <p><strong>City:</strong> {orderDetails.shippingAddress.city}</p>
-            <p><strong>State:</strong> {orderDetails.shippingAddress.state}</p>
-            <p><strong>Country:</strong> {orderDetails.shippingAddress.country}</p>
-            <p><strong>PinCode:</strong> {orderDetails.shippingAddress.pinCode}</p>
-            <p><strong>Phone:</strong> {orderDetails.shippingAddress.phoneNo}</p>
-            </div>
-
-           
-            </div>
-          </div>
- 
-
-          <div className={styles.orderItemsSection}>
+        <div className={styles.orderItemsSection}>
           <h2><FaBoxOpen /> Your Order</h2>
           <ul className={styles.orderItemsList}>
             {orderDetails.orderItems.map((item) => (
@@ -186,14 +167,35 @@ const OrderConfirmationPage = () => {
         </div> 
 
         </div>
+        
+          <div className={styles.shippingAddressSectionx}>
+            <h2><FaMapMarkerAlt /> Shipping Address</h2>
+            <div className={styles.shippingAddressSection}>
+
+            
+<div>
+            <p><strong>Address:</strong> {orderDetails.shippingAddress.address}</p>
+            {orderDetails.shippingAddress.address2 && <p><strong>Address 2:</strong> {orderDetails.shippingAddress.address2}</p>}
+            <p><strong>Landmark:</strong> {orderDetails.shippingAddress.landmark}</p>
+            </div>
+
+            <div>
+            <p><strong>City:</strong> {orderDetails.shippingAddress.city}</p>
+            <p><strong>State:</strong> {orderDetails.shippingAddress.state}</p>
+            <p><strong>Country:</strong> {orderDetails.shippingAddress.country}</p>
+            <p><strong>PinCode:</strong> {orderDetails.shippingAddress.pinCode}</p>
+            <p><strong>Phone:</strong> {orderDetails.shippingAddress.phoneNo}</p>
+            </div>
+
+           
+            </div>
+          </div>
+ 
+
 
       </div>
 
-      <div className={styles.modalHeader}>
-        
-      <h1>Thank You for Your Purchase!</h1>
-      <p>Your order has been placed successfully. We will notify you once its shipped.</p>
-   </div>
+
    
       <div className={styles.actionSectionx}>
       <Link href={"/me/myorder"} className={styles.trackOrderButtonto}>
