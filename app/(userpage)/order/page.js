@@ -536,7 +536,7 @@ const OrderPage = () => {
           console.log("cod data",data)
           router.push(`/orderconfirm/${data.orderId}`);
           
-            router.push(`/orderconfirm/${data.orderId}`);
+            // router.push(`/orderconfirm/${data.orderId}`);
          
           
         } else {
