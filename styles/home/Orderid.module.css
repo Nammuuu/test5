@@ -294,6 +294,11 @@
   margin: 20px 0;
 }
 
+.orderItemsSection, .orderDetailsSection, .shippingAddressSectionx, .modalHeader {
+  border-radius: 0px;  
+}
+
+
 }
 
 @media (max-width: 380px) {
@@ -334,7 +339,7 @@
   justify-content: space-between;
   padding: 5px 50px 5px 0;
   color: #1f1f39;
-  border-bottom: 1px solid #b2bcf129;
+  /* border-bottom: 1px solid #b2bcf129; */
   margin: 2px 0;
 }
 

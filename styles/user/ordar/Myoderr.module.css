@@ -16,8 +16,11 @@
     font-size: 2rem;
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: inherit;
     position: relative;
+    margin: 5px;
+    border-bottom: 1px solid #e9e7f073;
+    padding: 0 0 10px 0;
   }
 
  
@@ -115,45 +118,7 @@
     transform: scale(1.05);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
-  
-  /* Responsive Styling */
-  @media (max-width: 768px) {
-
-    .invoiceButton { 
-      width: max-content;
-    border: none;
-    gap: 5px;
-    font-size: 14px;
-    font-weight: 400;
-    }
-    .topBar {
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 0 0 ; 
-     border: none;
-    }
-    .topBar button {
-      width: 100% !important;
-      font-size: 14px !important;
-    font-weight: 400 !important;
-    }
-    .myOrdersContainerone {
-      padding: 10px;
-      
-    }
-  
-    .orderCard {
-      padding: 20px 10px;
-    }
-  .productImage{
-    width: 100px;
-    height: 100px;
-  }
-    .buttons {
-     display: flex;
-    }
-  }
-  
+    
   /* Order Items Styling */
   .orderItem {
     display: flex;
@@ -267,6 +232,46 @@
   .homeLink:hover {
     background-color: #d04e18;
   }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+
+      .invoiceButton { 
+        width: max-content;
+      border: none;
+      gap: 5px;
+      font-size: 14px;
+      font-weight: 400;
+      }
+      .topBar {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0 0 ; 
+       border: none;
+      }
+      .topBar button {
+        width: 100% !important;
+        font-size: 14px !important;
+      font-weight: 400 !important;
+      }
+      .myOrdersContainerone {
+        padding: 10px;
+        
+      }
+    
+      .orderCard {
+        padding: 0;
+        border-radius: 0px;
+          box-shadow: none;
+      }
+    .productImage{
+      width: 100px;
+      height: 100px;
+    }
+      .buttons {
+       display: flex;
+      }
+    }
   
   @media (max-width: 768px) {
     .noOrderMessage {
