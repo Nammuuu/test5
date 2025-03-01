@@ -235,9 +235,9 @@ const DashboardOverview = ({
 
   const getGreetingMessage = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return `Good Morning, ${adminName}`;
-    if (hour < 18) return `Good Afternoon, ${adminName}`;
-    return `Good Evening, ${adminName}`;
+    if (hour < 12) return `Good Morning! <span> ${adminName} </span>`;
+    if (hour < 18) return `Good Afternoon! <span>${adminName} </span>`;
+    return `Good Evening! <span>${adminName} </span>`;
   };
 
   // const stats = [

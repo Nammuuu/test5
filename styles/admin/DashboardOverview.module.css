@@ -117,7 +117,7 @@
   
   .cardTitle {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 8px;
     color: #fff;
     margin: 0;
@@ -125,7 +125,7 @@
   
   .cardValue {
     font-size: 0.90rem;
-    font-weight: 700;
+    font-weight: 600;
     color: #ffff;
     margin: 8px 0;
     margin-bottom: 4px;

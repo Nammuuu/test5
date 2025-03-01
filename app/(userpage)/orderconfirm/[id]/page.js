@@ -167,7 +167,7 @@ const OrderConfirmationPage = () => {
         </div> 
 
         </div>
-        
+
           <div className={styles.shippingAddressSectionx}>
             <h2><FaMapMarkerAlt /> Shipping Address</h2>
             <div className={styles.shippingAddressSection}>
