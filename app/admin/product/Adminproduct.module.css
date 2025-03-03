@@ -389,7 +389,7 @@
     
     border-radius: 12px;
     padding: 5px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1); */
     /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.4s ease, box-shadow 0.4s ease; */
@@ -969,44 +969,7 @@
     
     
   
-  /* Responsive Design */
-  @media (max-width: 768px) {
 
-
-    .quick_view_content {
-      flex-direction: column;
-      /* max-height: 90vh; */
-    }
-
-    .quickViewProduct_product_cart {
-      font-size: .90rem;
-    }
-  
-    .products { 
-      padding: 0px 0;
-    }
-    .searchBar {
-     
-      margin-top: 0px;
-     
-    }
-  
-    .searchInput {
-      flex-grow: unset;
-      width: 100%;
-    }
-  
-    .quickView_images_ccontainer, .quickViewProduct_container {
-      flex: unset;
-      width: 100%;
-    }
-  
-    .quickViewProduct_images {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-    }
-  }
   
   
   /* quickViewProduct end  */
@@ -1018,16 +981,7 @@
     }
   }
   
-  @media (max-width: 768px) {
-    .product_list {
-      grid-template-columns: repeat(2, 1fr);
-    }
 
-    .product_name {
-      font-size: 1rem;
-    }
-  }
-  
   @media (max-width: 480px) {
     .product_list {
       grid-template-columns: 1fr;
@@ -1288,13 +1242,7 @@
     position: relative;
   }
   
-  /* Responsive Layout */
-  @media (max-width: 768px) {
-    .modalContent {
-      grid-template-columns: 1fr; /* Stack columns on smaller screens */
-      max-width: 100%;
-    }
-  }
+
   
   /* Input Container */
   .inputcontainer {
@@ -1389,12 +1337,7 @@
     gap: 20px;
   }
   
-  @media (max-width: 768px) {
-    .couponContainer {
-      grid-template-columns: 1fr; /* Stack coupon inputs */
-    }
-  }
-  
+
   /* Buttons */
   .inputcontainerbuttons {
     display: flex;
@@ -1546,7 +1489,7 @@
   
     .productsGrid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      gap: 5px;
     }
     .mainproduct_images {
       height: 150px;
@@ -1735,8 +1678,68 @@
   }
   
 
+    /* Responsive Design */
+    @media (max-width: 768px) {
 
 
+      .quick_view_content {
+        flex-direction: column;
+        /* max-height: 90vh; */
+      }
+  
+      .quickViewProduct_product_cart {
+        font-size: .90rem;
+      }
+    
+      .products { 
+        padding: 0px 0;
+      }
+      .searchBar {
+       
+        margin-top: 0px;
+       
+      }
+    
+      .searchInput {
+        flex-grow: unset;
+        width: 100%;
+      }
+    
+      .quickView_images_ccontainer, .quickViewProduct_container {
+        flex: unset;
+        width: 100%;
+      }
+    
+      .quickViewProduct_images {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+      }
+    }
+
+  @media (max-width: 768px) {
+    .product_list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product_name {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Responsive Layout */
+  @media (max-width: 768px) {
+    .modalContent {
+      grid-template-columns: 1fr; /* Stack columns on smaller screens */
+      max-width: 100%;
+    }
+  }
+  @media (max-width: 768px) {
+    .couponContainer {
+      grid-template-columns: 1fr; /* Stack coupon inputs */
+    }
+  }
+  
 
   @media (max-width: 768px) { 
     .inputcontainer {
@@ -1745,9 +1748,23 @@
     }
     .modalOverlay {
       width: 90%;
+      height: 110vh;
+      bottom: 10px;
+      padding: 0 20px 0 20px;
+      align-items: self-start;
     }
+    .modalContent {
+      border-radius: 8px;
+      padding: 20px;
+      margin: 35px 0;
+    }
+   
   .modalContenthtag {
     display: none;
+  }
+  .view {
+    margin: 5px 0;
+    font-size: .9rem;
   }
   }
 

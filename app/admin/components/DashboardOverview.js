@@ -233,11 +233,18 @@ const DashboardOverview = ({
     setIsVisible(!isVisible);
   };
 
+  // const getGreetingMessage = () => {
+  //   const hour = new Date().getHours();
+  //   if (hour < 12) return `Good Morning!  ${adminName} `;
+  //   if (hour < 18) return `Good Afternoon! ${adminName} `;
+  //   return `Good Evening! <span>${adminName} </span>`;
+  // };
+
   const getGreetingMessage = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return `Good Morning! <span> ${adminName} </span>`;
-    if (hour < 18) return `Good Afternoon! <span>${adminName} </span>`;
-    return `Good Evening! <span>${adminName} </span>`;
+    if (hour < 12) return <>Good Morning! <span>{adminName}</span></>;
+    if (hour < 18) return <>Good Afternoon! <span>{adminName}</span></>;
+    return <>Good Evening! <span>{adminName}</span></>;
   };
 
   // const stats = [
@@ -249,9 +256,13 @@ const DashboardOverview = ({
 
   const stats = [
     { title: "Total Earnings", value: `$${totalSales}`, icon: <FaDollarSign />, color: "#ff0166", description: "Total sales revenue" },
+
     { title: "Total Orders", value: totalOrders, icon: <FaShoppingCart />, color: "#f23e14", description: "Number of orders placed" },
+    
     { title: "Total Products", value: totalProducts, icon: <FaBoxOpen />, color: "#6a45fe", description: "Products currently available" },
+
     { title: "Total Customers", value: totalUsers, icon: <FaUsers />, color: "#7d11e9", description: "Registered customers" },
+
     // { title: "Total Categories", value: totalCategories, icon: <FaTags />, color: "#9C27B0", description: "Product categories listed" },
     // { title: "Total Views Count", value: totalViewsCount, icon: <FaEye />, color: "#009688", description: "Total product views" }, // Use totalViewsCount
 

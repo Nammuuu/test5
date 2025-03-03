@@ -757,7 +757,7 @@ useEffect(() => {
       </Link> : 'Loading...'}
 
       <div className={styles.product_list_containet}>
-        <h4>{product.name.length > 20 ? product.name.slice(0, 20) + "..." : product.name}</h4>
+        <h4>{product.name.length > 15 ? product.name.slice(0, 15) + "..." : product.name}</h4>
         
         <p className={styles.conmmanClassname}>{renderRating(product.averageRating)}</p>
 
@@ -766,7 +766,7 @@ useEffect(() => {
           <p className={styles.price}>₹{product.price}</p>
           <p className={styles.discountPrice}>₹{product.discountPrice}</p>
         </div>
-        <p>Sales: {product.salesCount} | Views: {product.viewsCount}</p>
+        <p className={styles.view}>Sales: {product.salesCount} | Views: {product.viewsCount}</p>
         
 
       </div>

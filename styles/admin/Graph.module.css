@@ -35,6 +35,9 @@
   .graphContainer {
     margin-top: 0px;
     padding: 20px 0;
+    border-radius: 0;
+    margin-bottom: 35px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
     margin-bottom: 70px;
   }
 
