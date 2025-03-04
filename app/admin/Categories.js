@@ -212,9 +212,10 @@ const Categories = ( { params }) => {
                   height={400}
                   priority
                 />
-                <h3 className={styles.categoryName} >{category.name}</h3>
+                
                </div>
             <div className={styles.categoryCardButton}>
+            <h3 className={styles.categoryName} >{category.name}</h3>
             <button onClick={() => handleDelete(category._id)} disabled={loading}>
                 <FaTrash />
               </button>   

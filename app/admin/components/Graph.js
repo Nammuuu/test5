@@ -7,7 +7,7 @@ import { Bar } from 'react-chartjs-2';
 import styles from "../../../styles/admin/Graph.module.css";
 import {
   Chart as ChartJS,
-  CategoryScale,
+  CategoryScale, 
   LinearScale,
   BarElement,
   Title,
