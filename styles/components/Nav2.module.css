@@ -522,6 +522,20 @@ display: none; /* For Chrome, Safari, and Opera */
     border-bottom: 2px solid #f3f3f3;
 }
 
+.moblogo {
+  width: 110px;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+    display: flex;
+    position: static;
+}
+
+.moblogo img {
+width: 100%;
+height: 100%;
+}
+
 .moblogo a {
 
   text-decoration: none;
