@@ -358,7 +358,7 @@ import CartSidebar from "../../../components/Home/CartSidebar";
 import WishlistSidebar from "../../../components/Home/WishlistSidebar";
 import Auth from "../../../app/(auth)/autth"
 import Loader from "../../../components/Loader"
-
+import Image from "next/image";
 
 const Navbar = ({ isOpen, toggleSidebar, setCurrentSection }) => {
  
@@ -383,6 +383,11 @@ const Navbar = ({ isOpen, toggleSidebar, setCurrentSection }) => {
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false); // State to track loading
   const [prevPathname, setPrevPathname] = useState(pathname);
+
+  const [logoUrl, setLogoUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
 
   const [formData, setFormData] = useState({
    
@@ -437,24 +442,27 @@ const Navbar = ({ isOpen, toggleSidebar, setCurrentSection }) => {
   }, []);
 
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
-  //   const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-  //   setCartItems(storedCart);
-  //   setWishlistItems(storedWishlist);
-  //   setWishlistUpdated(storedWishlist);
+  // for logo 
+  useEffect(() => {
+    const fetchLogo = async () => {
+      try {
+          const response = await axios.get("/api/admin/setting/logoclint", {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
 
-  //   if (token) {
-  //     try {
-  //       const decoded = jwtDecode(token);
-  //       setUser(decoded);
-  //       setUserId(decoded.userId);
-  //     } catch (error) {
-  //       console.error('Failed to decode token:', error);
-  //     }
-  //   }
-  // }, []);
+        setLogoUrl(response.data.themeSettings.loginlogo);
+      } catch (err) {
+        console.error("Error fetching logo:", err);
+        setError("Failed to load logo.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLogo();
+  }, []);
+
 
   const handleSignOut = () => {
     localStorage.removeItem('token');
@@ -558,7 +566,17 @@ useEffect(() => {
 
           <div className={styles.close_logo_container}>
                 <div className={styles.logo}>
-                <Link href="/" className="MainColor" onClick={() => handleLinkClick("/")}>{formData?.shopName}</Link>
+                {/* <Link href="/" className="MainColor" onClick={() => handleLinkClick("/")}>
+                {formData?.shopName}
+                </Link> */}
+                <Link href="/" className="MainColor" onClick={() => handleLinkClick("/")}>
+      {logoUrl ? (
+        <Image src={logoUrl} alt="Company Logo" width={900} height={900} priority />
+      ) : (
+        formData?.shopName
+      )}
+    </Link>
+
                </div>
 
           <div className={styles.navIcons}>
@@ -633,7 +651,15 @@ useEffect(() => {
           <div className={styles.mobnavbarHeader}>
 
             <div className={styles.moblogo}>
-              <Link className="MainColor" onClick={() => handleLinkClick("/")} href="/">{formData?.shopName}</Link>
+            <Link href="/" className="MainColor" onClick={() => handleLinkClick("/")}>
+      {logoUrl ? (
+        <Image src={logoUrl} alt="Company Logo" width={900} height={900} priority />
+      ) : (
+        formData?.shopName
+      )}
+    </Link>
+
+              {/* <Link className="MainColor" onClick={() => handleLinkClick("/")} href="/">{formData?.shopName}</Link> */}
             </div>
 
             <button className={`${styles.closeBtn} ${styles.navButton}`} onClick={toggleMenu}><TbX  /> </button>
