@@ -235,17 +235,17 @@ display: none; /* For Chrome, Safari, and Opera */
 /* Set custom heights for each bar */
 .hamburger .bar:nth-child(1) {
   height: 10px;
-  animation: barPulse 3s infinite ease-in-out;
+  /* animation: barPulse 3s infinite ease-in-out; */
 }
 
 .hamburger .bar:nth-child(2) {
   height: 10px;
-  animation: barPulseb 3s infinite ease-in-out;
+  /* animation: barPulseb 3s infinite ease-in-out; */
 }
 
 .hamburger .bar:nth-child(3) {
   height: 10px;
-  animation: barPulsec 3s infinite ease-in-out;
+  /* animation: barPulsec 3s infinite ease-in-out; */
 }
 
 

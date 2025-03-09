@@ -405,7 +405,14 @@ if (error) return <p style={{ color: "red" }}>{error}</p>;
           <div className={styles.mobnavbarHeader}>
 
             <div className={styles.moblogo}>
-              <Link className="MainColor" onClick={() => handleLinkClick("/")} href="/">{formData?.shopName}</Link>
+            <Link href="/" className="MainColor" onClick={() => handleLinkClick("/")}>
+      {logoUrl ? (
+        <Image src={logoUrl} alt="Company Logo" width={900} height={900} priority />
+      ) : (
+        formData?.shopName
+      )}
+    </Link>
+              {/* <Link className="MainColor" onClick={() => handleLinkClick("/")} href="/">{formData?.shopName}</Link> */}
             </div>
 
             <button className={`${styles.closeBtn} ${styles.navButton}`} onClick={toggleMenu}><TbX  /> </button>

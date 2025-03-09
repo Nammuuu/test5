@@ -76,6 +76,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
           rel="stylesheet"
         />
        
+       <link rel="icon" type="image/png" href="/fov.png" />
+       
       </head>
 
      
