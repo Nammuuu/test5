@@ -11,6 +11,12 @@ import styles from '../../../styles/admin/order/Order.module.css'; // Import the
 import Image from "next/image";
 import Loader from "../../../components/Loader";
 import ReactPaginate from 'react-paginate';
+import {
+  FaStar, FaSearch, FaBars, FaTimes, FaTag, FaFilter,
+  FaSortAmountUp, FaSortAmountDown, FaHeart, FaEye, FaShoppingCart,
+  FaArrowLeft, FaArrowRight
+} from 'react-icons/fa';
+
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
