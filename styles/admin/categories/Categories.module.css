@@ -54,7 +54,7 @@
 
 
 .categoryName {
-  font-size: 1.4rem; /* Adjust font size for a balanced look */
+  font-size: 1.2rem; /* Adjust font size for a balanced look */
   font-weight: 600; /* Make it bold to stand out */
   color: #333; /* Use a dark neutral color */
   text-align: center; /* Center-align the text */
@@ -211,8 +211,8 @@
   }
   
   .categoryCardButton button {
-    background-color: rgb(242, 62, 20); /* Use the primary color */
-    color: white;
+    background-color: #fff;
+    color: rgb(242, 62, 20);
     border: none;
     border-radius: 5px;
     padding: 8px 12px; /* Add padding for a better look */
@@ -220,7 +220,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth transition on hover */
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: center;
   }
   
@@ -235,7 +235,11 @@
   
   .categoryCardButton button svg {
     margin-right: 5px; /* Space between icon and text */
-    font-size: 18px; /* Adjust icon size */
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    text-align: center;
   }
   
 
@@ -263,6 +267,7 @@
       padding: 10px 10px;
     }
     .categoryCardButton {
+      gap: 10px;
       justify-content: center;
     }
 

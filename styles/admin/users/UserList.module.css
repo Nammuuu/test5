@@ -220,7 +220,8 @@
 @media (max-width: 576px) {
   /* Adjust container padding and title font size */
   .userContainer {
-    padding: 10px;
+    padding: 0px;
+    background-color: #fff;
   }
 
   .userContainer h2 {

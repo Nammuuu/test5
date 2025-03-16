@@ -12,6 +12,7 @@ import styles from '../../../../../styles/admin/blog/BlogDetails.module.css'; //
 import Link from 'next/link';
 import Navbar from '../../../../../components/Nav';
 import Loader from '../../../../../components/Loader';
+// import Loader from "../../../../components/Loader"
 
 
  
@@ -115,16 +116,16 @@ useEffect(() => {
 
 <div> 
 
-<p><strong>Author:</strong> {blog.author?.name || 'Unknown'}</p>
-<p><strong>Published:</strong> {blog.published ? 'Yes' : 'No'}</p>
-<p><strong>Created At:</strong> {new Date(blog.createdAt).toLocaleDateString()}</p>
-<p><strong>Last Updated:</strong> {new Date(blog.updatedAt).toLocaleDateString()}</p>
+<p><strong>Author:</strong> {blog?.author?.name || 'Unknown'}</p>
+<p><strong>Published:</strong> {blog?.published ? 'Yes' : 'No'}</p>
+<p><strong>Created At:</strong> {new Date(blog?.createdAt).toLocaleDateString()}</p>
+<p><strong>Last Updated:</strong> {new Date(blog?.updatedAt).toLocaleDateString()}</p>
 
 </div>
-  <h2>{blog.title}</h2>
-  <h3>{blog.heading}</h3>
+  <h2>{blog?.title}</h2>
+  <h3>{blog?.heading}</h3>
   <p><strong>Content:</strong></p>
-  <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+  <div dangerouslySetInnerHTML={{ __html: blog?.content }} />
 
   <Link onClick={() =>
    handleLinkClick("/admin/dashboard")} 

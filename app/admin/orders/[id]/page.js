@@ -1,146 +1,5 @@
 
 
-
-
-
-
-
-// "use client";
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { useRouter } from "next/navigation";
-// import { toast } from 'react-toastify';
-// import styles from '../../../../styles/admin/order/OrderId.module.css'; // Import the CSS module
-
-// const AdminOrderPage = ({ params }) => {
-//   const [order, setOrder] = useState(null);
-//   const [orderStatus, setOrderStatus] = useState('');
-//   const [loading, setLoading] = useState(false);
-// const router = useRouter();
-// const { id } = params;
-
-//   // Fetch order details by ID
-//   useEffect(() => {
-//     const token = localStorage.getItem('token');
-//     if (!token) {
-//       router.push('/login');
-//       return;
-//     }
-  
-//     const fetchOrder = async () => {
-//       try {
-//         const { data } = await axios.get(`/api/admin/orders/${id}`, {
-//           headers: { Authorization: `Bearer ${token}` },
-//         });
-//         setOrder(data.order);  // Access the order object directly
-//         setOrderStatus(data.order.orderStatus);  // Set the order status from the nested order object
-//       } catch (error) {
-//         toast.error('Error fetching order');
-//       }
-//     };
-  
-//     fetchOrder();
-//   }, [id, router]);
-  
-
-//   const updateOrderStatus = async () => {
-//     try {
-//       const token = localStorage.getItem('authToken');
-//       setLoading(true);
-//       await axios.put(
-//         `/api/admin/orders/${id}`,
-//         { orderStatus },
-//         { headers: { Authorization: `Bearer ${token}` } }
-//       );
-//       toast.success('Order status updated successfully');
-//       setLoading(false);
-//     } catch (error) {
-//       setLoading(false);
-//       toast.error('Error updating order status');
-//     }
-//   };
-
-//   const deleteOrder = async () => {
-//     if (confirm('Are you sure you want to delete this order?')) {
-//       try {
-//         const token = localStorage.getItem('authToken');
-//         await axios.delete(`/api/admin/orders/${id}`, {
-//           headers: { Authorization: `Bearer ${token}` },
-//         });
-//         toast.success('Order deleted successfully');
-//         router.push('/admin/orders');
-//       } catch (error) {
-//         toast.error('Error deleting order');
-//       }
-//     }
-//   };
-
-//   const getStatusColor = (status) => {
-//     switch (status) {
-//       case 'Processing':
-//         return 'orange';
-//       case 'Cancelled':
-//         return 'red';
-//       case 'Delivered':
-//         return 'green';
-//       case 'Pending':
-//         return 'blue';
-//       default:
-//         return 'gray';
-//     }
-//   };
-
-//   return (
-//     <div className={styles.orderContainer}>
-//       <h2 className={styles.ordertitlte} >Admin Order Management</h2>
-//       {order ? (
-//         <div className={styles.orderDetails}>
-//           <p>Order ID: {order._id}</p>
-//           <p>User: {order.user}</p>
-//           <p>Total Price: {order.totalPrice}</p>
-          
-//           {/* Applying the dynamic color for the order status */}
-//           <p style={{ color: getStatusColor(order.orderStatus) }}>
-//             Order Status: {order.orderStatus}
-//           </p>
-
-//           {/* Safely accessing shipping address details */}
-//           <p>Shipping Address:</p>
-//           <p>Full Name: {order.shippingAddress?.fullName}</p>
-//           <p>Address: {order.shippingAddress?.address}</p>
-//           <p>City: {order.shippingAddress?.city}</p>
-//           <p>Country: {order.shippingAddress?.country}</p>
-//           <p>Phone: {order.shippingAddress?.phoneNo}</p>
-
-//           <label htmlFor="orderStatus">Update Order Status:</label>
-//           <select
-//             id="orderStatus"
-//             value={orderStatus}
-//             onChange={(e) => setOrderStatus(e.target.value)}
-//           >
-//             <option value="Processing">Processing</option>
-//             <option value="Cancelled">Cancelled</option>
-//             <option value="Delivered">Delivered</option>
-//             <option value="Pending">Pending</option>
-//           </select>
-
-//           <button onClick={updateOrderStatus} disabled={loading}>
-//             {loading ? 'Updating...' : 'Update Status'}
-//           </button>
-
-//           <button onClick={deleteOrder}>Delete Order</button>
-//         </div>
-//       ) : (
-//         <p>Loading order details...</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default AdminOrderPage;
-
-
-
 "use client";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -153,7 +12,8 @@ import { FaStar, FaArrowLeft } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from "next/image";
 // import  Sidebar from "../../components/Sidebar"
-
+import Loader from "../../../../components/Loader";
+// import ReactPaginate from 'react-paginate';
 import  Navbar from "../../../../components/Nav"
 
 const AdminOrderPage = ({ params }) => {
@@ -258,33 +118,6 @@ const AdminOrderPage = ({ params }) => {
   };
   
   
-
-//   <div className={styles.couponSection}>
-// {/* Check if there's a coupon applied */}
-// {order.coupon ? (
-//   <>
-//     <h3>Applied Coupon</h3>
-//     <p>Coupon Code: <strong>{order.coupon.code}</strong></p>
-//     <p>Discount: <strong>{order.coupon.discount}%</strong></p>
-//   </>
-// ) : (
-//   <p>No Coupon Applied</p>
-// )}
-
-// {/* If specific products have a coupon applied */}
-// {order.orderItems.map((item) => (
-//   item.coupons && item.coupons.length > 0 && (
-//     <div key={item.product._id}>
-//       <h3>Product-Specific Coupon</h3>
-//       <p>Product: {item.product.name}</p>
-
-//       <p>Coupon Code: <strong>{item.coupons[0].code}</strong></p>
-//       <p>Discount: <strong>{item.coupons[0].discount}%</strong></p>
-//     </div>
-//   )
-// ))}
-// </div>
-
 
 
 const generatePDF = (order) => {
@@ -395,6 +228,7 @@ const navigateToHome = () => {
 
   return (
  <> <Navbar />
+ {loading && <Loader />}
     <div className={styles.orderContainermain}>
      
      {/* <div className={styles.ShippingInformation}> 
@@ -617,7 +451,7 @@ const navigateToHome = () => {
 
         </div>
       ) : (
-        <p>Loading order details...</p>
+        <Loader />
       )}
 
 </div>

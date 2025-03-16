@@ -160,7 +160,7 @@
   max-width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .content {
@@ -273,7 +273,7 @@
   height: auto;         /* Maintain aspect ratio */
   margin: 15px 0;       /* Add vertical spacing */
   border-radius: 10px;  /* Rounded corners for images */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better aesthetics */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Add shadow for better aesthetics */
 }
 
 /* Responsive Headings */

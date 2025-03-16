@@ -202,11 +202,26 @@ background-color: rgba(242, 61, 20, 0.571);
 }
 
 .selectStatus {
-  padding: 10px;
+  /* padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s; */
+
+  border-radius: 5px;
+    font-size: 14px;
+    transition: border-color .3s;
+    cursor: pointer;
+    display: flex;
+    text-transform: capitalize;
+    transition: background-color .3sease, color .3sease;
+    background-color: #f7f7fc;
+    color: #1f1f39;
+    border: none;
+    font-family: inherit;
+    line-height: 1;
+    padding: 10px;
+
 }
 
 .selectStatus:focus {
@@ -462,11 +477,16 @@ background-color: rgba(242, 61, 20, 0.571);
   .rightContainer {
     padding: 0px;
     width: 100%;
+    box-shadow: none;
     margin: 0 0 20px 0px;
           
   }
   .productCard {  
     padding: 10px 0;
+    background-color: #fff;
+    gap: 10px;
+    align-items: self-start;
+ box-shadow: none;
   }
 
   .productDetails {

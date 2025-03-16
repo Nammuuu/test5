@@ -7,6 +7,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import styles from '../../../../styles/admin/blog/BlogList.module.css'; // Import CSS module
 import Link from 'next/link';
+import Loader from "../../../../components/Loader"
+
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
@@ -70,11 +72,17 @@ const BlogList = () => {
     }
   };
 
+  
+  if (loading) return <Loader />;
+  if (error) return <p>{error}</p>;
+
+  
   return (
     <div className={styles.container}>
+      {loading && <Loader />}
       <h2>All Blogs</h2>
       {loading ? (
-        <p>Loading blogs...</p>
+        <Loader />
       ) : error ? (
         <p>{error}</p>
       ) : (
