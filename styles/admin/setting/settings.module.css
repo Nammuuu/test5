@@ -327,6 +327,11 @@ display: none;
 
 @media (max-width: 576px) {
  
+  .settingValue{
+  display: flex;
+  align-items: self-end;
+  text-align: right;
+  }
   .container {
     margin-top: 0px; 
   }
@@ -358,7 +363,7 @@ display: none;
         float: right;
         position: absolute;
         right: 0px;
-        top: 0px;
+        top: 10px;
         font-size: 2.15rem;
         color: #f03e17;
   }
@@ -376,8 +381,8 @@ display: none;
     height: 100%;
     z-index: 1000;
     /* transform: translateX(-100%); */
-    width: 60%;
-    padding: 50px 20px;
+    width: 90%;
+    padding: 50px 5px;
   }
 
   .sidebar.open {
@@ -400,7 +405,6 @@ display: none;
   .saveButton {
     /* padding-inline: 30px;  */
     margin-bottom: 20%;
-   
     display: flex;
     justify-content: center;
     align-items: center;
