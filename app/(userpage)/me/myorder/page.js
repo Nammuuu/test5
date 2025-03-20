@@ -120,10 +120,7 @@ const MyOrdersPage = () => {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [orders]);
-
-
-  
+  }, [orders]); 
   useEffect(() => {
     // GSAP Parallax Effect
     gsap.utils.toArray(".parallax").forEach((element) => {
@@ -162,13 +159,7 @@ const MyOrdersPage = () => {
     };
   }, []);
   
-
-
-
-
-
-
-  const handleCancelOrder = async (orderId) => {
+const handleCancelOrder = async (orderId) => {
     const confirmCancel = confirm("Are you sure you want to cancel this order?");
     if (!confirmCancel) return;
 
@@ -258,9 +249,6 @@ const MyOrdersPage = () => {
   </div>
   ;
   }
-
- 
-  
 
   const showOrderDetails = (orderId) => {
     setSelectedOrder(orderId);
@@ -362,6 +350,12 @@ const MyOrdersPage = () => {
             <div>
               <p  className={styles.titlell}>{item.product?.name.length > 30 ? item.product?.name.slice(0, 30) + "..." : item.product?.name}</p>
               <p>Quantity: {item.quantity}</p>
+              {item.selectedAttributes && Object.entries(item.selectedAttributes).map(([key, value]) => (
+  <p key={key}>
+    <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
+  </p>
+))}
+ 
               {item.size && <p>Size: {item.size}</p>}
               {item.color && <p>Color: {item.color}</p>}
             </div>
