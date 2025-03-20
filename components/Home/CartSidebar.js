@@ -147,18 +147,15 @@ const handleCheckout = () => {
 
 
               <div className={styles.selectedSize}>
-              {cart.map((item) => (
-  <div key={item._id} className={styles.cartItem}>
-    <div className={styles.selectedAttributes}>
-      {item?.selectedAttributes &&
-        Object.entries(item.selectedAttributes).map(([title, value], index) => (
-          <p key={index}>
-            <strong>{title}:</strong> {value}
-          </p>
-        ))}
-    </div>
-  </div>
-))}
+              <div className={styles.selectedAttributes}>
+  {item?.selectedAttributes &&
+    Object.entries(item.selectedAttributes).map(([title, value], index) => (
+      <p key={index}>
+        <strong>{title}:</strong> {value}
+      </p>
+    ))}
+</div>
+
 
               {item?.selectedSize && <p>  {item.selectedSize}</p>}
               
