@@ -30,7 +30,7 @@
   
   .bannerItem {
     /* min-width: 100%; */
-    min-width: 57%;
+    min-width: 37%;
     position: relative;
     transition: opacity 0.5s ease-in-out;
     /* opacity: 0; */
@@ -223,6 +223,12 @@
   @media (max-width: 768px) {
   
    
+    .bannerItem {
+    
+      min-width: 57%;
+     
+    }
+
     .bannerContainer {
       padding: 0px;
       margin: 0px auto 0;

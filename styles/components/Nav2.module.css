@@ -987,10 +987,6 @@ height: 100%;
 }
 
 
-.userActive {
-  color: #9b9b9b; 
-  opacity: 1;
-}
 
 .activenameloing {
   color: #666666;
@@ -1167,9 +1163,23 @@ height: 100%;
   height: 100%;
 }
 
+.userActive {
+  color: #444;
+    transition: color .3s ease, transform .3s ease;
+    cursor: pointer;
+    opacity: .8;
+}
+
+
 @media (min-width: 768px) {
 
- 
+  .userActive {
+    color: #9b9b9b; 
+    opacity: 1;
+  }
+  
+
+
   .sidePanel {
     width: 20%;
   }
