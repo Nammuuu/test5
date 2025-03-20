@@ -1295,10 +1295,12 @@ useEffect(() => {
   </button>
 </div>
 
+{/* ✅ Display Added Attributes */}
 {newProduct.attributes.map((attr, index) => (
   <div key={index} className={styles.attributeContainer}>
     <strong>{attr.title}</strong>
     <div className={styles.values}>
+      {/* ✅ Display added values */}
       {attr.values.map((value, i) => (
         <span key={i} className={styles.value}>
           {value}
@@ -1308,6 +1310,12 @@ useEffect(() => {
           />
         </span>
       ))}
+      {/* ✅ Show current typing value (temporary) */}
+      {attr.title === newTitle && newValue && (
+        <span className={styles.tempValue}>
+          {newValue}
+        </span>
+      )}
     </div>
     <FaTrash
       className={styles.removeIcon}
@@ -1315,6 +1323,31 @@ useEffect(() => {
     />
   </div>
 ))}
+
+{/* ✅ Show the typing value in the list if title matches */}
+{newTitle && currentValues.length > 0 && (
+  <div className={styles.attributeContainer}>
+    <strong>{newTitle}</strong>
+    <div className={styles.values}>
+      {currentValues.map((value, i) => (
+        <span key={i} className={styles.value}>
+          {value}
+          <FaTrash
+            className={styles.removeIcon}
+            onClick={() => handleRemoveValue(newTitle, value)}
+          />
+        </span>
+      ))}
+      {/* ✅ Display the live typing value */}
+      {newValue && (
+        <span className={styles.tempValue}>
+          {newValue}
+        </span>
+      )}
+    </div>
+  </div>
+)}
+
 
 
       

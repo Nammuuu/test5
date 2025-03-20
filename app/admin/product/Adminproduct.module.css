@@ -4,6 +4,16 @@
   margin-bottom: 10px;
 }
 
+.tempValue {
+  color: #888;
+  background-color: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+
 .input {
   padding: 8px;
   border: 1px solid #ccc;
