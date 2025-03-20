@@ -216,6 +216,17 @@ const [selectedAttributes, setSelectedAttributes] = useState({});
         return;
       }
     }
+      
+    // delete this 
+    if (product.colors.length > 0 && !selectedColor) {
+      toast.error('Please select a color.');
+      return;
+    }
+    if (product.sizes.length > 0 && !selectedSize) {
+      toast.error('Please select a size.');
+      return;
+    }
+    // delete this 
   
     setIsAddingToCart(true);
   
