@@ -324,11 +324,12 @@ addriboute value
 
 
 
- 01. Multiple Payment 
- 02.  thame satting
-   --- font color
+01. Multiple Payment 
+02.  thame satting
+  --- font color
   --product style --admin choose to display product design multi and also 
   show and hide titme price and rating  
+
 backendgrund color,
  --button color 
  --cardbgcolors 
@@ -356,7 +357,7 @@ thame satting
  --user images in navbar top and bottom
  --thame product banners up and down funsaliys 
  --display product by category in home page 
-gird prodcut api
+ --gird prodcut api
 
 npm i 
  @next/third-parties @paypal/checkout-server-sdk @stripe/react-stripe-js  @stripe/stripe-js   

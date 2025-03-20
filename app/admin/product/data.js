@@ -105,10 +105,10 @@ const itemsPerPage = 8;
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   // const [attributeName, setAttributeName] = useState('');
   // const [attributeValue, setAttributeValue] = useState('');
-  const [attributes, setAttributes] = useState([]);
   const [newTitle, setNewTitle] = useState('');
   const [newValue, setNewValue] = useState('');
-
+  const [currentValues, setCurrentValues] = useState([]);
+  const [attributes, setAttributes] = useState([]);
 
   useEffect(() => {
     const fetchInitialProducts = async () => {
@@ -196,52 +196,50 @@ const itemsPerPage = 8;
   };
 
 
- // ✅ Add new attribute
- const handleAddAttribute = () => {
-  if (newTitle.trim() && newValue.trim()) {
-    const existingAttribute = attributes.find(
-      (attr) => attr.title === newTitle
-    );
-
-    if (existingAttribute) {
-      // Add value to existing attribute
-      setAttributes((prev) =>
-        prev.map((attr) =>
-          attr.title === newTitle
-            ? {
-                ...attr,
-                values: [...new Set([...attr.values, newValue.trim()])],
-              }
-            : attr
-        )
-      );
-    } else {
-      // Create new attribute
-      setAttributes((prev) => [
-        ...prev,
-        { title: newTitle.trim(), values: [newValue.trim()] },
-      ]);
-    }
-
-    setNewTitle('');
-    setNewValue('');
+// ✅ Add value to current values list
+const handleAddValue = () => {
+  if (newValue.trim() && !currentValues.includes(newValue)) {
+    setCurrentValues((prev) => [...prev, newValue]);
+    setNewValue(''); // Clear input after adding
   }
 };
 
-// ✅ Remove value from attribute
+// ✅ Finalize the attribute with current values
+const handleAddAttribute = () => {
+  if (!newTitle.trim() || currentValues.length === 0) return;
+
+  setAttributes((prev) => {
+    const existingAttribute = prev.find(attr => attr.title === newTitle);
+    if (existingAttribute) {
+      return prev.map(attr =>
+        attr.title === newTitle
+          ? { ...attr, values: [...new Set([...attr.values, ...currentValues])] }
+          : attr
+      );
+    } else {
+      return [...prev, { title: newTitle, values: currentValues }];
+    }
+  });
+
+  // ✅ Reset inputs after adding
+  setNewTitle('');
+  setCurrentValues([]);
+};
+
+// ✅ Remove single value from an attribute
 const handleRemoveValue = (title, value) => {
   setAttributes((prev) =>
-    prev.map((attr) =>
+    prev.map(attr =>
       attr.title === title
-        ? { ...attr, values: attr.values.filter((v) => v !== value) }
+        ? { ...attr, values: attr.values.filter(v => v !== value) }
         : attr
-    )
+    ).filter(attr => attr.values.length > 0)
   );
 };
 
 // ✅ Remove entire attribute
 const handleRemoveAttribute = (title) => {
-  setAttributes((prev) => prev.filter((attr) => attr.title !== title));
+  setAttributes((prev) => prev.filter(attr => attr.title !== title));
 };
 
 
@@ -1257,7 +1255,9 @@ useEffect(() => {
          
 
 {/* ✅ Input for Attribute Name and Value */}
-<div className={styles.attributeInput}>
+<div>
+      {/* ✅ Input Fields */}
+      <div className={styles.attributeInput}>
         <input
           type="text"
           value={newTitle}
@@ -1272,12 +1272,37 @@ useEffect(() => {
           placeholder="Enter Attribute Value"
           className={styles.input}
         />
+        <button onClick={handleAddValue} className={styles.addButton}>
+          Add Value
+        </button>
         <button onClick={handleAddAttribute} className={styles.addButton}>
           Add Attribute
         </button>
       </div>
 
-      {/* ✅ Display Added Attributes */}
+      {/* ✅ Display Current Values before confirming */}
+      {currentValues.length > 0 && (
+        <div className={styles.currentValues}>
+          <strong>{newTitle}</strong>
+          <div className={styles.values}>
+            {currentValues.map((value, index) => (
+              <span key={index} className={styles.value}>
+                {value}
+                <FaTrash
+                  className={styles.removeIcon}
+                  onClick={() => setCurrentValues((prev) =>
+                    prev.filter((v) => v !== value)
+                  )}
+                />
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+
+
+      {/* ✅ Display Finalized Attributes */}
       {attributes.map((attr, index) => (
         <div key={index} className={styles.attributeContainer}>
           <strong>{attr.title}</strong>
@@ -1298,6 +1323,8 @@ useEffect(() => {
           />
         </div>
       ))}
+    </div>
+
       
 
  {/*add material */}
