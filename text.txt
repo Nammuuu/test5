@@ -302,7 +302,28 @@ final test
 // end 
 
 
+
+
+
 adnavce funsaanaliys
+
+add addriboute for products 
+size color meatiral payment update
+
+addriboute
+single addriboute 
+display in admin carete color, size, matrial 
+
+add button 
+addriboute 
+
+user show addriboute add 
+addriboute name 
+addriboute value 
+
+
+
+
  01. Multiple Payment 
  02.  thame satting
    --- font color
@@ -320,8 +341,7 @@ backendgrund color,
  --hover colors 
  --brands --comapte section with api
 advnace 
-add addriboute for products 
-size color meatiral payment update 
+
 phonepay payment getway 
 thame satting 
  --product grid 

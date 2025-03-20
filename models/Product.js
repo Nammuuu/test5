@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   stock: { type: Number, default: 0 },
   media: [{ type: String }], // Changed from productImages to media
-  category: { 
+  category: {  
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Category',
     required: true,
@@ -21,6 +21,11 @@ const ProductSchema = new mongoose.Schema({
   colors: [String],
   materials: [String],
 
+  attributes: [{
+    name: { type: String, required: true }, // Attribute name (e.g., Size, Color)
+    values: [{ type: String }] // Attribute values (e.g., Red, Small, Large)
+  }],
+  
   // New fields for tracking performance
   viewsCount: { type: Number, default: 0 }, // Number of views
   salesCount: { type: Number, default: 0 }, // Number of sales
