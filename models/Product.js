@@ -21,10 +21,13 @@ const ProductSchema = new mongoose.Schema({
   colors: [String],
   materials: [String],
 
-  attributes: [{
-    name: { type: String, required: true }, // Attribute name (e.g., Size, Color)
-    values: [{ type: String }] // Attribute values (e.g., Red, Small, Large)
-  }],
+  attributes: [
+    {
+      title: { type: String, required: true }, // ✅ Change from 'name' to 'title'
+      values: [{ type: String }]
+    }
+  ],
+
   
   // New fields for tracking performance
   viewsCount: { type: Number, default: 0 }, // Number of views

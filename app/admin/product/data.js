@@ -197,27 +197,42 @@ const itemsPerPage = 8;
 
 
 // ✅ Add value to current values list
+// ✅ Add single value
 const handleAddValue = () => {
   if (newValue.trim() && !currentValues.includes(newValue)) {
     setCurrentValues((prev) => [...prev, newValue]);
-    setNewValue(''); // Clear input after adding
+    setNewValue('');
   }
 };
 
-// ✅ Finalize the attribute with current values
+// ✅ Finalize the attribute with multiple values
 const handleAddAttribute = () => {
   if (!newTitle.trim() || currentValues.length === 0) return;
 
-  setAttributes((prev) => {
-    const existingAttribute = prev.find(attr => attr.title === newTitle);
+  setNewProduct((prev) => {
+    const existingAttribute = prev.attributes.find(
+      (attr) => attr.title === newTitle
+    );
+
     if (existingAttribute) {
-      return prev.map(attr =>
-        attr.title === newTitle
-          ? { ...attr, values: [...new Set([...attr.values, ...currentValues])] }
-          : attr
-      );
+      // ✅ Add to existing attribute values
+      return {
+        ...prev,
+        attributes: prev.attributes.map((attr) =>
+          attr.title === newTitle
+            ? { ...attr, values: [...new Set([...attr.values, ...currentValues])] }
+            : attr
+        ),
+      };
     } else {
-      return [...prev, { title: newTitle, values: currentValues }];
+      // ✅ Create new attribute
+      return {
+        ...prev,
+        attributes: [
+          ...prev.attributes,
+          { title: newTitle, values: currentValues },
+        ],
+      };
     }
   });
 
@@ -228,18 +243,24 @@ const handleAddAttribute = () => {
 
 // ✅ Remove single value from an attribute
 const handleRemoveValue = (title, value) => {
-  setAttributes((prev) =>
-    prev.map(attr =>
-      attr.title === title
-        ? { ...attr, values: attr.values.filter(v => v !== value) }
-        : attr
-    ).filter(attr => attr.values.length > 0)
-  );
+  setNewProduct((prev) => ({
+    ...prev,
+    attributes: prev.attributes
+      .map((attr) =>
+        attr.title === title
+          ? { ...attr, values: attr.values.filter((v) => v !== value) }
+          : attr
+      )
+      .filter((attr) => attr.values.length > 0), // Remove attribute if empty
+  }));
 };
 
 // ✅ Remove entire attribute
 const handleRemoveAttribute = (title) => {
-  setAttributes((prev) => prev.filter(attr => attr.title !== title));
+  setNewProduct((prev) => ({
+    ...prev,
+    attributes: prev.attributes.filter((attr) => attr.title !== title),
+  }));
 };
 
 
@@ -607,12 +628,8 @@ const handleCreateProduct = async () => {
     formData.append('price', newProduct.price);
     formData.append('stock', newProduct.stock);
     formData.append('category', newProduct.category);
-    
- // Send category ID and category name
- formData.append('categoryId', newProduct.categoryId);  // Send category ID
- formData.append('categoryName', newProduct.categoryName);  // Send category name
- 
-
+    formData.append('categoryId', newProduct.categoryId);  // Send category ID
+    formData.append('categoryName', newProduct.categoryName);  // Send category name
     formData.append('title', newProduct.title);
     formData.append('tags', JSON.stringify(newProduct.tags));
     formData.append('sizes', JSON.stringify(newProduct.sizes));
@@ -622,8 +639,7 @@ const handleCreateProduct = async () => {
     formData.append('materials', JSON.stringify(newProduct.materials));  // Send materials
     formData.append('coupons', JSON.stringify(newProduct.coupons)); 
 // ✅ Send attributes as JSON string
-      // formData.append('attributes', JSON.stringify(newProduct.attributes));
-      formData.append('attributes', JSON.stringify(newProduct.attributes));
+formData.append('attributes', JSON.stringify(newProduct.attributes));
 
     if (categoryImage) {
       formData.append('categoryImage', categoryImage);
@@ -665,6 +681,7 @@ const handleCreateProduct = async () => {
       title: '',
       sizes: [],
       colors: [],
+      attributes: [],
       displayOptions: ['recommended'],
       discountPrice: '', // Reset discountPrice
       materials: [],     // Reset materials
@@ -1255,75 +1272,50 @@ useEffect(() => {
          
 
 {/* ✅ Input for Attribute Name and Value */}
-<div>
-      {/* ✅ Input Fields */}
-      <div className={styles.attributeInput}>
-        <input
-          type="text"
-          value={newTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
-          placeholder="Enter Attribute Title"
-          className={styles.input}
-        />
-        <input
-          type="text"
-          value={newValue}
-          onChange={(e) => setNewValue(e.target.value)}
-          placeholder="Enter Attribute Value"
-          className={styles.input}
-        />
-        <button onClick={handleAddValue} className={styles.addButton}>
-          Add Value
-        </button>
-        <button onClick={handleAddAttribute} className={styles.addButton}>
-          Add Attribute
-        </button>
-      </div>
+<div className={styles.attributeInput}>
+  <input
+    type="text"
+    value={newTitle}
+    onChange={(e) => setNewTitle(e.target.value)}
+    placeholder="Enter Attribute Title"
+    className={styles.input}
+  />
+  <input
+    type="text"
+    value={newValue}
+    onChange={(e) => setNewValue(e.target.value)}
+    placeholder="Enter Attribute Value"
+    className={styles.input}
+  />
+  <button onClick={handleAddValue} className={styles.addButton}>
+    Add Value
+  </button>
+  <button onClick={handleAddAttribute} className={styles.addButton}>
+    Add Attribute
+  </button>
+</div>
 
-      {/* ✅ Display Current Values before confirming */}
-      {currentValues.length > 0 && (
-        <div className={styles.currentValues}>
-          <strong>{newTitle}</strong>
-          <div className={styles.values}>
-            {currentValues.map((value, index) => (
-              <span key={index} className={styles.value}>
-                {value}
-                <FaTrash
-                  className={styles.removeIcon}
-                  onClick={() => setCurrentValues((prev) =>
-                    prev.filter((v) => v !== value)
-                  )}
-                />
-              </span>
-            ))}
-          </div>
-        </div>
-      )}
-
-
-
-      {/* ✅ Display Finalized Attributes */}
-      {attributes.map((attr, index) => (
-        <div key={index} className={styles.attributeContainer}>
-          <strong>{attr.title}</strong>
-          <div className={styles.values}>
-            {attr.values.map((value, i) => (
-              <span key={i} className={styles.value}>
-                {value}
-                <FaTrash
-                  className={styles.removeIcon}
-                  onClick={() => handleRemoveValue(attr.title, value)}
-                />
-              </span>
-            ))}
-          </div>
+{newProduct.attributes.map((attr, index) => (
+  <div key={index} className={styles.attributeContainer}>
+    <strong>{attr.title}</strong>
+    <div className={styles.values}>
+      {attr.values.map((value, i) => (
+        <span key={i} className={styles.value}>
+          {value}
           <FaTrash
             className={styles.removeIcon}
-            onClick={() => handleRemoveAttribute(attr.title)}
+            onClick={() => handleRemoveValue(attr.title, value)}
           />
-        </div>
+        </span>
       ))}
     </div>
+    <FaTrash
+      className={styles.removeIcon}
+      onClick={() => handleRemoveAttribute(attr.title)}
+    />
+  </div>
+))}
+
 
       
 
