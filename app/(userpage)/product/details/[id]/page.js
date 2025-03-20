@@ -37,6 +37,7 @@ const ProductDetailsPage = ({ params }) => {
   const [selectedColor, setSelectedColor] = useState(null);
 const [selectedSize, setSelectedSize] = useState(null);
 
+
 // Add logic to handle color and size selection
 
   const [review, setReview] = useState('');
@@ -60,6 +61,7 @@ const [cartUpdated, setCartUpdated] = useState(false);
 
 const [currentPage, setCurrentPage] = useState(0);
 const itemsPerPage = 10;
+const [selectedAttributes, setSelectedAttributes] = useState({});
 
 
 
@@ -429,6 +431,12 @@ const productNameTrim = (name) => {
 };
 
 
+const handleSelectAttribute = (title, value) => {
+  setSelectedAttributes((prev) => ({
+    ...prev,
+    [title]: value, // Store selected value for each title
+  }));
+};
 
 
   if (loading) return <div> <Loader /></div>;
@@ -475,25 +483,9 @@ const productNameTrim = (name) => {
                           handleThumbnailClick(index); // Mark the clicked thumbnail as active
                         }}
                         className={`${styles.thumbnail} ${activeThumbnail === index ? styles.activeThumbnail : ''}`}
-                      />
-                      
-      //                 <img
-      //             key={index}
-      //             src={url}
-      //             alt={`Thumbnail ${index + 1}`}
-      //             onClick={() => {
-      //   setMainImageIndex(index); // Change the main image on click
-      //   handleThumbnailClick(index); // Mark the clicked thumbnail as active
-      // }}
-      // className={`${styles.thumbnail} ${activeThumbnail === index ? styles.activeThumbnail : ''}`}
-      //           />
+                      />                     
               ))}
-
-
-
             </div>
-
-           
 
             <div className={styles.thumbnailContainer}>
             <button className={`${styles.arrowButton} ${styles.left}`} onClick={handlePrevImage}>
@@ -501,25 +493,16 @@ const productNameTrim = (name) => {
             </button>
             
             <Image
-                        src={product.media[mainImageIndex]} alt={product.name} className={styles.mainImage} 
+              src={product.media[mainImageIndex]} alt={product.name} className={styles.mainImage} 
+              width={900}
+              height={900}        
+              priority/>
 
-                        width={900}
-                        height={900}
-                       
-                        priority
-                      />
-
-          
             <button className={`${styles.arrowButton} ${styles.right}`} onClick={handleNextImage}>
               <FaArrowRight size={20} />
             </button>
           </div>
           
-
-
-
-
-
 
             <div className={styles.productcontent}>
               <h1>{product.name}</h1>
@@ -558,6 +541,26 @@ const productNameTrim = (name) => {
 
 
    <div className={styles.line}></div>
+
+{product.attributes.length > 0 && product.attributes.map((attr, index) => (
+  <div key={index} className={styles.options}>
+    <h3>{attr.title}:</h3>
+    <div className={styles.optionsContainer}>
+      {attr.values.map((value, i) => (
+        <button
+          key={i}
+          className={`${styles.optionButton} ${
+            selectedAttributes[attr.title] === value ? styles.selected : ''
+          }`}
+          onClick={() => handleSelectAttribute(attr.title, value)}
+        >
+          {value}
+        </button>
+      ))}
+    </div>
+  </div>
+))}
+
 
               {product.colors.length > 0 && (
                 <div className={styles.options}>
