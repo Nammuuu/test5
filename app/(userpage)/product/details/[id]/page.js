@@ -156,21 +156,16 @@ const [selectedAttributes, setSelectedAttributes] = useState({});
     return text;
   };
   
-
-
-
   // const handleAddToCart = () => {
   //   if (!product) return;
 
-
-  //   // if (!selectedColor && product.colors.length > 0) {
-  //   //   toast.error('Please select a color.');
-  //   //   return;
-  //   // }
-  //   // if (!selectedSize && product.sizes.length > 0) {
-  //   //   toast.error('Please select a size.');
-  //   //   return;
-  //   // }
+  //   // ✅ Check for missing attribute selection
+  // for (const attr of product.attributes) {
+  //   if (!selectedAttributes[attr.title]) {
+  //     toast.error(`Please select a ${attr.title}`);
+  //     return;
+  //   }
+  // }
 
   //   if (product.colors.length > 0 && !selectedColor) {
   //     toast.error('Please select a color.');
@@ -181,46 +176,21 @@ const [selectedAttributes, setSelectedAttributes] = useState({});
   //     return;
   //   }
 
-
-  //   setIsAddingToCart(true); // Disable button while adding
-
-  //   // let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-  //   // Add logic here for checking and adding item to cart
-  //   if (!product) return;
-
-  //   // Check if the product has color or size options
-  //   if (product.colors.length > 0 && !selectedColor) {
-  //     toast.error('Please select a color.');
-  //     return;
-  //   }
-
-  //   if (product.sizes.length > 0 && !selectedSize) {
-  //     toast.error('Please select a size.');
-  //     toast.error('Please select a color.');
-  //     return;
-  //   }
-
-  //   if (product.sizes.length > 0 && !selectedSize) {
-  //     toast.error('Please select a size.');
-  //     return;
-  //   }
+  //   setIsAddingToCart(true);
 
   //   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  //   // Check if the product already exists with the same color and size (if applicable)
-  //   const existingItem = cart.find(item =>
-  //     item._id === product._id &&
-  //     (!product.colors.length || item.selectedColor === selectedColor) &&
-  //     (!product.sizes.length || item.selectedSize === selectedSize)
+  //   const existingItem = cart.find(
+  //     (item) =>
+  //       item._id === product._id &&
+  //       (!product.colors.length || item.selectedColor === selectedColor) &&
+  //       (!product.sizes.length || item.selectedSize === selectedSize)
   //   );
 
   //   if (existingItem) {
-  //     // Increment quantity if product with same color and size is already in the cart
   //     existingItem.quantity += 1;
   //     toast.info(`${product.name} quantity increased in cart.`);
   //   } else {
-  //     // Add new item to cart
   //     const newItem = { ...product, quantity: 1 };
   //     if (product.colors.length > 0) newItem.selectedColor = selectedColor;
   //     if (product.sizes.length > 0) newItem.selectedSize = selectedSize;
@@ -230,53 +200,58 @@ const [selectedAttributes, setSelectedAttributes] = useState({});
   //   }
 
   //   localStorage.setItem('cart', JSON.stringify(cart));
-
-  //   setIsAddingToCart(false); // Enable button after adding
+  //   setCartUpdated(!cartUpdated); // Trigger cart update
+  //   setIsCartOpen(true); // Open the cart sidebar after adding item
+  //   setIsAddingToCart(false);
   // };
 
 
   const handleAddToCart = () => {
     if (!product) return;
-
-    if (product.colors.length > 0 && !selectedColor) {
-      toast.error('Please select a color.');
-      return;
+  
+    // ✅ Check for missing attribute selection
+    for (const attr of product.attributes) {
+      if (!selectedAttributes[attr.title]) {
+        toast.error(`Please select a ${attr.title}`);
+        return;
+      }
     }
-    if (product.sizes.length > 0 && !selectedSize) {
-      toast.error('Please select a size.');
-      return;
-    }
-
+  
     setIsAddingToCart(true);
-
+  
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
+  
+    // ✅ Check if the product with same attributes already exists in the cart
     const existingItem = cart.find(
       (item) =>
         item._id === product._id &&
-        (!product.colors.length || item.selectedColor === selectedColor) &&
-        (!product.sizes.length || item.selectedSize === selectedSize)
+        Object.entries(selectedAttributes).every(
+          ([title, value]) =>
+            item.selectedAttributes &&
+            item.selectedAttributes[title] === value
+        )
     );
-
+  
     if (existingItem) {
       existingItem.quantity += 1;
       toast.info(`${product.name} quantity increased in cart.`);
     } else {
       const newItem = { ...product, quantity: 1 };
-      if (product.colors.length > 0) newItem.selectedColor = selectedColor;
-      if (product.sizes.length > 0) newItem.selectedSize = selectedSize;
-
+      
+      // ✅ Add selected attributes to cart
+      newItem.selectedAttributes = { ...selectedAttributes };
+  
       cart.push(newItem);
       toast.success(`${product.name} added to cart`);
     }
-
+  
     localStorage.setItem('cart', JSON.stringify(cart));
     setCartUpdated(!cartUpdated); // Trigger cart update
-    setIsCartOpen(true); // Open the cart sidebar after adding item
+    setIsCartOpen(true); // Open cart sidebar after adding item
     setIsAddingToCart(false);
   };
 
-
+  
   const calculateAverageRating = (reviews) => {
     if (!reviews || reviews.length === 0) return 0;
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
@@ -430,13 +405,13 @@ const productNameTrim = (name) => {
   return name.length > 18 ? name.substring(0, 18) + '...' : name;
 };
 
-
 const handleSelectAttribute = (title, value) => {
   setSelectedAttributes((prev) => ({
     ...prev,
     [title]: value, // Store selected value for each title
   }));
 };
+
 
 
   if (loading) return <div> <Loader /></div>;

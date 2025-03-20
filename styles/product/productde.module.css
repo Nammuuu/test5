@@ -16,21 +16,9 @@
     margin-bottom: 30px;
   }
   
-  /* .url {
-    gap: 10px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    display: flex;
-    font-size: 1.2rem;
-    text-transform: capitalize;
-    font-weight: 500;
-  }
-
-  .url a {
-text-decoration: none;
-color: #333;
-  } */
+.options h3 {
+  text-transform: capitalize;
+}
 
 
   /* URL Container */
