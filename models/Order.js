@@ -21,6 +21,11 @@ const orderSchema = new mongoose.Schema(
         },
         size: { type: String },
         color: { type: String },
+        selectedAttributes: {
+          type: Map,
+          of: String, // ✅ Dynamic key-value pair for attributes
+          default: {},
+        },
       },
     ],
     shippingAddress: {
