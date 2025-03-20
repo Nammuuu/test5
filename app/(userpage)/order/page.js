@@ -18,7 +18,7 @@ import axios from 'axios';
 import { FaStar, FaArrowLeft } from 'react-icons/fa';
 import Loader from "../../../components/Loader";
 import { RiArrowGoBackLine } from "react-icons/ri";
-import Auth from "../../(auth)/autth";
+// import Auth from "../../(auth)/autth";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
@@ -44,7 +44,7 @@ const OrderPage = () => {
   const [paymentSettings, setPaymentSettings] = useState({});
   const [inputerrors, setInputerrors] = useState({});
   const router = useRouter();
-  const [showAuthPopup, setShowAuthPopup] = useState(false); // Popup state
+  // const [showAuthPopup, setShowAuthPopup] = useState(false); // Popup state
 
   const searchParams = useSearchParams();
 
@@ -65,8 +65,8 @@ const OrderPage = () => {
         setLoading(true);
         const token = localStorage.getItem('token');
         if (!token) {
-          setShowAuthPopup(true);
-          // router.push('/login');
+          // setShowAuthPopup(true);
+          router.push('/login');
           return;
         }
 
@@ -97,8 +97,8 @@ const OrderPage = () => {
         fetchGlobalCoupon();
       } catch (error) {
         console.error('Error checking user authentication:', error);
-        // router.push('/login');
-        setShowAuthPopup(true);
+        router.push('/login');
+        // setShowAuthPopup(true);
       }
       finally {
         setLoading(false);
@@ -666,9 +666,7 @@ const OrderPage = () => {
     return Object.keys(newErrors).length === 0; // Return true if no errors
   };
 
-  const handleClosePopup = () => {
-    setShowAuthPopup(false);
-  };
+
 
   if (loading) {
     return <Loader />; 
@@ -677,10 +675,7 @@ const OrderPage = () => {
   return (
     <div className={styles.checkoutPag}>
       {loading && <Loader />}
-  {showAuthPopup && (
-        <Auth onClose={handleClosePopup} />
-      
-      )}
+  
     <div className={styles.ShippingInformation}> 
     <button className={styles.arrowButton} >  <RiArrowGoBackLine /></button>
     <div className={styles.ShippingInformationh1}>
@@ -853,6 +848,8 @@ const OrderPage = () => {
       </div>
 
     </div>
+
+   
 
     </div>
   );
