@@ -310,7 +310,7 @@ adnavce funsaanaliys
 add addriboute for products 
 size color meatiral payment update
 
-addriboute
+01. addriboute
 single addriboute 
 display in admin carete color, size, matrial 
 

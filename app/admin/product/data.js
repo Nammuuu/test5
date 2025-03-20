@@ -103,8 +103,11 @@ const itemsPerPage = 8;
   const [imagePreviews, setImagePreviews] = useState([]); // For image preview
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
-  const [attributeName, setAttributeName] = useState('');
-  const [attributeValue, setAttributeValue] = useState('');
+  // const [attributeName, setAttributeName] = useState('');
+  // const [attributeValue, setAttributeValue] = useState('');
+  const [attributes, setAttributes] = useState([]);
+  const [newTitle, setNewTitle] = useState('');
+  const [newValue, setNewValue] = useState('');
 
 
   useEffect(() => {
@@ -193,59 +196,54 @@ const itemsPerPage = 8;
   };
 
 
-   // ✅ Handle adding attributes
-   const handleAddAttribute = () => {
-    if (attributeName.trim() && attributeValue.trim()) {
-      const existingAttribute = newProduct.attributes.find(
-        (attr) => attr.name === attributeName
+ // ✅ Add new attribute
+ const handleAddAttribute = () => {
+  if (newTitle.trim() && newValue.trim()) {
+    const existingAttribute = attributes.find(
+      (attr) => attr.title === newTitle
+    );
+
+    if (existingAttribute) {
+      // Add value to existing attribute
+      setAttributes((prev) =>
+        prev.map((attr) =>
+          attr.title === newTitle
+            ? {
+                ...attr,
+                values: [...new Set([...attr.values, newValue.trim()])],
+              }
+            : attr
+        )
       );
-
-      if (existingAttribute) {
-        // If attribute exists, add the value to existing values
-        setNewProduct((prev) => ({
-          ...prev,
-          attributes: prev.attributes.map((attr) =>
-            attr.name === attributeName
-              ? {
-                  ...attr,
-                  values: [...new Set([...attr.values, attributeValue.trim()])],
-                }
-              : attr
-          ),
-        }));
-      } else {
-        // If attribute does not exist, create a new attribute
-        setNewProduct((prev) => ({
-          ...prev,
-          attributes: [
-            ...prev.attributes,
-            { name: attributeName.trim(), values: [attributeValue.trim()] },
-          ],
-        }));
-      }
-
-      setAttributeName('');
-      setAttributeValue('');
+    } else {
+      // Create new attribute
+      setAttributes((prev) => [
+        ...prev,
+        { title: newTitle.trim(), values: [newValue.trim()] },
+      ]);
     }
-  };
-  // ✅ Handle removing attribute value
-  const handleRemoveAttributeValue = (name, value) => {
-    setNewProduct((prev) => ({
-      ...prev,
-      attributes: prev.attributes.map((attr) =>
-        attr.name === name
-          ? { ...attr, values: attr.values.filter((v) => v !== value) }
-          : attr
-      ),
-    }));
-  };
-  // ✅ Handle removing entire attribute
-  const handleRemoveAttribute = (name) => {
-    setNewProduct((prev) => ({
-      ...prev,
-      attributes: prev.attributes.filter((attr) => attr.name !== name),
-    }));
-  };
+
+    setNewTitle('');
+    setNewValue('');
+  }
+};
+
+// ✅ Remove value from attribute
+const handleRemoveValue = (title, value) => {
+  setAttributes((prev) =>
+    prev.map((attr) =>
+      attr.title === title
+        ? { ...attr, values: attr.values.filter((v) => v !== value) }
+        : attr
+    )
+  );
+};
+
+// ✅ Remove entire attribute
+const handleRemoveAttribute = (title) => {
+  setAttributes((prev) => prev.filter((attr) => attr.title !== title));
+};
+
 
 
 
@@ -626,6 +624,7 @@ const handleCreateProduct = async () => {
     formData.append('materials', JSON.stringify(newProduct.materials));  // Send materials
     formData.append('coupons', JSON.stringify(newProduct.coupons)); 
 // ✅ Send attributes as JSON string
+      // formData.append('attributes', JSON.stringify(newProduct.attributes));
       formData.append('attributes', JSON.stringify(newProduct.attributes));
 
     if (categoryImage) {
@@ -1258,52 +1257,49 @@ useEffect(() => {
          
 
 {/* ✅ Input for Attribute Name and Value */}
-<div className={styles.attributeContainer}>
+<div className={styles.attributeInput}>
         <input
           type="text"
-          value={attributeName}
-          placeholder="Attribute Name (e.g., Size)"
-          onChange={(e) => setAttributeName(e.target.value)}
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+          placeholder="Enter Attribute Title"
           className={styles.input}
         />
         <input
           type="text"
-          value={attributeValue}
-          placeholder="Attribute Value (e.g., Large)"
-          onChange={(e) => setAttributeValue(e.target.value)}
+          value={newValue}
+          onChange={(e) => setNewValue(e.target.value)}
+          placeholder="Enter Attribute Value"
           className={styles.input}
         />
-        <button
-          type="button"
-          onClick={handleAddAttribute}
-          className={styles.addButton}
-        >
+        <button onClick={handleAddAttribute} className={styles.addButton}>
           Add Attribute
         </button>
       </div>
 
-      {/* ✅ Display Attributes */}
-      {newProduct.attributes.map((attr, index) => (
-        <div key={index} className={styles.attributeDisplay}>
-          <strong>{attr.name}</strong>
+      {/* ✅ Display Added Attributes */}
+      {attributes.map((attr, index) => (
+        <div key={index} className={styles.attributeContainer}>
+          <strong>{attr.title}</strong>
           <div className={styles.values}>
             {attr.values.map((value, i) => (
               <span key={i} className={styles.value}>
                 {value}
                 <FaTrash
                   className={styles.removeIcon}
-                  onClick={() => handleRemoveAttributeValue(attr.name, value)}
+                  onClick={() => handleRemoveValue(attr.title, value)}
                 />
               </span>
             ))}
           </div>
           <FaTrash
             className={styles.removeIcon}
-            onClick={() => handleRemoveAttribute(attr.name)}
+            onClick={() => handleRemoveAttribute(attr.title)}
           />
         </div>
       ))}
-       
+      
+
  {/*add material */}
  <div className={styles.colorSizeMatrialTagcontinaer}>
  <label htmlFor="matrial" className={styles.label}>Add Material</label>

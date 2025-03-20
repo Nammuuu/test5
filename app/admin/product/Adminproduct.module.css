@@ -1,7 +1,4 @@
-
-
-
-.attributeContainer {
+.attributeInput {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
@@ -11,39 +8,49 @@
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 100%;
 }
 
 .addButton,
 .submitButton {
   padding: 8px 16px;
   background-color: #0070f3;
-  color: #fff;
+  color: white;
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  transition: background 0.3s;
 }
 
-.attributeDisplay {
-  margin-top: 10px;
+.addButton:hover,
+.submitButton:hover {
+  background-color: #005bb5;
+}
+
+.attributeContainer {
   padding: 8px;
-  background-color: #f9f9f9;
+  border: 1px solid #eee;
   border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.values {
+  margin-top: 4px;
 }
 
 .value {
   display: inline-block;
+  background-color: #f1f1f1;
   padding: 4px 8px;
-  background-color: #eee;
-  margin-right: 5px;
+  margin-right: 4px;
   border-radius: 4px;
 }
 
 .removeIcon {
   color: red;
+  margin-left: 4px;
   cursor: pointer;
-  margin-left: 5px;
 }
-
 
 
 
