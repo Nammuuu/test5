@@ -44,8 +44,9 @@ const LoginRegister = () => {
       toast.success("Login successful!");
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('refreshToken', response.data.refreshToken);
-      window.location.reload();
-      router.push('/');
+      // window.location.reload();
+      // router.push('/');
+      window.location.href = '/';
      
     } else {
       toast.error(response.error || "Login failed. Please check your credentials.");
