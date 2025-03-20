@@ -276,10 +276,7 @@
   color: #000;
 }
 
-.selectedSize p:first-of-type::after {
-  content: '|'; /* Adds a pipe separator between size and color */
-  margin-left: 2px;
-}
+
 
 
 

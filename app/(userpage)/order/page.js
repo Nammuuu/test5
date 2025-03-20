@@ -255,6 +255,16 @@ const OrderPage = () => {
   
   const handleOrderSubmit = async () => {
 
+    for (const item of cartItems) {
+      if (item.selectedAttributes) {
+        for (const [title, value] of Object.entries(item.selectedAttributes)) {
+          if (!value) {
+            toast.error(`Please select a ${title} for ${item.name}.`);
+            return;
+          }
+        }
+      }
+    }
 
     if (!validateForm()) {
       return;  // Exit if the form is not valid
@@ -286,9 +296,9 @@ const OrderPage = () => {
     const finalTotal = couponDiscount > 0 ? totalAmount - (totalAmount * couponDiscount) / 100 : totalAmount;
     const discountedTotal = discount === 0 ? totalAmount : finalTotal;
 
-    console.log("Total Amount:", totalAmount);
-    console.log("Discount:", discount);
-    console.log("Discounted Total:", discountedTotal);
+    // console.log("Total Amount:", totalAmount);
+    // console.log("Discount:", discount);
+    // console.log("Discounted Total:", discountedTotal);
 
 
     const orderData = {
@@ -298,6 +308,7 @@ const OrderPage = () => {
         quantity: item.quantity,
         image: item.image,
         name: item.name,
+        selectedAttributes: item.selectedAttributes || {},
         size: item.selectedSize,
         color: item.selectedColor,
       })),
@@ -315,7 +326,6 @@ const OrderPage = () => {
     try {
       setLoading(true);
       let paymentSuccess = false;
-
 
       if (paymentMethod === 'RazorPay') {
 
@@ -721,11 +731,15 @@ const OrderPage = () => {
             </div>
 
               <div className={styles.sizecolor}>
+              {item.selectedAttributes &&
+            Object.entries(item.selectedAttributes).map(([title, value]) => (
+              <p key={title}>
+                <strong>{title}:</strong> {value}
+              </p>
+            ))}
+
                 {item?.selectedSize && <p>{item.selectedSize}</p>}
                 {item?.selectedColor && <p>{item.selectedColor}</p>}
-
-                {/*{item?.selectedSize && <p>Size: {item.selectedSize}</p>}
-                {item?.selectedColor && <p>Color: {item.selectedColor}</p>}*/}
               </div>
             </div>
 
