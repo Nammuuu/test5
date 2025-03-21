@@ -54,6 +54,25 @@
     resize: vertical;
     height: 150px;
   }
+
+  .attributeInput {
+    display: flex;
+        gap: 10px;
+        flex-direction: column;
+        margin-bottom: 5px;
+  }
+  .attributeInput button {
+    text-transform: capitalize;
+    padding: 10px 15px;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    background-color: #f23e14;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
   
   .actionbutton  button {
     padding: 10px 15px;

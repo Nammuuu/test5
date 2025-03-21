@@ -370,7 +370,7 @@ product.attributes.forEach((attr, index) => {
           </div>
 
           <div  className={styles.formGroupContainer}>
-          <div className={styles.formGroup}>
+          {/* <div className={styles.formGroup}>
             <label>Sizes (comma separated):</label>
             <input 
               type="text" 
@@ -387,7 +387,7 @@ product.attributes.forEach((attr, index) => {
               value={product.colors.join(', ')} 
               onChange={handleColorsChange}
             />
-          </div>
+          </div> */}
 
           {/* Attributes Input */}
       <div className={styles.attributeInput}>
