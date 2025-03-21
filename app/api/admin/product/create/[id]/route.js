@@ -84,7 +84,18 @@ export async function PUT(req, { params }) {
     const colors = formData.get('colors') ? formData.get('colors').split(',') : [];
     const mediaToRemove = formData.getAll('mediaToRemove'); // URLs of media to remove
     const displayOptions = formData.get('displayOptions');   
-    const attributes = formData.get('attributes') ? JSON.parse(formData.get('attributes')) : {}; 
+    // const attributes = formData.get('attributes') ? JSON.parse(formData.get('attributes')) : {}; 
+   // Parse attributes correctly
+
+   const attributes = [];
+   let index = 0;
+   while (formData.has(`attributes[${index}][title]`)) {
+     const title = formData.get(`attributes[${index}][title]`);
+     const values = formData.getAll(`attributes[${index}][values]`); // Get all values
+     attributes.push({ title, values });
+     index++;
+   }
+
     // Update fields if present
     if (name) product.name = name;
     if (description) product.description = description;
@@ -101,7 +112,9 @@ export async function PUT(req, { params }) {
     if (sizes.length) product.sizes = sizes;
     if (colors.length) product.colors = colors;
     if (displayOptions) product.displayOptions = displayOptions;
-    if (Object.keys(attributes).length) product.attributes = attributes;
+    if (attributes.length) product.attributes = attributes;
+
+    // if (Object.keys(attributes).length) product.attributes = attributes;
     // Remove specified media
     if (mediaToRemove.length > 0) {
       product.media = product.media.filter((url) => !mediaToRemove.includes(url));

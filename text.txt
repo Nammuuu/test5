@@ -314,7 +314,6 @@ size color meatiral payment update
  add on admin side start
  
   --admin 
-  01. update product
   02. pdf admin order --fix letter
   + user order --done
   03. order details page

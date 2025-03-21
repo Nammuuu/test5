@@ -201,16 +201,15 @@ const handleUpdateProduct = async () => {
       formData.append('sizes', product.sizes.join(','));
       formData.append('colors', product.colors.join(','));
       formData.append('displayOptions', product.displayOptions);
-// Append attributes
+
+// Append attributes correctly
 product.attributes.forEach((attr, index) => {
   formData.append(`attributes[${index}][title]`, attr.title);
   attr.values.forEach((value) => {
     formData.append(`attributes[${index}][values]`, value);
   });
 });
-for (let pair of formData.entries()) {
-  console.log(pair[0], pair[1]);
-}
+
 
 
 
