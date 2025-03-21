@@ -172,8 +172,9 @@ const generatePDF = (order) => {
     quantity: item.quantity || 0,
     price: item.product?.price || 'N/A',
     size: item.size || 'N/A',
-    color: item.color || 'N/A',
-    attributes: item.attributes ? Object.entries(item.attributes).map(([key, value]) => `${key}: ${value}`).join(', ') : 'N/A',
+    attributes: item.selectedAttributes 
+      ? Object.entries(item.selectedAttributes).map(([key, value]) => `${key}: ${value}`).join(', ') 
+      : 'N/A',
   }));
 
   
@@ -290,7 +291,8 @@ const navigateToHome = () => {
               <p><strong>Quantity:</strong><span> {item.quantity} </span></p>
               <p><strong>color:</strong><span> {item.color} </span></p>
               <p><strong>size:</strong><span> {item.size} </span></p>
-              <p><strong>Attributes:</strong> {item.attributes ? Object.entries(item.attributes).map(([key, value]) => `${key}: ${value}`).join(', ') : 'N/A'}</p>
+              {/* <p><strong>Attributes:</strong> {item.attributes ? Object.entries(item.attributes).map(([key, value]) => `${key}: ${value}`).join(', ') : 'N/A'}</p> */}
+              <p><strong>Attributes:</strong> {item.selectedAttributes ? Object.entries(item.selectedAttributes).map(([key, value]) => `${key}: ${value}`).join(', ') : 'N/A'}</p>
               <p><strong>Total:</strong> <span> ${(item.product?.price * item.quantity).toFixed(2)} </span></p>
               <div  className={styles.ViewProduct}> 
               <Link href={`/product/details/${item.product?._id}`}> View Product details</Link>
