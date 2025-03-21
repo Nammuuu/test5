@@ -316,7 +316,7 @@ size color meatiral payment update
   --admin 
   02. pdf admin order --fix letter
   + user order --done
-  03. order details page --start
+  03. order details page --done
   04 admin product details --done
 
  invoice add done

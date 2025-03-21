@@ -289,10 +289,17 @@ const navigateToHome = () => {
             : item.product?.name}  </span></p>
               <p><strong>Price:</strong> <span> ${item.product?.price.toFixed(2)} </span></p>
               <p><strong>Quantity:</strong><span> {item.quantity} </span></p>
-              <p><strong>color:</strong><span> {item.color} </span></p>
+              {/* <p><strong>color:</strong><span> {item.color} </span></p>
               <p><strong>size:</strong><span> {item.size} </span></p>
-              {/* <p><strong>Attributes:</strong> {item.attributes ? Object.entries(item.attributes).map(([key, value]) => `${key}: ${value}`).join(', ') : 'N/A'}</p> */}
-              <p><strong>Attributes:</strong> {item.selectedAttributes ? Object.entries(item.selectedAttributes).map(([key, value]) => `${key}: ${value}`).join(', ') : 'N/A'}</p>
+              <p><strong>Attributes:</strong> {item.selectedAttributes 
+              ? Object.entries(item.selectedAttributes).map(([key, value]) =>
+               `${key}: ${value}`).join(', ') : 'N/A'}</p> */}
+                {item.selectedAttributes?.color && <p><strong>Color:</strong> <span>{item.selectedAttributes.color}</span></p>}
+              {item.selectedAttributes?.size && <p><strong>Size:</strong> <span>{item.selectedAttributes.size}</span></p>}
+              {item.selectedAttributes && Object.keys(item.selectedAttributes).length > 0 && (
+                <p><strong>Attributes:</strong> {Object.entries(item.selectedAttributes).map(([key, value]) => `${key}: ${value}`).join(', ')}</p>
+              )}
+              
               <p><strong>Total:</strong> <span> ${(item.product?.price * item.quantity).toFixed(2)} </span></p>
               <div  className={styles.ViewProduct}> 
               <Link href={`/product/details/${item.product?._id}`}> View Product details</Link>
