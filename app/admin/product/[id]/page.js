@@ -8,7 +8,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from '../../../../styles/admin/product/productdetails.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaTimes, FaUndo } from 'react-icons/fa';
+
+
+import { FaTimes,   FaTrash, FaUndo } from 'react-icons/fa';
 import Navbar from '../../../../components/Nav';
 // import Navbar from '../../components/Sidebar';
 import Loader from "../../../../components/Loader";
