@@ -18,6 +18,12 @@
 /* topbar text id and user id   */
 /* design new   */
 
+.atrributecontainer {
+  margin: 5px 0;
+}
+.dispalynoen {
+  display: none;
+}
 .ShippingInformation h1{
   color: #333;
   font-size: 20px;

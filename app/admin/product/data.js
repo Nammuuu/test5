@@ -1192,7 +1192,7 @@ useEffect(() => {
 
         {/* Add inputs for sizes */}
 
-        <div className={styles.colorSizeMatrialTagcontinaer}>
+        {/* <div className={styles.colorSizeMatrialTagcontinaer}>
 
 
           <label htmlFor="size" className={styles.label}> Add Size <span> * </span></label>
@@ -1226,7 +1226,7 @@ useEffect(() => {
               </span>
             ))}
           </div>
-        </div>
+        </div> */}
 
 </div>
 
@@ -1234,7 +1234,7 @@ useEffect(() => {
         {/* Add inputs for colors */}
 
         <div className={styles.inputcontainer}>
-<div className={styles.colorSizeMatrialTagcontinaer}>
+{/* <div className={styles.colorSizeMatrialTagcontinaer}>
           <label htmlFor="color" className={styles.label}> Add Color <span> * </span></label>
           <input
             id="color"
@@ -1267,7 +1267,7 @@ useEffect(() => {
               </span>
             ))}
           </div>
-          </div>
+          </div> */}
 
          
 
@@ -1353,7 +1353,7 @@ useEffect(() => {
       
 
  {/*add material */}
- <div className={styles.colorSizeMatrialTagcontinaer}>
+ {/* <div className={styles.colorSizeMatrialTagcontinaer}>
  <label htmlFor="matrial" className={styles.label}>Add Material</label>
  <input
    id="matrial"
@@ -1387,7 +1387,7 @@ useEffect(() => {
    ))}
  </div>
 
-</div>
+</div> */}
 
 </div>
 

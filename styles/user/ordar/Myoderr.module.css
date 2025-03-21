@@ -12,6 +12,13 @@
     overflow: hidden;    
   }
   
+  .stong {
+    font-size: 1rem;
+    color: #444;
+    margin: 5px 0;
+    font-weight: 450;
+    text-transform: capitalize;
+  }
   .myOrdersContainerone h1 {
     font-size: 2rem;
     text-align: center;

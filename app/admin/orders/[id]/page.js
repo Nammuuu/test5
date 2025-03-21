@@ -300,8 +300,8 @@ const navigateToHome = () => {
           )}
             
             {item.selectedAttributes && Object.keys(item.selectedAttributes).length > 0 && (
-                <p><strong>Attributes:</strong> {Object.entries(item.selectedAttributes).map(([key, value]) => (
-                  <span key={key}><strong>{key}:</strong> <span>{value}</span></span>
+                <p><strong className={styles.dispalynoen}>Attributes:</strong> {Object.entries(item.selectedAttributes).map(([key, value]) => (
+                  <span key={key} className={styles.atrributecontainer} ><strong>{key}:</strong> <span>{value}</span></span>
                 ))}</p>
               )}
 

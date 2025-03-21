@@ -405,7 +405,7 @@ const handleCancelOrder = async (orderId) => {
               <p>Quantity: {item.quantity}</p>
               {item.selectedAttributes && Object.entries(item.selectedAttributes).map(([key, value]) => (
   <p key={key}>
-    <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
+    <strong className={styles.stong}>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
   </p>
 ))}
  
