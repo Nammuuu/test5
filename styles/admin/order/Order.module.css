@@ -154,4 +154,38 @@
       width: 100%;
     }
   }
-  
+
+
+
+/* for pagination  */
+.pagination {
+  display: flex;
+    justify-content: flex-end;
+   
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.page_link, .prev_link, .next_link {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.page_link:hover, .prev_link:hover, .next_link:hover {
+  background-color: #f2f2f2;
+}
+
+.active .page_link {
+  background-color: rgb(242, 62, 20);
+  color: white;
+}
+
+.product_selstag {
+  font-size: 1rem;
+    font-weight: 450;
+    margin: 0;
+}

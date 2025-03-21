@@ -101,19 +101,36 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
     fetchCategories();
   }, []);
 
+  const handleRemoveAttribute = (title) => {
+    setProduct((prev) => ({
+      ...prev,
+      attributes: prev.attributes.filter((attr) => attr.title !== title).map(({ title, values }) => ({ title, values })), // Remove `_id`
+    }));
+  };
+  
   const handleAddValue = () => {
     if (!newTitle || !newValue) return;
+  
     setProduct((prev) => {
-      const existingAttribute = prev.attributes.find((attr) => attr.title === newTitle);
-      if (existingAttribute) {
-        existingAttribute.values.push(newValue);
+      const existingAttributeIndex = prev.attributes.findIndex(attr => attr.title === newTitle);
+      let updatedAttributes = [...prev.attributes];
+  
+      if (existingAttributeIndex !== -1) {
+        // Prevent duplicate values
+        if (!updatedAttributes[existingAttributeIndex].values.includes(newValue)) {
+          updatedAttributes[existingAttributeIndex].values.push(newValue);
+        }
       } else {
-        prev.attributes.push({ title: newTitle, values: [newValue] });
+        updatedAttributes.push({ title: newTitle, values: [newValue] });
       }
-      return { ...prev };
+  
+      return { ...prev, attributes: updatedAttributes };
     });
+  
     setNewValue("");
   };
+
+  
 
   const handleRemoveValue = (title, value) => {
     setProduct((prev) => {
@@ -127,12 +144,6 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
     });
   };
 
-  const handleRemoveAttribute = (title) => {
-    setProduct((prev) => ({
-      ...prev,
-      attributes: prev.attributes.filter((attr) => attr.title !== title),
-    }));
-  };
 
 
   const handleInputChange = (e) => {
@@ -193,10 +204,15 @@ const handleUpdateProduct = async () => {
 // Append attributes
 product.attributes.forEach((attr, index) => {
   formData.append(`attributes[${index}][title]`, attr.title);
-  attr.values.forEach((value, valueIndex) => {
-    formData.append(`attributes[${index}][values][${valueIndex}]`, value);
+  attr.values.forEach((value) => {
+    formData.append(`attributes[${index}][values]`, value);
   });
 });
+for (let pair of formData.entries()) {
+  console.log(pair[0], pair[1]);
+}
+
+
 
            // Append media to remove
       mediaToRemove.forEach((url) => {

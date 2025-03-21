@@ -315,7 +315,8 @@ size color meatiral payment update
  
   --admin 
   01. update product
-  02. pdf admin order + user order
+  02. pdf admin order --fix letter
+  + user order --done
   03. order details page
   04 admin product details
 
