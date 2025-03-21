@@ -310,16 +310,18 @@ adnavce funsaanaliys
 add addriboute for products 
 size color meatiral payment update
 
-01. addriboute
-single addriboute 
-display in admin carete color, size, matrial 
+01. addriboute --done
+ add on admin side start
+ 
+  --admin 
+  01. update product
+  02. pdf admin order + user order
+  03. order details page
+  04 admin product details
 
-add button 
-addriboute 
-
-user show addriboute add 
-addriboute name 
-addriboute value 
+ invoice add done
+ check mobile 
+ --done funal
 
 
 

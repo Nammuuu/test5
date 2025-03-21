@@ -197,6 +197,49 @@ const handleCancelOrder = async (orderId) => {
   };
 
   // Invoice Generation Function
+  // const generateInvoice = (order) => {
+  //   const doc = new jsPDF();
+
+  //   // Add invoice header
+  //   doc.setFontSize(18);
+  //   doc.text("Invoice", 105, 10, null, null, "center");
+
+  //   // Add order details
+  //   doc.setFontSize(12);
+  //   doc.text(`Order ID: ${order._id}`, 10, 30);
+  //   doc.text(`Date: ${new Date(order.createdAt).toLocaleDateString()}`, 10, 40);
+  //   doc.text(`Total Price: $${order.totalPrice}`, 10, 50);
+  //   doc.text(`Payment Method: ${order.paymentMethod}`, 10, 60);
+  //   doc.text(`Paid: ${order.isPaid ? "Yes" : "No"}`, 10, 70);
+  //   doc.text(`Order Status: ${order.orderStatus}`, 10, 80);
+
+  //   // Add shipping address
+  //   doc.text("Shipping Address:", 10, 100);
+  //   const { fullName, address, city, state, country, pinCode } = order.shippingAddress;
+  //   doc.text(`Name: ${fullName}`, 10, 110);
+  //   doc.text(`Address: ${address}, ${city}, ${state}`, 10, 120);
+  //   doc.text(`Country: ${country}, Pin Code: ${pinCode}`, 10, 130);
+
+  //   // Add product details as a table
+  //   const productData = order.orderItems.map((item, index) => [
+  //     index + 1,
+  //     item.product.name,
+  //     item.quantity,
+  //     item.size || "N/A",
+  //     item.color || "N/A",
+  //     item.product.price,
+  //   ]);
+
+  //   doc.autoTable({
+  //     head: [["#", "Product Name", "Quantity", "Size", "Color", "Price"]],
+  //     body: productData,
+  //     startY: 150,
+  //   });
+
+  //   // Save the PDF
+  //   doc.save(`invoice_${order._id}.pdf`);
+  // };
+
   const generateInvoice = (order) => {
     const doc = new jsPDF();
 
@@ -220,25 +263,35 @@ const handleCancelOrder = async (orderId) => {
     doc.text(`Address: ${address}, ${city}, ${state}`, 10, 120);
     doc.text(`Country: ${country}, Pin Code: ${pinCode}`, 10, 130);
 
-    // Add product details as a table
-    const productData = order.orderItems.map((item, index) => [
-      index + 1,
-      item.product.name,
-      item.quantity,
-      item.size || "N/A",
-      item.color || "N/A",
-      item.product.price,
-    ]);
+    // Add product details as a table with dynamic attributes
+    const productData = order.orderItems.map((item, index) => {
+        // Extract selected attributes dynamically
+        const attributes = item.selectedAttributes
+            ? Object.entries(item.selectedAttributes)
+                  .map(([key, value]) => `${key}: ${value}`)
+                  .join(", ")
+            : "N/A";
+
+        return [
+            index + 1,
+            item.product.name,
+            item.quantity,
+            attributes, // Display attributes in one column
+            `$${item.product.price}`,
+        ];
+    });
 
     doc.autoTable({
-      head: [["#", "Product Name", "Quantity", "Size", "Color", "Price"]],
-      body: productData,
-      startY: 150,
+        head: [["#", "Product Name", "Quantity", "Attributes", "Price"]],
+        body: productData,
+        startY: 150,
     });
 
     // Save the PDF
     doc.save(`invoice_${order._id}.pdf`);
-  };
+};
+
+
 
   if (!orders.length) {
     return  <div className={styles.msgcontainer}>
@@ -376,133 +429,7 @@ const handleCancelOrder = async (orderId) => {
     </div>
   ))}
 </div>
-
-
-    {/* <div  className={styles.myOrdersContainer}>
-        {orders.map((order, index) => (
-          <div  key={order._id} className={styles.myOrdersContainer} >
-          {orders.map((order, index) => (
-            <div
-              key={order._id}
-              className={`${styles.orderCard} gsap-animate ${index % 2 === 0 ? 'fade-left' : 'fade-right'}`} 
-    
-    
-              data-animate="fade-up"
-            > 
-              <div className={styles.topBar}>
-                <button
-                  onClick={() => loadProductDetails(order._id)}
-                  className={`${styles.topButton} ${activeButton === 'order' ? styles.active : ''}`}
-                  // className={`${styles.topButton} ${activeButton === 'order' ? styles.active : ''}`}
-                >
-                  Order
-                </button>
-    
-      
-                <button
-                  onClick={() => showOrderDetails(order._id)}
-                  className={`${styles.topButton} ${activeButton === 'orderDetails' ? styles.active : ''}`}
-                >
-                  Order Details
-                </button>
-                <button
-                  onClick={() => showShippingDetails(order._id)}
-                  className={`${styles.topButton} ${activeButton === 'shippingDetails' ? styles.active : ''}`}
-                >
-                  Shipping Details
-                </button>
-              </div>
-      
-              {selectedOrder === order._id && showDetails === "orderDetails" && (
-                <div className={`${styles.sectionorderCard} gsap-animate`} data-animate="fade-up">
-                  <h2>Order ID: {order._id}</h2>
-                  <p>Total Price: ₹{order.totalPrice}</p>
-                  <p>Payment Method: {order.paymentMethod}</p>
-                  <p>Order Status: {order.orderStatus}</p>
-                  <p>Paid: {order.isPaid ? "Yes" : "No"}</p>
-                  <p>Paid At: {order.paidAt ? new Date(order.paidAt).toLocaleString() : "Not Paid"}</p>
-                  {order.coupon && order.coupon.code && order.coupon.discount && (
-                    <div>
-                      <p>Coupon Code: {order.coupon.code}</p>
-                      <p>Discount Applied: {order.coupon.discount}%</p>
-                      <p>Discounted Price: ₹{order.totalPrice}</p>
-                    </div>
-                  )}
-                </div>
-              )}
-      
-              {selectedOrder === order._id && showDetails === "shippingDetails" && (
-                <div className={`${styles.sectionorderCard} gsap-animate`} data-animate="fade-up">
-                  <h2 className={`scroll-animate ${styles.subHeading}`}>Shipping Address</h2>
-                  <p className={`scroll-animate`}>Full Name: <span>{order.shippingAddress.fullName}</span></p>
-                  <p className="TypingEffect">Address: <span>{order.shippingAddress.address}</span></p>
-                  <p className="TypingEffect">Address2: <span>{order.shippingAddress.address2}</span></p>
-                  <p>City: <span>{order.shippingAddress.city}</span></p>
-                  <p>State: <span>{order.shippingAddress.state}</span></p>
-                  <p>Landmark: <span>{order.shippingAddress.landmark}</span> - Phone No: <span>{order.shippingAddress.phoneNo}</span></p>
-                  <p>Country: <span>{order.shippingAddress.country}</span> - PinCode: <span>{order.shippingAddress.pinCode}</span></p>
-                </div>
-              )}
-    
-            
-    
-              
-      
-              <div className={`${styles.sectionorderCard} gsap-animate`}>
-                <h3>Order Items</h3>
-                {order.orderItems.map((item) => (
-                  <li 
-                  // key={item.product?._id}
-                  key={`${order._id}-${item.product?._id}`}
-    
-                   className={`gsap-animate ${styles.orderItem}`}>
-    
-                    {item.product?.media && item.product.media.length > 0 && (
-                     
-                      <Image
-                      src={item.product.media[0]}
-                      alt={item.product?.name}
-                      className={styles.productImage}
-                      width={300}
-                height={300}
-               
-              />
-
-                    )}
-                    <div>
-                    <p className="TypingEffect" >{item.product?.name.length > 30 ? item.product?.name.slice(0, 30) + "..." : item.product?.name}</p>
-                      <p className="TypingEffect" > Quantity: {item.quantity}</p>
-                      {item.size && <p>Size: {item.size}</p>}
-                      {item.color && <p>Color: {item.color}</p>}
-                    </div>
-                  </li>
-                ))}
-              </div>
-    
-    
-             
-    
-    
-    
-      
-              <div className={styles.buttons}>
-                <button className={`gsap-animate ${styles.invoiceButton}`} onClick={() => generateInvoice(order)}>
-                  Download Invoice
-                </button>
-                {order.orderStatus !== "Cancelled" && (
-                  <button className={`gsap-animate ${styles.invoiceButton}`} onClick={() => handleCancelOrder(order._id)}>
-                    Cancel Order
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        ))}
-      </div> */}
-
-   
+  
   </div>
   
   );

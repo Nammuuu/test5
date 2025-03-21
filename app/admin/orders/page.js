@@ -126,54 +126,93 @@ const generatePDF = (order) => {
   doc.text(`${order.shippingAddress.country}, ${order.shippingAddress.pinCode}`, marginX, currentY);
   currentY += 10;
 
-  // Define columns and data for the table
+  // // Define columns and data for the table
+  // const columns = [
+  //   { header: 'Product', dataKey: 'productName' },
+  //   { header: 'Quantity', dataKey: 'quantity' },
+  //   { header: 'Size', dataKey: 'size' },
+  //   { header: 'Color', dataKey: 'color' },
+  //   { header: 'Price', dataKey: 'price' },
+  // ];
+
+  // const data = order.orderItems.map((item) => ({
+  //   productName: item.product?.name || 'N/A',
+  //   quantity: item.quantity || 0,
+  //   price: item.product?.price || 'N/A',
+  //   size: item.size || 'N/A',
+  //   color: item.color || 'N/A',
+  // }));
+
+  
+
+  // // Add product table
+  // doc.autoTable({
+  //   head: [columns],
+  //   body: data.map(row => [
+  //     row.productName,
+  //     row.quantity,
+  //     row.size,
+  //     row.color,
+  //     row.price
+  //   ]),
+  //   startY: currentY,
+  //   theme: 'grid',
+  //   styles: { fontSize: 10, cellPadding: 3 },
+  //   columnStyles: {
+  //     0: { cellWidth: 60 }, // Product name
+  //     1: { cellWidth: 30 }, // Quantity
+  //     2: { cellWidth: 30 }, // Size
+  //     3: { cellWidth: 30 }, // Color
+  //     4: { cellWidth: 40 }  // Price
+  //   }
+  // });
+  const data = order.orderItems.map((item) => {
+    const attributes = item.attributes ? item.attributes.map(attr => `${attr.name}: ${attr.value}`).join(', ') : 'N/A';
+    
+    return {
+      productName: item.product?.name || 'N/A',
+      quantity: item.quantity || 0,
+      price: item.product?.price || 'N/A',
+      size: item.size || 'N/A',
+      color: item.color || 'N/A',
+      attributes, // Add attributes field
+    };
+  });
+  
+  // Update columns
   const columns = [
     { header: 'Product', dataKey: 'productName' },
     { header: 'Quantity', dataKey: 'quantity' },
     { header: 'Size', dataKey: 'size' },
     { header: 'Color', dataKey: 'color' },
+    { header: 'Attributes', dataKey: 'attributes' }, // New column for attributes
     { header: 'Price', dataKey: 'price' },
   ];
-
-  // const data = order.orderItems.map((item) => ({
-  //   productName: item.product?.name || 'N/A', // Fallback to 'N/A' if product or name is unavailable
-  //   quantity: item.quantity,
-  //   size: item.size || 'N/A', // Fallback for size
-  //   color: item.color || 'N/A', // Fallback for color
-  //   price: item.product?.price || 'N/A', // Fallback for price
-  // }));
-
-  const data = order.orderItems.map((item) => ({
-    productName: item.product?.name || 'N/A',
-    quantity: item.quantity || 0,
-    price: item.product?.price || 'N/A',
-    size: item.size || 'N/A',
-    color: item.color || 'N/A',
-  }));
-
   
-
-  // Add product table
+  // Update autoTable body mapping
   doc.autoTable({
-    head: [columns],
+    head: [columns.map(col => col.header)],
     body: data.map(row => [
       row.productName,
       row.quantity,
       row.size,
       row.color,
-      row.price
+      row.attributes, // Include attributes in the table
+      row.price,
     ]),
     startY: currentY,
     theme: 'grid',
     styles: { fontSize: 10, cellPadding: 3 },
     columnStyles: {
-      0: { cellWidth: 60 }, // Product name
-      1: { cellWidth: 30 }, // Quantity
-      2: { cellWidth: 30 }, // Size
-      3: { cellWidth: 30 }, // Color
-      4: { cellWidth: 40 }  // Price
+      0: { cellWidth: 50 }, // Product name
+      1: { cellWidth: 20 }, // Quantity
+      2: { cellWidth: 20 }, // Size
+      3: { cellWidth: 20 }, // Color
+      4: { cellWidth: 50 }, // Attributes
+      5: { cellWidth: 30 }, // Price
     }
   });
+  
 
   // Update Y position after table
   currentY = doc.lastAutoTable.finalY + 10;

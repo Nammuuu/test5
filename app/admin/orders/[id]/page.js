@@ -156,6 +156,7 @@ const generatePDF = (order) => {
     { header: 'Size', dataKey: 'size' },
     { header: 'Color', dataKey: 'color' },
     { header: 'Price', dataKey: 'price' },
+    { header: 'Attributes', dataKey: 'attributes' },
   ];
 
   // const data = order.orderItems.map((item) => ({
@@ -172,6 +173,7 @@ const generatePDF = (order) => {
     price: item.product?.price || 'N/A',
     size: item.size || 'N/A',
     color: item.color || 'N/A',
+    attributes: item.attributes ? Object.entries(item.attributes).map(([key, value]) => `${key}: ${value}`).join(', ') : 'N/A',
   }));
 
   
@@ -184,17 +186,19 @@ const generatePDF = (order) => {
       row.quantity,
       row.size,
       row.color,
-      row.price
+      row.price,
+      row.attributes,
     ]),
     startY: currentY,
     theme: 'grid',
     styles: { fontSize: 10, cellPadding: 3 },
     columnStyles: {
-      0: { cellWidth: 60 }, // Product name
-      1: { cellWidth: 30 }, // Quantity
-      2: { cellWidth: 30 }, // Size
-      3: { cellWidth: 30 }, // Color
-      4: { cellWidth: 40 }  // Price
+      0: { cellWidth: 50 },
+      1: { cellWidth: 20 },
+      2: { cellWidth: 20 },
+      3: { cellWidth: 20 },
+      4: { cellWidth: 50 },
+      5: { cellWidth: 30 },
     }
   });
 
@@ -286,6 +290,7 @@ const navigateToHome = () => {
               <p><strong>Quantity:</strong><span> {item.quantity} </span></p>
               <p><strong>color:</strong><span> {item.color} </span></p>
               <p><strong>size:</strong><span> {item.size} </span></p>
+              <p><strong>Attributes:</strong> {item.attributes ? Object.entries(item.attributes).map(([key, value]) => `${key}: ${value}`).join(', ') : 'N/A'}</p>
               <p><strong>Total:</strong> <span> ${(item.product?.price * item.quantity).toFixed(2)} </span></p>
               <div  className={styles.ViewProduct}> 
               <Link href={`/product/details/${item.product?._id}`}> View Product details</Link>

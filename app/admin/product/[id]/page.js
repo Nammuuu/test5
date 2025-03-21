@@ -24,6 +24,7 @@ const ProductPage = ({ params }) => {
     sizes: [],
     colors: [],
     media: [],
+    attributes: [],
   });
   const [newImages, setNewImages] = useState([]);
 const [mediaToRemove, setMediaToRemove] = useState([]);
@@ -35,6 +36,8 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+  const [newValue, setNewValue] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -70,24 +73,6 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
   }, [id, router]);
 
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   const fetchCategories = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const categoriesResponse = await axios.get('/api/admin/product/category', {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       });
-  //       setCategories(categoriesResponse.data.categories);
-  //     } catch (error) {
-  //       console.error('Error fetching categories:', error);
-  //       toast.error('Failed to fetch categories.');
-  //     }
-  //     setLoading(false);
-  //   };
-  //   fetchCategories();
-  // }, []);
-
   
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -114,11 +99,39 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
     fetchCategories();
   }, []);
 
+  const handleAddValue = () => {
+    if (!newTitle || !newValue) return;
+    setProduct((prev) => {
+      const existingAttribute = prev.attributes.find((attr) => attr.title === newTitle);
+      if (existingAttribute) {
+        existingAttribute.values.push(newValue);
+      } else {
+        prev.attributes.push({ title: newTitle, values: [newValue] });
+      }
+      return { ...prev };
+    });
+    setNewValue("");
+  };
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setProduct({ ...product, [name]: value });
-  // };
+  const handleRemoveValue = (title, value) => {
+    setProduct((prev) => {
+      const updatedAttributes = prev.attributes.map((attr) => {
+        if (attr.title === title) {
+          return { ...attr, values: attr.values.filter((v) => v !== value) };
+        }
+        return attr;
+      });
+      return { ...prev, attributes: updatedAttributes };
+    });
+  };
+
+  const handleRemoveAttribute = (title) => {
+    setProduct((prev) => ({
+      ...prev,
+      attributes: prev.attributes.filter((attr) => attr.title !== title),
+    }));
+  };
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -127,9 +140,7 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
       [name]: value,
     }));
   };
-
-
-  const handleTagsChange = (e) => {
+const handleTagsChange = (e) => {
     setProduct({ ...product, tags: e.target.value.split(',').map(tag => tag.trim()) });
   };
 
@@ -149,12 +160,6 @@ const [mediaToRemove, setMediaToRemove] = useState([]);
     setProduct({ ...product, media: [...product.media, ...filePreviews] }); // Add previews to media array
   };
 
-  
-
-  // const handleImageUpload = (e) => {
-  //   setNewImages([...e.target.files]);
-  // };
-
 const handleRemoveMedia = (url) => {
   setMediaToRemove((prev) => {
     if (prev.includes(url)) {
@@ -165,8 +170,8 @@ const handleRemoveMedia = (url) => {
   });
 };
 
-  const handleUpdateProduct = async () => {
-    const token = localStorage.getItem('token');
+const handleUpdateProduct = async () => {
+  const token = localStorage.getItem('token');
     if (!token) {
       router.push('/login');
       return;
@@ -183,6 +188,13 @@ const handleRemoveMedia = (url) => {
       formData.append('sizes', product.sizes.join(','));
       formData.append('colors', product.colors.join(','));
       formData.append('displayOptions', product.displayOptions);
+// Append attributes
+product.attributes.forEach((attr, index) => {
+  formData.append(`attributes[${index}][title]`, attr.title);
+  attr.values.forEach((value, valueIndex) => {
+    formData.append(`attributes[${index}][values][${valueIndex}]`, value);
+  });
+});
 
            // Append media to remove
       mediaToRemove.forEach((url) => {
@@ -236,12 +248,7 @@ const handleRemoveMedia = (url) => {
     }
     setLoading(false);
   };
-
-
-
-
-  
-  
+ 
   return (
     <div className={styles.container}>
  {loading && <Loader />}
@@ -293,19 +300,7 @@ const handleRemoveMedia = (url) => {
           <div  className={styles.formGroupContainer}>
           <div className={styles.formGroup}>
           <label>Category:</label>
-          {/* <select
-          className={styles.selectCat}
-            name="category"
-            value={product.category}
-            onChange={handleInputChange}
-          >
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </select> */}
+        
 
 <select
        className={styles.selectCat}
@@ -376,6 +371,43 @@ const handleRemoveMedia = (url) => {
               onChange={handleColorsChange}
             />
           </div>
+
+          {/* Attributes Input */}
+      <div className={styles.attributeInput}>
+        <input
+          type="text"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+          placeholder="Enter Attribute Title"
+          className={styles.input}
+        />
+        <input
+          type="text"
+          value={newValue}
+          onChange={(e) => setNewValue(e.target.value)}
+          placeholder="Enter Attribute Value"
+          className={styles.input}
+        />
+        <button onClick={handleAddValue} className={styles.addButton}>Add Value</button>
+      </div>
+
+      {/* Display Added Attributes */}
+      {product.attributes.map((attr, index) => (
+        <div key={index} className={styles.attributeContainer}>
+          <strong>{attr.title}</strong>
+          <div className={styles.values}>
+            {attr.values.map((value, i) => (
+              <span key={i} className={styles.value}>
+                {value}
+                <FaTrash className={styles.removeIcon} onClick={() => handleRemoveValue(attr.title, value)} />
+              </span>
+            ))}
+          </div>
+          <FaTrash className={styles.removeIcon} onClick={() => handleRemoveAttribute(attr.title)} />
+        </div>
+      ))}
+
+
           </div>
 
          
@@ -455,7 +487,7 @@ const handleRemoveMedia = (url) => {
     </div>
   );
 };
-
+ 
 export default ProductPage;
 
 
