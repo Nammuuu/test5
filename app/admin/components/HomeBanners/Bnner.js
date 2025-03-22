@@ -10,7 +10,7 @@ import Image from "next/image";
 import styles from "../../../../styles/admin/home/banner.module.css";
 import Link from "next/link";
 import {
-  FaBars,
+  FaBars, 
   FaTimes,
   FaTachometerAlt,
   FaBoxOpen,
@@ -21,7 +21,7 @@ import {
 import Loader from "../../../../components/Loader";
 // import ThamwSettingsPage from "./Themasatting";
 
-export default function BannerPage() {
+export default function BannerPaget() {
   const [banners, setBanners] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
