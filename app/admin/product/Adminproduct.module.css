@@ -54,6 +54,7 @@
   padding: 4px 8px;
   margin-right: 4px;
   border-radius: 4px;
+  text-transform: capitalize;
 }
 
 .removeIcon {
@@ -1286,6 +1287,11 @@
     overflow-y: auto;
     z-index: 1000;
     transition: opacity 0.3s ease;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .modalOverlay::-webkit-scrollbar {
+    display: none; 
   }
   
   /* Modal Content */
@@ -1302,7 +1308,13 @@
     grid-template-columns: 1fr 1fr; */
     gap: 20px;
     position: relative;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  
+  .modalContent::-webkit-scrollbar {
+    display: none;  /* Webkit browsers */
+   }
   
 
   
@@ -1844,6 +1856,14 @@
     margin: 5px 0;
     font-size: .75rem;
   }
+  .attributeInput {
+    flex-direction: column;
+  }
+  .container textarea{
+    width: unset;
+  }
+
+
   }
 
 

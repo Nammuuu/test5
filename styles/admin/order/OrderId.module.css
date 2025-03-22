@@ -446,7 +446,18 @@ background-color: rgba(242, 61, 20, 0.571);
 
 /* Responsive design */
 @media (max-width: 768px) {
-  
+ 
+  .productDetails p span {
+    font-size: .9rem;
+    color: #666;
+    text-transform: capitalize;
+    display: flex;
+    /* gap: 10px; */
+    flex-wrap: wrap;
+    text-align: left;
+    align-items: center;
+  }
+
   .ViewProduct {
     padding: 5px 5px;
     

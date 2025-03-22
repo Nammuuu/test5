@@ -287,6 +287,18 @@ const navigateToHome = () => {
           <p><strong>Name:</strong> <span>  {item.product?.name.length > 20 
             ? item.product?.name.slice(0, 20) + '...' 
             : item.product?.name}  </span></p>
+
+{item.selectedAttributes && Object.keys(item.selectedAttributes).length > 0 && (
+                <p>
+                  
+                {Object.entries(item.selectedAttributes).map(([key, value]) => (
+                  <p key={key} className={styles.atrributecontainer} >
+                    <strong>{key}:</strong> 
+                  <span>{value}</span></p>
+                ))}
+                </p>
+              )}
+              
               <p><strong>Price:</strong> <span> ${item.product?.price.toFixed(2)} </span></p>
               <p><strong>Quantity:</strong><span> {item.quantity} </span></p>
               {/* <p><strong>color:</strong><span> {item.color} </span></p>
@@ -299,11 +311,7 @@ const navigateToHome = () => {
             <p><strong>size:</strong><span> {item.size} </span></p>
           )}
             
-            {item.selectedAttributes && Object.keys(item.selectedAttributes).length > 0 && (
-                <p><strong className={styles.dispalynoen}>Attributes:</strong> {Object.entries(item.selectedAttributes).map(([key, value]) => (
-                  <span key={key} className={styles.atrributecontainer} ><strong>{key}:</strong> <span>{value}</span></span>
-                ))}</p>
-              )}
+         
 
               {/* {item.selectedAttributes && Object.keys(item.selectedAttributes).length > 0 && (
                 <p><strong>Attributes:</strong>
