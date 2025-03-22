@@ -228,8 +228,10 @@ export default function BannerPaget() {
         {banners.map((banner) => (
           <div key={banner._id} className={styles.bannerItem}>
             <Image src={banner.images} alt={banner.title} width={600} height={400} />
-            <Link href={banner.productUrl} target="_blank">View Product</Link>
-            <button onClick={() => handleDelete(banner._id)}>Delete</button>
+            <div className={styles.deleteButtonContainer} > 
+            <Link className={styles.deleteButton} href={banner.productUrl} target="_blank">View Product</Link>
+            <button onClick={() => handleDelete(banner._id)} className={styles.deleteButton}>Delete</button>
+            </div>
           </div>
         ))}
       </div>
