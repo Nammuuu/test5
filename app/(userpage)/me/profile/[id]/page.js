@@ -172,21 +172,23 @@ const UserProfilePage = () => {
     setLoading(true);
   
     try {
-      const formData = new FormData();  // Use FormData for proper encoding
+      const formData = new FormData();
   
       if (profilePicture && profilePicture.includes(",")) {
-        const base64Image = profilePicture.split(",")[1]; // Extract base64 part
+        const base64Image = profilePicture.split(",")[1]; 
         formData.append("profilePicture", base64Image);
       }
   
-      formData.append('fullName', fullName || ""); 
-      formData.append('address', address || "");
-      formData.append('savedShippingAddresses', JSON.stringify(savedShippingAddresses || []));
-      formData.append('deletedAccountRequest', deletedAccountRequest.toString()); 
+      formData.append("fullName", fullName || "");  
+      formData.append("address", address || "");  
+      formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
+      formData.append("deletedAccountRequest", deletedAccountRequest.toString());
+  
+      console.log("Submitting formData:", Object.fromEntries(formData.entries())); // Debugging
   
       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',  // Ensure correct content type
+          "Content-Type": "multipart/form-data",
         },
       });
   
@@ -202,6 +204,7 @@ const UserProfilePage = () => {
       setLoading(false);
     }
   };
+  
 
   
   const handleDeleteProfile = async () => {
