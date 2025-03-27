@@ -174,17 +174,28 @@ const UserProfilePage = () => {
     try {
       const formData = new FormData();
   
-      if (profilePicture && profilePicture.includes(",")) {
-        const base64Image = profilePicture.split(",")[1]; 
-        formData.append("profilePicture", base64Image);
+      // Handle profile picture (allow removal)
+      if (profilePicture) {
+        if (profilePicture.includes(",")) {
+          const base64Image = profilePicture.split(",")[1];
+          formData.append("profilePicture", base64Image);
+        }
+      } else {
+        formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
       }
   
       formData.append("fullName", fullName?.trim() || "");  
       formData.append("address", address?.trim() || "");  
       formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
-      formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Convert to string
+      formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Convert boolean to string
   
-      console.log("Submitting formData:", Object.fromEntries([...formData])); // Debugging
+      console.log("Submitting formData:", {
+        fullName,
+        address,
+        savedShippingAddresses,
+        deletedAccountRequest,
+        profilePicture: profilePicture ? "[BASE64 IMAGE]" : "No Image",
+      });
   
       const response = await fetch(`/api/user/me/profile/${id}`, {
         method: "PUT",
@@ -208,6 +219,7 @@ const UserProfilePage = () => {
       setLoading(false);
     }
   };
+  
   
   
   

@@ -108,24 +108,25 @@ export async function DELETE(req, { params }) {
 // }
 
 
+
+
+
 export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
-
-
-
     const formData = await req.formData();
 
-    const profilePictureBase64 = formData.get("profilePicture");
     let profilePictureUrl = "";
+    const profilePictureBase64 = formData.get("profilePicture");
 
-    if (profilePictureBase64) {
-      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+    // Upload to Cloudinary if a new profile picture is provided
+    if (profilePictureBase64 && profilePictureBase64.startsWith("data:image")) {
+      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64.replace(/^data:image\/\w+;base64,/, ""), "profile_images");
       profilePictureUrl = uploadResult.secure_url;
     }
 
-    // Convert formData values properly
+    // Parse form data
     const updatedProfile = {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
@@ -133,32 +134,30 @@ export async function PUT(req, { params }) {
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
     };
 
-    // Only update profilePicture if a new one is uploaded
-    if (profilePictureUrl) {
-      updatedProfile.profilePicture = profilePictureUrl;
+    // If no new profile picture is uploaded, keep the existing one
+    const existingProfile = await UserProfile.findOne({ userId: id });
+    if (!profilePictureUrl && existingProfile) {
+      profilePictureUrl = existingProfile.profilePicture || "";
     }
+
+    updatedProfile.profilePicture = profilePictureUrl;
 
     console.log("Updating user profile with:", updatedProfile); // Debugging
 
-    // const userProfile = await UserProfile.findOneAndUpdate(
-    //   { userId: id },
-    //   { $set: updatedProfile },
-    //   { new: true, upsert: true, runValidators: true }
-    // );
-
+    // Update the user profile
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       {
         $set: {
           fullName: updatedProfile.fullName,
           address: updatedProfile.address,
+          profilePicture: updatedProfile.profilePicture,
           deletedAccountRequest: updatedProfile.deletedAccountRequest,
+          savedShippingAddresses: updatedProfile.savedShippingAddresses, // Replace instead of pushing
         },
-        $push: { savedShippingAddresses: { $each: updatedProfile.savedShippingAddresses } },
       },
       { new: true, upsert: true, runValidators: true }
     );
-    
 
     if (!userProfile) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
@@ -170,4 +169,5 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
+
 
