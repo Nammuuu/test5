@@ -179,17 +179,15 @@ const UserProfilePage = () => {
         formData.append("profilePicture", base64Image);
       }
   
-      formData.append("fullName", fullName || "");  
-      formData.append("address", address || "");  
+      formData.append("fullName", fullName?.trim() || "");  
+      formData.append("address", address?.trim() || "");  
       formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
-      formData.append("deletedAccountRequest", deletedAccountRequest.toString());
+      formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Ensure boolean
   
-      console.log("Submitting formData:", Object.fromEntries(formData.entries())); // Debugging
+      console.log("Submitting formData:", Object.fromEntries([...formData])); // Debugging
   
       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
   
       if (response.status === 200) {
@@ -199,11 +197,13 @@ const UserProfilePage = () => {
         throw new Error("Failed to update profile.");
       }
     } catch (error) {
-      handleError(error, "Failed to update profile.");
+      console.error("Error updating profile:", error.response?.data || error.message);
+      toast.error("Failed to update profile. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+  
   
 
   

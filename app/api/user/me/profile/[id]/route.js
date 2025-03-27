@@ -137,11 +137,25 @@ export async function PUT(req, { params }) {
 
     console.log("Updating user profile with:", updatedProfile); // Debugging
 
+    // const userProfile = await UserProfile.findOneAndUpdate(
+    //   { userId: id },
+    //   { $set: updatedProfile },
+    //   { new: true, upsert: true, runValidators: true }
+    // );
+
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
-      { $set: updatedProfile },
+      {
+        $set: {
+          fullName: updatedProfile.fullName,
+          address: updatedProfile.address,
+          deletedAccountRequest: updatedProfile.deletedAccountRequest,
+        },
+        $push: { savedShippingAddresses: { $each: updatedProfile.savedShippingAddresses } },
+      },
       { new: true, upsert: true, runValidators: true }
     );
+    
 
     if (!userProfile) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
