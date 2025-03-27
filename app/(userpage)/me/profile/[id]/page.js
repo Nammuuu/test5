@@ -182,27 +182,33 @@ const UserProfilePage = () => {
       formData.append("fullName", fullName?.trim() || "");  
       formData.append("address", address?.trim() || "");  
       formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
-      formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Ensure boolean
+      formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Convert to string
   
       console.log("Submitting formData:", Object.fromEntries([...formData])); // Debugging
   
-      const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const response = await fetch(`/api/user/me/profile/${id}`, {
+        method: "PUT",
+        body: formData,
       });
   
-      if (response.status === 200) {
-        toast.success("Profile updated successfully!");
-        router.push(`/me/profile`);
-      } else {
-        throw new Error("Failed to update profile.");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to update profile.");
       }
+  
+      const responseData = await response.json();
+      console.log("Profile updated:", responseData);
+  
+      toast.success("Profile updated successfully!");
+      router.push(`/me/profile`);
     } catch (error) {
-      console.error("Error updating profile:", error.response?.data || error.message);
-      toast.error("Failed to update profile. Please try again.");
+      console.error("Error updating profile:", error);
+      toast.error(error.message || "Failed to update profile. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+  
   
   
 

@@ -112,6 +112,9 @@ export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
+
+
+
     const formData = await req.formData();
 
     const profilePictureBase64 = formData.get("profilePicture");
