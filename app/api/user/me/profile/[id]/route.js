@@ -115,18 +115,19 @@ export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
+
     const formData = await req.formData();
 
-    let profilePictureUrl = "";
     const profilePictureBase64 = formData.get("profilePicture");
+    let profilePictureUrl = "";
 
-    // Upload to Cloudinary if a new profile picture is provided
-    if (profilePictureBase64 && profilePictureBase64.startsWith("data:image")) {
-      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64.replace(/^data:image\/\w+;base64,/, ""), "profile_images");
+    // Upload to Cloudinary only if there's a valid base64 image
+    if (profilePictureBase64 && profilePictureBase64.length > 100) {
+      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
       profilePictureUrl = uploadResult.secure_url;
     }
 
-    // Parse form data
+    // Convert formData values properly
     const updatedProfile = {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
@@ -134,17 +135,16 @@ export async function PUT(req, { params }) {
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
     };
 
-    // If no new profile picture is uploaded, keep the existing one
-    const existingProfile = await UserProfile.findOne({ userId: id });
-    if (!profilePictureUrl && existingProfile) {
-      profilePictureUrl = existingProfile.profilePicture || "";
+    // If profile picture is empty, remove it
+    if (profilePictureBase64 === "") {
+      updatedProfile.profilePicture = "";
+    } else if (profilePictureUrl) {
+      updatedProfile.profilePicture = profilePictureUrl;
     }
 
-    updatedProfile.profilePicture = profilePictureUrl;
+    console.log("Updating user profile with:", updatedProfile);
 
-    console.log("Updating user profile with:", updatedProfile); // Debugging
-
-    // Update the user profile
+    // Replace saved addresses instead of appending
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       {
@@ -153,7 +153,7 @@ export async function PUT(req, { params }) {
           address: updatedProfile.address,
           profilePicture: updatedProfile.profilePicture,
           deletedAccountRequest: updatedProfile.deletedAccountRequest,
-          savedShippingAddresses: updatedProfile.savedShippingAddresses, // Replace instead of pushing
+          savedShippingAddresses: updatedProfile.savedShippingAddresses, // REPLACING instead of pushing
         },
       },
       { new: true, upsert: true, runValidators: true }
@@ -169,5 +169,6 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
 }
+
 
 
