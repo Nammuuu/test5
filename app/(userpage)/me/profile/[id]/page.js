@@ -128,39 +128,71 @@ const UserProfilePage = () => {
     }
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     const formData = new URLSearchParams();
+
+  //     if (profilePicture && profilePicture.includes(",")) {
+  //       const base64Image = profilePicture.split(",")[1]; // Extract base64 string part
+  //       formData.append("profilePicture", base64Image);
+  //     }
+
+  //     formData.append('fullName', fullName);
+  //     formData.append('address', address);
+  //     formData.append('notificationPreferences', notification);
+  //     formData.append('savedShippingAddresses', JSON.stringify(savedShippingAddresses));
+  //     formData.append('billingInfo', JSON.stringify(billingInfo));
+  //     formData.append('deletedAccountRequest', deletedAccountRequest);
+
+  //     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //       },
+  //     });
+
+  //     if (response.status === 200) {
+  //       toast.success("Profile updated successfully!");
+  //       router.push(`/me/profile`); // Updated line for redirection
+  //     } else {
+  //       throw new Error("Failed to update profile.");
+  //     }
+  //   } catch (error) {
+  //     handleError(error, "Failed to update profile.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
-      const formData = new URLSearchParams();
-
-      // if (profilePicture) {
-      //   const base64Image = profilePicture.split(",")[1]; // Extract base64 string part
-      //   formData.append("profilePicture", base64Image);
-      // }
-
+      const formData = new FormData();  // Use FormData for proper encoding
+  
       if (profilePicture && profilePicture.includes(",")) {
-        const base64Image = profilePicture.split(",")[1]; // Extract base64 string part
+        const base64Image = profilePicture.split(",")[1]; // Extract base64 part
         formData.append("profilePicture", base64Image);
       }
-
-      formData.append('fullName', fullName);
-      formData.append('address', address);
-      formData.append('notificationPreferences', notification);
-      formData.append('savedShippingAddresses', JSON.stringify(savedShippingAddresses));
-      formData.append('billingInfo', JSON.stringify(billingInfo));
-      formData.append('deletedAccountRequest', deletedAccountRequest);
-
+  
+      formData.append('fullName', fullName || ""); 
+      formData.append('address', address || "");
+      formData.append('savedShippingAddresses', JSON.stringify(savedShippingAddresses || []));
+      formData.append('deletedAccountRequest', deletedAccountRequest.toString()); 
+  
       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'multipart/form-data',  // Ensure correct content type
         },
       });
-
+  
       if (response.status === 200) {
         toast.success("Profile updated successfully!");
-        router.push(`/me/profile`); // Updated line for redirection
+        router.push(`/me/profile`);
       } else {
         throw new Error("Failed to update profile.");
       }
@@ -171,6 +203,7 @@ const UserProfilePage = () => {
     }
   };
 
+  
   const handleDeleteProfile = async () => {
     setLoading(true);
     try {
@@ -227,55 +260,6 @@ return (
     <div className={styles.containerprofileid}>
 
       <form onSubmit={handleSubmit} className={styles.profileForm}>
-
-{/*
-      <div className={styles.formGroupprofile}>
- 
-  <Link href="/" className={styles.backHome}>
-    <FaArrowLeft size={24} /> 
-  </Link>
-
-  
-  <label htmlFor="fullName" className={styles.label}>
-    <FaUser className={styles.icon} /> Full Name:
-  </label>
-  <input
-    type="text"
-    id="fullName"
-    value={fullName}
-    onChange={(e) => setFullName(e.target.value)}
-    className={styles.inputField}
-    placeholder="Enter your full name"
-  />
-
- 
-  <label htmlFor="profilePicture" className={styles.label}>
-    <FaPlus className={styles.icon} /> Profile Picture:
-  </label>
-
- 
-  <input
-    type="file"
-    id="profilePicture"
-    onChange={handleProfilePictureChange}
-    className={styles.fileInput}
-  />
-
-  
-  <div className={styles.uploadIcon} onClick={() => document.getElementById('profilePicture').click()}>
-    {profilePictureImagePreview ? (
-      <img
-        src={profilePictureImagePreview}
-        alt="Profile Preview"
-        className={styles.profilePreview}
-      />
-    ) : (
-      <FaPlus size={30} className={styles.iconInsideUpload} />
-    )}
-  </div>
-</div>
-
-*/}
 
 <div className={styles.formGroupprofile}>
   {/* Back to Home Icon */}
@@ -468,244 +452,7 @@ return (
     </div>
   </>
 );
-
-
-
-  // return (
-  //   <>
-  //     {error ? <p className={styles.errorMessage}>{error}</p> : <p className={styles.userId}>User ID: {userId}</p>}
-  //     {loading && <Loader />}
-  //    <div className={styles.containerprofileid}  > 
-  //     <form onSubmit={handleSubmit} className={styles.profileForm}>
-
-  //       <div className={styles.formGroup}>
-          
-  //       <label htmlFor="fullName" className={styles.label}>Full Name:</label>
-  //       <input
-  //         type="text"
-  //         id="fullName"
-  //         value={fullName}
-  //         onChange={(e) => setFullName(e.target.value)}
-  //         className={styles.inputField}
-  //         placeholder="Enter your full name"
-  //       />
-
-  //       <label htmlFor="profilePicture" className={styles.label}>Profile Picture:</label>
-  //         <input
-  //           type="file"
-  //           id="profilePicture"
-  //           onChange={handleProfilePictureChange}
-  //           className={styles.fileInput}
-  //         />
-  //         {profilePictureImagePreview && (
-  //           <img
-  //             src={profilePictureImagePreview}
-  //             alt="Profile Preview"
-  //             className={styles.profilePreview}
-  //           />
-  //         )}
-  //       </div>
-
-  //       <div className={styles.formGroup}>
-  //         <label className={styles.label}>Saved Shipping Addresses:</label>
-      
-          
-  //         {savedShippingAddresses.map((address, index) => (
-  //           <div key={index} className={styles.addressContainer}>
-  //           <label htmlFor="address" className={styles.label}>Address:</label>
-  //             <input
-  //               type="text"
-  //               name="address"
-  //               value={address.address || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               className={styles.addressInput}
-  //               placeholder="Address"
-  //             />
-  //             <label htmlFor="address2" className={styles.label}>Address 2:</label>
-  //             <input
-  //               type="text"
-  //               name="address2"
-  //               value={address.address2 || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               className={styles.addressInput}
-  //               placeholder="Address Line 2"
-  //             />
-
-  //             <label htmlFor="phoneNo" className={styles.label}>phoneNo:</label>
-  //             <input
-  //               type="text"
-  //               name="phoneNo"
-  //               value={address.phoneNo || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               className={styles.addressInput}
-  //               placeholder="Phone Number"
-  //             />
-  //             <label htmlFor="city" className={styles.label}>City:</label>
-  //             <input
-  //               type="text"
-  //               name="city"
-  //               value={address.city || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               className={styles.addressInput}
-  //               placeholder="City"
-  //             />
-
-  //             <label htmlFor="state" className={styles.label}>State:</label>
-  //             <input
-  //               type="text"
-  //               name="state"
-  //               value={address.state || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               className={styles.addressInput}
-  //               placeholder="State"
-  //             />
-  //             <label htmlFor="landmark" className={styles.label}>Landmark:</label>
-  //             <input
-  //               type="text"
-  //               name="landmark"
-  //               value={address.landmark || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               className={styles.addressInput}
-  //               placeholder="Landmark"
-  //             />
-  //             <label htmlFor="Country" className={styles.label}>Country:</label>
-  //             <input
-  //               type="text"
-  //               name="country"
-  //               value={address.country || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               className={styles.addressInput}
-  //               placeholder="Country"
-  //             />
-  //             <label htmlFor="pinCode" className={styles.label}>PIN Code:</label>
-  //             <input
-  //               type="text"
-  //               name="pinCode"
-  //               value={address.pinCode || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               className={styles.addressInput}
-  //               placeholder="PIN Code"
-  //             />
-  //           </div>
-  //         ))}
-
-          
-  //         <button type="button" onClick={addNewAddress} className={styles.addButton}>Add New Address</button>
-  //       </div>
-   
-  
-  //       <div className={styles.formGroup}>
-  //         <label htmlFor="deletedAccountRequest" className={styles.checkboxLabel}>
-  //           Request Account Deletion:
-  //           <input
-  //             type="checkbox"
-  //             id="deletedAccountRequest"
-  //             checked={deletedAccountRequest}
-  //             onChange={(e) => setDeletedAccountRequest(e.target.checked)}
-  //             className={styles.checkbox}
-  //           />
-  //         </label>
-  //       </div>
-  
-  //       <div className={styles.buttonContainer}>
-  //         <button type="submit" disabled={loading} className={styles.submitButton}>Save Changes</button>
-  //         <button onClick={handleDeleteProfile} disabled={loading} className={styles.deleteButton}>Delete Profile</button>
-  //       </div>
-  //     </form>
-  //     </div>
-  //   </>
-  // );
-
-   
-
-  
-  // return (
-  //   <>
-  //   {error ? <p>{error}</p> : <p>User ID: {userId}</p>}
-  //     {loading && <Loader />}
-  //     <form onSubmit={handleSubmit} className={styles.profileForm}>
-  //       <div className={styles.formGroup}>
-        //   <label htmlFor="profilePicture">Profile Picture:</label>
-        //   <input type="file" id="profilePicture" onChange={handleProfilePictureChange} />
-        //   {profilePictureImagePreview && <img src={profilePictureImagePreview} alt="Profile Preview" width="100" />}
-        // </div>
-  //       <div className={styles.formGroup}>
-  //         <label htmlFor="fullName">Full Name:</label>
-  //         <input type="text" id="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} />
-  //       </div>
-  //       <div className={styles.formGroup}>
-  //         <label htmlFor="address">Address:</label>
-  //         <input type="text" id="address" value={address} onChange={(e) => setAddress(e.target.value)} />
-  //       </div>
-  //       <div className={styles.formGroup}>
-  //         <label>Notification Preferences:</label>
-  //         <input type="text" value={notification} onChange={(e) => setNotification(e.target.value)} />
-  //       </div>
-  //       <div className={styles.formGroup}>
-  //         <label>Saved Shipping Addresses:</label>
-  //         {savedShippingAddresses.map((address, index) => (
-  //           <div key={index} className={styles.addressContainer}>
-  //             <input
-  //               type="text"
-  //               name="address"
-  //               value={address.address || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               placeholder="Address"
-  //             />
-  //             <input
-  //               type="text"
-  //               name="city"
-  //               value={address.city || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               placeholder="City"
-  //             />
-  //             <input
-  //               type="text"
-  //               name="state"
-  //               value={address.state || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               placeholder="State"
-  //             />
-  //             <input
-  //               type="text"
-  //               name="zipCode"
-  //               value={address.zipCode || ''}
-  //               onChange={(e) => handleAddressChange(index, e)}
-  //               placeholder="Zip Code"
-  //             />
-  //           </div>
-  //         ))}
-  //         <button type="button" onClick={addNewAddress} className={styles.addButton}>Add New Address</button>
-  //       </div>
-  //       <div className={styles.formGroup}>
-  //         <label>Billing Info:</label>
-  //         <input
-  //           type="text"
-  //           value={billingInfo.billingName || ''}
-  //           onChange={(e) => setBillingInfo({ ...billingInfo, billingName: e.target.value })}
-  //           placeholder="Billing Name"
-  //         />
-  //         <input
-  //           type="text"
-  //           value={billingInfo.billingAddress || ''}
-  //           onChange={(e) => setBillingInfo({ ...billingInfo, billingAddress: e.target.value })}
-  //           placeholder="Billing Address"
-  //         />
-  //       </div>
-  //       <div className={styles.formGroup}>
-  //         <label htmlFor="deletedAccountRequest">Request Account Deletion:</label>
-  //         <input
-  //           type="checkbox"
-  //           id="deletedAccountRequest"
-  //           checked={deletedAccountRequest}
-  //           onChange={(e) => setDeletedAccountRequest(e.target.checked)}
-  //         />
-  //       </div>
-  //       <button type="submit" disabled={loading}>Save Changes</button>
-  //     </form>
-  //     <button onClick={handleDeleteProfile} disabled={loading} className={styles.deleteButton}>Delete Profile</button>
-  //   </>
-  // );
+ 
 };
 
 export default UserProfilePage;

@@ -396,17 +396,9 @@ transition: background-color .3sease;
 }
 
 .productItem {
- 
   cursor: pointer;
-  
-
-  
   border-radius: 12px;
   padding: 5px;
-  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1); */
-  /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -417,9 +409,9 @@ transition: background-color .3sease;
   text-decoration: none;
 }
 
-.productItem:hover {
+/* .productItem:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .productImage {
   width: 100%;
@@ -610,9 +602,10 @@ transition: background-color .3sease;
 .mainproduct_images {
   position: relative;
   width: 100%;
-  height: 280px; /* Fixed height */
+  height: 280px;
   overflow: hidden;
-  display: flex;
+  display: flex
+;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
@@ -624,6 +617,11 @@ transition: background-color .3sease;
   object-fit: cover; /* Ensures the image fills the container */
   transition: transform 0.4s ease;
   border-radius: 8px;
+  transition-duration: .3s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    border-radius: .75rem;
+    display: block;
 }
 
 .product_container:hover .product_list_images {
@@ -701,26 +699,46 @@ transition: background-color .3sease;
 }
 
 .product_list_containet h4 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  font-weight: 450;
-  color: #333;
-  text-transform: capitalize;
+  letter-spacing: 0;
+    padding: 0;
+    word-break: break-all;
+    gap: 0;
+    justify-content: flex-start;
+    align-items: flex-start;
+    color: #000;
+    display: flex;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: inherit;
+    text-decoration: inherit;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    text-transform: capitalize;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin: 0;
+    transition-duration: .3s;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-weight: 450;
+    color: #333;
+    text-transform: capitalize;
 }
 
 .product_list_containet .conmmanClassname {
-  font-size: 0.9rem;
+  font-size: .8rem;
   color: #777;
-  /* margin-bottom: 8px; */
   margin: 8px 0;
+  display: flex;
+  gap: 2px;
 }
 
 .conmmanClassname svg {
   fill: none;
-  border-color: #ffc107;
-  stroke-width: 30;
-  stroke: #ffe254;
-  margin: 0 5px 0 0;
+    border-color: #ffc107;
+    stroke-width: 55;
+    stroke: #ffce11;
 }
 
 
@@ -1520,11 +1538,21 @@ height: 40px;
     gap: 5px;
   }
   .mainproduct_images {
-    height: 150px;
+    transition: transform .4s ease;
+    border-radius: 8px;
+    transition-duration: .3s;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    border-radius: .75rem;
+    display: block;
+    height: auto;
+    aspect-ratio: 12 / 13;
+    width: 100%;
+    max-width: 100%;
   }
 
   .product_list_images {
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .product_list_containet {
@@ -1550,19 +1578,25 @@ height: 40px;
 
   .price_containet {
     display: flex;
-    align-items: flex-start;
+    align-items: self-start;
     gap: 5px;
   }
   .price {
-    font-size: 1.2rem;
-    font-weight: 450;
     letter-spacing: 0;
+    font-size: 1rem;
+    margin: 6px 0;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: inherit;
+    line-height: 1.75rem;
   }
 
 
   .price_containet .discountPrice {
     margin-top: 12px;
-    font-size: 1rem;
+    color: #f23e14;
+    text-decoration: line-through;
+    font-size: .71rem;
   }
 
 
@@ -1573,17 +1607,20 @@ height: 40px;
 
   .product_list_containet h4 {
     margin: 0;
-    
         font-size: 1rem;
-        letter-spacing: 0.0px;
+        letter-spacing: 0;
         padding: 0;
-       
         word-break: break-all;
         gap: 0;
-      
         justify-content: flex-start;
         align-items: flex-start;
-        color: #000;
+        color: inherit;
+        display: flex;
+        font-weight: 600;
+        opacity: .9;
+        
+       
+       
   }
  
 

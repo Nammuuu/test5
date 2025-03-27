@@ -507,7 +507,7 @@ const toggleShowAllTags = () => setShowAllTags(!showAllTags);
       </Link>
       <div className={styles.product_list_containet}>
         <h4>{product.name.length > 15 ? product.name.slice(0, 15) + "..." : product.name}</h4>
-        
+         
         <p className={styles.conmmanClassname}>{renderRating(product.averageRating)}</p>
 
 
