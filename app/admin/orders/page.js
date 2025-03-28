@@ -260,7 +260,7 @@ const AdminOrders = () => {
 
 
 
-const generatePDF = async (order, companyDetails, logoUrl) => {
+const generatePDF = async (order, formData, logoUrl) => {
   const doc = new jsPDF();
 
   const marginX = 10;
@@ -284,13 +284,13 @@ const generatePDF = async (order, companyDetails, logoUrl) => {
 
   // Company Details
   doc.setFontSize(12);
-  if (companyDetails.shopName) doc.text(`${companyDetails.shopName}`, marginX, currentY);
+  if (formData.shopName) doc.text(`${formData.shopName}`, marginX, currentY);
   currentY += 7;
-  if (companyDetails.address) doc.text(`Address: ${companyDetails.address}`, marginX, currentY);
+  if (formData.address) doc.text(`Address: ${formData.address}`, marginX, currentY);
   currentY += 7;
-  if (companyDetails.contact) doc.text(`Phone: ${companyDetails.contact}`, marginX, currentY);
+  if (formData.contact) doc.text(`Phone: ${formData.contact}`, marginX, currentY);
   currentY += 7;
-  if (companyDetails.email) doc.text(`Email: ${companyDetails.email}`, marginX, currentY);
+  if (formData.email) doc.text(`Email: ${formData.email}`, marginX, currentY);
   currentY += 10;
 
   // Customer & Shipping Details
