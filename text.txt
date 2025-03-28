@@ -311,20 +311,15 @@ add addriboute for products
 size color meatiral payment update
 
 01. addriboute --done
- add on admin side start
- 
-  --admin 
-  02. pdf admin order --fix letter
-  + user order --done
-  03. order details page --done
-  04 admin product details --done
 
- invoice add done
  check mobile 
  --done funal
 
+ 01 --pandding--
+    --profile update fix it letter 
+    02  invoice add + tax information
+    03. user invoice
 
-profile update fix it letter 
 
 01. Multiple Payment 
 02.  thame satting

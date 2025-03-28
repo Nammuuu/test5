@@ -16,7 +16,9 @@ import {
   FaSortAmountUp, FaSortAmountDown, FaHeart, FaEye, FaShoppingCart,
   FaArrowLeft, FaArrowRight
 } from 'react-icons/fa';
-
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import QRCode from "qrcode";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -25,6 +27,23 @@ const AdminOrders = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
+  const [logoUrl, setLogoUrl] = useState(null);
+  const [formData, setFormData] = useState({
+   
+    themeColor: "#ffffff", 
+    shopName: "",
+    website: "",
+    font: "Poppins", 
+    address: "",
+    postCode: "",
+    contact: "",
+    email: "",
+    facebook: "",
+    instagram: "",
+    twitter: "",
+    youtube: "",
+
+  });
 
   
   const fetchOrders = async () => {
@@ -57,6 +76,47 @@ const AdminOrders = () => {
   };
 
   
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await axios.get("/api/admin/setting" , {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
+        if (res?.data) {
+          setFormData(res.data);  // Ensure you update the formData with the correct settings
+        
+         
+        }
+      } catch (error) {
+        console.error("Failed to load settings:", error);
+      }
+    };
+  
+    fetchSettings();
+  }, []);
+
+  useEffect(() => {
+    const fetchLogo = async () => {
+      try {
+          const response = await axios.get("/api/admin/setting/logoclint", {
+          headers: {
+            'Cache-Control': 'no-cache',
+          },
+        });
+
+        setLogoUrl(response.data.themeSettings.loginlogo);
+      } catch (err) {
+        console.error("Error fetching logo:", err);
+        setError("Failed to load logo.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLogo();
+  }, []);
 
   const handleOrderSelection = (orderId) => {
     setSelectedOrders((prevSelectedOrders) =>
@@ -97,127 +157,186 @@ const AdminOrders = () => {
   };
 
 
-const generatePDF = (order) => {
+// const generatePDF = (order) => {
+//   const doc = new jsPDF();
+  
+//   // Set margin and spacing variables
+//   const marginX = 10;
+//   let currentY = 10; // Tracks Y position on the PDF for dynamic content placement
+  
+//   // Add title
+//   doc.setFontSize(16);
+//   doc.text(`Invoice for Order ID: ${order._id}`, marginX, currentY);
+//   currentY += 10;
+
+//   // Add user details
+//   doc.setFontSize(12);
+//   doc.text(`User Email: ${order.user.email}`, marginX, currentY);
+//   currentY += 10;
+  
+//   // Add shipping address
+//   doc.text(`Shipping Address:`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`${order.shippingAddress.fullName}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`${order.shippingAddress.address}, ${order.shippingAddress.address2}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`${order.shippingAddress.city}, ${order.shippingAddress.state}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`${order.shippingAddress.country}, ${order.shippingAddress.pinCode}`, marginX, currentY);
+//   currentY += 10;
+
+//   const data = order.orderItems.map((item) => {
+//     const attributes = item.attributes ? item.attributes.map(attr => `${attr.name}: ${attr.value}`).join(', ') : 'N/A';
+    
+//     return {
+//       productName: item.product?.name || 'N/A',
+//       quantity: item.quantity || 0,
+//       price: item.product?.price || 'N/A',
+//       size: item.size || 'N/A',
+//       color: item.color || 'N/A',
+//       attributes, // Add attributes field
+//     };
+//   });
+  
+//   // Update columns
+//   const columns = [
+//     { header: 'Product', dataKey: 'productName' },
+//     { header: 'Quantity', dataKey: 'quantity' },
+//     { header: 'Size', dataKey: 'size' },
+//     { header: 'Color', dataKey: 'color' },
+//     { header: 'Attributes', dataKey: 'attributes' }, // New column for attributes
+//     { header: 'Price', dataKey: 'price' },
+//   ];
+  
+//   // Update autoTable body mapping
+//   doc.autoTable({
+//     head: [columns.map(col => col.header)],
+//     body: data.map(row => [
+//       row.productName,
+//       row.quantity,
+//       row.size,
+//       row.color,
+//       row.attributes, // Include attributes in the table
+//       row.price,
+//     ]),
+//     startY: currentY,
+//     theme: 'grid',
+//     styles: { fontSize: 10, cellPadding: 3 },
+//     columnStyles: {
+//       0: { cellWidth: 50 }, // Product name
+//       1: { cellWidth: 20 }, // Quantity
+//       2: { cellWidth: 20 }, // Size
+//       3: { cellWidth: 20 }, // Color
+//       4: { cellWidth: 50 }, // Attributes
+//       5: { cellWidth: 30 }, // Price
+//     }
+//   });
+  
+
+//   // Update Y position after table
+//   currentY = doc.lastAutoTable.finalY + 10;
+
+//   // Add additional order details
+//   doc.text(`Total Price: ${order.totalPrice}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`Order Status: ${order.orderStatus}`, marginX, currentY);
+//   currentY += 7;
+//   doc.text(`Payment Method: ${order.paymentMethod}`, marginX, currentY);
+//   currentY += 10;
+
+//   // Add coupon details if available
+//   if (order.coupon) {
+//     doc.text(`Coupon Code: ${order.coupon.code}`, marginX, currentY);
+//     currentY += 7;
+//     doc.text(`Discount Amount: ${order.coupon.discount}`, marginX, currentY);
+//     currentY += 10;
+//   }
+ 
+//   // Save the PDF
+//   doc.save(`Invoice_${order._id}.pdf`);
+// };
+
+
+
+
+const generatePDF = async (order, companyDetails, logoUrl) => {
   const doc = new jsPDF();
-  
-  // Set margin and spacing variables
+
   const marginX = 10;
-  let currentY = 10; // Tracks Y position on the PDF for dynamic content placement
-  
-  // Add title
+  let currentY = 20; // Start position for content
+
+  // Add Company Logo
+  if (logoUrl) {
+    try {
+      const img = new Image();
+      img.src = logoUrl;
+      doc.addImage(img, "PNG", marginX, 5, 40, 20); // Position logo at top
+    } catch (error) {
+      console.error("Error loading logo:", error);
+    }
+  }
+
+  // Title
   doc.setFontSize(16);
   doc.text(`Invoice for Order ID: ${order._id}`, marginX, currentY);
   currentY += 10;
 
-  // Add user details
+  // Company Details
   doc.setFontSize(12);
-  doc.text(`User Email: ${order.user.email}`, marginX, currentY);
+  if (companyDetails.shopName) doc.text(`${companyDetails.shopName}`, marginX, currentY);
+  currentY += 7;
+  if (companyDetails.address) doc.text(`Address: ${companyDetails.address}`, marginX, currentY);
+  currentY += 7;
+  if (companyDetails.contact) doc.text(`Phone: ${companyDetails.contact}`, marginX, currentY);
+  currentY += 7;
+  if (companyDetails.email) doc.text(`Email: ${companyDetails.email}`, marginX, currentY);
   currentY += 10;
-  
-  // Add shipping address
+
+  // Customer & Shipping Details
+  doc.text(`Customer: ${order.user.email}`, marginX, currentY);
+  currentY += 10;
   doc.text(`Shipping Address:`, marginX, currentY);
   currentY += 7;
   doc.text(`${order.shippingAddress.fullName}`, marginX, currentY);
   currentY += 7;
-  doc.text(`${order.shippingAddress.address}, ${order.shippingAddress.address2}`, marginX, currentY);
+  doc.text(`${order.shippingAddress.address}, ${order.shippingAddress.address2 || ""}`, marginX, currentY);
   currentY += 7;
   doc.text(`${order.shippingAddress.city}, ${order.shippingAddress.state}`, marginX, currentY);
   currentY += 7;
   doc.text(`${order.shippingAddress.country}, ${order.shippingAddress.pinCode}`, marginX, currentY);
   currentY += 10;
 
-  // // Define columns and data for the table
-  // const columns = [
-  //   { header: 'Product', dataKey: 'productName' },
-  //   { header: 'Quantity', dataKey: 'quantity' },
-  //   { header: 'Size', dataKey: 'size' },
-  //   { header: 'Color', dataKey: 'color' },
-  //   { header: 'Price', dataKey: 'price' },
-  // ];
-
-  // const data = order.orderItems.map((item) => ({
-  //   productName: item.product?.name || 'N/A',
-  //   quantity: item.quantity || 0,
-  //   price: item.product?.price || 'N/A',
-  //   size: item.size || 'N/A',
-  //   color: item.color || 'N/A',
-  // }));
-
-  
-
-  // // Add product table
-  // doc.autoTable({
-  //   head: [columns],
-  //   body: data.map(row => [
-  //     row.productName,
-  //     row.quantity,
-  //     row.size,
-  //     row.color,
-  //     row.price
-  //   ]),
-  //   startY: currentY,
-  //   theme: 'grid',
-  //   styles: { fontSize: 10, cellPadding: 3 },
-  //   columnStyles: {
-  //     0: { cellWidth: 60 }, // Product name
-  //     1: { cellWidth: 30 }, // Quantity
-  //     2: { cellWidth: 30 }, // Size
-  //     3: { cellWidth: 30 }, // Color
-  //     4: { cellWidth: 40 }  // Price
-  //   }
-  // });
+  // Order Items Table
   const data = order.orderItems.map((item) => {
-    const attributes = item.attributes ? item.attributes.map(attr => `${attr.name}: ${attr.value}`).join(', ') : 'N/A';
+    const attributes = item.attributes ? item.attributes.map(attr => `${attr.name}: ${attr.value}`).join(', ') : null;
     
-    return {
-      productName: item.product?.name || 'N/A',
-      quantity: item.quantity || 0,
-      price: item.product?.price || 'N/A',
-      size: item.size || 'N/A',
-      color: item.color || 'N/A',
-      attributes, // Add attributes field
-    };
+    return [
+      item.product?.name || 'N/A',
+      item.quantity || 0,
+      item.size || null,
+      item.color || null,
+      attributes || null,
+      item.product?.price || 'N/A',
+    ].filter(Boolean); // Remove null values
   });
-  
-  // Update columns
-  const columns = [
-    { header: 'Product', dataKey: 'productName' },
-    { header: 'Quantity', dataKey: 'quantity' },
-    { header: 'Size', dataKey: 'size' },
-    { header: 'Color', dataKey: 'color' },
-    { header: 'Attributes', dataKey: 'attributes' }, // New column for attributes
-    { header: 'Price', dataKey: 'price' },
-  ];
-  
-  // Update autoTable body mapping
-  doc.autoTable({
-    head: [columns.map(col => col.header)],
-    body: data.map(row => [
-      row.productName,
-      row.quantity,
-      row.size,
-      row.color,
-      row.attributes, // Include attributes in the table
-      row.price,
-    ]),
-    startY: currentY,
-    theme: 'grid',
-    styles: { fontSize: 10, cellPadding: 3 },
-    columnStyles: {
-      0: { cellWidth: 50 }, // Product name
-      1: { cellWidth: 20 }, // Quantity
-      2: { cellWidth: 20 }, // Size
-      3: { cellWidth: 20 }, // Color
-      4: { cellWidth: 50 }, // Attributes
-      5: { cellWidth: 30 }, // Price
-    }
-  });
-  
 
-  // Update Y position after table
+  const columns = ["Product", "Quantity", "Size", "Color", "Attributes", "Price"].filter((col, index) =>
+    data.some(row => row[index] !== null) // Show only if any row has data
+  );
+
+  doc.autoTable({
+    head: [columns],
+    body: data,
+    startY: currentY,
+    theme: "grid",
+    styles: { fontSize: 10, cellPadding: 3 },
+    columnStyles: { 0: { cellWidth: 50 } },
+  });
+
   currentY = doc.lastAutoTable.finalY + 10;
 
-  // Add additional order details
+  // Additional Order Details
   doc.text(`Total Price: ${order.totalPrice}`, marginX, currentY);
   currentY += 7;
   doc.text(`Order Status: ${order.orderStatus}`, marginX, currentY);
@@ -225,17 +344,30 @@ const generatePDF = (order) => {
   doc.text(`Payment Method: ${order.paymentMethod}`, marginX, currentY);
   currentY += 10;
 
-  // Add coupon details if available
+  // Coupon Details (if available)
   if (order.coupon) {
     doc.text(`Coupon Code: ${order.coupon.code}`, marginX, currentY);
     currentY += 7;
-    doc.text(`Discount Amount: ${order.coupon.discount}`, marginX, currentY);
+    doc.text(`Discount: ${order.coupon.discount}`, marginX, currentY);
     currentY += 10;
   }
- 
+
+  // Generate QR Code for Order Details
+  try {
+    const qrData = await QRCode.toDataURL(`https://www.mydomain.com/product/order/${order._id}`);
+    doc.addImage(qrData, "PNG", marginX, currentY, 40, 40);
+    currentY += 50;
+  } catch (error) {
+    console.error("Error generating QR Code:", error);
+  }
+
+  // Footer Line
+  doc.line(10, 280, 200, 280);
+
   // Save the PDF
   doc.save(`Invoice_${order._id}.pdf`);
 };
+
 
 const offset = currentPage * itemsPerPage;
 const currentOrders = orders.slice(offset, offset + itemsPerPage);
