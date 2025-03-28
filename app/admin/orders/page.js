@@ -77,18 +77,39 @@ const AdminOrders = () => {
 
   
 
+  // useEffect(() => {
+  //   const fetchSettings = async () => {
+  //     try {
+  //       const res = await axios.get("/api/admin/setting" , {
+  //         headers: {
+  //           'Cache-Control': 'no-cache',
+  //         },
+  //       });
+  //       if (res?.data) {
+  //         setFormData(res.data);  // Ensure you update the formData with the correct settings
+        
+         
+  //       }
+  //     } catch (error) {
+  //       console.error("Failed to load settings:", error);
+  //     }
+  //   };
+  
+  //   fetchSettings();
+  // }, []);
+
+
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await axios.get("/api/admin/setting" , {
+        const res = await axios.get("/api/admin/setting", {
           headers: {
-            'Cache-Control': 'no-cache',
+            "Cache-Control": "no-cache",
           },
         });
         if (res?.data) {
-          setFormData(res.data);  // Ensure you update the formData with the correct settings
-        
-         
+          setFormData(res.data);
+          console.log("Fetched formData:", res.data); // Debugging
         }
       } catch (error) {
         console.error("Failed to load settings:", error);
@@ -98,6 +119,8 @@ const AdminOrders = () => {
     fetchSettings();
   }, []);
 
+  
+  // for logo
   useEffect(() => {
     const fetchLogo = async () => {
       try {
@@ -262,6 +285,7 @@ const AdminOrders = () => {
 
 const generatePDF = async (order, formData, logoUrl) => {
   const doc = new jsPDF();
+  console.log("PDF function formData:", formData); // Debugging
 
   const marginX = 10;
   let currentY = 20; // Start position for content
@@ -283,9 +307,21 @@ const generatePDF = async (order, formData, logoUrl) => {
   currentY += 10;
 
   // Company Details
+  // doc.setFontSize(12);
+
+  if (formData.shopName) {
+    console.log("shopName exists:", formData.shopName); // Debugging
+  } else {
+    console.log("shopName is missing in PDF function"); // Debugging
+  }
+
   doc.setFontSize(12);
-  if (formData.shopName) doc.text(`${formData.shopName}`, marginX, currentY);
-  currentY += 7;
+  if (formData.shopName) {
+    doc.text(`Shop Name: ${formData.shopName}`, marginX, currentY);
+    currentY += 7;
+  }
+
+  
   if (formData.address) doc.text(`Address: ${formData.address}`, marginX, currentY);
   currentY += 7;
   if (formData.contact) doc.text(`Phone: ${formData.contact}`, marginX, currentY);
