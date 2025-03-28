@@ -325,25 +325,18 @@ const generatePDF = async (order, formData, logoUrl) => {
   currentY += 7;
   doc.text(`${order.shippingAddress.fullName}`, marginX, currentY);
   currentY += 7;
-  doc.text(`${order.shippingAddress.address},
-     ${order.shippingAddress.address2 || ""}`, marginX, currentY);
+  doc.text(`${order.shippingAddress.address}, ${order.shippingAddress.address2 || ""}`, marginX, currentY);
   currentY += 7;
 
-  doc.text(`${order.shippingAddress.landmark},
-    ${order.shippingAddress.landmark || ""}`, marginX, currentY);
+ doc.text(`${order.shippingAddress.landmark}, ${order.shippingAddress.landmark || ""}`, marginX, currentY);
  currentY += 7;
-
- doc.text(`${order.shippingAddress.phoneNo},
-  ${order.shippingAddress.phoneNo || ""}`, marginX, currentY);
-currentY += 7;
-
-
-  doc.text(`${order.shippingAddress.city}, 
-    ${order.shippingAddress.state}`, marginX, currentY);
-  currentY += 7;
-  doc.text(`${order.shippingAddress.country}, 
-    ${order.shippingAddress.pinCode}`, marginX, currentY);
-  currentY += 10;
+ doc.text(`${order.shippingAddress.phoneNo}, ${order.shippingAddress.phoneNo || ""}`, marginX, currentY);
+ currentY += 7;
+ doc.text(`${order.shippingAddress.city}, ${order.shippingAddress.state}`, marginX, currentY);
+ currentY += 7;
+ 
+ doc.text(`${order.shippingAddress.country}, ${order.shippingAddress.pinCode}`, marginX, currentY);
+ currentY += 10;
 
   // Order Items Table
   // const data = order.orderItems.map((item) => {
