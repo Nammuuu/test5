@@ -336,11 +336,24 @@ const generatePDF = async (order, formData, logoUrl) => {
   currentY += 7;
   doc.text(`${order.shippingAddress.fullName}`, marginX, currentY);
   currentY += 7;
-  doc.text(`${order.shippingAddress.address}, ${order.shippingAddress.address2 || ""}`, marginX, currentY);
+  doc.text(`${order.shippingAddress.address},
+     ${order.shippingAddress.address2 || ""}`, marginX, currentY);
   currentY += 7;
-  doc.text(`${order.shippingAddress.city}, ${order.shippingAddress.state}`, marginX, currentY);
+
+  doc.text(`${order.shippingAddress.landmark},
+    ${order.shippingAddress.landmark || ""}`, marginX, currentY);
+ currentY += 7;
+
+ doc.text(`${order.shippingAddress.phoneNo},
+  ${order.shippingAddress.phoneNo || ""}`, marginX, currentY);
+currentY += 7;
+
+
+  doc.text(`${order.shippingAddress.city}, 
+    ${order.shippingAddress.state}`, marginX, currentY);
   currentY += 7;
-  doc.text(`${order.shippingAddress.country}, ${order.shippingAddress.pinCode}`, marginX, currentY);
+  doc.text(`${order.shippingAddress.country}, 
+    ${order.shippingAddress.pinCode}`, marginX, currentY);
   currentY += 10;
 
   // Order Items Table
@@ -381,12 +394,20 @@ const generatePDF = async (order, formData, logoUrl) => {
   currentY += 10;
 
   // Coupon Details (if available)
-  if (order.coupon) {
-    doc.text(`Coupon Code: ${order.coupon.code}`, marginX, currentY);
-    currentY += 7;
-    doc.text(`Discount: ${order.coupon.discount}`, marginX, currentY);
-    currentY += 10;
-  }
+  // if (order.coupon) {
+  //   doc.text(`Coupon Code: ${order.coupon.code}`, marginX, currentY);
+  //   currentY += 7;
+  //   doc.text(`Discount: ${order.coupon.discount}`, marginX, currentY);
+  //   currentY += 10;
+  // }
+
+  if (order.coupon && order.coupon.code && order.coupon.discount) {  
+    doc.text(`Coupon Code: ${order.coupon.code}`, marginX, currentY);  
+    currentY += 7;  
+    doc.text(`Discount: ${order.coupon.discount}`, marginX, currentY);  
+    currentY += 10;  
+}
+
 
   // Generate QR Code for Order Details
   // try {
