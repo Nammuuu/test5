@@ -497,7 +497,11 @@ const currentOrders = orders.slice(offset, offset + itemsPerPage);
                   </td>
                   <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                   <td>
-                    <button onClick={() => generatePDF(order)}>Download Invoice</button>
+                  <button onClick={() => generatePDF(order, formData, logoUrl)}>
+  Download Invoice
+</button>
+
+                    {/* <button onClick={() => generatePDF(order)}>Download Invoice</button> */}
                   </td>
                   <td>
                     <Link className={styles.link} href={`/admin/orders/${order._id}`}>
