@@ -18,7 +18,7 @@ import {
 } from 'react-icons/fa';
 // import jsPDF from "jspdf";
 // import "jspdf-autotable";
-import QRCode from "qrcode";
+// import QRCode from "qrcode";
 
 const AdminOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -353,13 +353,13 @@ const generatePDF = async (order, companyDetails, logoUrl) => {
   }
 
   // Generate QR Code for Order Details
-  try {
-    const qrData = await QRCode.toDataURL(`https://www.mydomain.com/product/order/${order._id}`);
-    doc.addImage(qrData, "PNG", marginX, currentY, 40, 40);
-    currentY += 50;
-  } catch (error) {
-    console.error("Error generating QR Code:", error);
-  }
+  // try {
+  //   const qrData = await QRCode.toDataURL(`https://www.mydomain.com/product/order/${order._id}`);
+  //   doc.addImage(qrData, "PNG", marginX, currentY, 40, 40);
+  //   currentY += 50;
+  // } catch (error) {
+  //   console.error("Error generating QR Code:", error);
+  // }
 
   // Footer Line
   doc.line(10, 280, 200, 280);
