@@ -285,8 +285,6 @@ const AdminOrders = () => {
 
 const generatePDF = async (order, formData, logoUrl) => {
   const doc = new jsPDF();
-  console.log("PDF function formData:", formData); // Debugging
-
   const marginX = 10;
   let currentY = 20; // Start position for content
 
@@ -305,15 +303,6 @@ const generatePDF = async (order, formData, logoUrl) => {
   doc.setFontSize(16);
   doc.text(`Invoice for Order ID: ${order._id}`, marginX, currentY);
   currentY += 10;
-
-  // Company Details
-  // doc.setFontSize(12);
-
-  if (formData.shopName) {
-    console.log("shopName exists:", formData.shopName); // Debugging
-  } else {
-    console.log("shopName is missing in PDF function"); // Debugging
-  }
 
   doc.setFontSize(12);
   if (formData.shopName) {
@@ -357,26 +346,62 @@ currentY += 7;
   currentY += 10;
 
   // Order Items Table
-  const data = order.orderItems.map((item) => {
-    const attributes = item.attributes ? item.attributes.map(attr => `${attr.name}: ${attr.value}`).join(', ') : null;
+  // const data = order.orderItems.map((item) => {
+  //   const attributes = item.attributes ? item.attributes.map(attr => `${attr.name}: ${attr.value}`).join(', ') : null;
     
-    return [
-      item.product?.name || 'N/A',
-      item.quantity || 0,
-      item.size || null,
-      item.color || null,
-      attributes || null,
-      item.product?.price || 'N/A',
-    ].filter(Boolean); // Remove null values
-  });
+  //   return [
+  //     item.product?.name || 'N/A',
+  //     item.quantity || 0,
+  //     item.size || null,
+  //     item.color || null,
+  //     attributes || null,
+  //     item.product?.price || 'N/A',
+  //   ].filter(Boolean); // Remove null values
+  // });
 
-  const columns = ["Product", "Quantity", "Size", "Color", "Attributes", "Price"].filter((col, index) =>
-    data.some(row => row[index] !== null) // Show only if any row has data
-  );
+  // const columns = ["Product", "Quantity", "Size", "Color", "Attributes", "Price"].filter((col, index) =>
+  //   data.some(row => row[index] !== null) // Show only if any row has data
+  // );
 
+  // doc.autoTable({
+  //   head: [columns],
+  //   body: data,
+  //   startY: currentY,
+  //   theme: "grid",
+  //   styles: { fontSize: 10, cellPadding: 3 },
+  //   columnStyles: { 0: { cellWidth: 50 } },
+  // });
+
+  // currentY = doc.lastAutoTable.finalY + 10;
+
+
+  // Generate order items table data
+const data = order.orderItems.map((item) => {
+  const attributes = item.attributes ? item.attributes.map(attr => `${attr.name}: ${attr.value}`).join(', ') : null;
+  
+  return [
+    item.product?.name || null,  // Ensure empty values are properly handled
+    item.quantity || null,
+    item.size || null,
+    item.color || null,
+    attributes || null,
+    item.product?.price || null,
+  ];
+});
+
+// Column names
+const allColumns = ["Product", "Quantity", "Size", "Color", "Attributes", "Price"];
+
+// Filter columns based on non-empty values in any row
+const columns = allColumns.filter((col, index) => 
+  data.some(row => row[index] !== null && row[index] !== undefined && row[index] !== "")
+);
+
+// Only render the table if there is at least one column left
+if (columns.length > 0) {
   doc.autoTable({
     head: [columns],
-    body: data,
+    body: data.map(row => row.slice(0, columns.length)), // Ensure row data matches columns
     startY: currentY,
     theme: "grid",
     styles: { fontSize: 10, cellPadding: 3 },
@@ -384,6 +409,8 @@ currentY += 7;
   });
 
   currentY = doc.lastAutoTable.finalY + 10;
+}
+
 
   // Additional Order Details
   doc.text(`Total Price: ${order.totalPrice}`, marginX, currentY);
