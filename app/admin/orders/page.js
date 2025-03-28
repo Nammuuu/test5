@@ -16,8 +16,8 @@ import {
   FaSortAmountUp, FaSortAmountDown, FaHeart, FaEye, FaShoppingCart,
   FaArrowLeft, FaArrowRight
 } from 'react-icons/fa';
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+// import jsPDF from "jspdf";
+// import "jspdf-autotable";
 import QRCode from "qrcode";
 
 const AdminOrders = () => {
