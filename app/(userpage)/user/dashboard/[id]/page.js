@@ -30,8 +30,6 @@ gsap.registerPlugin(ScrollTrigger);
   const { user } = useContext(AuthContext);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const [reviews, setReviews] = useState([]);
   const router = useRouter();
   const { id } = useParams();
@@ -61,10 +59,6 @@ gsap.registerPlugin(ScrollTrigger);
     fetchSettings();
   }, []);
 
-
-
-
- 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -120,10 +114,6 @@ gsap.registerPlugin(ScrollTrigger);
     });
   }, [activeSection]);
 
-  // const toggleSidebar = () => {
-  //   setIsSidebarOpen(!isSidebarOpen);
-  // };
-
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
 
@@ -134,11 +124,7 @@ gsap.registerPlugin(ScrollTrigger);
 
       {/* Sidebar */}
       <div className={styles.dashboard}>
-
-
-      <div className={`${styles.sidebar} ${isSidebarOpen ? styles.open : styles.closed}`}>
-    
-      
+       <div className={`${styles.sidebar} ${isSidebarOpen ? styles.open : styles.closed}`}>    
       <div className={styles.user_dashbord_logo_container}> 
         <h1> {formData?.shopName} </h1>
                 {!isSidebarOpen && (
@@ -158,8 +144,6 @@ gsap.registerPlugin(ScrollTrigger);
       </div>
 
       <ul>
-
-
       <div className={styles.iconsContainer}>    
           <div className={styles.userProfiledis}>
           <Image
@@ -171,8 +155,6 @@ gsap.registerPlugin(ScrollTrigger);
       />     
           </div>
         </div>
-      
-
           <li className="sidebarItem" onClick={() => { setActiveSection("home"); toggleSidebar(); }}>
           <Link  className={styles.link} href='/'>  <FaHome /> <span>Home</span> </Link>
           </li>
@@ -200,37 +182,23 @@ gsap.registerPlugin(ScrollTrigger);
           <li className="sidebarItem" onClick={() => { setActiveSection("Reviews"); toggleSidebar(); }}>
               <FaClipboardList /> <span>My Reviews</span>
           </li>
-          {/* <li className="sidebarItem" onClick={() => { setActiveSection("cart"); toggleSidebar(); }}>
-              <FaShoppingCart /> <span>Cart</span>
-          </li> */}
-
-
           <li className="sidebarItem" onClick={() => { handleLogout(); toggleSidebar(); }}>
               <FaSignOutAlt /> <span>Logout</span>
           </li>
       </ul>
-  </div>
-  
-
+        </div>
         {/* Main Content */}
         <div  className={`${styles.mainContent} mainContentt`}>
-
         <div className={styles.topBar}>
-
         <button className={styles.toggleSidebarBtn} onClick={toggleSidebar}>
                             {isSidebarOpen ? <FaChevronLeft /> : <FaChevronRight />}
         </button>
-            
-        
-
       <div className={styles.searchBar}>
       <input type="text" placeholder="Search..." className={styles.searchInput} />
       <button className={styles.searchBtn}>
           <FaSearch />
       </button>
   </div>
-
-
 
         <div className={styles.iconsContainer}>
           <FaBell className={styles.notificationIcon} />
@@ -243,7 +211,7 @@ gsap.registerPlugin(ScrollTrigger);
         height={900}
       />
        
-            <FiChevronDown className={styles.chevronIcon} />
+        <FiChevronDown className={styles.chevronIcon} />
             <div className={styles.dropdownMenu}>
               <p>{userData?.email}</p>
               <button onClick={() => setActiveSection("profile")}>My Profile</button>
@@ -254,16 +222,13 @@ gsap.registerPlugin(ScrollTrigger);
         </div>
       </div>
 
-          {activeSection === "profile" && (
+      {activeSection === "profile" && (
             <div className={styles.profileCard}>
-            <div className={styles.containerprofileCard}>
-
-              
+            <div className={styles.containerprofileCard}>              
             <Profile />
           </div> 
             </div>
           )}
-
           {activeSection === "orders" && (
             <div className={styles.MyOrdersPageorderCard}>
             <div className={styles.MyOrdersPagecontainerorder}>
@@ -271,55 +236,6 @@ gsap.registerPlugin(ScrollTrigger);
             </div> 
             </div>
           ) }
-
-
-{/* {activeSection === "penddingorders" && (
-  <div className={styles.pendingOrdersContainer}>
-    <h2 className={styles.pendingOrdersHeader}>Pending Orders</h2>
-    {userData?.pendingOrders?.length ? (
-      <ul className={styles.pendingOrdersList}>
-        {userData.pendingOrders.map((order) => (
-          <li key={order._id} className={styles.orderCard}>
-            <div className={styles.orderInfo}>
-              <p><strong>Order ID:</strong> {order._id}</p>
-              <p><strong>Status:</strong> {order.orderStatus}</p>
-              <p><strong>Total:</strong> ${order.totalPrice}</p>
-            </div>
-
-            <div className={styles.orderProductInfo}>
-              <h3>Product Details:</h3>
-              {order.orderItems.map((item) => (
-                <div key={item.product._id} className={styles.orderCardpendding}>
-                  <Image
-                    src={item.product?.media[0] || ""}
-                    alt={item.product?.name}
-                    className={styles.productImage}
-                    width={900}
-                    height={900} 
-                  />
-
-                  <div>
-                    <p>{item.product?.name.length > 15 ? item.product.name.slice(0, 15) + "..." : item.product.name}</p>
-                    <p>Price: ${item.product.price}</p>
-                    <p>Quantity: {item.quantity}</p>
-                  </div>
-
-                  <button className={styles.viewDetailsButton}>
-                    <Link className={styles.link} href="/me/myorder">View Details</Link>
-                  </button>
-                </div>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      <p className={styles.noOrders}>No pending orders.</p>
-    )}
-  </div>
-)} */}
-
-
 
 {activeSection === "penddingorders" && (
   <div className={styles.pendingOrdersContainer}>
@@ -370,61 +286,6 @@ gsap.registerPlugin(ScrollTrigger);
     )}
   </div>
 )}
-
-
-    {/* {activeSection === "penddingorders" && (
-            <div className={styles.pendingOrdersContainer}>
-              <h2 className={styles.pendingOrdersHeader}>Pending Orders</h2>
-              {userData?.pendingOrders?.length ? (
-                <ul className={styles.pendingOrdersList}>
-                  {userData.pendingOrders.map((order) => (
-                    <li key={order._id} className={styles.orderCard}>
-                      <div className={styles.orderInfo}>
-                        <p><strong>Order ID:</strong> {order._id}</p>
-                        <p><strong>Status:</strong> {order.orderStatus}</p>
-                        <p><strong>Total:</strong> ${order.totalPrice}</p>
-                      </div>
-           
-                      <div className={styles.orderProductInfo}>
-                        <h3>Product Details:</h3>
-                        {order.orderItems.map((item) => (
-                          <div key={item.product._id} className={styles.orderCardpendding}>
-                          
-
-<Image
-         src={item.product.media[0]}
-         alt={item.product.name}
-         className={styles.productImage}
-        width={900}
-        height={900}
-      />
-
-                            <div>
-                            <p>{product.name.length > 15 ? product.name.slice(0, 15) + "..." : product.name}</p>
-                              <p>Price: ${item.product.price}</p>
-                              <p>Quantity: {item.quantity}</p>
-                            </div>
-
-                            <button className={styles.viewDetailsButton}> <Link  className={styles.link} href="/me/myorder">View Details</Link> </button>
-                          </div>
-                        ))}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className={styles.noOrders}>No pending orders.</p>
-              )}
-            </div>
-          )} */}
-
-
-
-
-
-
-
-
           {activeSection === "Wishlist" && (
            <div className={styles.MyWishlistPage}>
             <div className={styles.MyOrdersPagecontainerorder}>
@@ -432,13 +293,9 @@ gsap.registerPlugin(ScrollTrigger);
        </div>
       </div>
           )}
-
-
-
            {activeSection === "cart" && (
               <div className={styles.MyWishlistPage}>
             <div className={styles.MyOrdersPagecontainerorder}>
-       {/* <Cart /> */}
        <Cartsidebar />
 
       
@@ -474,44 +331,6 @@ gsap.registerPlugin(ScrollTrigger);
 
           )}
 
-
-  {/* 
-            {activeSection === "Reviews" && (
- <div>
-        <h2>Product Reviews</h2>
-        {reviews?.length ? (
-          reviews.map((review, index) => (
-            <div key={index}>
-              <p>Review for Product: {review.product?.name || "Unnamed Product"}</p>
-             <p>Rating: 
-  {[...Array(review.rating)].map((_, i) => (
-    <span key={i}>⭐</span> // You can replace this with any star icon
-  ))}
-</p>
-              <p>Comment: {review.comment}</p>
-              <p>Reviewed on: {new Date(review.createdAt).toLocaleDateString()}</p>
-              {review.profilePictureImagePreview && (
-              
-
-                <Image
-                src={review.profilePictureImagePreview} 
-                alt="User Profile" 
-                className="h-10 w-10 rounded-full" 
-        width={900}
-        height={900}
-      />
-
-              )}
-            </div>
-          ))
-        ) : (
-          <p>No reviews available.</p>
-        )}
-      </div>
-          )}
-         */ }
-
-
 {activeSection === "Reviews" && (
   <div className={styles.reviewsContainer}>
     <h2 className={styles.reviewsTitle}>Product Reviews</h2>
@@ -519,21 +338,9 @@ gsap.registerPlugin(ScrollTrigger);
       reviews.map((review, index) => (
         <div key={index} className={styles.reviewCard}>
           <div className={styles.reviewHeader}>
-            {/* {review.profilePictureImagePreview && (
-              <Image
-                src={review.profilePictureImagePreview}
-                alt="User Profile"
-                className={styles.profilePicture}
-                width={900}
-                height={900}
-              />
-            )} */}
-
 {review.product.media && (
               <Image
-              // src={product.media[0] || ""}
               src={review.product.media[0] || ""}
-                // src={review.profilePictureImagePreview}
                 alt="User Profile"
                 className={styles.profilePicture}
                 width={50}
@@ -542,11 +349,8 @@ gsap.registerPlugin(ScrollTrigger);
             )}
 
             <div>
-            {/* <Link href={`/product/details/${product._id}`}> */}
-            {/* <Link className={styles.link} href="/me/myorder">View Details</Link>  */}
               <p className={styles.productName}>
               {review.product?.name.length > 30 ? review.product?.name.slice(0, 30) + "..." : review.product?.name}
-                {/* {review.product?.name || "Unnamed Product"} */}
               </p>
               <p className={styles.reviewDate}>
                 {new Date(review.createdAt).toLocaleDateString()}
