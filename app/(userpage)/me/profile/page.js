@@ -111,10 +111,6 @@ const UserProfilePage = () => {
       setLoading(false);
     }
   },  [router]);
-
-  // useEffect(() => {
-  //   fetchUserId();
-  // }, []);
   
   useEffect(() => {
     fetchUserId();

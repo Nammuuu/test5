@@ -74,9 +74,8 @@ gsap.registerPlugin(ScrollTrigger);
 
         if (!response.ok) {
           toast.info('Update Your Profile dasbor err.');
-          router.push(`/me/profile/${userProfile._id}`);
-
-          router.push("/login");
+          router.push(`/me/profile/${id}`);
+          // router.push("/login");
           return;
         }
 
