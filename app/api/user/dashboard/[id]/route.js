@@ -7,60 +7,6 @@
 
 // just update authka
 
-// import { NextResponse } from 'next/server';
-// import jwt from 'jsonwebtoken';
-// import connectToDatabase from '../../../../../lib/mongodb';
-// import User from '../../../../../models/User';
-// import Order from '../../../../../models/Order';
-// import UserProfile from '../../../../../models/UserProfile';
-// import Product from '../../../../../models/Product';
-
-// const JWT_SECRET = process.env.JWT_SECRET;
-
-// export async function GET(req, { params }) {
-//   const { id } = params;
-
-//   try {
-//     await connectToDatabase();
-
-
-//     const authHeader = req.headers.get("authorization");
-//     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-//       return NextResponse.json({ message: "Unauthorized: Missing or invalid authorization header" }, { status: 401 });
-//     }
-
-//     const token = authHeader.split(" ")[1];
-//     let decodedToken;
-
-//     try {
-//       decodedToken = jwt.verify(token, JWT_SECRET);
-//     } catch (error) {
-//       return NextResponse.json({ message: "Invalid token" }, { status: 401 });
-//     }
-
-//     const user = await User.findById(id).select('-password');
-//     const userProfile = await UserProfile.findOne({ userId: id });
-//     const orderHistory = await Order.find({ user: id });
-//     const pendingOrders = orderHistory.filter(order => order.orderStatus === 'Processing');
-
-
-
-
-//     return NextResponse.json({
-//       user: {
-//         ...user.toObject(),
-//         ...userProfile.toObject(),
-//         orderHistory,
-//         pendingOrders,
-//         abandonedCarts,
-//       }
-//     }, { status: 200 });
-//   } catch (error) {
-//     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
-//   }
-// }
-
-
 export const dynamic = 'force-dynamic';
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
@@ -116,7 +62,7 @@ export async function GET(req, { params }) {
           product: {
             name: product.name,
             price: product.price,
-            media: product.media // Fetch product images
+            media: product.media 
           }
         }));
     });

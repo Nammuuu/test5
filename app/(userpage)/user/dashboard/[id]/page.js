@@ -47,9 +47,7 @@ gsap.registerPlugin(ScrollTrigger);
       try {
         const res = await axios.get("/api/admin/setting");
         if (res?.data) {
-          setFormData(res.data);  // Ensure you update the formData with the correct settings
-        
-         
+          setFormData(res.data);    
         }
       } catch (error) {
         console.error("Failed to load settings:", error);
@@ -75,6 +73,9 @@ gsap.registerPlugin(ScrollTrigger);
         });
 
         if (!response.ok) {
+          toast.info('Update Your Profile dasbor err.');
+          router.push(`/me/profile/${userProfile._id}`);
+
           router.push("/login");
           return;
         }
