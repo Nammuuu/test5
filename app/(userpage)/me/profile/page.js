@@ -74,7 +74,7 @@ const UserProfilePage = () => {
 
   const fetchUserProfile = useCallback(async () => {
     const token = localStorage.getItem('token');
-    if (!token) {
+     if (!token) {
       toast.error('No token found');
       router.push('/login');
       return;
@@ -101,6 +101,7 @@ const UserProfilePage = () => {
       if (error.response && error.response.status === 404) {
         // Show toast if profile is not found
         toast.info('Update Your Profile.');
+        router.push(`/me/profile/${userProfile._id}`);
       } else {
         // Handle other errors
         console.error('Failed to fetch profile:', error);
