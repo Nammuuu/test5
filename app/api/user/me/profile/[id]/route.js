@@ -63,85 +63,36 @@ export async function DELETE(req, { params }) {
   }
 }
 
-export async function PUT(req, { params }) {
-  try {
-    await connectToDatabase();
-    const { id } = params;
-    const formData = await req.formData();
-
-    let profilePictureUrl = "";
-    const profilePictureBase64 = formData.get("profilePicture");
-
-    // Upload to Cloudinary if it's a valid Base64 string
-    if (profilePictureBase64 && profilePictureBase64.length > 100) {
-      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
-      profilePictureUrl = uploadResult.secure_url;
-    }
-
-    const updatedProfile = {
-      fullName: formData.get("fullName") || "",
-      address: formData.get("address") || "",
-      savedShippingAddresses: JSON.parse(formData.get("savedShippingAddresses") || "[]"),
-      deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-    };
-
-    // Ensure profile picture is updated properly
-    if (profilePictureBase64 === "") {
-      updatedProfile.profilePicture = ""; // Remove profile picture
-    } else if (profilePictureUrl) {
-      updatedProfile.profilePicture = profilePictureUrl; // Set new picture
-    }
-
-    console.log("Updating user profile with:", updatedProfile);
-
-    const userProfile = await UserProfile.findOneAndUpdate(
-      { userId: id },
-      { $set: updatedProfile },
-      { new: true, upsert: true, runValidators: true }
-    );
-
-    if (!userProfile) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
-    }
-
-    return NextResponse.json(userProfile, { status: 200 });
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
-  }
-}
-
-
-// PUT Update User Profile
 // export async function PUT(req, { params }) {
 //   try {
 //     await connectToDatabase();
-
 //     const { id } = params;
 //     const formData = await req.formData();
 
-//     const profilePictureBase64 = formData.get('profilePicture');
-//     let profilePictureUrl = '';
+//     let profilePictureUrl = "";
+//     const profilePictureBase64 = formData.get("profilePicture");
 
-//     if (profilePictureBase64) {
-//       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, 'profile_images');
-//       console.log("Upload Result:", uploadResult); 
+//     // Upload to Cloudinary if it's a valid Base64 string
+//     if (profilePictureBase64 && profilePictureBase64.length > 100) {
+//       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
 //       profilePictureUrl = uploadResult.secure_url;
 //     }
 
 //     const updatedProfile = {
-//       // profilePicture: profilePictureUrl,
-//       // fullName: formData.get('fullName'),
-     
-//       // // notificationPreferences: formData.get('notificationPreferences'),
-//       // savedShippingAddresses: JSON.parse(formData.get('savedShippingAddresses')),
-     
-//       // deletedAccountRequest: formData.get('deletedAccountRequest') === 'true',
-//       fullName: formData.get('fullName') || "",
-//       address: formData.get('address') || "",
-//       savedShippingAddresses: JSON.parse(formData.get('savedShippingAddresses') || "[]"),
-//       deletedAccountRequest: formData.get('deletedAccountRequest') === 'true',
+//       fullName: formData.get("fullName") || "",
+//       address: formData.get("address") || "",
+//       savedShippingAddresses: JSON.parse(formData.get("savedShippingAddresses") || "[]"),
+//       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
 //     };
+
+//     // Ensure profile picture is updated properly
+//     if (profilePictureBase64 === "") {
+//       updatedProfile.profilePicture = ""; // Remove profile picture
+//     } else if (profilePictureUrl) {
+//       updatedProfile.profilePicture = profilePictureUrl; // Set new picture
+//     }
+
+//     console.log("Updating user profile with:", updatedProfile);
 
 //     const userProfile = await UserProfile.findOneAndUpdate(
 //       { userId: id },
@@ -149,12 +100,61 @@ export async function PUT(req, { params }) {
 //       { new: true, upsert: true, runValidators: true }
 //     );
 
+//     if (!userProfile) {
+//       return NextResponse.json({ message: "User not found" }, { status: 404 });
+//     }
+
 //     return NextResponse.json(userProfile, { status: 200 });
 //   } catch (error) {
-//     console.error('Error updating profile:', error);
-//     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+//     console.error("Error updating profile:", error);
+//     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
 //   }
 // }
+
+
+// PUT Update User Profile
+export async function PUT(req, { params }) {
+  try {
+    await connectToDatabase();
+
+    const { id } = params;
+    const formData = await req.formData();
+
+    const profilePictureBase64 = formData.get('profilePicture');
+    let profilePictureUrl = '';
+
+    if (profilePictureBase64) {
+      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, 'profile_images');
+      console.log("Upload Result:", uploadResult); 
+      profilePictureUrl = uploadResult.secure_url;
+    }
+
+    const updatedProfile = {
+      // profilePicture: profilePictureUrl,
+      // fullName: formData.get('fullName'),
+     
+      // // notificationPreferences: formData.get('notificationPreferences'),
+      // savedShippingAddresses: JSON.parse(formData.get('savedShippingAddresses')),
+     
+      // deletedAccountRequest: formData.get('deletedAccountRequest') === 'true',
+      fullName: formData.get('fullName') || "",
+      address: formData.get('address') || "",
+      savedShippingAddresses: JSON.parse(formData.get('savedShippingAddresses') || "[]"),
+      deletedAccountRequest: formData.get('deletedAccountRequest') === 'true',
+    };
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId: id },
+      { $set: updatedProfile },
+      { new: true, upsert: true, runValidators: true }
+    );
+
+    return NextResponse.json(userProfile, { status: 200 });
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+  }
+}
 
 
 
