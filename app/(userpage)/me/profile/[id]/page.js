@@ -203,38 +203,34 @@ const UserProfilePage = () => {
   //   }
   // };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
   
     try {
-      const formData = {
-        fullName: fullName?.trim() || "",
-        address: address?.trim() || "",
-        savedShippingAddresses: savedShippingAddresses || [],
-        billingInfo: billingInfo || {},
-        deletedAccountRequest: deletedAccountRequest,
-        notificationPreferences: notification || {}, // Ensure it's not undefined
-      };
+      const formData = new FormData();
+      formData.append("fullName", fullName?.trim() || "");
+      formData.append("address", address?.trim() || "");
+      formData.append("deletedAccountRequest", deletedAccountRequest);
   
-      // Handle profile picture (allow removal)
+      // ✅ Convert `savedShippingAddresses` to a JSON string
+      formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
+  
+      // ✅ Ensure profile picture is handled correctly
       if (profilePicture) {
         if (profilePicture.includes(",")) {
-          formData.profilePicture = profilePicture.split(",")[1]; // Extract base64
-        } else {
-          formData.profilePicture = profilePicture; // Use existing URL
+          const base64Image = profilePicture.split(",")[1];
+          formData.append("profilePicture", base64Image);
         }
       } else {
-        formData.profilePicture = ""; // Ensure empty string if removed
+        formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
       }
   
-      console.log("Submitting formData:", formData);
+      console.log("Submitting formData:", Object.fromEntries(formData));
   
       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
         headers: {
-          "Content-Type": 'application/x-www-form-urlencoded',
-          
+          "Content-Type": "multipart/form-data", // ✅ Ensure correct Content-Type
         },
       });
   
@@ -245,12 +241,60 @@ const UserProfilePage = () => {
         throw new Error("Failed to update profile.");
       }
     } catch (error) {
-      console.error("Profile update failed:", error.response?.data || error);
       handleError(error, "Failed to update profile.");
     } finally {
       setLoading(false);
     }
   };
+
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  
+  //   try {
+  //     const formData = {
+  //       fullName: fullName?.trim() || "",
+  //       address: address?.trim() || "",
+  //       savedShippingAddresses: savedShippingAddresses || [],
+  //       billingInfo: billingInfo || {},
+  //       deletedAccountRequest: deletedAccountRequest,
+  //       notificationPreferences: notification || {}, // Ensure it's not undefined
+  //     };
+  
+  //     // Handle profile picture (allow removal)
+  //     if (profilePicture) {
+  //       if (profilePicture.includes(",")) {
+  //         formData.profilePicture = profilePicture.split(",")[1]; // Extract base64
+  //       } else {
+  //         formData.profilePicture = profilePicture; // Use existing URL
+  //       }
+  //     } else {
+  //       formData.profilePicture = ""; // Ensure empty string if removed
+  //     }
+  
+  //     console.log("Submitting formData:", formData);
+  
+  //     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+  //       headers: {
+  //         "Content-Type": 'application/x-www-form-urlencoded',
+          
+  //       },
+  //     });
+  
+  //     if (response.status === 200) {
+  //       toast.success("Profile updated successfully!");
+  //       router.push(`/me/profile`);
+  //     } else {
+  //       throw new Error("Failed to update profile.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Profile update failed:", error.response?.data || error);
+  //     handleError(error, "Failed to update profile.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   
   
   

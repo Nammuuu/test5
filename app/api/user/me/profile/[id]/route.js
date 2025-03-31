@@ -114,13 +114,14 @@ export async function DELETE(req, { params }) {
 
 // PUT Update User Profile
 
+
 export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
     const formData = await req.formData();
 
-    console.log("Received formData:", formData);
+    console.log("Received formData:", Object.fromEntries(formData)); // ✅ Debugging
 
     let profilePictureUrl = "";
     const profilePictureBase64 = formData.get("profilePicture");
@@ -150,6 +151,7 @@ export async function PUT(req, { params }) {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+      savedShippingAddresses: savedShippingAddresses, // ✅ Correctly set parsed data
     };
 
     // ✅ Handle profile picture update
@@ -160,15 +162,11 @@ export async function PUT(req, { params }) {
     }
 
     console.log("Updating user profile with:", updatedProfile);
-    console.log("Updating savedShippingAddresses:", savedShippingAddresses);
 
-    // ✅ Use `$set` for profile data and `$push` for nested array update
+    // ✅ Use `$set` to properly update MongoDB
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
-      {
-        $set: updatedProfile,
-        $set: { savedShippingAddresses: savedShippingAddresses }, // ✅ Ensure array is properly set
-      },
+      { $set: updatedProfile },
       { new: true, upsert: true, runValidators: true }
     );
 
@@ -182,6 +180,7 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 // export async function PUT(req, { params }) {
