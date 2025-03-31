@@ -121,7 +121,7 @@ export async function PUT(req, { params }) {
     const profilePictureBase64 = formData.get("profilePicture");
     let profilePictureUrl = "";
 
-    // Upload to Cloudinary only if there's a valid base64 image
+    // Upload to Cloudinary if there's a valid base64 image
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
       profilePictureUrl = uploadResult.secure_url;
@@ -131,7 +131,9 @@ export async function PUT(req, { params }) {
     const updatedProfile = {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
-      savedShippingAddresses: JSON.parse(formData.get("savedShippingAddresses") || "[]"),
+      savedShippingAddresses: formData.get("savedShippingAddresses")
+        ? JSON.parse(formData.get("savedShippingAddresses"))
+        : [],
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
     };
 
@@ -144,7 +146,7 @@ export async function PUT(req, { params }) {
 
     console.log("Updating user profile with:", updatedProfile);
 
-    // Replace saved addresses instead of appending
+    // Ensure all fields are updated correctly
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       {
@@ -153,7 +155,7 @@ export async function PUT(req, { params }) {
           address: updatedProfile.address,
           profilePicture: updatedProfile.profilePicture,
           deletedAccountRequest: updatedProfile.deletedAccountRequest,
-          savedShippingAddresses: updatedProfile.savedShippingAddresses, // REPLACING instead of pushing
+          savedShippingAddresses: updatedProfile.savedShippingAddresses, // Properly setting array
         },
       },
       { new: true, upsert: true, runValidators: true }
@@ -172,3 +174,5 @@ export async function PUT(req, { params }) {
 
 
 
+
+ 

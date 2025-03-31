@@ -166,7 +166,6 @@ const UserProfilePage = () => {
   //   }
   // };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -219,6 +218,59 @@ const UserProfilePage = () => {
       setLoading(false);
     }
   };
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  
+  //   try {
+  //     const formData = new FormData();
+  
+  //     // Handle profile picture (allow removal)
+  //     if (profilePicture) {
+  //       if (profilePicture.includes(",")) {
+  //         const base64Image = profilePicture.split(",")[1];
+  //         formData.append("profilePicture", base64Image);
+  //       }
+  //     } else {
+  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
+  //     }
+  
+  //     formData.append("fullName", fullName?.trim() || "");  
+  //     formData.append("address", address?.trim() || "");  
+  //     formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
+  //     formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Convert boolean to string
+  
+  //     console.log("Submitting formData:", {
+  //       fullName,
+  //       address,
+  //       savedShippingAddresses,
+  //       deletedAccountRequest,
+  //       profilePicture: profilePicture ? "[BASE64 IMAGE]" : "No Image",
+  //     });
+  
+  //     const response = await fetch(`/api/user/me/profile/${id}`, {
+  //       method: "PUT",
+  //       body: formData,
+  //     });
+  
+  //     if (!response.ok) {
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.message || "Failed to update profile.");
+  //     }
+  
+  //     const responseData = await response.json();
+  //     console.log("Profile updated:", responseData);
+  
+  //     toast.success("Profile updated successfully!");
+  //     router.push(`/me/profile`);
+  //   } catch (error) {
+  //     console.error("Error updating profile:", error);
+  //     toast.error(error.message || "Failed to update profile. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   
   
   
@@ -477,3 +529,4 @@ return (
 };
 
 export default UserProfilePage;
+ 
