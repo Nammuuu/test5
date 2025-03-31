@@ -320,7 +320,7 @@ const UserProfilePage = () => {
         savedShippingAddresses: savedShippingAddresses || [],
         billingInfo: billingInfo || {},
         deletedAccountRequest: deletedAccountRequest,
-        notificationPreferences: notification,
+        notificationPreferences: notification || {}, // Ensure it's not undefined
       };
   
       // Handle profile picture (allow removal)
@@ -349,11 +349,13 @@ const UserProfilePage = () => {
         throw new Error("Failed to update profile.");
       }
     } catch (error) {
+      console.error("Profile update failed:", error.response?.data || error);
       handleError(error, "Failed to update profile.");
     } finally {
       setLoading(false);
     }
   };
+  
   
   
   

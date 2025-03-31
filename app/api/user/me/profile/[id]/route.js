@@ -114,12 +114,13 @@ export async function DELETE(req, { params }) {
 
 // PUT Update User Profile
 
-
 export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
     const formData = await req.formData();
+
+    console.log("Received formData:", formData);
 
     let profilePictureUrl = "";
     const profilePictureBase64 = formData.get("profilePicture");
@@ -130,15 +131,25 @@ export async function PUT(req, { params }) {
       profilePictureUrl = uploadResult.secure_url;
     }
 
-    // Build the update object
+    // Convert `savedShippingAddresses` safely
+    let savedShippingAddresses = [];
+    try {
+      savedShippingAddresses = formData.get("savedShippingAddresses")
+        ? JSON.parse(formData.get("savedShippingAddresses"))
+        : [];
+    } catch (error) {
+      console.error("Error parsing savedShippingAddresses:", error);
+      return NextResponse.json({ message: "Invalid savedShippingAddresses format" }, { status: 400 });
+    }
+
     const updatedProfile = {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
-      savedShippingAddresses: JSON.parse(formData.get("savedShippingAddresses") || "[]"),
+      savedShippingAddresses: Array.isArray(savedShippingAddresses) ? savedShippingAddresses : [],
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
     };
 
-    // If the profile picture is empty, remove it
+    // Ensure profile picture is updated correctly
     if (profilePictureBase64 === "") {
       updatedProfile.profilePicture = "";
     } else if (profilePictureUrl) {
@@ -161,9 +172,10 @@ export async function PUT(req, { params }) {
     return NextResponse.json(userProfile, { status: 200 });
   } catch (error) {
     console.error("Error updating profile:", error);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 // export async function PUT(req, { params }) {
