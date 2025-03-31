@@ -132,7 +132,7 @@ export async function PUT(req, { params }) {
       profilePictureUrl = uploadResult.secure_url;
     }
 
-    // ✅ Parse `savedShippingAddresses`
+    // ✅ Extract `savedShippingAddresses` properly
     let savedShippingAddresses = [];
     for (let i = 0; ; i++) {
       const address = {};
@@ -158,40 +158,28 @@ export async function PUT(req, { params }) {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+      savedShippingAddresses, // ✅ Now includes full address objects
     };
 
-    // ✅ Ensure existing addresses are updated, and new ones are added
-    const userProfile = await UserProfile.findOne({ userId: id });
-
-    if (!userProfile) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
-    }
-
-    // ✅ Update existing addresses & add new ones
-    savedShippingAddresses.forEach((newAddress) => {
-      const existingAddressIndex = userProfile.savedShippingAddresses.findIndex(
-        (addr) => addr._id.toString() === newAddress._id
-      );
-
-      if (existingAddressIndex !== -1) {
-        userProfile.savedShippingAddresses[existingAddressIndex] = newAddress; // ✅ Update existing
-      } else {
-        userProfile.savedShippingAddresses.push(newAddress); // ✅ Add new
-      }
-    });
-
-    // ✅ Handle profile picture updates
+    // ✅ Ensure profile picture is updated correctly
     if (profilePictureBase64 === "") {
       updatedProfile.profilePicture = ""; // Remove picture
     } else if (profilePictureUrl) {
       updatedProfile.profilePicture = profilePictureUrl;
     }
 
-    // ✅ Save updated user profile
-    userProfile.set(updatedProfile);
-    await userProfile.save();
+    console.log("Updating user profile with:", updatedProfile);
 
-    console.log("Updated User Profile:", userProfile);
+    // ✅ Update MongoDB using `$set`
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId: id },
+      { $set: updatedProfile },
+      { new: true, upsert: true, runValidators: true }
+    );
+
+    if (!userProfile) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
 
     return NextResponse.json(userProfile, { status: 200 });
   } catch (error) {
@@ -199,6 +187,7 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 
