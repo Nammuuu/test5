@@ -210,15 +210,15 @@ const UserProfilePage = () => {
   //   try {
   //     const formData = new FormData();
   
-  //     // Handle profile picture (allow removal)
-  //     if (profilePicture) {
-  //       if (profilePicture.includes(",")) {
-  //         const base64Image = profilePicture.split(",")[1];
-  //         formData.append("profilePicture", base64Image);
-  //       }
-  //     } else {
-  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
-  //     }
+      // // Handle profile picture (allow removal)
+      // if (profilePicture) {
+      //   if (profilePicture.includes(",")) {
+      //     const base64Image = profilePicture.split(",")[1];
+      //     formData.append("profilePicture", base64Image);
+      //   }
+      // } else {
+      //   formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
+      // }
   
   //     formData.append("fullName", fullName?.trim() || "");  
   //     formData.append("address", address?.trim() || "");  
@@ -313,6 +313,16 @@ const UserProfilePage = () => {
     e.preventDefault();
     setLoading(true);
   
+         // Handle profile picture (allow removal)
+         if (profilePicture) {
+          if (profilePicture.includes(",")) {
+            const base64Image = profilePicture.split(",")[1];
+            formData.append("profilePicture", base64Image);
+          }
+        } else {
+          formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
+        }
+
     try {
       const formData = {
         fullName: fullName?.trim() || "",
@@ -323,16 +333,6 @@ const UserProfilePage = () => {
         notificationPreferences: notification,
       };
   
-      // Handle profile picture (allow removal)
-      if (profilePicture) {
-        if (profilePicture.includes(",")) {
-          formData.profilePicture = profilePicture.split(",")[1]; // Extract base64
-        } else {
-          formData.profilePicture = profilePicture; // Use existing URL
-        }
-      } else {
-        formData.profilePicture = ""; // Ensure empty string if removed
-      }
   
       console.log("Submitting formData:", formData);
   
