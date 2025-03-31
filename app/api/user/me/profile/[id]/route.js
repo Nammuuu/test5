@@ -62,13 +62,104 @@ export async function DELETE(req, { params }) {
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
+// export async function PUT(req, { params }) {
+//   try {
+//     await connectToDatabase();
+//     const { id } = params;
+//     const formData = await req.formData();
+
+//     // Fetch existing user profile
+//     let existingUserProfile = await UserProfile.findOne({ userId: id });
+//     if (!existingUserProfile) {
+//       return NextResponse.json({ message: "User not found" }, { status: 404 });
+//     }
+
+//     let profilePictureUrl = existingUserProfile.profilePicture; // Default to existing picture
+//     const profilePictureBase64 = formData.get("profilePicture");
+
+//     // Upload new profile picture only if provided and valid
+//     // if (profilePictureBase64 && profilePictureBase64.length > 100) {
+//     //   const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+//     //   profilePictureUrl = uploadResult.secure_url; // Save new picture URL
+//     // } else if (profilePictureBase64 === "") {
+//     //   profilePictureUrl = ""; // User removed the profile picture
+//     // }
+
+//     if (profilePictureBase64 && profilePictureBase64.length > 100) {
+//       try {
+//         const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+//         console.log("Cloudinary Upload Result:", uploadResult);
+//         if (uploadResult && uploadResult.secure_url) {
+//           profilePictureUrl = uploadResult.secure_url;
+//         } else {
+//           console.error("Cloudinary Upload Failed:", uploadResult);
+//         }
+//       } catch (error) {
+//         console.error("Error uploading to Cloudinary:", error);
+//       }
+//     }
+    
+
+//     // Extract saved shipping addresses
+//     let savedShippingAddresses = [];
+//     for (let i = 0; ; i++) {
+//       const address = {};
+//       const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
+//       let hasData = false;
+
+//       keys.forEach((key) => {
+//         const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
+//         if (value) {
+//           address[key] = value;
+//           hasData = true;
+//         }
+//       });
+
+//       if (!hasData) break;
+//       savedShippingAddresses.push(address);
+//     }
+
+//     // Update profile
+//     const updatedProfile = {
+//       fullName: formData.get("fullName") || "",
+//       address: formData.get("address") || "",
+//       profilePicture: profilePictureUrl, // ✅ Correctly handled profile picture update
+//       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+//       savedShippingAddresses,
+//     };
+
+//     // const userProfile = await UserProfile.findOneAndUpdate(
+//     //   { userId: id },
+//     //   { $set: updatedProfile },
+//     //   { new: true, upsert: true, runValidators: true }
+//     // );
+
+//     const userProfile = await UserProfile.findOneAndUpdate(
+//       { userId: id },
+//       { $set: updatedProfile },
+//       { new: true, upsert: true, runValidators: true }
+//     );
+//     console.log("Updated User Profile:", userProfile);
+    
+
+//     return NextResponse.json(userProfile, { status: 200 });
+//   } catch (error) {
+//     console.error("Error updating profile:", error);
+//     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
+//   }
+// }
+// import { NextResponse } from "next/server";
+// import connectToDatabase from "../../../../../../lib/mongodb";
+// import UserProfile from "../../../../../../models/UserProfile";
+// import { cloudinaryUploadcategory } from "../../../../../../lib/cloudinary";
+
 export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
     const formData = await req.formData();
 
-    // Fetch existing user profile
+    // ✅ Fetch existing user profile
     let existingUserProfile = await UserProfile.findOne({ userId: id });
     if (!existingUserProfile) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
@@ -77,30 +168,29 @@ export async function PUT(req, { params }) {
     let profilePictureUrl = existingUserProfile.profilePicture; // Default to existing picture
     const profilePictureBase64 = formData.get("profilePicture");
 
-    // Upload new profile picture only if provided and valid
-    // if (profilePictureBase64 && profilePictureBase64.length > 100) {
-    //   const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
-    //   profilePictureUrl = uploadResult.secure_url; // Save new picture URL
-    // } else if (profilePictureBase64 === "") {
-    //   profilePictureUrl = ""; // User removed the profile picture
-    // }
+    // ✅ Handle profile picture upload / removal
+    if (profilePictureBase64) {
+      if (profilePictureBase64.length > 100) {
+        try {
+          console.log("Uploading profile picture to Cloudinary...");
+          const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
 
-    if (profilePictureBase64 && profilePictureBase64.length > 100) {
-      try {
-        const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
-        console.log("Cloudinary Upload Result:", uploadResult);
-        if (uploadResult && uploadResult.secure_url) {
-          profilePictureUrl = uploadResult.secure_url;
-        } else {
-          console.error("Cloudinary Upload Failed:", uploadResult);
+          if (uploadResult?.secure_url) {
+            profilePictureUrl = uploadResult.secure_url;
+            console.log("Uploaded Profile Picture URL:", profilePictureUrl);
+          } else {
+            console.error("Cloudinary Upload Failed:", uploadResult);
+          }
+        } catch (error) {
+          console.error("Error uploading to Cloudinary:", error);
         }
-      } catch (error) {
-        console.error("Error uploading to Cloudinary:", error);
+      } else if (profilePictureBase64 === "") {
+        profilePictureUrl = ""; // ✅ User removed the profile picture
+        console.log("Profile picture removed.");
       }
     }
-    
 
-    // Extract saved shipping addresses
+    // ✅ Extract saved shipping addresses
     let savedShippingAddresses = [];
     for (let i = 0; ; i++) {
       const address = {};
@@ -119,28 +209,23 @@ export async function PUT(req, { params }) {
       savedShippingAddresses.push(address);
     }
 
-    // Update profile
+    // ✅ Update profile
     const updatedProfile = {
-      fullName: formData.get("fullName") || "",
-      address: formData.get("address") || "",
-      profilePicture: profilePictureUrl, // ✅ Correctly handled profile picture update
+      fullName: formData.get("fullName")?.trim() || "",
+      address: formData.get("address")?.trim() || "",
+      profilePicture: profilePictureUrl, // ✅ Correctly handled profile picture
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
       savedShippingAddresses,
     };
 
-    // const userProfile = await UserProfile.findOneAndUpdate(
-    //   { userId: id },
-    //   { $set: updatedProfile },
-    //   { new: true, upsert: true, runValidators: true }
-    // );
-
+    // ✅ Update user profile in DB
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       { $set: updatedProfile },
       { new: true, upsert: true, runValidators: true }
     );
+
     console.log("Updated User Profile:", userProfile);
-    
 
     return NextResponse.json(userProfile, { status: 200 });
   } catch (error) {
