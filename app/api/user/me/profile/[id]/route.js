@@ -148,15 +148,7 @@ export async function DELETE(req, { params }) {
 //     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
 //   }
 // }
-// import { NextResponse } from "next/server";
-// import connectToDatabase from "../../../../../../lib/mongodb";
-// import UserProfile from "../../../../../../models/UserProfile";
-// import { cloudinaryUploadcategory } from "../../../../../../lib/cloudinary";
 
-import { NextResponse } from "next/server";
-import connectToDatabase from "../../../../../../lib/mongodb";
-import UserProfile from "../../../../../../models/UserProfile";
-import { cloudinaryUploadcategory } from "../../../../../../lib/cloudinary";
 
 export async function PUT(req, { params }) {
   try {
