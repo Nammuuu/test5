@@ -205,7 +205,7 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
       
 
       console.log("Form Data Received:", formData);
-      console.log("Received Profile Picture:", profilePictureBase64 ? profilePictureBase64.slice(0, 100) : "Not Provided");
+      // console.log("Received Profile Picture:", profilePictureBase64 ? profilePictureBase64.slice(0, 100) : "Not Provided");
       
   
       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
