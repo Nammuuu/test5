@@ -133,18 +133,41 @@ export async function PUT(req, { params }) {
     }
 
     // ✅ Ensure `savedShippingAddresses` is properly parsed
-    let savedShippingAddresses = [];
-    try {
-      const savedAddressesStr = formData.get("savedShippingAddresses");
-      savedShippingAddresses = savedAddressesStr ? JSON.parse(savedAddressesStr) : [];
+    // let savedShippingAddresses = [];
+    // try {
+    //   const savedAddressesStr = formData.get("savedShippingAddresses");
+    //   savedShippingAddresses = savedAddressesStr ? JSON.parse(savedAddressesStr) : [];
 
-      if (!Array.isArray(savedShippingAddresses)) {
-        throw new Error("Invalid savedShippingAddresses format");
-      }
-    } catch (error) {
-      console.error("Error parsing savedShippingAddresses:", error);
-      return NextResponse.json({ message: "Invalid savedShippingAddresses format" }, { status: 400 });
+    //   if (!Array.isArray(savedShippingAddresses)) {
+    //     throw new Error("Invalid savedShippingAddresses format");
+    //   }
+    // } catch (error) {
+    //   console.error("Error parsing savedShippingAddresses:", error);
+    //   return NextResponse.json({ message: "Invalid savedShippingAddresses format" }, { status: 400 });
+    // }
+
+    let savedShippingAddresses = [];
+
+// Extract addresses correctly
+for (let i = 0; ; i++) {
+  const address = {};
+  const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
+  let hasData = false;
+
+  keys.forEach((key) => {
+    const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
+    if (value) {
+      address[key] = value;
+      hasData = true;
     }
+  });
+
+  if (!hasData) break; // Stop when no more addresses are found
+  savedShippingAddresses.push(address);
+}
+
+console.log("Parsed savedShippingAddresses:", savedShippingAddresses);
+
 
     // ✅ Construct the updated profile
     const updatedProfile = {

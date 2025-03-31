@@ -214,8 +214,14 @@ const UserProfilePage = () => {
       formData.append("deletedAccountRequest", deletedAccountRequest);
   
       // ✅ Convert `savedShippingAddresses` to a JSON string
-      formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
+      // formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
   
+      savedShippingAddresses.forEach((address, index) => {
+        Object.entries(address).forEach(([key, value]) => {
+          formData.append(`savedShippingAddresses[${index}][${key}]`, value);
+        });
+      });
+
       // ✅ Ensure profile picture is handled correctly
       if (profilePicture) {
         if (profilePicture.includes(",")) {
@@ -225,6 +231,7 @@ const UserProfilePage = () => {
       } else {
         formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
       }
+      console.log("FormData before submission:", Object.fromEntries(formData));
   
       console.log("Submitting formData:", Object.fromEntries(formData));
   
