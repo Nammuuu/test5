@@ -121,7 +121,7 @@ export async function PUT(req, { params }) {
     const { id } = params;
     const formData = await req.formData();
 
-    console.log("Received formData:", Object.fromEntries(formData)); // ✅ Debugging
+    console.log("Received FormData:", Object.fromEntries(formData)); // ✅ Debugging
 
     let profilePictureUrl = "";
     const profilePictureBase64 = formData.get("profilePicture");
@@ -132,11 +132,11 @@ export async function PUT(req, { params }) {
       profilePictureUrl = uploadResult.secure_url;
     }
 
-    // ✅ Extract savedShippingAddresses correctly
+    // ✅ Parse `savedShippingAddresses`
     let savedShippingAddresses = [];
     for (let i = 0; ; i++) {
       const address = {};
-      const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
+      const keys = ["_id", "address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
       let hasData = false;
 
       keys.forEach((key) => {
@@ -160,34 +160,38 @@ export async function PUT(req, { params }) {
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
     };
 
-    // ✅ Handle profile picture update
-    if (profilePictureBase64 === "") {
-      updatedProfile.profilePicture = ""; // Ensure profile picture is removed
-    } else if (profilePictureUrl) {
-      updatedProfile.profilePicture = profilePictureUrl;
-    }
-
-    console.log("Updating user profile with:", updatedProfile);
-
-    // ✅ Use `$set` to properly update MongoDB fields except `savedShippingAddresses`
-    const userProfile = await UserProfile.findOneAndUpdate(
-      { userId: id },
-      { $set: updatedProfile },
-      { new: true, upsert: true, runValidators: true }
-    );
-
-    // ✅ Separate update for `savedShippingAddresses`
-    if (savedShippingAddresses.length > 0) {
-      await UserProfile.findOneAndUpdate(
-        { userId: id },
-        { $set: { savedShippingAddresses } }, // ✅ Properly replacing the array
-        { new: true, runValidators: true }
-      );
-    }
+    // ✅ Ensure existing addresses are updated, and new ones are added
+    const userProfile = await UserProfile.findOne({ userId: id });
 
     if (!userProfile) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
+
+    // ✅ Update existing addresses & add new ones
+    savedShippingAddresses.forEach((newAddress) => {
+      const existingAddressIndex = userProfile.savedShippingAddresses.findIndex(
+        (addr) => addr._id.toString() === newAddress._id
+      );
+
+      if (existingAddressIndex !== -1) {
+        userProfile.savedShippingAddresses[existingAddressIndex] = newAddress; // ✅ Update existing
+      } else {
+        userProfile.savedShippingAddresses.push(newAddress); // ✅ Add new
+      }
+    });
+
+    // ✅ Handle profile picture updates
+    if (profilePictureBase64 === "") {
+      updatedProfile.profilePicture = ""; // Remove picture
+    } else if (profilePictureUrl) {
+      updatedProfile.profilePicture = profilePictureUrl;
+    }
+
+    // ✅ Save updated user profile
+    userProfile.set(updatedProfile);
+    await userProfile.save();
+
+    console.log("Updated User Profile:", userProfile);
 
     return NextResponse.json(userProfile, { status: 200 });
   } catch (error) {
@@ -195,6 +199,7 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 
