@@ -178,15 +178,35 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
       });
   
       // ✅ Handle profile picture correctly
+      // if (profilePicture) {
+       
+      //   if (profilePicture.includes(",")) {
+      //     formData.append("profilePicture", profilePicture.split(",")[1]); // Convert to base64
+      //   } else {
+      //     formData.append("profilePicture", profilePicture); // Keep existing URL
+      //   }
+      // } else {
+      //   formData.append("profilePicture", ""); // Ensure empty string is sent if user removes it
+      // }
+
       if (profilePicture) {
         if (profilePicture.includes(",")) {
-          formData.append("profilePicture", profilePicture.split(",")[1]); // Convert to base64
+          const base64Data = profilePicture.split(",")[1]; // Extract base64 only
+          console.log("Base64 Data (First 100 chars):", base64Data.slice(0, 100));
+          formData.append("profilePicture", base64Data);
         } else {
-          formData.append("profilePicture", profilePicture); // Keep existing URL
+          console.log("Existing Profile Picture URL:", profilePicture);
+          formData.append("profilePicture", profilePicture); // Keep URL
         }
       } else {
-        formData.append("profilePicture", ""); // Ensure empty string is sent if user removes it
+        console.log("Profile Picture Removed");
+        formData.append("profilePicture", ""); // User removed the profile picture
       }
+      
+
+      console.log("Form Data Received:", formData);
+      console.log("Received Profile Picture:", profilePictureBase64 ? profilePictureBase64.slice(0, 100) : "Not Provided");
+      
   
       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },

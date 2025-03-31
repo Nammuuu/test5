@@ -6,9 +6,9 @@ const UserProfileSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  profilePicture: {
-    type: String,
-  },
+
+  profilePicture: { type: String, default: "" }, // Ensure this exists
+
   fullName: {
     type: String,
     required: false,

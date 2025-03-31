@@ -78,12 +78,27 @@ export async function PUT(req, { params }) {
     const profilePictureBase64 = formData.get("profilePicture");
 
     // Upload new profile picture only if provided and valid
+    // if (profilePictureBase64 && profilePictureBase64.length > 100) {
+    //   const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+    //   profilePictureUrl = uploadResult.secure_url; // Save new picture URL
+    // } else if (profilePictureBase64 === "") {
+    //   profilePictureUrl = ""; // User removed the profile picture
+    // }
+
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
-      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
-      profilePictureUrl = uploadResult.secure_url; // Save new picture URL
-    } else if (profilePictureBase64 === "") {
-      profilePictureUrl = ""; // User removed the profile picture
+      try {
+        const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+        console.log("Cloudinary Upload Result:", uploadResult);
+        if (uploadResult && uploadResult.secure_url) {
+          profilePictureUrl = uploadResult.secure_url;
+        } else {
+          console.error("Cloudinary Upload Failed:", uploadResult);
+        }
+      } catch (error) {
+        console.error("Error uploading to Cloudinary:", error);
+      }
     }
+    
 
     // Extract saved shipping addresses
     let savedShippingAddresses = [];
@@ -113,11 +128,19 @@ export async function PUT(req, { params }) {
       savedShippingAddresses,
     };
 
+    // const userProfile = await UserProfile.findOneAndUpdate(
+    //   { userId: id },
+    //   { $set: updatedProfile },
+    //   { new: true, upsert: true, runValidators: true }
+    // );
+
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       { $set: updatedProfile },
       { new: true, upsert: true, runValidators: true }
     );
+    console.log("Updated User Profile:", userProfile);
+    
 
     return NextResponse.json(userProfile, { status: 200 });
   } catch (error) {
