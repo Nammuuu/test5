@@ -214,6 +214,7 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
   
       if (response.status === 200) {
         toast.success("Profile updated successfully!");
+        setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
         router.push(`/me/profile`);
       } else {
         throw new Error("Failed to update profile.");

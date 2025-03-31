@@ -153,6 +153,11 @@ export async function DELETE(req, { params }) {
 // import UserProfile from "../../../../../../models/UserProfile";
 // import { cloudinaryUploadcategory } from "../../../../../../lib/cloudinary";
 
+import { NextResponse } from "next/server";
+import connectToDatabase from "../../../../../../lib/mongodb";
+import UserProfile from "../../../../../../models/UserProfile";
+import { cloudinaryUploadcategory } from "../../../../../../lib/cloudinary";
+
 export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
@@ -209,13 +214,13 @@ export async function PUT(req, { params }) {
       savedShippingAddresses.push(address);
     }
 
-    // ✅ Update profile
+    // ✅ Ensure fields are properly extracted and updated
     const updatedProfile = {
-      fullName: formData.get("fullName")?.trim() || "",
-      address: formData.get("address")?.trim() || "",
+      fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName || "",
+      address: formData.get("address")?.trim() || existingUserProfile.address || "",
       profilePicture: profilePictureUrl, // ✅ Correctly handled profile picture
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-      savedShippingAddresses,
+      savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
     };
 
     // ✅ Update user profile in DB
@@ -233,6 +238,8 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
+
 
 
 // export async function PUT(req, { params }) {
