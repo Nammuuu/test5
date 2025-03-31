@@ -86,9 +86,6 @@ const UserProfilePage = () => {
     }
   }, [fetchUserProfile]);
 
-
-
-
   useEffect(() => {
     fetchUserProfile();
   }, [fetchUserProfile]); // No warnings now
@@ -141,177 +138,222 @@ const UserProfilePage = () => {
     console.error(errorMessage);
   }, [router]);
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+
+  //   try {
+  //     const formData = new URLSearchParams();
+
+  //     // if (profilePicture && profilePicture.includes(",")) {
+  //     //   const base64Image = profilePicture.split(",")[1]; // Extract base64 string part
+  //     //   formData.append("profilePicture", base64Image);
+  //     // }
+
+  //      // Handle profile picture (allow removal)
+  //      if (profilePicture) {
+  //       if (profilePicture.includes(",")) {
+  //         const base64Image = profilePicture.split(",")[1];
+  //         formData.append("profilePicture", base64Image);
+  //       }
+  //     } else {
+  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
+  //     }
+
+  //     // formData.append('fullName', fullName);
+  //     // formData.append('address', address);
+  //     formData.append("fullName", fullName?.trim() || "");  
+  //       formData.append("address", address?.trim() || "");  
+  //     formData.append('notificationPreferences', notification);
+  //     formData.append('savedShippingAddresses', JSON.stringify(savedShippingAddresses || []));
+  //     formData.append('billingInfo', JSON.stringify(billingInfo));
+  //     formData.append('deletedAccountRequest', deletedAccountRequest);
+
+  //     console.log("Submitting formData:", {
+  //       fullName,
+  //       address,
+  //       savedShippingAddresses,
+  //       deletedAccountRequest,
+  //     });
+
+  //     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.message || "Failed to update profile.");
+  //     }
+  //     // const responseData = await response.json();
+  //     // console.log("Profile updated:", responseData);
+
+  //     if (response.status === 200) {
+  //       toast.success("Profile updated successfully!");
+  //       router.push(`/me/profile`); // Updated line for redirection
+  //     } else {
+  //       throw new Error("Failed to update profile.");
+  //     }
+
+  //   } catch (error) {
+  //     handleError(error, "Failed to update profile.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  
+  //   try {
+  //     const formData = new FormData();
+  
+  //     // Handle profile picture (allow removal)
+  //     if (profilePicture) {
+  //       if (profilePicture.includes(",")) {
+  //         const base64Image = profilePicture.split(",")[1];
+  //         formData.append("profilePicture", base64Image);
+  //       }
+  //     } else {
+  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
+  //     }
+  
+  //     formData.append("fullName", fullName?.trim() || "");  
+  //     formData.append("address", address?.trim() || "");  
+  //     formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
+  //     formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Convert boolean to string
+  
+  //     console.log("Submitting formData:", {
+  //       fullName,
+  //       address,
+  //       savedShippingAddresses,
+  //       deletedAccountRequest,
+  //       profilePicture: profilePicture ? "[BASE64 IMAGE]" : "No Image",
+  //     });
+  
+  //     const response = await fetch(`/api/user/me/profile/${id}`, {
+  //       method: "PUT",
+  //       body: formData,
+  //     });
+  
+  //     if (!response.ok) {
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.message || "Failed to update profile.");
+  //     }
+  
+  //     const responseData = await response.json();
+  //     console.log("Profile updated:", responseData);
+  
+  //     toast.success("Profile updated successfully!");
+  //     router.push(`/me/profile`);
+  //   } catch (error) {
+  //     console.error("Error updating profile:", error);
+  //     toast.error(error.message || "Failed to update profile. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  
+  //   try {
+  //     const formData = new FormData();
+  
+  //     // Handle profile picture (allow removal)
+  //     if (profilePicture) {
+  //       if (profilePicture.includes(",")) {
+  //         const base64Image = profilePicture.split(",")[1];
+  //         formData.append("profilePicture", base64Image);
+  //       }
+  //     } else {
+  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
+  //     }
+  
+  //     formData.append("fullName", fullName?.trim() || "");  
+  //     formData.append("address", address?.trim() || "");  
+  //     formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
+  //     formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Convert boolean to string
+  
+  //     console.log("Submitting formData:", {
+  //       fullName,
+  //       address,
+  //       savedShippingAddresses,
+  //       deletedAccountRequest,
+  //       profilePicture: profilePicture ? "[BASE64 IMAGE]" : "No Image",
+  //     });
+  
+  //     const response = await fetch(`/api/user/me/profile/${id}`, {
+  //       method: "PUT",
+  //       body: formData,
+  //     });
+  
+  //     if (!response.ok) {
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.message || "Failed to update profile.");
+  //     }
+  
+  //     const responseData = await response.json();
+  //     console.log("Profile updated:", responseData);
+  
+  //     toast.success("Profile updated successfully!");
+  //     router.push(`/me/profile`);
+  //   } catch (error) {
+  //     console.error("Error updating profile:", error);
+  //     toast.error(error.message || "Failed to update profile. Please try again.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
     try {
-      const formData = new URLSearchParams();
-
-      // if (profilePicture && profilePicture.includes(",")) {
-      //   const base64Image = profilePicture.split(",")[1]; // Extract base64 string part
-      //   formData.append("profilePicture", base64Image);
-      // }
-
-       // Handle profile picture (allow removal)
-       if (profilePicture) {
+      const formData = {
+        fullName: fullName?.trim() || "",
+        address: address?.trim() || "",
+        savedShippingAddresses: savedShippingAddresses || [],
+        billingInfo: billingInfo || {},
+        deletedAccountRequest: deletedAccountRequest,
+        notificationPreferences: notification,
+      };
+  
+      // Handle profile picture (allow removal)
+      if (profilePicture) {
         if (profilePicture.includes(",")) {
-          const base64Image = profilePicture.split(",")[1];
-          formData.append("profilePicture", base64Image);
+          formData.profilePicture = profilePicture.split(",")[1]; // Extract base64
+        } else {
+          formData.profilePicture = profilePicture; // Use existing URL
         }
       } else {
-        formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
+        formData.profilePicture = ""; // Ensure empty string if removed
       }
-
-      // formData.append('fullName', fullName);
-      // formData.append('address', address);
-      formData.append("fullName", fullName?.trim() || "");  
-        formData.append("address", address?.trim() || "");  
-      formData.append('notificationPreferences', notification);
-      formData.append('savedShippingAddresses', JSON.stringify(savedShippingAddresses || []));
-      formData.append('billingInfo', JSON.stringify(billingInfo));
-      formData.append('deletedAccountRequest', deletedAccountRequest);
-
-      console.log("Submitting formData:", {
-        fullName,
-        address,
-        savedShippingAddresses,
-        deletedAccountRequest,
-      });
-
+  
+      console.log("Submitting formData:", formData);
+  
       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/json",
         },
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to update profile.");
-      }
-      const responseData = await response.json();
-      console.log("Profile updated:", responseData);
-
+  
       if (response.status === 200) {
         toast.success("Profile updated successfully!");
-        router.push(`/me/profile`); // Updated line for redirection
+        router.push(`/me/profile`);
       } else {
         throw new Error("Failed to update profile.");
       }
-
     } catch (error) {
       handleError(error, "Failed to update profile.");
     } finally {
       setLoading(false);
     }
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  
-  //   try {
-  //     const formData = new FormData();
-  
-  //     // Handle profile picture (allow removal)
-  //     if (profilePicture) {
-  //       if (profilePicture.includes(",")) {
-  //         const base64Image = profilePicture.split(",")[1];
-  //         formData.append("profilePicture", base64Image);
-  //       }
-  //     } else {
-  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
-  //     }
-  
-  //     formData.append("fullName", fullName?.trim() || "");  
-  //     formData.append("address", address?.trim() || "");  
-  //     formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
-  //     formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Convert boolean to string
-  
-  //     console.log("Submitting formData:", {
-  //       fullName,
-  //       address,
-  //       savedShippingAddresses,
-  //       deletedAccountRequest,
-  //       profilePicture: profilePicture ? "[BASE64 IMAGE]" : "No Image",
-  //     });
-  
-  //     const response = await fetch(`/api/user/me/profile/${id}`, {
-  //       method: "PUT",
-  //       body: formData,
-  //     });
-  
-  //     if (!response.ok) {
-  //       const errorData = await response.json();
-  //       throw new Error(errorData.message || "Failed to update profile.");
-  //     }
-  
-  //     const responseData = await response.json();
-  //     console.log("Profile updated:", responseData);
-  
-  //     toast.success("Profile updated successfully!");
-  //     router.push(`/me/profile`);
-  //   } catch (error) {
-  //     console.error("Error updating profile:", error);
-  //     toast.error(error.message || "Failed to update profile. Please try again.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  
-  //   try {
-  //     const formData = new FormData();
-  
-  //     // Handle profile picture (allow removal)
-  //     if (profilePicture) {
-  //       if (profilePicture.includes(",")) {
-  //         const base64Image = profilePicture.split(",")[1];
-  //         formData.append("profilePicture", base64Image);
-  //       }
-  //     } else {
-  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
-  //     }
-  
-  //     formData.append("fullName", fullName?.trim() || "");  
-  //     formData.append("address", address?.trim() || "");  
-  //     formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
-  //     formData.append("deletedAccountRequest", String(!!deletedAccountRequest)); // Convert boolean to string
-  
-  //     console.log("Submitting formData:", {
-  //       fullName,
-  //       address,
-  //       savedShippingAddresses,
-  //       deletedAccountRequest,
-  //       profilePicture: profilePicture ? "[BASE64 IMAGE]" : "No Image",
-  //     });
-  
-  //     const response = await fetch(`/api/user/me/profile/${id}`, {
-  //       method: "PUT",
-  //       body: formData,
-  //     });
-  
-  //     if (!response.ok) {
-  //       const errorData = await response.json();
-  //       throw new Error(errorData.message || "Failed to update profile.");
-  //     }
-  
-  //     const responseData = await response.json();
-  //     console.log("Profile updated:", responseData);
-  
-  //     toast.success("Profile updated successfully!");
-  //     router.push(`/me/profile`);
-  //   } catch (error) {
-  //     console.error("Error updating profile:", error);
-  //     toast.error(error.message || "Failed to update profile. Please try again.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  
   
   
   

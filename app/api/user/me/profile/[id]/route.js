@@ -63,6 +63,55 @@ export async function DELETE(req, { params }) {
   }
 }
 
+export async function PUT(req, { params }) {
+  try {
+    await connectToDatabase();
+    const { id } = params;
+    const formData = await req.formData();
+
+    let profilePictureUrl = "";
+    const profilePictureBase64 = formData.get("profilePicture");
+
+    // Upload to Cloudinary if it's a valid Base64 string
+    if (profilePictureBase64 && profilePictureBase64.length > 100) {
+      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+      profilePictureUrl = uploadResult.secure_url;
+    }
+
+    const updatedProfile = {
+      fullName: formData.get("fullName") || "",
+      address: formData.get("address") || "",
+      savedShippingAddresses: JSON.parse(formData.get("savedShippingAddresses") || "[]"),
+      deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+    };
+
+    // Ensure profile picture is updated properly
+    if (profilePictureBase64 === "") {
+      updatedProfile.profilePicture = ""; // Remove profile picture
+    } else if (profilePictureUrl) {
+      updatedProfile.profilePicture = profilePictureUrl; // Set new picture
+    }
+
+    console.log("Updating user profile with:", updatedProfile);
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId: id },
+      { $set: updatedProfile },
+      { new: true, upsert: true, runValidators: true }
+    );
+
+    if (!userProfile) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(userProfile, { status: 200 });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+  }
+}
+
+
 // PUT Update User Profile
 // export async function PUT(req, { params }) {
 //   try {
@@ -111,66 +160,66 @@ export async function DELETE(req, { params }) {
 
 
 
-export async function PUT(req, { params }) {
-  try {
-    await connectToDatabase();
-    const { id } = params;
+// export async function PUT(req, { params }) {
+//   try {
+//     await connectToDatabase();
+//     const { id } = params;
 
-    const formData = await req.formData();
+//     const formData = await req.formData();
 
-    const profilePictureBase64 = formData.get("profilePicture");
-    let profilePictureUrl = "";
+//     const profilePictureBase64 = formData.get("profilePicture");
+//     let profilePictureUrl = "";
 
-    // Upload to Cloudinary if there's a valid base64 image
-    if (profilePictureBase64 && profilePictureBase64.length > 100) {
-      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
-      profilePictureUrl = uploadResult.secure_url;
-    }
+//     // Upload to Cloudinary if there's a valid base64 image
+//     if (profilePictureBase64 && profilePictureBase64.length > 100) {
+//       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+//       profilePictureUrl = uploadResult.secure_url;
+//     }
 
-    // Convert formData values properly
-    const updatedProfile = {
-      fullName: formData.get("fullName") || "",
-      address: formData.get("address") || "",
-      savedShippingAddresses: formData.get("savedShippingAddresses")
-        ? JSON.parse(formData.get("savedShippingAddresses"))
-        : [],
-      deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-    };
+//     // Convert formData values properly
+//     const updatedProfile = {
+//       fullName: formData.get("fullName") || "",
+//       address: formData.get("address") || "",
+//       savedShippingAddresses: formData.get("savedShippingAddresses")
+//         ? JSON.parse(formData.get("savedShippingAddresses"))
+//         : [],
+//       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+//     };
 
-    // If profile picture is empty, remove it
-    if (profilePictureBase64 === "") {
-      updatedProfile.profilePicture = "";
-    } else if (profilePictureUrl) {
-      updatedProfile.profilePicture = profilePictureUrl;
-    }
+//     // If profile picture is empty, remove it
+//     if (profilePictureBase64 === "") {
+//       updatedProfile.profilePicture = "";
+//     } else if (profilePictureUrl) {
+//       updatedProfile.profilePicture = profilePictureUrl;
+//     }
 
-    console.log("Updating user profile with:", updatedProfile);
+//     console.log("Updating user profile with:", updatedProfile);
 
-    // Ensure all fields are updated correctly
-    const userProfile = await UserProfile.findOneAndUpdate(
-      { userId: id },
-      {
-        $set: {
-          fullName: updatedProfile.fullName,
-          address: updatedProfile.address,
-          profilePicture: updatedProfile.profilePicture,
-          deletedAccountRequest: updatedProfile.deletedAccountRequest,
-          savedShippingAddresses: updatedProfile.savedShippingAddresses, // Properly setting array
-        },
-      },
-      { new: true, upsert: true, runValidators: true }
-    );
+//     // Ensure all fields are updated correctly
+//     const userProfile = await UserProfile.findOneAndUpdate(
+//       { userId: id },
+//       {
+//         $set: {
+//           fullName: updatedProfile.fullName,
+//           address: updatedProfile.address,
+//           profilePicture: updatedProfile.profilePicture,
+//           deletedAccountRequest: updatedProfile.deletedAccountRequest,
+//           savedShippingAddresses: updatedProfile.savedShippingAddresses, // Properly setting array
+//         },
+//       },
+//       { new: true, upsert: true, runValidators: true }
+//     );
 
-    if (!userProfile) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
-    }
+//     if (!userProfile) {
+//       return NextResponse.json({ message: "User not found" }, { status: 404 });
+//     }
 
-    return NextResponse.json(userProfile, { status: 200 });
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    return NextResponse.json({ message: "Internal server error" }, { status: 500 });
-  }
-}
+//     return NextResponse.json(userProfile, { status: 200 });
+//   } catch (error) {
+//     console.error("Error updating profile:", error);
+//     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+//   }
+// }
 
 
 
