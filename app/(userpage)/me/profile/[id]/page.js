@@ -213,16 +213,14 @@ const UserProfilePage = () => {
       formData.append("address", address?.trim() || "");
       formData.append("deletedAccountRequest", deletedAccountRequest);
   
-      // ✅ Convert `savedShippingAddresses` to a JSON string
-      // formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
-  
+      // ✅ Ensure `savedShippingAddresses` is handled properly
       savedShippingAddresses.forEach((address, index) => {
         Object.entries(address).forEach(([key, value]) => {
           formData.append(`savedShippingAddresses[${index}][${key}]`, value);
         });
       });
-
-      // ✅ Ensure profile picture is handled correctly
+  
+      // ✅ Handle profile picture (allow removal)
       if (profilePicture) {
         if (profilePicture.includes(",")) {
           const base64Image = profilePicture.split(",")[1];
@@ -231,9 +229,8 @@ const UserProfilePage = () => {
       } else {
         formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
       }
-      console.log("FormData before submission:", Object.fromEntries(formData));
   
-      console.log("Submitting formData:", Object.fromEntries(formData));
+      console.log("Submitting FormData:", Object.fromEntries(formData));
   
       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
         headers: {
@@ -253,6 +250,7 @@ const UserProfilePage = () => {
       setLoading(false);
     }
   };
+  
 
   
   // const handleSubmit = async (e) => {
@@ -260,32 +258,36 @@ const UserProfilePage = () => {
   //   setLoading(true);
   
   //   try {
-  //     const formData = {
-  //       fullName: fullName?.trim() || "",
-  //       address: address?.trim() || "",
-  //       savedShippingAddresses: savedShippingAddresses || [],
-  //       billingInfo: billingInfo || {},
-  //       deletedAccountRequest: deletedAccountRequest,
-  //       notificationPreferences: notification || {}, // Ensure it's not undefined
-  //     };
+  //     const formData = new FormData();
+  //     formData.append("fullName", fullName?.trim() || "");
+  //     formData.append("address", address?.trim() || "");
+  //     formData.append("deletedAccountRequest", deletedAccountRequest);
   
-  //     // Handle profile picture (allow removal)
+  //     // ✅ Convert `savedShippingAddresses` to a JSON string
+  //     // formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses || []));
+  
+  //     savedShippingAddresses.forEach((address, index) => {
+  //       Object.entries(address).forEach(([key, value]) => {
+  //         formData.append(`savedShippingAddresses[${index}][${key}]`, value);
+  //       });
+  //     });
+
+  //     // ✅ Ensure profile picture is handled correctly
   //     if (profilePicture) {
   //       if (profilePicture.includes(",")) {
-  //         formData.profilePicture = profilePicture.split(",")[1]; // Extract base64
-  //       } else {
-  //         formData.profilePicture = profilePicture; // Use existing URL
+  //         const base64Image = profilePicture.split(",")[1];
+  //         formData.append("profilePicture", base64Image);
   //       }
   //     } else {
-  //       formData.profilePicture = ""; // Ensure empty string if removed
+  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
   //     }
+  //     console.log("FormData before submission:", Object.fromEntries(formData));
   
-  //     console.log("Submitting formData:", formData);
+  //     console.log("Submitting formData:", Object.fromEntries(formData));
   
   //     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
   //       headers: {
-  //         "Content-Type": 'application/x-www-form-urlencoded',
-          
+  //         "Content-Type": "multipart/form-data", // ✅ Ensure correct Content-Type
   //       },
   //     });
   
@@ -296,13 +298,14 @@ const UserProfilePage = () => {
   //       throw new Error("Failed to update profile.");
   //     }
   //   } catch (error) {
-  //     console.error("Profile update failed:", error.response?.data || error);
   //     handleError(error, "Failed to update profile.");
   //   } finally {
   //     setLoading(false);
   //   }
   // };
+
   
+
   
   
   

@@ -132,66 +132,58 @@ export async function PUT(req, { params }) {
       profilePictureUrl = uploadResult.secure_url;
     }
 
-    // ✅ Ensure `savedShippingAddresses` is properly parsed
-    // let savedShippingAddresses = [];
-    // try {
-    //   const savedAddressesStr = formData.get("savedShippingAddresses");
-    //   savedShippingAddresses = savedAddressesStr ? JSON.parse(savedAddressesStr) : [];
-
-    //   if (!Array.isArray(savedShippingAddresses)) {
-    //     throw new Error("Invalid savedShippingAddresses format");
-    //   }
-    // } catch (error) {
-    //   console.error("Error parsing savedShippingAddresses:", error);
-    //   return NextResponse.json({ message: "Invalid savedShippingAddresses format" }, { status: 400 });
-    // }
-
+    // ✅ Extract savedShippingAddresses correctly
     let savedShippingAddresses = [];
+    for (let i = 0; ; i++) {
+      const address = {};
+      const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
+      let hasData = false;
 
-// Extract addresses correctly
-for (let i = 0; ; i++) {
-  const address = {};
-  const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
-  let hasData = false;
+      keys.forEach((key) => {
+        const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
+        if (value) {
+          address[key] = value;
+          hasData = true;
+        }
+      });
 
-  keys.forEach((key) => {
-    const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
-    if (value) {
-      address[key] = value;
-      hasData = true;
+      if (!hasData) break; // Stop when no more addresses are found
+      savedShippingAddresses.push(address);
     }
-  });
 
-  if (!hasData) break; // Stop when no more addresses are found
-  savedShippingAddresses.push(address);
-}
-
-console.log("Parsed savedShippingAddresses:", savedShippingAddresses);
-
+    console.log("Parsed savedShippingAddresses:", savedShippingAddresses);
 
     // ✅ Construct the updated profile
     const updatedProfile = {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-      savedShippingAddresses: savedShippingAddresses, // ✅ Correctly set parsed data
     };
 
     // ✅ Handle profile picture update
     if (profilePictureBase64 === "") {
-      updatedProfile.profilePicture = "";
+      updatedProfile.profilePicture = ""; // Ensure profile picture is removed
     } else if (profilePictureUrl) {
       updatedProfile.profilePicture = profilePictureUrl;
     }
 
     console.log("Updating user profile with:", updatedProfile);
 
-    // ✅ Use `$set` to properly update MongoDB
+    // ✅ Use `$set` to properly update MongoDB fields except `savedShippingAddresses`
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       { $set: updatedProfile },
       { new: true, upsert: true, runValidators: true }
     );
+
+    // ✅ Separate update for `savedShippingAddresses`
+    if (savedShippingAddresses.length > 0) {
+      await UserProfile.findOneAndUpdate(
+        { userId: id },
+        { $set: { savedShippingAddresses } }, // ✅ Properly replacing the array
+        { new: true, runValidators: true }
+      );
+    }
 
     if (!userProfile) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
@@ -203,6 +195,7 @@ console.log("Parsed savedShippingAddresses:", savedShippingAddresses);
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 
