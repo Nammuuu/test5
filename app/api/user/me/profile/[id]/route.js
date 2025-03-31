@@ -157,13 +157,18 @@ export async function PUT(req, { params }) {
     const formData = await req.formData();
 
     // ✅ Fetch existing user profile
-    let existingUserProfile = await UserProfile.findOne({ userId: id });
+    let existingUserProfile = await User.findOne({ userId: id });
     if (!existingUserProfile) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
     let profilePictureUrl = existingUserProfile.profilePicture; // Default to existing picture
     const profilePictureBase64 = formData.get("profilePicture");
+
+    // if (!profilePictureBase64) {
+    //       return NextResponse.json({ message: "Missing required fields profilePicture" }, { status: 400 });
+    // }
+    
 
     // ✅ Handle profile picture upload / removal
     if (profilePictureBase64) {
