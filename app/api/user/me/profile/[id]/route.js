@@ -125,31 +125,34 @@ export async function PUT(req, { params }) {
     let profilePictureUrl = "";
     const profilePictureBase64 = formData.get("profilePicture");
 
-    // Upload only if valid Base64
+    // ✅ Upload profile picture if provided
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
       profilePictureUrl = uploadResult.secure_url;
     }
 
-    // Convert `savedShippingAddresses` safely
+    // ✅ Ensure `savedShippingAddresses` is properly parsed
     let savedShippingAddresses = [];
     try {
-      savedShippingAddresses = formData.get("savedShippingAddresses")
-        ? JSON.parse(formData.get("savedShippingAddresses"))
-        : [];
+      const savedAddressesStr = formData.get("savedShippingAddresses");
+      savedShippingAddresses = savedAddressesStr ? JSON.parse(savedAddressesStr) : [];
+
+      if (!Array.isArray(savedShippingAddresses)) {
+        throw new Error("Invalid savedShippingAddresses format");
+      }
     } catch (error) {
       console.error("Error parsing savedShippingAddresses:", error);
       return NextResponse.json({ message: "Invalid savedShippingAddresses format" }, { status: 400 });
     }
 
+    // ✅ Construct the updated profile
     const updatedProfile = {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
-      savedShippingAddresses: Array.isArray(savedShippingAddresses) ? savedShippingAddresses : [],
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
     };
 
-    // Ensure profile picture is updated correctly
+    // ✅ Handle profile picture update
     if (profilePictureBase64 === "") {
       updatedProfile.profilePicture = "";
     } else if (profilePictureUrl) {
@@ -157,11 +160,15 @@ export async function PUT(req, { params }) {
     }
 
     console.log("Updating user profile with:", updatedProfile);
+    console.log("Updating savedShippingAddresses:", savedShippingAddresses);
 
-    // Update user profile
+    // ✅ Use `$set` for profile data and `$push` for nested array update
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
-      { $set: updatedProfile },
+      {
+        $set: updatedProfile,
+        $set: { savedShippingAddresses: savedShippingAddresses }, // ✅ Ensure array is properly set
+      },
       { new: true, upsert: true, runValidators: true }
     );
 
@@ -177,49 +184,69 @@ export async function PUT(req, { params }) {
 }
 
 
-
 // export async function PUT(req, { params }) {
 //   try {
 //     await connectToDatabase();
-
 //     const { id } = params;
 //     const formData = await req.formData();
 
-//     const profilePictureBase64 = formData.get('profilePicture');
-//     let profilePictureUrl = '';
+//     console.log("Received formData:", formData);
 
-//     if (profilePictureBase64) {
-//       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, 'profile_images');
-//       console.log("Upload Result:", uploadResult); 
+//     let profilePictureUrl = "";
+//     const profilePictureBase64 = formData.get("profilePicture");
+
+//     // Upload only if valid Base64
+//     if (profilePictureBase64 && profilePictureBase64.length > 100) {
+//       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
 //       profilePictureUrl = uploadResult.secure_url;
 //     }
 
+//     // Convert `savedShippingAddresses` safely
+//     let savedShippingAddresses = [];
+//     try {
+//       savedShippingAddresses = formData.get("savedShippingAddresses")
+//         ? JSON.parse(formData.get("savedShippingAddresses"))
+//         : [];
+//     } catch (error) {
+//       console.error("Error parsing savedShippingAddresses:", error);
+//       return NextResponse.json({ message: "Invalid savedShippingAddresses format" }, { status: 400 });
+//     }
+
 //     const updatedProfile = {
-//       // profilePicture: profilePictureUrl,
-//       // fullName: formData.get('fullName'),
-     
-//       // // notificationPreferences: formData.get('notificationPreferences'),
-//       // savedShippingAddresses: JSON.parse(formData.get('savedShippingAddresses')),
-     
-//       // deletedAccountRequest: formData.get('deletedAccountRequest') === 'true',
-//       fullName: formData.get('fullName') || "",
-//       address: formData.get('address') || "",
-//       savedShippingAddresses: JSON.parse(formData.get('savedShippingAddresses') || "[]"),
-//       deletedAccountRequest: formData.get('deletedAccountRequest') === 'true',
+//       fullName: formData.get("fullName") || "",
+//       address: formData.get("address") || "",
+//       savedShippingAddresses: Array.isArray(savedShippingAddresses) ? savedShippingAddresses : [],
+//       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
 //     };
 
+//     // Ensure profile picture is updated correctly
+//     if (profilePictureBase64 === "") {
+//       updatedProfile.profilePicture = "";
+//     } else if (profilePictureUrl) {
+//       updatedProfile.profilePicture = profilePictureUrl;
+//     }
+
+//     console.log("Updating user profile with:", updatedProfile);
+
+//     // Update user profile
 //     const userProfile = await UserProfile.findOneAndUpdate(
 //       { userId: id },
 //       { $set: updatedProfile },
 //       { new: true, upsert: true, runValidators: true }
 //     );
 
+//     if (!userProfile) {
+//       return NextResponse.json({ message: "User not found" }, { status: 404 });
+//     }
+
 //     return NextResponse.json(userProfile, { status: 200 });
 //   } catch (error) {
-//     console.error('Error updating profile:', error);
-//     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
+//     console.error("Error updating profile:", error);
+//     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
 //   }
 // }
+
+
 
 
 
