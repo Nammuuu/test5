@@ -62,81 +62,34 @@ export async function DELETE(req, { params }) {
     return NextResponse.json({ message: 'Internal server error' }, { status: 500 });
   }
 }
-
-// export async function PUT(req, { params }) {
-//   try {
-//     await connectToDatabase();
-//     const { id } = params;
-//     const formData = await req.formData();
-
-//     let profilePictureUrl = "";
-//     const profilePictureBase64 = formData.get("profilePicture");
-
-//     // Upload to Cloudinary if it's a valid Base64 string
-//     if (profilePictureBase64 && profilePictureBase64.length > 100) {
-//       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
-//       profilePictureUrl = uploadResult.secure_url;
-//     }
-
-//     const updatedProfile = {
-//       fullName: formData.get("fullName") || "",
-//       address: formData.get("address") || "",
-//       savedShippingAddresses: JSON.parse(formData.get("savedShippingAddresses") || "[]"),
-//       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-//     };
-
-//     // Ensure profile picture is updated properly
-//     if (profilePictureBase64 === "") {
-//       updatedProfile.profilePicture = ""; // Remove profile picture
-//     } else if (profilePictureUrl) {
-//       updatedProfile.profilePicture = profilePictureUrl; // Set new picture
-//     }
-
-//     console.log("Updating user profile with:", updatedProfile);
-
-//     const userProfile = await UserProfile.findOneAndUpdate(
-//       { userId: id },
-//       { $set: updatedProfile },
-//       { new: true, upsert: true, runValidators: true }
-//     );
-
-//     if (!userProfile) {
-//       return NextResponse.json({ message: "User not found" }, { status: 404 });
-//     }
-
-//     return NextResponse.json(userProfile, { status: 200 });
-//   } catch (error) {
-//     console.error("Error updating profile:", error);
-//     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
-//   }
-// }
-
-
-// PUT Update User Profile
-
-
 export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
     const formData = await req.formData();
 
-    console.log("Received FormData:", Object.fromEntries(formData)); // ✅ Debugging
-
-    let profilePictureUrl = "";
-    const profilePictureBase64 = formData.get("profilePicture");
-
-    // ✅ Upload profile picture if provided
-    if (profilePictureBase64 && profilePictureBase64.length > 100) {
-      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
-      profilePictureUrl = uploadResult.secure_url;
+    // Fetch existing user profile
+    let existingUserProfile = await UserProfile.findOne({ userId: id });
+    if (!existingUserProfile) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    // ✅ Extract `savedShippingAddresses` properly
+    let profilePictureUrl = existingUserProfile.profilePicture; // Default to existing picture
+    const profilePictureBase64 = formData.get("profilePicture");
+
+    // Upload new profile picture only if provided and valid
+    if (profilePictureBase64 && profilePictureBase64.length > 100) {
+      const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+      profilePictureUrl = uploadResult.secure_url; // Save new picture URL
+    } else if (profilePictureBase64 === "") {
+      profilePictureUrl = ""; // User removed the profile picture
+    }
+
+    // Extract saved shipping addresses
     let savedShippingAddresses = [];
     for (let i = 0; ; i++) {
       const address = {};
-      const keys = ["_id", "address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
+      const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
       let hasData = false;
 
       keys.forEach((key) => {
@@ -147,39 +100,24 @@ export async function PUT(req, { params }) {
         }
       });
 
-      if (!hasData) break; // Stop when no more addresses are found
+      if (!hasData) break;
       savedShippingAddresses.push(address);
     }
 
-    console.log("Parsed savedShippingAddresses:", savedShippingAddresses);
-
-    // ✅ Construct the updated profile
+    // Update profile
     const updatedProfile = {
       fullName: formData.get("fullName") || "",
       address: formData.get("address") || "",
+      profilePicture: profilePictureUrl, // ✅ Correctly handled profile picture update
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-      savedShippingAddresses, // ✅ Now includes full address objects
+      savedShippingAddresses,
     };
 
-    // ✅ Ensure profile picture is updated correctly
-    if (profilePictureBase64 === "") {
-      updatedProfile.profilePicture = ""; // Remove picture
-    } else if (profilePictureUrl) {
-      updatedProfile.profilePicture = profilePictureUrl;
-    }
-
-    console.log("Updating user profile with:", updatedProfile);
-
-    // ✅ Update MongoDB using `$set`
     const userProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       { $set: updatedProfile },
       { new: true, upsert: true, runValidators: true }
     );
-
-    if (!userProfile) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
-    }
 
     return NextResponse.json(userProfile, { status: 200 });
   } catch (error) {
@@ -189,55 +127,61 @@ export async function PUT(req, { params }) {
 }
 
 
-
-
-
-
 // export async function PUT(req, { params }) {
 //   try {
 //     await connectToDatabase();
 //     const { id } = params;
 //     const formData = await req.formData();
 
-//     console.log("Received formData:", formData);
-
 //     let profilePictureUrl = "";
+//     // const profilePictureBase64 = formData.get("profilePicture");
 //     const profilePictureBase64 = formData.get("profilePicture");
 
-//     // Upload only if valid Base64
+//     // ✅ Upload profile picture if provided
 //     if (profilePictureBase64 && profilePictureBase64.length > 100) {
 //       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
 //       profilePictureUrl = uploadResult.secure_url;
 //     }
 
-//     // Convert `savedShippingAddresses` safely
+//     // ✅ Extract `savedShippingAddresses` properly
 //     let savedShippingAddresses = [];
-//     try {
-//       savedShippingAddresses = formData.get("savedShippingAddresses")
-//         ? JSON.parse(formData.get("savedShippingAddresses"))
-//         : [];
-//     } catch (error) {
-//       console.error("Error parsing savedShippingAddresses:", error);
-//       return NextResponse.json({ message: "Invalid savedShippingAddresses format" }, { status: 400 });
+//     for (let i = 0; ; i++) {
+//       const address = {};
+//       const keys = ["_id", "address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
+//       let hasData = false;
+
+//       keys.forEach((key) => {
+//         const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
+//         if (value) {
+//           address[key] = value;
+//           hasData = true;
+//         }
+//       });
+
+//       if (!hasData) break; // Stop when no more addresses are found
+//       savedShippingAddresses.push(address);
 //     }
 
+//     console.log("Parsed savedShippingAddresses:", savedShippingAddresses);
+
+//     // ✅ Construct the updated profile
 //     const updatedProfile = {
 //       fullName: formData.get("fullName") || "",
 //       address: formData.get("address") || "",
-//       savedShippingAddresses: Array.isArray(savedShippingAddresses) ? savedShippingAddresses : [],
 //       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+//       savedShippingAddresses, // ✅ Now includes full address objects
 //     };
 
-//     // Ensure profile picture is updated correctly
+//     // ✅ Ensure profile picture is updated correctly
 //     if (profilePictureBase64 === "") {
-//       updatedProfile.profilePicture = "";
+//       updatedProfile.profilePicture = ""; // Remove picture
 //     } else if (profilePictureUrl) {
 //       updatedProfile.profilePicture = profilePictureUrl;
 //     }
 
 //     console.log("Updating user profile with:", updatedProfile);
 
-//     // Update user profile
+//     // ✅ Update MongoDB using `$set`
 //     const userProfile = await UserProfile.findOneAndUpdate(
 //       { userId: id },
 //       { $set: updatedProfile },
@@ -254,6 +198,9 @@ export async function PUT(req, { params }) {
 //     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
 //   }
 // }
+
+
+
 
 
 
