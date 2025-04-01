@@ -50,55 +50,26 @@ export async function PUT(req, { params }) {
 
     const formData = await req.formData();
 
-    // Debug FormData
-    for (let [key, value] of formData.entries()) {
-      console.log(`FormData - ${key}:`, value);
-    }
-
-    // ✅ Ensure user profile exists
     let existingUserProfile = await UserProfile.findOne({ userId: id });
 
     if (!existingUserProfile) {
-      console.log("User profile not found. Creating a new one...");
       existingUserProfile = new UserProfile({ userId: id });
       await existingUserProfile.save();
     }
 
     let profilePictureUrl = existingUserProfile.profilePicture;
 
-    // ✅ Handle profile picture upload
+    // Profile picture handling
     const profilePictureBase64 = formData.get("profilePicture");
-    // if (profilePictureBase64 && profilePictureBase64.length > 100) {
-    //   try {
-    //     console.log("Uploading profile picture to Cloudinary...");
-    //     const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
-    //     if (uploadResult?.secure_url) {
-    //       profilePictureUrl = uploadResult.secure_url;
-    //       console.log("Uploaded Profile Picture URL:", profilePictureUrl);
-    //     }
-    //   } catch (error) {
-    //     console.error("Error uploading to Cloudinary:", error);
-    //   }
-    // } else if (profilePictureBase64 === "") {
-    //   profilePictureUrl = "";
-    //   console.log("Profile picture removed.");
-    // }
-
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
-      try {
-        const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
-        if (uploadResult?.secure_url) {
-          profilePictureUrl = uploadResult.secure_url;
-        }
-      } catch (error) {
-        console.error("Error uploading to Cloudinary:", error);
+      const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
+      if (uploadResult?.secure_url) {
+        profilePictureUrl = uploadResult.secure_url;
       }
     } else if (profilePictureBase64 === "") {
-      profilePictureUrl = ""; // Ensure it's handled if removed
+      profilePictureUrl = "";
     }
-    
 
-    // ✅ Extract saved shipping addresses
     let savedShippingAddresses = [];
     for (let i = 0; ; i++) {
       const address = {};
@@ -117,31 +88,27 @@ export async function PUT(req, { params }) {
       savedShippingAddresses.push(address);
     }
 
-  // Instead of overwriting the entire object, do a partial update
-  const updatedProfile = {
-    fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName,
-    address: formData.get("address")?.trim() || existingUserProfile.address,
-    profilePicture: profilePictureUrl !== existingUserProfile.profilePicture ? profilePictureUrl : existingUserProfile.profilePicture,
-    deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-    savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
-  };
-  
-// Update only the modified fields
-const userProfile = await UserProfile.findOneAndUpdate(
-  { userId: id },
-  updatedProfile,
-  { new: true, runValidators: true }
-);
+    const updatedProfile = {
+      fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName,
+      address: formData.get("address")?.trim() || existingUserProfile.address,
+      profilePicture: profilePictureUrl !== existingUserProfile.profilePicture ? profilePictureUrl : existingUserProfile.profilePicture,
+      deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+      savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
+    };
 
-console.log("Updated User Profile:", userProfile);
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId: id },
+      updatedProfile,
+      { new: true, runValidators: true }
+    );
 
     return NextResponse.json(userProfile, { status: 200 });
 
   } catch (error) {
-    console.error("Error updating profile:", error);
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 // DELETE User Profile
