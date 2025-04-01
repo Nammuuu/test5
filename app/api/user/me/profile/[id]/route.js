@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
 import connectToDatabase from '../../../../../../lib/mongodb';
 import UserProfile from '../../../../../../models/UserProfile';
 import User from '../../../../../../models/User';
-import { cloudinaryUploadcategory } from '../../../../../../lib/cloudinary';
+import { cloudinaryUploaduserprofilepic } from '../../../../../../lib/cloudinary';
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET; // Ensure you have a JWT_SECRET in your .env file
@@ -79,7 +79,7 @@ export async function DELETE(req, { params }) {
 
 //     // Upload new profile picture only if provided and valid
 //     // if (profilePictureBase64 && profilePictureBase64.length > 100) {
-//     //   const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+//     //   const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
 //     //   profilePictureUrl = uploadResult.secure_url; // Save new picture URL
 //     // } else if (profilePictureBase64 === "") {
 //     //   profilePictureUrl = ""; // User removed the profile picture
@@ -87,7 +87,7 @@ export async function DELETE(req, { params }) {
 
 //     if (profilePictureBase64 && profilePictureBase64.length > 100) {
 //       try {
-//         const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+//         const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
 //         console.log("Cloudinary Upload Result:", uploadResult);
 //         if (uploadResult && uploadResult.secure_url) {
 //           profilePictureUrl = uploadResult.secure_url;
@@ -168,13 +168,14 @@ export async function PUT(req, { params }) {
     }
 
     let profilePictureUrl = existingUserProfile.profilePicture;
-    const profilePictureBase64 = formData.get("profilePicture");
+   
 
     // ✅ Handle profile picture upload
+    const profilePictureBase64 = formData.get("profilePicture");
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
       try {
         console.log("Uploading profile picture to Cloudinary...");
-        const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+        const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
         if (uploadResult?.secure_url) {
           profilePictureUrl = uploadResult.secure_url;
           console.log("Uploaded Profile Picture URL:", profilePictureUrl);
@@ -186,6 +187,7 @@ export async function PUT(req, { params }) {
       profilePictureUrl = "";
       console.log("Profile picture removed.");
     }
+    
 
     // ✅ Extract saved shipping addresses
     let savedShippingAddresses = [];
@@ -247,7 +249,7 @@ export async function PUT(req, { params }) {
 
 //     // ✅ Upload profile picture if provided
 //     if (profilePictureBase64 && profilePictureBase64.length > 100) {
-//       const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+//       const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
 //       profilePictureUrl = uploadResult.secure_url;
 //     }
 
