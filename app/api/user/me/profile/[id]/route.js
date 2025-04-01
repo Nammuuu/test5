@@ -68,21 +68,35 @@ export async function PUT(req, { params }) {
 
     // ✅ Handle profile picture upload
     const profilePictureBase64 = formData.get("profilePicture");
+    // if (profilePictureBase64 && profilePictureBase64.length > 100) {
+    //   try {
+    //     console.log("Uploading profile picture to Cloudinary...");
+    //     const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
+    //     if (uploadResult?.secure_url) {
+    //       profilePictureUrl = uploadResult.secure_url;
+    //       console.log("Uploaded Profile Picture URL:", profilePictureUrl);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error uploading to Cloudinary:", error);
+    //   }
+    // } else if (profilePictureBase64 === "") {
+    //   profilePictureUrl = "";
+    //   console.log("Profile picture removed.");
+    // }
+
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
       try {
-        console.log("Uploading profile picture to Cloudinary...");
         const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
         if (uploadResult?.secure_url) {
           profilePictureUrl = uploadResult.secure_url;
-          console.log("Uploaded Profile Picture URL:", profilePictureUrl);
         }
       } catch (error) {
         console.error("Error uploading to Cloudinary:", error);
       }
     } else if (profilePictureBase64 === "") {
-      profilePictureUrl = "";
-      console.log("Profile picture removed.");
+      profilePictureUrl = ""; // Ensure it's handled if removed
     }
+    
 
     // ✅ Extract saved shipping addresses
     let savedShippingAddresses = [];
@@ -104,23 +118,23 @@ export async function PUT(req, { params }) {
     }
 
   // Instead of overwriting the entire object, do a partial update
-const updatedProfile = {
-  fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName,
-  address: formData.get("address")?.trim() || existingUserProfile.address,
-  profilePicture: profilePictureUrl !== existingUserProfile.profilePicture ? profilePictureUrl : existingUserProfile.profilePicture,
-  deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-  savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
-};
-
+  const updatedProfile = {
+    fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName,
+    address: formData.get("address")?.trim() || existingUserProfile.address,
+    profilePicture: profilePictureUrl !== existingUserProfile.profilePicture ? profilePictureUrl : existingUserProfile.profilePicture,
+    deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+    savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
+  };
+  
 // Update only the modified fields
 const userProfile = await UserProfile.findOneAndUpdate(
   { userId: id },
-  updatedProfile, // Update only the modified fields
+  updatedProfile,
   { new: true, runValidators: true }
 );
 
+console.log("Updated User Profile:", userProfile);
 
-    console.log("Updated User Profile:", userProfile);
     return NextResponse.json(userProfile, { status: 200 });
 
   } catch (error) {
