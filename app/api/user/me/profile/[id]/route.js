@@ -154,42 +154,37 @@ export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
     const { id } = params;
+    console.log("Updating profile for userId:", id);
+
     const formData = await req.formData();
 
-    // ✅ Fetch existing user profile
-    let existingUserProfile = await User.findOne({ userId: id });
+    // ✅ Ensure user profile exists
+    let existingUserProfile = await UserProfile.findOne({ userId: id });
+
     if (!existingUserProfile) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+      console.log("User profile not found. Creating a new one...");
+      existingUserProfile = new UserProfile({ userId: id });
+      await existingUserProfile.save();
     }
 
-    let profilePictureUrl = existingUserProfile.profilePicture; // Default to existing picture
+    let profilePictureUrl = existingUserProfile.profilePicture;
     const profilePictureBase64 = formData.get("profilePicture");
 
-    // if (!profilePictureBase64) {
-    //       return NextResponse.json({ message: "Missing required fields profilePicture" }, { status: 400 });
-    // }
-    
-
-    // ✅ Handle profile picture upload / removal
-    if (profilePictureBase64) {
-      if (profilePictureBase64.length > 100) {
-        try {
-          console.log("Uploading profile picture to Cloudinary...");
-          const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
-
-          if (uploadResult?.secure_url) {
-            profilePictureUrl = uploadResult.secure_url;
-            console.log("Uploaded Profile Picture URL:", profilePictureUrl);
-          } else {
-            console.error("Cloudinary Upload Failed:", uploadResult);
-          }
-        } catch (error) {
-          console.error("Error uploading to Cloudinary:", error);
+    // ✅ Handle profile picture upload
+    if (profilePictureBase64 && profilePictureBase64.length > 100) {
+      try {
+        console.log("Uploading profile picture to Cloudinary...");
+        const uploadResult = await cloudinaryUploadcategory(profilePictureBase64, "profile_images");
+        if (uploadResult?.secure_url) {
+          profilePictureUrl = uploadResult.secure_url;
+          console.log("Uploaded Profile Picture URL:", profilePictureUrl);
         }
-      } else if (profilePictureBase64 === "") {
-        profilePictureUrl = ""; // ✅ User removed the profile picture
-        console.log("Profile picture removed.");
+      } catch (error) {
+        console.error("Error uploading to Cloudinary:", error);
       }
+    } else if (profilePictureBase64 === "") {
+      profilePictureUrl = "";
+      console.log("Profile picture removed.");
     }
 
     // ✅ Extract saved shipping addresses
@@ -211,11 +206,11 @@ export async function PUT(req, { params }) {
       savedShippingAddresses.push(address);
     }
 
-    // ✅ Ensure fields are properly extracted and updated
+    // ✅ Ensure fields are updated correctly
     const updatedProfile = {
       fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName || "",
       address: formData.get("address")?.trim() || existingUserProfile.address || "",
-      profilePicture: profilePictureUrl, // ✅ Correctly handled profile picture
+      profilePicture: profilePictureUrl,
       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
       savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
     };
@@ -228,13 +223,14 @@ export async function PUT(req, { params }) {
     );
 
     console.log("Updated User Profile:", userProfile);
-
     return NextResponse.json(userProfile, { status: 200 });
+
   } catch (error) {
     console.error("Error updating profile:", error);
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 
