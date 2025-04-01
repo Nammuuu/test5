@@ -95,7 +95,7 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
   
 
 
-  useEffect( () => {
+useEffect( () => {
     const token = localStorage.getItem('token');
 
     if (!token) {
@@ -110,25 +110,9 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
       console.error('Failed to decode token:', error);
       setError('Failed to decode token.');
     }
-  }, [fetchUserProfile, router]);
+}, [fetchUserProfile, router]);
 
-  
-  // const handleProfilePictureChange = (e) => {
-  //   const file = e.target.files[0];
-  
-  //   if (file) {
-  //     const reader = new FileReader();
-  
-  //     reader.onloadend = () => {
-  //       setProfilePicture(reader.result); // Save base64 string for the image
-  //       setProfilePictureImagePreview(reader.result); // Preview image as base64
-  //     };
-  
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
-
-  const handleProfilePictureChange = (e) => {
+const handleProfilePictureChange = (e) => {
     const file = e.target.files[0];
   
     if (file) {
@@ -142,11 +126,9 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
       setProfilePicture(""); // Remove image if the user clears it
       setProfilePictureImagePreview("");
     }
-  };
+};
 
-
-
-  const handleError = useCallback((error, defaultMessage) => {
+const handleError = useCallback((error, defaultMessage) => {
     const errorMessage = error.response?.data?.message || error.message || defaultMessage;
 
     if (error.response?.status === 401) {
@@ -157,125 +139,111 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
     }
 
     console.error(errorMessage);
-  }, [router]);
+}, [router]);
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+// const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
   
-    try {
-      const formData = new FormData();
-      formData.append("fullName", fullName?.trim() || "");
-      formData.append("address", address?.trim() || "");
-      formData.append("deletedAccountRequest", deletedAccountRequest);
+//     try {
+//       const formData = new FormData();
+//       formData.append("fullName", fullName?.trim() || "");
+//       formData.append("address", address?.trim() || "");
+//       formData.append("deletedAccountRequest", deletedAccountRequest);
   
-      // ✅ Handle saved shipping addresses
-      savedShippingAddresses.forEach((address, index) => {
-        Object.entries(address).forEach(([key, value]) => {
-          formData.append(`savedShippingAddresses[${index}][${key}]`, value);
-        });
-      });
-  
-      // ✅ Handle profile picture correctly
-      // if (profilePicture) {
-       
-      //   if (profilePicture.includes(",")) {
-      //     formData.append("profilePicture", profilePicture.split(",")[1]); // Convert to base64
-      //   } else {
-      //     formData.append("profilePicture", profilePicture); // Keep existing URL
-      //   }
-      // } else {
-      //   formData.append("profilePicture", ""); // Ensure empty string is sent if user removes it
-      // }
-
-      if (profilePicture) {
-        if (profilePicture.includes(",")) {
-          const base64Data = profilePicture.split(",")[1]; // Extract base64 only
-          console.log("Base64 Data (First 100 chars):", base64Data.slice(0, 100));
-          formData.append("profilePicture", base64Data);
-        } else {
-          console.log("Existing Profile Picture URL:", profilePicture);
-          formData.append("profilePicture", profilePicture); // Keep URL
-        }
-      } else {
-        console.log("Profile Picture Removed");
-        formData.append("profilePicture", ""); // User removed the profile picture
-      }
+//       // ✅ Handle saved shipping addresses
+//       savedShippingAddresses.forEach((address, index) => {
+//         Object.entries(address).forEach(([key, value]) => {
+//           formData.append(`savedShippingAddresses[${index}][${key}]`, value);
+//         });
+//       });
+//       if (profilePicture) {
+//         if (profilePicture.includes(",")) {
+//           const base64Data = profilePicture.split(",")[1]; // Extract base64 only
+//           console.log("Base64 Data (First 100 chars):", base64Data.slice(0, 100));
+//           formData.append("profilePicture", base64Data);
+//         } else {
+//           console.log("Existing Profile Picture URL:", profilePicture);
+//           formData.append("profilePicture", profilePicture); // Keep URL
+//         }
+//       } else {
+//         console.log("Profile Picture Removed");
+//         formData.append("profilePicture", ""); // User removed the profile picture
+//       }
       
 
-      console.log("Form Data Received:", formData);
-      // console.log("Received Profile Picture:", profilePictureBase64 ? profilePictureBase64.slice(0, 100) : "Not Provided");
+//       console.log("Form Data Received:", formData);
+//       // console.log("Received Profile Picture:", profilePictureBase64 ? profilePictureBase64.slice(0, 100) : "Not Provided");
       
   
-      const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+//       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+//         headers: { "Content-Type": "multipart/form-data" },
+//       });
   
-      if (response.status === 200) {
-        toast.success("Profile updated successfully!");
-        setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
-        router.push(`/me/profile`);
+//       if (response.status === 200) {
+//         toast.success("Profile updated successfully!");
+//         setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
+//         router.push(`/me/profile`);
+//       } else {
+//         throw new Error("Failed to update profile.");
+//       }
+//     } catch (error) {
+//       handleError(error, "Failed to update profile.");
+//     } finally {
+//       setLoading(false);
+//     }
+// };
+ 
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  try {
+    const formData = new FormData();
+    formData.append("fullName", fullName?.trim() || "");
+    formData.append("address", address?.trim() || "");
+    formData.append("deletedAccountRequest", deletedAccountRequest);
+
+    // ✅ Always update shipping addresses
+    savedShippingAddresses.forEach((address, index) => {
+      Object.entries(address).forEach(([key, value]) => {
+        formData.append(`savedShippingAddresses[${index}][${key}]`, value.trim());
+      });
+    });
+
+    // ✅ Ensure profile picture is handled correctly
+    if (profilePicture) {
+      if (profilePicture.includes(",")) {
+        const base64Data = profilePicture.split(",")[1]; // Extract base64 part only
+        formData.append("profilePicture", base64Data);
       } else {
-        throw new Error("Failed to update profile.");
+        formData.append("profilePicture", profilePicture); // Keep URL if unchanged
       }
-    } catch (error) {
-      handleError(error, "Failed to update profile.");
-    } finally {
-      setLoading(false);
+    } else {
+      formData.append("profilePicture", ""); // Ensure empty string is sent if removed
     }
-  };
 
-  
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("fullName", fullName?.trim() || "");
-  //     formData.append("address", address?.trim() || "");
-  //     formData.append("deletedAccountRequest", deletedAccountRequest);
-  
-  //     // ✅ Ensure `savedShippingAddresses` is handled properly
-  //     savedShippingAddresses.forEach((address, index) => {
-  //       Object.entries(address).forEach(([key, value]) => {
-  //         formData.append(`savedShippingAddresses[${index}][${key}]`, value);
-  //       });
-  //     });
-  
-  //     // ✅ Handle profile picture (allow removal)
-  //     if (profilePicture) {
-  //       if (profilePicture.includes(",")) {
-  //         const base64Image = profilePicture.split(",")[1];
-  //         formData.append("profilePicture", base64Image);
-  //       }
-  //     } else {
-  //       formData.append("profilePicture", ""); // Ensure empty string is sent if the user removes it
-  //     }
-  
-  //     console.log("Submitting FormData:", Object.fromEntries(formData));
-  
-  //     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data", // ✅ Ensure correct Content-Type
-  //       },
-  //     });
-  
-  //     if (response.status === 200) {
-  //       toast.success("Profile updated successfully!");
-  //       router.push(`/me/profile`);
-  //     } else {
-  //       throw new Error("Failed to update profile.");
-  //     }
-  //   } catch (error) {
-  //     handleError(error, "Failed to update profile.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-    
-  const handleDeleteProfile = async () => {
+    const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    if (response.status === 200) {
+      toast.success("Profile updated successfully!");
+      setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
+      router.push(`/me/profile`);
+    } else {
+      throw new Error("Failed to update profile.");
+    }
+  } catch (error) {
+    handleError(error, "Failed to update profile.");
+  } finally {
+    setLoading(false);
+  }
+};
+
+const handleDeleteProfile = async () => {
     setLoading(true);
     try {
       const response = await axios.delete(`/api/user/me/profile/${id}`);
@@ -291,11 +259,9 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
     } finally {
       setLoading(false);
     }
-  };
+};
 
-
-
-  const handleAddressChange = (index, e) => {
+const handleAddressChange = (index, e) => {
     const { name, value } = e.target;
     const newAddresses = [...savedShippingAddresses];
     newAddresses[index] = {
@@ -303,15 +269,11 @@ setProfilePictureImagePreview(userProfile.profilePicture || "");
       [name]: value,
     };
     setSavedShippingAddresses(newAddresses);
-  };
+};
 
-  const addNewAddress = () => {
-    setSavedShippingAddresses([...savedShippingAddresses, {}]);
-  };
-
-
-
-
+const addNewAddress = () => {
+  setSavedShippingAddresses([...savedShippingAddresses, {}]);
+};
 
 return (
   <>
