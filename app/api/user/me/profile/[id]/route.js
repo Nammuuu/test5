@@ -43,6 +43,8 @@ export async function GET(req, { params }) {
 }
 
 
+
+
 export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
@@ -63,27 +65,11 @@ export async function PUT(req, { params }) {
     // Profile picture handling
     const profilePictureBase64 = formData.get("profilePicture");
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
-      console.log("Received profile picture, attempting to upload...");
-      
-      // Validate base64 image size (optional)
-      const maxFileSize = 5 * 1024 * 1024; // 5MB limit
-      const imageSize = Buffer.from(profilePictureBase64, 'base64').length;
-
-      if (imageSize > maxFileSize) {
-        console.error("File size exceeds limit (5MB)");
-        return NextResponse.json({ message: "File size exceeds 5MB" }, { status: 400 });
-      }
-
       const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
       if (uploadResult?.secure_url) {
-        console.log("Cloudinary upload successful, URL:", uploadResult.secure_url);
         profilePictureUrl = uploadResult.secure_url;
-      } else {
-        console.error("Cloudinary upload failed with no URL");
-        return NextResponse.json({ message: "Cloudinary upload failed" }, { status: 500 });
       }
     } else if (profilePictureBase64 === "") {
-      console.log("No profile picture provided, setting empty URL.");
       profilePictureUrl = "";
     }
 
@@ -122,77 +108,9 @@ export async function PUT(req, { params }) {
     return NextResponse.json(userProfile, { status: 200 });
 
   } catch (error) {
-    console.error("Error occurred during profile update:", error);
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
-
-// export async function PUT(req, { params }) {
-//   try {
-//     await connectToDatabase();
-//     const { id } = params;
-//     console.log("Updating profile for userId:", id);
-
-//     const formData = await req.formData();
-
-//     let existingUserProfile = await UserProfile.findOne({ userId: id });
-
-//     if (!existingUserProfile) {
-//       existingUserProfile = new UserProfile({ userId: id });
-//       await existingUserProfile.save();
-//     }
-
-//     let profilePictureUrl = existingUserProfile.profilePicture;
-
-//     // Profile picture handling
-//     const profilePictureBase64 = formData.get("profilePicture");
-//     if (profilePictureBase64 && profilePictureBase64.length > 100) {
-//       const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
-//       if (uploadResult?.secure_url) {
-//         profilePictureUrl = uploadResult.secure_url;
-//       }
-//     } else if (profilePictureBase64 === "") {
-//       profilePictureUrl = "";
-//     }
-
-//     let savedShippingAddresses = [];
-//     for (let i = 0; ; i++) {
-//       const address = {};
-//       const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
-//       let hasData = false;
-
-//       keys.forEach((key) => {
-//         const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
-//         if (value) {
-//           address[key] = value;
-//           hasData = true;
-//         }
-//       });
-
-//       if (!hasData) break;
-//       savedShippingAddresses.push(address);
-//     }
-
-//     const updatedProfile = {
-//       fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName,
-//       address: formData.get("address")?.trim() || existingUserProfile.address,
-//       profilePicture: profilePictureUrl !== existingUserProfile.profilePicture ? profilePictureUrl : existingUserProfile.profilePicture,
-//       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-//       savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
-//     };
-
-//     const userProfile = await UserProfile.findOneAndUpdate(
-//       { userId: id },
-//       updatedProfile,
-//       { new: true, runValidators: true }
-//     );
-
-//     return NextResponse.json(userProfile, { status: 200 });
-
-//   } catch (error) {
-//     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
-//   }
-// }
 
 
 
