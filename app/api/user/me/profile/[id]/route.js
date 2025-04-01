@@ -120,16 +120,6 @@ export async function PUT(req, { params }) {
       if (!hasData) break;
       savedShippingAddresses.push(address);
     }
-
-    // ✅ Ensure fields are updated correctly
-    // const updatedProfile = {
-    //   fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName || "",
-    //   address: formData.get("address")?.trim() || existingUserProfile.address || "",
-    //   profilePicture: profilePictureUrl,
-    //   deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-    //   savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
-    // };
-
     const updatedProfile = {
       fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName || "",
       address: formData.get("address")?.trim() || existingUserProfile.address || "",
@@ -145,6 +135,11 @@ export async function PUT(req, { params }) {
       { $set: updatedProfile },
       { new: true, upsert: true, runValidators: true }
     );
+    
+    if (userProfile) {
+      await userProfile.save();
+    }
+    
 
     console.log("Updated User Profile:", userProfile);
     return NextResponse.json(userProfile, { status: 200 });

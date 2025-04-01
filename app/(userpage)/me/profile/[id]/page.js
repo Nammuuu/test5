@@ -142,59 +142,6 @@ const handleError = useCallback((error, defaultMessage) => {
 }, [router]);
 
 
-// const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-  
-//     try {
-//       const formData = new FormData();
-//       formData.append("fullName", fullName?.trim() || "");
-//       formData.append("address", address?.trim() || "");
-//       formData.append("deletedAccountRequest", deletedAccountRequest);
-  
-//       // ✅ Handle saved shipping addresses
-//       savedShippingAddresses.forEach((address, index) => {
-//         Object.entries(address).forEach(([key, value]) => {
-//           formData.append(`savedShippingAddresses[${index}][${key}]`, value);
-//         });
-//       });
-//       if (profilePicture) {
-//         if (profilePicture.includes(",")) {
-//           const base64Data = profilePicture.split(",")[1]; // Extract base64 only
-//           console.log("Base64 Data (First 100 chars):", base64Data.slice(0, 100));
-//           formData.append("profilePicture", base64Data);
-//         } else {
-//           console.log("Existing Profile Picture URL:", profilePicture);
-//           formData.append("profilePicture", profilePicture); // Keep URL
-//         }
-//       } else {
-//         console.log("Profile Picture Removed");
-//         formData.append("profilePicture", ""); // User removed the profile picture
-//       }
-      
-
-//       console.log("Form Data Received:", formData);
-//       // console.log("Received Profile Picture:", profilePictureBase64 ? profilePictureBase64.slice(0, 100) : "Not Provided");
-      
-  
-//       const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-//         headers: { "Content-Type": "multipart/form-data" },
-//       });
-  
-//       if (response.status === 200) {
-//         toast.success("Profile updated successfully!");
-//         setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
-//         router.push(`/me/profile`);
-//       } else {
-//         throw new Error("Failed to update profile.");
-//       }
-//     } catch (error) {
-//       handleError(error, "Failed to update profile.");
-//     } finally {
-//       setLoading(false);
-//     }
-// };
- 
 
 const handleSubmit = async (e) => {
   e.preventDefault();
