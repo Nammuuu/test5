@@ -51,6 +51,7 @@ const UserProfilePage = () => {
         },
       });
       const userProfile = response.data;
+      setExistingUserProfile(response.data);
       setUserId(userProfile.userId)
       setFullName(userProfile.fullName);
       setAddress(userProfile.address);
