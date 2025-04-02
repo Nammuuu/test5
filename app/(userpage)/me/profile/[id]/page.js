@@ -162,6 +162,7 @@ const handleSubmit = async (e) => {
 
   const token = localStorage.getItem('token');
   if (!token) {
+    console.error("❌ No token found, redirecting to login.");
     router.push('/login');
     return;
   }
@@ -180,19 +181,25 @@ const handleSubmit = async (e) => {
     formData.append("deletedAccountRequest", deletedAccountRequest);
   }
 
-  // ✅ Fix: Check if profilePicture is valid before sending
+  // ✅ Debug Profile Picture Before Sending
   if (profilePicture && profilePicture.includes(",")) {
     try {
       const base64Data = profilePicture.split(",")[1];
-      if (base64Data.length > 100) {  // Ensure valid base64 data
+      if (base64Data.length > 100) {
+        console.log("✅ Sending Base64 Profile Picture:", base64Data.substring(0, 30) + "...");
         formData.append("profilePicture", base64Data);
       } else {
-        console.error("Invalid Base64 Image Data.");
+        console.error("❌ Invalid Base64 Image Data:", base64Data);
       }
     } catch (err) {
-      console.error("Base64 Processing Error:", err);
+      console.error("❌ Base64 Processing Error:", err);
     }
+  } else {
+    console.log("ℹ️ No new profile picture to update.");
   }
+
+  // ✅ Debug Shipping Address
+  console.log("📦 Saved Shipping Addresses:", savedShippingAddresses);
 
   try {
     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
@@ -202,6 +209,8 @@ const handleSubmit = async (e) => {
       },
     });
 
+    console.log("✅ API Response:", response.data);
+
     if (response.status === 200) {
       toast.success("Profile updated successfully!");
       router.push(`/me/profile`);
@@ -209,11 +218,12 @@ const handleSubmit = async (e) => {
       throw new Error("Failed to update profile.");
     }
   } catch (error) {
-    console.error("Profile Update Error:", error);
+    console.error("❌ Profile Update Error:", error);
   } finally {
     setLoading(false);
   }
 };
+
 
 
 

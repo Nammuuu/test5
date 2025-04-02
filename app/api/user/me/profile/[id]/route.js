@@ -45,73 +45,82 @@ export async function GET(req, { params }) {
 
 export async function PUT(req, { params }) {
   try {
+    console.log("🔹 API HIT: Updating Profile");
     await connectToDatabase();
+    
     const { id } = params;
-    console.log("Updating profile for userId:", id);
+    console.log("🔹 Updating profile for userId:", id);
 
     const formData = await req.formData();
+    console.log("📥 Received Form Data:", formData);
 
     let existingUserProfile = await UserProfile.findOne({ userId: id });
 
     if (!existingUserProfile) {
+      console.log("⚠️ No existing profile found, creating a new one.");
       existingUserProfile = new UserProfile({ userId: id });
       await existingUserProfile.save();
+    } else {
+      console.log("✅ Found existing profile:", existingUserProfile);
     }
 
     let updates = {};
 
-    // ✅ Profile Picture Handling with Debugging
+    // ✅ Debug Profile Picture Handling
     let profilePictureUrl = existingUserProfile.profilePicture;
     const profilePictureBase64 = formData.get("profilePicture");
 
-    console.log("Received Profile Picture Base64:", profilePictureBase64 ? profilePictureBase64.substring(0, 30) : "No image received");
+    console.log("📸 Received Base64 Profile Picture:", profilePictureBase64 ? profilePictureBase64.substring(0, 30) : "No image received");
 
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
-      console.log("Uploading to Cloudinary...");
+      console.log("🔹 Uploading to Cloudinary...");
       const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
       
       if (uploadResult?.secure_url) {
-        console.log("Cloudinary Upload Successful:", uploadResult.secure_url);
+        console.log("✅ Cloudinary Upload Successful:", uploadResult.secure_url);
         profilePictureUrl = uploadResult.secure_url;
       } else {
-        console.error("Cloudinary Upload Failed:", uploadResult);
+        console.error("❌ Cloudinary Upload Failed:", uploadResult);
       }
     } else if (profilePictureBase64 === "") {
+      console.log("🔹 Removing profile picture.");
       profilePictureUrl = "";
     }
     updates.profilePicture = profilePictureUrl;
 
-    console.log("Updated Profile Picture URL:", profilePictureUrl);
-
-    // ✅ Full Name & Address Updates
+    // ✅ Debug Other Fields
     if (formData.has("fullName")) {
       updates.fullName = formData.get("fullName").trim();
+      console.log("✅ Updated Full Name:", updates.fullName);
     }
     if (formData.has("address")) {
       updates.address = formData.get("address").trim();
+      console.log("✅ Updated Address:", updates.address);
     }
-
-    // ✅ Deleted Account Request
     if (formData.has("deletedAccountRequest")) {
       updates.deletedAccountRequest = formData.get("deletedAccountRequest") === "true";
+      console.log("✅ Updated Deleted Account Request:", updates.deletedAccountRequest);
     }
 
-    // ✅ Update Profile in DB (Ensure Update Works)
+    // ✅ Debugging the update query
+    console.log("📤 Applying Updates:", updates);
+
     const updatedProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       { $set: updates },
-      { new: true, runValidators: true, upsert: true }  // 🔥 Fix: Ensure update happens
+      { new: true, runValidators: true, upsert: true }  // 🔥 Ensure update happens
     );
 
-    console.log("Updated Profile Data:", updatedProfile);
+    console.log("✅ Final Updated Profile:", updatedProfile);
 
     return NextResponse.json(updatedProfile, { status: 200 });
 
   } catch (error) {
-    console.error("Profile Update Error:", error);
+    console.error("❌ Profile Update Error:", error);
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 
