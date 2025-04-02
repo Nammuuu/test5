@@ -156,73 +156,73 @@ const handleError = useCallback((error, defaultMessage) => {
 }, [router]);
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setLoading(true);
 
-  const token = localStorage.getItem('token');
-  if (!token) {
-    console.error("❌ No token found, redirecting to login.");
-    router.push('/login');
-    return;
-  }
+//   const token = localStorage.getItem('token');
+//   if (!token) {
+//     console.error("❌ No token found, redirecting to login.");
+//     router.push('/login');
+//     return;
+//   }
 
-  const formData = new FormData();
+//   const formData = new FormData();
 
-  if (fullName && fullName !== existingUserProfile.fullName) {
-    formData.append("fullName", fullName.trim());
-  }
+//   if (fullName && fullName !== existingUserProfile.fullName) {
+//     formData.append("fullName", fullName.trim());
+//   }
 
-  if (address && address !== existingUserProfile.address) {
-    formData.append("address", address.trim());
-  }
+//   if (address && address !== existingUserProfile.address) {
+//     formData.append("address", address.trim());
+//   }
 
-  if (deletedAccountRequest !== existingUserProfile.deletedAccountRequest) {
-    formData.append("deletedAccountRequest", deletedAccountRequest);
-  }
+//   if (deletedAccountRequest !== existingUserProfile.deletedAccountRequest) {
+//     formData.append("deletedAccountRequest", deletedAccountRequest);
+//   }
 
-  // ✅ Debug Profile Picture Before Sending
-  if (profilePicture && profilePicture.includes(",")) {
-    try {
-      const base64Data = profilePicture.split(",")[1];
-      if (base64Data.length > 100) {
-        console.log("✅ Sending Base64 Profile Picture:", base64Data.substring(0, 30) + "...");
-        formData.append("profilePicture", base64Data);
-      } else {
-        console.error("❌ Invalid Base64 Image Data:", base64Data);
-      }
-    } catch (err) {
-      console.error("❌ Base64 Processing Error:", err);
-    }
-  } else {
-    console.log("ℹ️ No new profile picture to update.");
-  }
+//   // ✅ Debug Profile Picture Before Sending
+//   if (profilePicture && profilePicture.includes(",")) {
+//     try {
+//       const base64Data = profilePicture.split(",")[1];
+//       if (base64Data.length > 100) {
+//         console.log("✅ Sending Base64 Profile Picture:", base64Data.substring(0, 30) + "...");
+//         formData.append("profilePicture", base64Data);
+//       } else {
+//         console.error("❌ Invalid Base64 Image Data:", base64Data);
+//       }
+//     } catch (err) {
+//       console.error("❌ Base64 Processing Error:", err);
+//     }
+//   } else {
+//     console.log("ℹ️ No new profile picture to update.");
+//   }
 
-  // ✅ Debug Shipping Address
-  console.log("📦 Saved Shipping Addresses:", savedShippingAddresses);
+//   // ✅ Debug Shipping Address
+//   console.log("📦 Saved Shipping Addresses:", savedShippingAddresses);
 
-  try {
-    const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+//   try {
+//     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     });
 
-    console.log("✅ API Response:", response.data);
+//     console.log("✅ API Response:", response.data);
 
-    if (response.status === 200) {
-      toast.success("Profile updated successfully!");
-      router.push(`/me/profile`);
-    } else {
-      throw new Error("Failed to update profile.");
-    }
-  } catch (error) {
-    console.error("❌ Profile Update Error:", error);
-  } finally {
-    setLoading(false);
-  }
-};
+//     if (response.status === 200) {
+//       toast.success("Profile updated successfully!");
+//       router.push(`/me/profile`);
+//     } else {
+//       throw new Error("Failed to update profile.");
+//     }
+//   } catch (error) {
+//     console.error("❌ Profile Update Error:", error);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
 
 
 
@@ -350,6 +350,67 @@ const handleSubmit = async (e) => {
 //   }
 // };
 
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.error("❌ No token found, redirecting to login.");
+    router.push('/login');
+    return;
+  }
+
+  const formData = new FormData();
+
+  if (fullName && fullName !== existingUserProfile.fullName) {
+    formData.append("fullName", fullName.trim());
+  }
+
+  if (address && address !== existingUserProfile.address) {
+    formData.append("address", address.trim());
+  }
+
+  if (deletedAccountRequest !== existingUserProfile.deletedAccountRequest) {
+    formData.append("deletedAccountRequest", deletedAccountRequest);
+  }
+
+  if (profilePicture && profilePicture.includes(",")) {
+    const base64Data = profilePicture.split(",")[1];
+    formData.append("profilePicture", base64Data);
+  }
+
+  try {
+    const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log("✅ API Response:", response.data);
+
+    if (response.status === 200) {
+      toast.success("Profile updated successfully!");
+
+      // **🔹 Update state immediately to reflect new profile picture**
+      setExistingUserProfile((prev) => ({
+        ...prev,
+        profilePicture: response.data.profilePicture,  // 👈 Update profile picture state
+      }));
+
+      router.push(`/me/profile`);
+    } else {
+      throw new Error("Failed to update profile.");
+    }
+  } catch (error) {
+    console.error("❌ Profile Update Error:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 const handleDeleteProfile = async () => {
     setLoading(true);
     try {
@@ -401,15 +462,25 @@ return (
     {profilePictureImagePreview ? (
      
 
-      <Image
-      src={profilePictureImagePreview}
-        alt="Profile Preview"
-        className={styles.profilePicture}
-      width={150}
-      height={150}
+    //   <Image
+    //   src={profilePictureImagePreview}
+      //   alt="Profile Preview"
+      //   className={styles.profilePicture}
+      // width={150}
+      // height={150}
       
-      priority
-    />
+    //   priority
+    // />
+
+    <Image
+  src={existingUserProfile.profilePicture ? `${existingUserProfile.profilePicture}?t=${new Date().getTime()}` : "/default-avatar.png"}
+  alt="Profile Preview"
+  className={styles.profilePicture}
+width={150}
+height={150}
+/>
+
+
 
     ) : (
       <div className={styles.defaultPicture}>N</div> /* Default avatar with initial */
