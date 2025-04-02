@@ -72,64 +72,22 @@ const UserProfilePage = () => {
     }
   }, [router]);
 
-  // const fetchUserProfile = useCallback(async () => {
-  //   const token = localStorage.getItem('token');
-  //    if (!token) {
-  //     toast.error('No token found');
-  //     router.push('/login');
-  //     return;
-  //   }
-
-  //   setLoading(true);
-  //   try {
-  //     const response = await axios.get(`/api/user/me/profile`, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     const userProfile = response.data;
-  //     setUserId(userProfile._id);
-  //     setFullName(userProfile.fullName);
-  //     setAddress(userProfile.address);
-  //     setNotification(userProfile.notificationPreferences);
-  //     setBillingInfo(userProfile.billingInfo || {});
-  //     setSavedShippingAddresses(userProfile.savedShippingAddresses || []);
-  //     setDeletedAccountRequest(userProfile.deletedAccountRequest);
-  //     setProfilePictureImagePreview(userProfile.profilePicture);
-  //     setProfileCreatedAt(new Date(userProfile.createdAt).toLocaleString()); // Profile creation time
-  //   } catch (error) {
-  //     if (error.response && error.response.status === 404) {
-  //       // Show toast if profile is not found
-  //       toast.info('Update Your Profile.');
-  //       router.push(`/me/profile/${userProfile._id}`);
-  //     } else {
-  //       // Handle other errors
-  //       console.error('Failed to fetch profile:', error);
-  //       setError('Failed to fetch profile.');
-  //     }
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // },  [router]);
-  
-
   const fetchUserProfile = useCallback(async () => {
     const token = localStorage.getItem('token');
-    if (!token) {
+     if (!token) {
       toast.error('No token found');
       router.push('/login');
       return;
     }
-  
+
     setLoading(true);
     try {
       const response = await axios.get(`/api/user/me/profile`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-  
       const userProfile = response.data;
-      console.log("🔄 Fetching Updated Profile:", userProfile);
-  
       setUserId(userProfile._id);
       setFullName(userProfile.fullName);
       setAddress(userProfile.address);
@@ -137,17 +95,59 @@ const UserProfilePage = () => {
       setBillingInfo(userProfile.billingInfo || {});
       setSavedShippingAddresses(userProfile.savedShippingAddresses || []);
       setDeletedAccountRequest(userProfile.deletedAccountRequest);
-      
-      // **🔥 Force re-render of the profile picture**
-      setProfilePictureImagePreview(`${userProfile.profilePicture}?t=${new Date().getTime()}`);
-  
+      setProfilePictureImagePreview(userProfile.profilePicture);
+      setProfileCreatedAt(new Date(userProfile.createdAt).toLocaleString()); // Profile creation time
     } catch (error) {
-      console.error('Failed to fetch profile:', error);
-      setError('Failed to fetch profile.');
+      if (error.response && error.response.status === 404) {
+        // Show toast if profile is not found
+        toast.info('Update Your Profile.');
+        router.push(`/me/profile/${userProfile._id}`);
+      } else {
+        // Handle other errors
+        console.error('Failed to fetch profile:', error);
+        setError('Failed to fetch profile.');
+      }
     } finally {
       setLoading(false);
     }
-  }, [router]);
+  },  [router]);
+  
+
+  // const fetchUserProfile = useCallback(async () => {
+  //   const token = localStorage.getItem('token');
+  //   if (!token) {
+  //     toast.error('No token found');
+  //     router.push('/login');
+  //     return;
+  //   }
+  
+  //   setLoading(true);
+  //   try {
+  //     const response = await axios.get(`/api/user/me/profile`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  
+  //     const userProfile = response.data;
+  //     console.log("🔄 Fetching Updated Profile:", userProfile);
+  
+  //     setUserId(userProfile._id);
+  //     setFullName(userProfile.fullName);
+  //     setAddress(userProfile.address);
+  //     setNotification(userProfile.notificationPreferences);
+  //     setBillingInfo(userProfile.billingInfo || {});
+  //     setSavedShippingAddresses(userProfile.savedShippingAddresses || []);
+  //     setDeletedAccountRequest(userProfile.deletedAccountRequest);
+      
+  //     // **🔥 Force re-render of the profile picture**
+  //     setProfilePictureImagePreview(`${userProfile.profilePicture}?t=${new Date().getTime()}`);
+  
+  //   } catch (error) {
+  //     console.error('Failed to fetch profile:', error);
+  //     setError('Failed to fetch profile.');
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, [router]);
 
   
   useEffect(() => {

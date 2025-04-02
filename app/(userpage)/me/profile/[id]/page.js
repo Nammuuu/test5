@@ -156,6 +156,53 @@ const handleError = useCallback((error, defaultMessage) => {
 }, [router]);
 
 
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setLoading(true);
+
+//   const token = localStorage.getItem('token');
+//   if (!token) {
+//     console.error("❌ No token found, redirecting to login.");
+//     router.push('/login');
+//     return;
+//   }
+
+//   const formData = new FormData();
+//   if (fullName) formData.append("fullName", fullName.trim());
+//   if (address) formData.append("address", address.trim());
+
+//   if (profilePictureImagePreview && profilePictureImagePreview.includes(",")) {
+//     const base64Data = profilePictureImagePreview.split(",")[1];
+//     formData.append("profilePicture", base64Data);
+//   }
+
+//   try {
+//     const response = await axios.put(`/api/user/me/profile/${userId}`, formData, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     });
+
+//     console.log("✅ Profile Updated:", response.data);
+
+//     if (response.status === 200) {
+//       toast.success("Profile updated successfully!");
+
+//       // **🔹 Update the state immediately with new profile picture**
+//       setProfilePictureImagePreview(`${response.data.profilePicture}?t=${new Date().getTime()}`);
+
+//       // **🔹 Also, re-fetch the profile to ensure UI sync**
+//       fetchUserProfile();
+//     }
+//   } catch (error) {
+//     console.error("❌ Profile Update Error:", error);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
@@ -168,12 +215,20 @@ const handleSubmit = async (e) => {
   }
 
   const formData = new FormData();
+
+  // Append Basic User Info
   if (fullName) formData.append("fullName", fullName.trim());
   if (address) formData.append("address", address.trim());
 
+  // Append Profile Picture if it exists
   if (profilePictureImagePreview && profilePictureImagePreview.includes(",")) {
     const base64Data = profilePictureImagePreview.split(",")[1];
     formData.append("profilePicture", base64Data);
+  }
+
+  // Append Shipping Addresses (Convert array to JSON string)
+  if (savedShippingAddresses.length > 0) {
+    formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses));
   }
 
   try {
@@ -189,79 +244,28 @@ const handleSubmit = async (e) => {
     if (response.status === 200) {
       toast.success("Profile updated successfully!");
 
-      // **🔹 Update the state immediately with new profile picture**
-      setProfilePictureImagePreview(`${response.data.profilePicture}?t=${new Date().getTime()}`);
+      // **🔹 Update profile picture preview**
+      if (response.data.profilePicture) {
+        setProfilePictureImagePreview(`${response.data.profilePicture}?t=${new Date().getTime()}`);
+      }
 
-      // **🔹 Also, re-fetch the profile to ensure UI sync**
+      // **🔹 Update saved addresses in state**
+      if (response.data.savedShippingAddresses) {
+        setSavedShippingAddresses(response.data.savedShippingAddresses);
+      }
+
+      // **🔹 Re-fetch the profile to sync UI**
       fetchUserProfile();
     }
   } catch (error) {
     console.error("❌ Profile Update Error:", error);
+    toast.error("Failed to update profile. Please try again.");
   } finally {
     setLoading(false);
   }
 };
 
 
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   setLoading(true);
-
-//   const token = localStorage.getItem('token');
-//   if (!token) {
-//     console.error("❌ No token found, redirecting to login.");
-//     router.push('/login');
-//     return;
-//   }
-
-//   const formData = new FormData();
-
-//   if (fullName && fullName !== existingUserProfile.fullName) {
-//     formData.append("fullName", fullName.trim());
-//   }
-
-//   if (address && address !== existingUserProfile.address) {
-//     formData.append("address", address.trim());
-//   }
-
-//   if (deletedAccountRequest !== existingUserProfile.deletedAccountRequest) {
-//     formData.append("deletedAccountRequest", deletedAccountRequest);
-//   }
-
-//   if (profilePicture && profilePicture.includes(",")) {
-//     const base64Data = profilePicture.split(",")[1];
-//     formData.append("profilePicture", base64Data);
-//   }
-
-//   try {
-//     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//         'Content-Type': 'multipart/form-data',
-//       },
-//     });
-
-//     console.log("✅ API Response:", response.data);
-
-//     if (response.status === 200) {
-//       toast.success("Profile updated successfully!");
-
-//       // **🔹 Update state immediately to reflect new profile picture**
-//       setExistingUserProfile((prev) => ({
-//         ...prev,
-//         profilePicture: response.data.profilePicture,  // 👈 Update profile picture state
-//       }));
-
-//       router.push(`/me/profile`);
-//     } else {
-//       throw new Error("Failed to update profile.");
-//     }
-//   } catch (error) {
-//     console.error("❌ Profile Update Error:", error);
-//   } finally {
-//     setLoading(false);
-//   }
-// };
 
 const handleDeleteProfile = async () => {
     setLoading(true);
@@ -313,25 +317,6 @@ return (
   <div className={styles.profileContainer}>
     {profilePictureImagePreview ? (
      
-
-    //   <Image
-    //   src={profilePictureImagePreview}
-      //   alt="Profile Preview"
-      //   className={styles.profilePicture}
-      // width={150}
-      // height={150}
-      
-    //   priority
-    // />
-
-//     <Image
-//   src={existingUserProfile.profilePicture ? `${existingUserProfile.profilePicture}?t=${new Date().getTime()}` : "/default-avatar.png"}
-//   alt="Profile Preview"
-//   className={styles.profilePicture}
-// width={150}
-// height={150}
-// />
-
 <Image
   src={profilePictureImagePreview || "/default-avatar.png"}
   alt="Profile Picture"
