@@ -159,6 +159,11 @@ const handleError = useCallback((error, defaultMessage) => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
+  const token = localStorage.getItem('token');
+    if (!token) {
+      router.push('/login');
+      return;
+    }
 
   const formData = new FormData();
 
@@ -188,7 +193,10 @@ const handleSubmit = async (e) => {
 
   try {
     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
     });
 
     if (response.status === 200) {
