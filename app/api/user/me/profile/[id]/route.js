@@ -88,6 +88,13 @@ export async function PUT(req, { params }) {
     }
     updates.profilePicture = profilePictureUrl;
 
+    if (formData.has("savedShippingAddresses")) {
+      const addresses = JSON.parse(formData.get("savedShippingAddresses"));
+      updates.savedShippingAddresses = addresses;
+      console.log("✅ Updated Shipping Addresses:", updates.savedShippingAddresses);
+    }
+
+    
     // ✅ Debug Other Fields
     if (formData.has("fullName")) {
       updates.fullName = formData.get("fullName").trim();

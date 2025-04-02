@@ -52,21 +52,17 @@ const UserProfilePage = () => {
         },
       });
       const userProfile = response.data;
-      setExistingUserProfile(response.data);
-      setUserId(userProfile.userId)
+      setExistingUserProfile(userProfile);
+      setUserId(userProfile.userId);
       setFullName(userProfile.fullName);
       setAddress(userProfile.address);
       setNotification(userProfile.notificationPreferences);
-      // setSavedShippingAddresses(userProfile.savedShippingAddresses);
       setSavedShippingAddresses(userProfile.savedShippingAddresses || []);
-
       setBillingInfo(userProfile.billingInfo);
       setDeletedAccountRequest(userProfile.deletedAccountRequest);
-      // setProfilePictureImagePreview(userProfile.profilePicture);
-// ✅ Set profile picture correctly
-setProfilePicture(userProfile.profilePicture || "");
-setProfilePictureImagePreview(userProfile.profilePicture || "");
-
+      setProfilePicture(userProfile.profilePicture || "");
+      setProfilePictureImagePreview(userProfile.profilePicture || "");
+      
     } catch (error) {
       toast.info('update your profile.');
       console.error(error);
@@ -217,6 +213,7 @@ const handleSubmit = async (e) => {
   }
 
   const formData = new FormData();
+  formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses));
 
   if (fullName) {
     formData.append("fullName", fullName.trim());
@@ -235,7 +232,7 @@ const handleSubmit = async (e) => {
     formData.append("profilePicture", base64Data);
   }
 
-  formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses));
+  
 
   // if (savedShippingAddresses.length > 0) {
   //   formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses));
@@ -374,12 +371,13 @@ const handleDeleteProfile = async () => {
 const handleAddressChange = (index, e) => {
   const { name, value } = e.target;
 
-  setSavedShippingAddresses(prevAddresses => {
-      return prevAddresses.map((address, i) =>
-          i === index ? { ...address, [name]: value } : address
-      );
-  });
+  setSavedShippingAddresses(prevAddresses =>
+    prevAddresses.map((address, i) =>
+      i === index ? { ...address, [name]: value } : address
+    )
+  );
 };
+
 
 
 
