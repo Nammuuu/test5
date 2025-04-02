@@ -59,19 +59,29 @@ export async function PUT(req, { params }) {
     }
 
     let updates = {};
-    
-    // ✅ Profile Picture Handling
+
+    // ✅ Profile Picture Handling with Debugging
     let profilePictureUrl = existingUserProfile.profilePicture;
     const profilePictureBase64 = formData.get("profilePicture");
+
+    console.log("Received Profile Picture Base64:", profilePictureBase64 ? profilePictureBase64.substring(0, 30) : "No image received");
+
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
+      console.log("Uploading to Cloudinary...");
       const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
+      
       if (uploadResult?.secure_url) {
+        console.log("Cloudinary Upload Successful:", uploadResult.secure_url);
         profilePictureUrl = uploadResult.secure_url;
+      } else {
+        console.error("Cloudinary Upload Failed:", uploadResult);
       }
     } else if (profilePictureBase64 === "") {
       profilePictureUrl = "";
     }
     updates.profilePicture = profilePictureUrl;
+
+    console.log("Updated Profile Picture URL:", profilePictureUrl);
 
     // ✅ Full Name & Address Updates
     if (formData.has("fullName")) {
@@ -86,32 +96,14 @@ export async function PUT(req, { params }) {
       updates.deletedAccountRequest = formData.get("deletedAccountRequest") === "true";
     }
 
-    // ✅ Shipping Addresses Handling
-    let savedShippingAddresses = [];
-    for (let i = 0; ; i++) {
-      const address = {};
-      const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
-      let hasData = false;
-
-      keys.forEach((key) => {
-        const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
-        if (value) {
-          address[key] = value;
-          hasData = true;
-        }
-      });
-
-      if (!hasData) break;
-      savedShippingAddresses.push(address);
-    }
-    updates.savedShippingAddresses = savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses;
-
-    // ✅ Update Profile in DB
+    // ✅ Update Profile in DB (Ensure Update Works)
     const updatedProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
       { $set: updates },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true, upsert: true }  // 🔥 Fix: Ensure update happens
     );
+
+    console.log("Updated Profile Data:", updatedProfile);
 
     return NextResponse.json(updatedProfile, { status: 200 });
 
@@ -120,6 +112,7 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
 
 
 

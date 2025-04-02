@@ -159,11 +159,12 @@ const handleError = useCallback((error, defaultMessage) => {
 const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
+
   const token = localStorage.getItem('token');
-    if (!token) {
-      router.push('/login');
-      return;
-    }
+  if (!token) {
+    router.push('/login');
+    return;
+  }
 
   const formData = new FormData();
 
@@ -179,17 +180,19 @@ const handleSubmit = async (e) => {
     formData.append("deletedAccountRequest", deletedAccountRequest);
   }
 
+  // ✅ Fix: Check if profilePicture is valid before sending
   if (profilePicture && profilePicture.includes(",")) {
-    const base64Data = profilePicture.split(",")[1];
-    formData.append("profilePicture", base64Data);
-  }
-
-  // ✅ Update only the modified phone number inside shipping addresses
-  savedShippingAddresses.forEach((address, index) => {
-    if (address.phoneNo !== existingUserProfile.savedShippingAddresses[index]?.phoneNo) {
-      formData.append(`savedShippingAddresses[${index}][phoneNo]`, address.phoneNo);
+    try {
+      const base64Data = profilePicture.split(",")[1];
+      if (base64Data.length > 100) {  // Ensure valid base64 data
+        formData.append("profilePicture", base64Data);
+      } else {
+        console.error("Invalid Base64 Image Data.");
+      }
+    } catch (err) {
+      console.error("Base64 Processing Error:", err);
     }
-  });
+  }
 
   try {
     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
@@ -206,11 +209,12 @@ const handleSubmit = async (e) => {
       throw new Error("Failed to update profile.");
     }
   } catch (error) {
-    handleError(error, "Failed to update profile.");
+    console.error("Profile Update Error:", error);
   } finally {
     setLoading(false);
   }
 };
+
 
 
 // const handleSubmit = async (e) => {
