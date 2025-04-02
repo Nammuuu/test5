@@ -57,7 +57,9 @@ const UserProfilePage = () => {
       setFullName(userProfile.fullName);
       setAddress(userProfile.address);
       setNotification(userProfile.notificationPreferences);
-      setSavedShippingAddresses(userProfile.savedShippingAddresses);
+      // setSavedShippingAddresses(userProfile.savedShippingAddresses);
+      setSavedShippingAddresses(userProfile.savedShippingAddresses || []);
+
       setBillingInfo(userProfile.billingInfo);
       setDeletedAccountRequest(userProfile.deletedAccountRequest);
       // setProfilePictureImagePreview(userProfile.profilePicture);
@@ -233,9 +235,11 @@ const handleSubmit = async (e) => {
     formData.append("profilePicture", base64Data);
   }
 
-  if (savedShippingAddresses.length > 0) {
-    formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses));
-  }
+  formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses));
+
+  // if (savedShippingAddresses.length > 0) {
+  //   formData.append("savedShippingAddresses", JSON.stringify(savedShippingAddresses));
+  // }
 
   // Log the data being sent
   console.log("🔹 FormData Entries:");
@@ -260,9 +264,9 @@ const handleSubmit = async (e) => {
         setProfilePictureImagePreview(`${response.data.profilePicture}?t=${new Date().getTime()}`);
       }
 
-      if (response.data.savedShippingAddresses) {
-        setSavedShippingAddresses(response.data.savedShippingAddresses);
-      }
+      // if (response.data.savedShippingAddresses) {
+      //   setSavedShippingAddresses(response.data.savedShippingAddresses);
+      // }
 
       fetchUserProfile();
     }
@@ -357,15 +361,28 @@ const handleDeleteProfile = async () => {
     }
 };
 
+// const handleAddressChange = (index, e) => {
+//     const { name, value } = e.target;
+//     const newAddresses = [...savedShippingAddresses];
+//     newAddresses[index] = {
+//       ...newAddresses[index],
+//       [name]: value,
+//     };
+//     setSavedShippingAddresses(newAddresses);
+// };
+
 const handleAddressChange = (index, e) => {
-    const { name, value } = e.target;
-    const newAddresses = [...savedShippingAddresses];
-    newAddresses[index] = {
-      ...newAddresses[index],
-      [name]: value,
-    };
-    setSavedShippingAddresses(newAddresses);
+  const { name, value } = e.target;
+
+  setSavedShippingAddresses(prevAddresses => {
+      return prevAddresses.map((address, i) =>
+          i === index ? { ...address, [name]: value } : address
+      );
+  });
 };
+
+
+
 
 const addNewAddress = () => {
   setSavedShippingAddresses([...savedShippingAddresses, {}]);
@@ -440,9 +457,131 @@ return (
         </div>
       
         <div className={styles.ShippingAddressescontainer}> 
+  {savedShippingAddresses.map((address, index) => (
+    <div key={index} className={styles.addressContainer}>
+      
+      <label htmlFor={`address-${index}`} className={styles.label}>
+        <FaMapMarkerAlt /> Address:
+      </label>
+      <input
+        type="text"
+        id={`address-${index}`}
+        name="address"
+        value={address.address || ''}
+        onChange={(e) => handleAddressChange(index, e)}
+        className={styles.addressInput}
+        placeholder="Address"
+      />
+
+      <label htmlFor={`address2-${index}`} className={styles.label}>
+        <FaHome /> Address 2:
+      </label>
+      <input
+        type="text"
+        id={`address2-${index}`}
+        name="address2"
+        value={address.address2 || ''}
+        onChange={(e) => handleAddressChange(index, e)}
+        className={styles.addressInput}
+        placeholder="Address Line 2"
+      />
+
+      <label htmlFor={`phoneNo-${index}`} className={styles.label}>
+        <FaPhone /> Phone No:
+      </label>
+      <input
+        type="text"
+        id={`phoneNo-${index}`}
+        name="phoneNo"
+        value={address.phoneNo || ''}
+        onChange={(e) => handleAddressChange(index, e)}
+        className={styles.addressInput}
+        placeholder="Phone Number"
+      />
+
+      <label htmlFor={`city-${index}`} className={styles.label}>
+        <FaCity /> City:
+      </label>
+      <input
+        type="text"
+        id={`city-${index}`}
+        name="city"
+        value={address.city || ''}
+        onChange={(e) => handleAddressChange(index, e)}
+        className={styles.addressInput}
+        placeholder="City"
+      />
+
+      <label htmlFor={`state-${index}`} className={styles.label}>
+        <FaFlag /> State:
+      </label>
+      <input
+        type="text"
+        id={`state-${index}`}
+        name="state"
+        value={address.state || ''}
+        onChange={(e) => handleAddressChange(index, e)}
+        className={styles.addressInput}
+        placeholder="State"
+      />
+
+      <label htmlFor={`landmark-${index}`} className={styles.label}>
+        <FaMapMarkerAlt /> Landmark:
+      </label>
+      <input
+        type="text"
+        id={`landmark-${index}`}
+        name="landmark"
+        value={address.landmark || ''}
+        onChange={(e) => handleAddressChange(index, e)}
+        className={styles.addressInput}
+        placeholder="Landmark"
+      />
+
+      <label htmlFor={`country-${index}`} className={styles.label}>
+        <FaFlag /> Country:
+      </label>
+      <input
+        type="text"
+        id={`country-${index}`}
+        name="country"
+        value={address.country || ''}
+        onChange={(e) => handleAddressChange(index, e)}
+        className={styles.addressInput}
+        placeholder="Country"
+      />
+
+      <label htmlFor={`pinCode-${index}`} className={styles.label}>
+        <FaMapMarkerAlt /> PIN Code:
+      </label>
+      <input
+        type="text"
+        id={`pinCode-${index}`}
+        name="pinCode"
+        value={address.pinCode || ''}
+        onChange={(e) => handleAddressChange(index, e)}
+        className={styles.addressInput}
+        placeholder="PIN Code"
+      />
+
+      {/* Remove Address Button */}
+      <button 
+        type="button" 
+        onClick={() => removeAddress(index)} 
+        className={styles.deleteAddressButton}
+      >
+        <FaTrashAlt /> Remove
+      </button>
+
+    </div>
+  ))}
+</div>
+
+
+        {/* <div className={styles.ShippingAddressescontainer}> 
         {savedShippingAddresses.map((address, index) => (
           <div key={index} className={styles.addressContainer}>
-            {/* Address Fields with Icons */}
+           
             <label htmlFor="address" className={styles.label}><FaMapMarkerAlt /> Address:</label>
             <input
               type="text"
@@ -526,7 +665,7 @@ return (
         ))}
 
         
-        </div>
+        </div> */}
 
         <button type="button" onClick={addNewAddress} className={styles.addButton}>
         <FaPlus /> Add New Address
