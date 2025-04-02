@@ -113,21 +113,34 @@ useEffect( () => {
     }
 }, [fetchUserProfile, router]);
 
-const handleProfilePictureChange = (e) => {
-    const file = e.target.files[0];
-  
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePicture(reader.result); // Save base64 image
-        setProfilePictureImagePreview(reader.result); // Preview image
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setProfilePicture(""); // Remove image if the user clears it
-      setProfilePictureImagePreview("");
-    }
+const handleProfilePictureChange = async (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfilePicture(reader.result);
+      setProfilePictureImagePreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+  }
 };
+
+
+// const handleProfilePictureChange = (e) => {
+//     const file = e.target.files[0];
+  
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onloadend = () => {
+//         setProfilePicture(reader.result); // Save base64 image
+//         setProfilePictureImagePreview(reader.result); // Preview image
+//       };
+//       reader.readAsDataURL(file);
+//     } else {
+//       setProfilePicture(""); // Remove image if the user clears it
+//       setProfilePictureImagePreview("");
+//     }
+// };
 
 const handleError = useCallback((error, defaultMessage) => {
     const errorMessage = error.response?.data?.message || error.message || defaultMessage;
@@ -142,6 +155,54 @@ const handleError = useCallback((error, defaultMessage) => {
     console.error(errorMessage);
 }, [router]);
 
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  const formData = new FormData();
+
+  if (fullName && fullName !== existingUserProfile.fullName) {
+    formData.append("fullName", fullName.trim());
+  }
+
+  if (address && address !== existingUserProfile.address) {
+    formData.append("address", address.trim());
+  }
+
+  if (deletedAccountRequest !== existingUserProfile.deletedAccountRequest) {
+    formData.append("deletedAccountRequest", deletedAccountRequest);
+  }
+
+  if (profilePicture && profilePicture.includes(",")) {
+    const base64Data = profilePicture.split(",")[1];
+    formData.append("profilePicture", base64Data);
+  }
+
+  // ✅ Update only the modified phone number inside shipping addresses
+  savedShippingAddresses.forEach((address, index) => {
+    if (address.phoneNo !== existingUserProfile.savedShippingAddresses[index]?.phoneNo) {
+      formData.append(`savedShippingAddresses[${index}][phoneNo]`, address.phoneNo);
+    }
+  });
+
+  try {
+    const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    if (response.status === 200) {
+      toast.success("Profile updated successfully!");
+      router.push(`/me/profile`);
+    } else {
+      throw new Error("Failed to update profile.");
+    }
+  } catch (error) {
+    handleError(error, "Failed to update profile.");
+  } finally {
+    setLoading(false);
+  }
+};
 
 
 // const handleSubmit = async (e) => {
@@ -215,57 +276,57 @@ const handleError = useCallback((error, defaultMessage) => {
 // };
 
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   setLoading(true);
 
-  if (!existingUserProfile) {
-    console.error("User profile is not available yet.");
-    return;
-  }
+//   if (!existingUserProfile) {
+//     console.error("User profile is not available yet.");
+//     return;
+//   }
 
-  const formData = new FormData();
-  formData.append("fullName", fullName?.trim() || existingUserProfile.fullName);
-  formData.append("address", address?.trim() || existingUserProfile.address);
-  formData.append("deletedAccountRequest", deletedAccountRequest);
+//   const formData = new FormData();
+//   formData.append("fullName", fullName?.trim() || existingUserProfile.fullName);
+//   formData.append("address", address?.trim() || existingUserProfile.address);
+//   formData.append("deletedAccountRequest", deletedAccountRequest);
 
-  savedShippingAddresses.forEach((address, index) => {
-    Object.entries(address).forEach(([key, value]) => {
-      formData.append(`savedShippingAddresses[${index}][${key}]`, value.trim());
-    });
-  });
+//   savedShippingAddresses.forEach((address, index) => {
+//     Object.entries(address).forEach(([key, value]) => {
+//       formData.append(`savedShippingAddresses[${index}][${key}]`, value.trim());
+//     });
+//   });
 
-  if (profilePicture) {
-    if (profilePicture.includes(",")) {
-      const base64Data = profilePicture.split(",")[1];
-      formData.append("profilePicture", base64Data);
-    } else {
-      formData.append("profilePicture", profilePicture);
-    }
-  } else {
-    formData.append("profilePicture", existingUserProfile.profilePicture || "");
-  }
+//   if (profilePicture) {
+//     if (profilePicture.includes(",")) {
+//       const base64Data = profilePicture.split(",")[1];
+//       formData.append("profilePicture", base64Data);
+//     } else {
+//       formData.append("profilePicture", profilePicture);
+//     }
+//   } else {
+//     formData.append("profilePicture", existingUserProfile.profilePicture || "");
+//   }
 
-  try {
-    const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+//   try {
+//     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
+//       headers: { "Content-Type": "multipart/form-data" },
+//     });
 
-    if (response.status === 200) {
-      toast.success("Profile updated successfully!");
-      console.log("Response Data:", response.data);
-      setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
-      router.push(`/me/profile`);
-    } else {
-      throw new Error("Failed to update profile.");
-    }
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    handleError(error, "Failed to update profile.");
-  } finally {
-    setLoading(false);
-  }
-};
+//     if (response.status === 200) {
+//       toast.success("Profile updated successfully!");
+//       console.log("Response Data:", response.data);
+//       setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
+//       router.push(`/me/profile`);
+//     } else {
+//       throw new Error("Failed to update profile.");
+//     }
+//   } catch (error) {
+//     console.error("Error updating profile:", error);
+//     handleError(error, "Failed to update profile.");
+//   } finally {
+//     setLoading(false);
+//   }
+// };
 
 const handleDeleteProfile = async () => {
     setLoading(true);

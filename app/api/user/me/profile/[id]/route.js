@@ -43,8 +43,6 @@ export async function GET(req, { params }) {
 }
 
 
-
-
 export async function PUT(req, { params }) {
   try {
     await connectToDatabase();
@@ -52,65 +50,128 @@ export async function PUT(req, { params }) {
     console.log("Updating profile for userId:", id);
 
     const formData = await req.formData();
-
     let existingUserProfile = await UserProfile.findOne({ userId: id });
 
     if (!existingUserProfile) {
-      existingUserProfile = new UserProfile({ userId: id });
-      await existingUserProfile.save();
+      return NextResponse.json({ message: "User profile not found" }, { status: 404 });
     }
 
-    let profilePictureUrl = existingUserProfile.profilePicture;
+    let updates = {};
 
-    // Profile picture handling
+    // ✅ Handle Profile Picture Upload
     const profilePictureBase64 = formData.get("profilePicture");
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
       const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
       if (uploadResult?.secure_url) {
-        profilePictureUrl = uploadResult.secure_url;
+        updates.profilePicture = uploadResult.secure_url;
       }
-    } else if (profilePictureBase64 === "") {
-      profilePictureUrl = "";
     }
 
-    let savedShippingAddresses = [];
-    for (let i = 0; ; i++) {
-      const address = {};
-      const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
-      let hasData = false;
+    // ✅ Handle Selective Updates
+    if (formData.has("fullName")) {
+      updates.fullName = formData.get("fullName").trim();
+    }
+    if (formData.has("address")) {
+      updates.address = formData.get("address").trim();
+    }
+    if (formData.has("deletedAccountRequest")) {
+      updates.deletedAccountRequest = formData.get("deletedAccountRequest") === "true";
+    }
 
-      keys.forEach((key) => {
-        const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
-        if (value) {
-          address[key] = value;
-          hasData = true;
+    // ✅ Handle Partial Shipping Address Updates
+    if (formData.has("savedShippingAddresses")) {
+      let savedShippingAddresses = existingUserProfile.savedShippingAddresses;
+      for (let i = 0; i < savedShippingAddresses.length; i++) {
+        const phoneNo = formData.get(`savedShippingAddresses[${i}][phoneNo]`);
+        if (phoneNo) {
+          savedShippingAddresses[i].phoneNo = phoneNo;
         }
-      });
-
-      if (!hasData) break;
-      savedShippingAddresses.push(address);
+      }
+      updates.savedShippingAddresses = savedShippingAddresses;
     }
 
-    const updatedProfile = {
-      fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName,
-      address: formData.get("address")?.trim() || existingUserProfile.address,
-      profilePicture: profilePictureUrl !== existingUserProfile.profilePicture ? profilePictureUrl : existingUserProfile.profilePicture,
-      deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
-      savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
-    };
-
-    const userProfile = await UserProfile.findOneAndUpdate(
+    // ✅ Update Profile in DB
+    const updatedProfile = await UserProfile.findOneAndUpdate(
       { userId: id },
-      updatedProfile,
+      { $set: updates },
       { new: true, runValidators: true }
     );
 
-    return NextResponse.json(userProfile, { status: 200 });
+    return NextResponse.json(updatedProfile, { status: 200 });
 
   } catch (error) {
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
+
+
+
+// export async function PUT(req, { params }) {
+//   try {
+//     await connectToDatabase();
+//     const { id } = params;
+//     console.log("Updating profile for userId:", id);
+
+//     const formData = await req.formData();
+
+//     let existingUserProfile = await UserProfile.findOne({ userId: id });
+
+//     if (!existingUserProfile) {
+//       existingUserProfile = new UserProfile({ userId: id });
+//       await existingUserProfile.save();
+//     }
+
+//     let profilePictureUrl = existingUserProfile.profilePicture;
+
+//     // Profile picture handling
+//     const profilePictureBase64 = formData.get("profilePicture");
+//     if (profilePictureBase64 && profilePictureBase64.length > 100) {
+//       const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
+//       if (uploadResult?.secure_url) {
+//         profilePictureUrl = uploadResult.secure_url;
+//       }
+//     } else if (profilePictureBase64 === "") {
+//       profilePictureUrl = "";
+//     }
+
+//     let savedShippingAddresses = [];
+//     for (let i = 0; ; i++) {
+//       const address = {};
+//       const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
+//       let hasData = false;
+
+//       keys.forEach((key) => {
+//         const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
+//         if (value) {
+//           address[key] = value;
+//           hasData = true;
+//         }
+//       });
+
+//       if (!hasData) break;
+//       savedShippingAddresses.push(address);
+//     }
+
+//     const updatedProfile = {
+//       fullName: formData.get("fullName")?.trim() || existingUserProfile.fullName,
+//       address: formData.get("address")?.trim() || existingUserProfile.address,
+//       profilePicture: profilePictureUrl !== existingUserProfile.profilePicture ? profilePictureUrl : existingUserProfile.profilePicture,
+//       deletedAccountRequest: formData.get("deletedAccountRequest") === "true",
+//       savedShippingAddresses: savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses,
+//     };
+
+//     const userProfile = await UserProfile.findOneAndUpdate(
+//       { userId: id },
+//       updatedProfile,
+//       { new: true, runValidators: true }
+//     );
+
+//     return NextResponse.json(userProfile, { status: 200 });
+
+//   } catch (error) {
+//     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
+//   }
+// }
 
 
 
