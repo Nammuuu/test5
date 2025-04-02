@@ -50,45 +50,61 @@ export async function PUT(req, { params }) {
     console.log("Updating profile for userId:", id);
 
     const formData = await req.formData();
+
     let existingUserProfile = await UserProfile.findOne({ userId: id });
 
     if (!existingUserProfile) {
-      return NextResponse.json({ message: "User profile not found" }, { status: 404 });
+      existingUserProfile = new UserProfile({ userId: id });
+      await existingUserProfile.save();
     }
 
     let updates = {};
-
-    // ✅ Handle Profile Picture Upload
+    
+    // ✅ Profile Picture Handling
+    let profilePictureUrl = existingUserProfile.profilePicture;
     const profilePictureBase64 = formData.get("profilePicture");
     if (profilePictureBase64 && profilePictureBase64.length > 100) {
       const uploadResult = await cloudinaryUploaduserprofilepic(profilePictureBase64, "profile_images");
       if (uploadResult?.secure_url) {
-        updates.profilePicture = uploadResult.secure_url;
+        profilePictureUrl = uploadResult.secure_url;
       }
+    } else if (profilePictureBase64 === "") {
+      profilePictureUrl = "";
     }
+    updates.profilePicture = profilePictureUrl;
 
-    // ✅ Handle Selective Updates
+    // ✅ Full Name & Address Updates
     if (formData.has("fullName")) {
       updates.fullName = formData.get("fullName").trim();
     }
     if (formData.has("address")) {
       updates.address = formData.get("address").trim();
     }
+
+    // ✅ Deleted Account Request
     if (formData.has("deletedAccountRequest")) {
       updates.deletedAccountRequest = formData.get("deletedAccountRequest") === "true";
     }
 
-    // ✅ Handle Partial Shipping Address Updates
-    if (formData.has("savedShippingAddresses")) {
-      let savedShippingAddresses = existingUserProfile.savedShippingAddresses;
-      for (let i = 0; i < savedShippingAddresses.length; i++) {
-        const phoneNo = formData.get(`savedShippingAddresses[${i}][phoneNo]`);
-        if (phoneNo) {
-          savedShippingAddresses[i].phoneNo = phoneNo;
+    // ✅ Shipping Addresses Handling
+    let savedShippingAddresses = [];
+    for (let i = 0; ; i++) {
+      const address = {};
+      const keys = ["address", "address2", "phoneNo", "city", "state", "landmark", "country", "pinCode"];
+      let hasData = false;
+
+      keys.forEach((key) => {
+        const value = formData.get(`savedShippingAddresses[${i}][${key}]`);
+        if (value) {
+          address[key] = value;
+          hasData = true;
         }
-      }
-      updates.savedShippingAddresses = savedShippingAddresses;
+      });
+
+      if (!hasData) break;
+      savedShippingAddresses.push(address);
     }
+    updates.savedShippingAddresses = savedShippingAddresses.length > 0 ? savedShippingAddresses : existingUserProfile.savedShippingAddresses;
 
     // ✅ Update Profile in DB
     const updatedProfile = await UserProfile.findOneAndUpdate(
@@ -100,6 +116,7 @@ export async function PUT(req, { params }) {
     return NextResponse.json(updatedProfile, { status: 200 });
 
   } catch (error) {
+    console.error("Profile Update Error:", error);
     return NextResponse.json({ message: "Internal server error", error: error.message }, { status: 500 });
   }
 }
@@ -176,6 +193,8 @@ export async function PUT(req, { params }) {
 
 
 // DELETE User Profile
+
+
 export async function DELETE(req, { params }) {
   try {
     await connectToDatabase();
