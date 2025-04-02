@@ -156,6 +156,53 @@ const handleError = useCallback((error, defaultMessage) => {
 }, [router]);
 
 
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    console.error("❌ No token found, redirecting to login.");
+    router.push('/login');
+    return;
+  }
+
+  const formData = new FormData();
+  if (fullName) formData.append("fullName", fullName.trim());
+  if (address) formData.append("address", address.trim());
+
+  if (profilePictureImagePreview && profilePictureImagePreview.includes(",")) {
+    const base64Data = profilePictureImagePreview.split(",")[1];
+    formData.append("profilePicture", base64Data);
+  }
+
+  try {
+    const response = await axios.put(`/api/user/me/profile/${userId}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log("✅ Profile Updated:", response.data);
+
+    if (response.status === 200) {
+      toast.success("Profile updated successfully!");
+
+      // **🔹 Update the state immediately with new profile picture**
+      setProfilePictureImagePreview(`${response.data.profilePicture}?t=${new Date().getTime()}`);
+
+      // **🔹 Also, re-fetch the profile to ensure UI sync**
+      fetchUserProfile();
+    }
+  } catch (error) {
+    console.error("❌ Profile Update Error:", error);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 // const handleSubmit = async (e) => {
 //   e.preventDefault();
 //   setLoading(true);
@@ -181,25 +228,10 @@ const handleError = useCallback((error, defaultMessage) => {
 //     formData.append("deletedAccountRequest", deletedAccountRequest);
 //   }
 
-//   // ✅ Debug Profile Picture Before Sending
 //   if (profilePicture && profilePicture.includes(",")) {
-//     try {
-//       const base64Data = profilePicture.split(",")[1];
-//       if (base64Data.length > 100) {
-//         console.log("✅ Sending Base64 Profile Picture:", base64Data.substring(0, 30) + "...");
-//         formData.append("profilePicture", base64Data);
-//       } else {
-//         console.error("❌ Invalid Base64 Image Data:", base64Data);
-//       }
-//     } catch (err) {
-//       console.error("❌ Base64 Processing Error:", err);
-//     }
-//   } else {
-//     console.log("ℹ️ No new profile picture to update.");
+//     const base64Data = profilePicture.split(",")[1];
+//     formData.append("profilePicture", base64Data);
 //   }
-
-//   // ✅ Debug Shipping Address
-//   console.log("📦 Saved Shipping Addresses:", savedShippingAddresses);
 
 //   try {
 //     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
@@ -213,6 +245,13 @@ const handleError = useCallback((error, defaultMessage) => {
 
 //     if (response.status === 200) {
 //       toast.success("Profile updated successfully!");
+
+//       // **🔹 Update state immediately to reflect new profile picture**
+//       setExistingUserProfile((prev) => ({
+//         ...prev,
+//         profilePicture: response.data.profilePicture,  // 👈 Update profile picture state
+//       }));
+
 //       router.push(`/me/profile`);
 //     } else {
 //       throw new Error("Failed to update profile.");
@@ -223,193 +262,6 @@ const handleError = useCallback((error, defaultMessage) => {
 //     setLoading(false);
 //   }
 // };
-
-
-
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   setLoading(true);
-
-//   try {
-//     // const formData = new FormData();
-//     // formData.append("fullName", fullName?.trim() || "");
-//     // formData.append("address", address?.trim() || "");
-//     // formData.append("deletedAccountRequest", deletedAccountRequest);
-
-//     // // ✅ Always update shipping addresses
-//     // savedShippingAddresses.forEach((address, index) => {
-//     //   Object.entries(address).forEach(([key, value]) => {
-//     //     formData.append(`savedShippingAddresses[${index}][${key}]`, value.trim());
-//     //   });
-//     // });
-
-//     // // ✅ Ensure profile picture is handled correctly
-//     // if (profilePicture) {
-//     //   if (profilePicture.includes(",")) {
-//     //     const base64Data = profilePicture.split(",")[1]; // Extract base64 part only
-//     //     formData.append("profilePicture", base64Data);
-//     //   } else {
-//     //     formData.append("profilePicture", profilePicture); // Keep URL if unchanged
-//     //   }
-//     // } else {
-//     //   formData.append("profilePicture", ""); // Ensure empty string is sent if removed
-//     // }
-
-// const formData = new FormData();
-// formData.append("fullName", fullName?.trim() || existingUserProfile.fullName);
-// formData.append("address", address?.trim() || existingUserProfile.address);
-// formData.append("deletedAccountRequest", deletedAccountRequest);
-
-// savedShippingAddresses.forEach((address, index) => {
-//   Object.entries(address).forEach(([key, value]) => {
-//     formData.append(`savedShippingAddresses[${index}][${key}]`, value.trim());
-//   });
-// });
-
-// if (profilePicture) {
-//   if (profilePicture.includes(",")) {
-//     const base64Data = profilePicture.split(",")[1];
-//     formData.append("profilePicture", base64Data);
-//   } else {
-//     formData.append("profilePicture", profilePicture);
-//   }
-// } else {
-//   formData.append("profilePicture", existingUserProfile.profilePicture || "");
-// }
-
-
-//     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-//       headers: { "Content-Type": "multipart/form-data" },
-//     });
-
-//     if (response.status === 200) {
-//       toast.success("Profile updated successfully!");
-//       setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
-//       router.push(`/me/profile`);
-//     } else {
-//       throw new Error("Failed to update profile.");
-//     }
-//   } catch (error) {
-//     handleError(error, "Failed to update profile.");
-//   } finally {
-//     setLoading(false);
-//   }
-// };
-
-
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-//   setLoading(true);
-
-//   if (!existingUserProfile) {
-//     console.error("User profile is not available yet.");
-//     return;
-//   }
-
-//   const formData = new FormData();
-//   formData.append("fullName", fullName?.trim() || existingUserProfile.fullName);
-//   formData.append("address", address?.trim() || existingUserProfile.address);
-//   formData.append("deletedAccountRequest", deletedAccountRequest);
-
-//   savedShippingAddresses.forEach((address, index) => {
-//     Object.entries(address).forEach(([key, value]) => {
-//       formData.append(`savedShippingAddresses[${index}][${key}]`, value.trim());
-//     });
-//   });
-
-//   if (profilePicture) {
-//     if (profilePicture.includes(",")) {
-//       const base64Data = profilePicture.split(",")[1];
-//       formData.append("profilePicture", base64Data);
-//     } else {
-//       formData.append("profilePicture", profilePicture);
-//     }
-//   } else {
-//     formData.append("profilePicture", existingUserProfile.profilePicture || "");
-//   }
-
-//   try {
-//     const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-//       headers: { "Content-Type": "multipart/form-data" },
-//     });
-
-//     if (response.status === 200) {
-//       toast.success("Profile updated successfully!");
-//       console.log("Response Data:", response.data);
-//       setProfilePicture(`${response.data.profilePicture}?t=${new Date().getTime()}`); // Cache-busting
-//       router.push(`/me/profile`);
-//     } else {
-//       throw new Error("Failed to update profile.");
-//     }
-//   } catch (error) {
-//     console.error("Error updating profile:", error);
-//     handleError(error, "Failed to update profile.");
-//   } finally {
-//     setLoading(false);
-//   }
-// };
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-
-  const token = localStorage.getItem('token');
-  if (!token) {
-    console.error("❌ No token found, redirecting to login.");
-    router.push('/login');
-    return;
-  }
-
-  const formData = new FormData();
-
-  if (fullName && fullName !== existingUserProfile.fullName) {
-    formData.append("fullName", fullName.trim());
-  }
-
-  if (address && address !== existingUserProfile.address) {
-    formData.append("address", address.trim());
-  }
-
-  if (deletedAccountRequest !== existingUserProfile.deletedAccountRequest) {
-    formData.append("deletedAccountRequest", deletedAccountRequest);
-  }
-
-  if (profilePicture && profilePicture.includes(",")) {
-    const base64Data = profilePicture.split(",")[1];
-    formData.append("profilePicture", base64Data);
-  }
-
-  try {
-    const response = await axios.put(`/api/user/me/profile/${id}`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    console.log("✅ API Response:", response.data);
-
-    if (response.status === 200) {
-      toast.success("Profile updated successfully!");
-
-      // **🔹 Update state immediately to reflect new profile picture**
-      setExistingUserProfile((prev) => ({
-        ...prev,
-        profilePicture: response.data.profilePicture,  // 👈 Update profile picture state
-      }));
-
-      router.push(`/me/profile`);
-    } else {
-      throw new Error("Failed to update profile.");
-    }
-  } catch (error) {
-    console.error("❌ Profile Update Error:", error);
-  } finally {
-    setLoading(false);
-  }
-};
 
 const handleDeleteProfile = async () => {
     setLoading(true);
@@ -472,13 +324,23 @@ return (
     //   priority
     // />
 
-    <Image
-  src={existingUserProfile.profilePicture ? `${existingUserProfile.profilePicture}?t=${new Date().getTime()}` : "/default-avatar.png"}
-  alt="Profile Preview"
+//     <Image
+//   src={existingUserProfile.profilePicture ? `${existingUserProfile.profilePicture}?t=${new Date().getTime()}` : "/default-avatar.png"}
+//   alt="Profile Preview"
+//   className={styles.profilePicture}
+// width={150}
+// height={150}
+// />
+
+<Image
+  src={profilePictureImagePreview || "/default-avatar.png"}
+  alt="Profile Picture"
+  width={150}
+  height={150}
   className={styles.profilePicture}
-width={150}
-height={150}
+  priority
 />
+
 
 
 
