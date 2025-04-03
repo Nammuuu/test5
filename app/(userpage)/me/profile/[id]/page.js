@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import { useRouter, useParams } from 'next/navigation';
 import { toast } from "react-toastify";
@@ -15,6 +15,8 @@ import Link from "next/link";
 
 const UserProfilePage = () => {
   const [userId, setUserId] = useState('');
+  const [userIdGet, setUserIdGet] = useState('');
+  
   const [error, setError] = useState('');
   const router = useRouter();
 
@@ -32,6 +34,51 @@ const UserProfilePage = () => {
   const [loading, setLoading] = useState(false);
 
   const [existingUserProfile, setExistingUserProfile] = useState(null);
+
+
+  const [username, setUsername ] = useState('your name');
+  const profileRef = useRef(null);
+
+
+  const fetchUserId = useCallback(async  () => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      setError('No token found in local storage');
+      router.push('/login');
+      return;
+    }
+
+    try {
+      const response = await axios.get(`/api/user`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = response.data;
+
+      if (!data._id) {
+        toast.error('User ID not found. Redirecting...');
+        router.push('/login');
+        return;
+      }
+
+      setUserIdGet(data._id);
+      setUsername(data.username);
+
+    } catch (error) {
+      console.error('Error fetching user ID:', error);
+      toast.error('Error fetching user ID.');
+      router.push('/login');
+    }
+  }, [router]);
+
+  useEffect(() => {
+    fetchUserId();
+  }, [fetchUserId]);
+
 
   const fetchUserProfile = useCallback(async   () => {
 
@@ -437,9 +484,9 @@ return (
 
   {/* User Info */}
   <div className={styles.userInfo}>
-    <h3>{fullName || "Full Name"}</h3>
+    <h3> Welcome, {username ? username : 'Guest'}!</h3>
     
-  </div>
+  </div> 
 
 </div>
 
@@ -564,13 +611,13 @@ return (
       />
 
       {/* Remove Address Button */}
-      <button 
+      {/* <button 
         type="button" 
         onClick={() => removeAddress(index)} 
         className={styles.deleteAddressButton}
       >
         <FaTrashAlt /> Remove
-      </button>
+      </button> */}
 
     </div>
   ))}

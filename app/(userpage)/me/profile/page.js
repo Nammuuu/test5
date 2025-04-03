@@ -32,7 +32,7 @@ const UserProfilePage = () => {
   const [savedShippingAddresses, setSavedShippingAddresses] = useState(["addrsss", "Your Shipping Addresses",]);
   const [deletedAccountRequest, setDeletedAccountRequest] = useState(false);
   const [currentTime, setCurrentTime] = useState(null);
-
+  const [username, setUsername ] = useState('your name');
   const profileRef = useRef(null);
   const router = useRouter();
 
@@ -64,6 +64,7 @@ const UserProfilePage = () => {
       }
 
       setUserId(data._id);
+      setUsername(data.username);
 
     } catch (error) {
       console.error('Error fetching user ID:', error);
@@ -233,7 +234,7 @@ const UserProfilePage = () => {
                     ) : (
                       <p>No profile picture available.</p>
                     )}
-                    <p><strong>Full Name:</strong> {fullName}</p>
+                    <p><strong>Full Name:</strong> {username ? username : 'Guest'}!</p>
                     
                     <p><strong>Profile Created At:</strong> {profileCreatedAt}</p>
                   </div>
@@ -241,8 +242,8 @@ const UserProfilePage = () => {
                   <div className={styles.header}>
                     <h1>
                       {getGreeting()},
-                      <span className={styles.username}>{fullName}
-                        
+                      <span className={styles.username}>
+                        {username ? username : 'Guest'}!
                       </span>
 
 
