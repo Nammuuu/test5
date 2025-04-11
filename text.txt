@@ -327,6 +327,12 @@ size color meatiral payment update
   --product style --admin choose to display product design multi and also 
   show and hide titme price and rating  
 
+advance futuchaers 
+ .1 ai product to photo
+ .2 timemar on product details page add
+ 
+
+
 backendgrund color,
  --button color 
  --cardbgcolors 

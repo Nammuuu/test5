@@ -1167,15 +1167,15 @@ height: 100%;
   color: #444;
     transition: color .3s ease, transform .3s ease;
     cursor: pointer;
-    opacity: .8;
+    /* opacity: .8; */
 }
 
 
 @media (min-width: 768px) {
 
   .userActive {
-    color: #9b9b9b; 
-    opacity: 1;
+    color: #444;
+    /* opacity: .8; */
   }
   
 

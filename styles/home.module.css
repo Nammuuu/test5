@@ -621,6 +621,10 @@ gap: 20px;
    
     padding: 10px;
     overflow: visible;
+    fill: none;
+    border-color: #333;
+    stroke-width: 55;
+    /* stroke: #111; */
 }
 
 .product_icons svg:hover {
